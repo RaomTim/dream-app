@@ -309,7 +309,8 @@
     "removeWallAria": "remove from the Wall",
     "layersLegend": "what you say about it yourself — it’s yours, the app didn’t write it",
     "layersConfirm": "that’s right",
-    "layersReset": "it’s all the dream"
+    "layersReset": "it’s all the dream",
+    "more": "and also"
   },
   "transcriptCheck": {
     "line": "Check the transcription",

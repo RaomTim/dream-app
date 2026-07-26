@@ -568,6 +568,7 @@
     "candSearching": "looking…",
     "candSilence": "Nothing particularly stands out right now. That’s an answer too.",
     "candNo": "not this one",
-    "candNoRush": "You can also decide nothing. Nothing is lost, and I won’t ask again."
+    "candNoRush": "You can also decide nothing. Nothing is lost, and I won’t ask again.",
+    "doubleDate": "dreamt in {{dreamed}} · recognised in {{recognised}}"
   }
 }

@@ -51,6 +51,8 @@ export default function GreatDreamFlag({
   facets,
   note,
   radiant,
+  compact,
+  mark,
   onChange,
 }: {
   session: Session
@@ -61,6 +63,15 @@ export default function GreatDreamFlag({
   note?: string | null
   /** suggestion de l'IA (numinosity_score ≥ 0.7) — invitation, jamais entrée */
   radiant?: boolean
+  /** 2026-07-26 — la marque vit dans l'EN-TÊTE de la fiche, plus dans une section.
+   *  Marquer un grand rêve est un geste SUR le rêve, d'une seule touche, réversible :
+   *  ça n'a jamais mérité une carte pleine largeur au milieu d'un écran de lecture.
+   *  En compact, il ne reste que le disque — et, une fois marqué, la double date. */
+  compact?: boolean
+  /** `false` = ne rends PAS le geste de marquage, seulement ce qui vient après
+   *  (la double date + « pourquoi celui-là »). Sert sur la fiche, où le disque
+   *  vit dans l'en-tête. Par défaut le composant rend les deux, comme avant. */
+  mark?: boolean
   onChange?: (next: { marked: boolean; facets: string[]; note: string | null }) => void
 }) {
   const { t, locale } = useT()
@@ -93,12 +104,11 @@ export default function GreatDreamFlag({
     }
   }
 
-  const toggleFacet = async (f: string) => {
-    const next = fac.includes(f) ? fac.filter(x => x !== f) : [...fac, f]
-    setFac(next)
-    onChange?.({ marked: on, facets: next, note: noteVal || null })
-    try { await patch(kairosId, { great_dream_facets: next }, session) } catch { if (mounted.current) setFac(fac) }
-  }
+  /* 2026-07-26 — D11 tranchée par Tim : « la nuance "ça m'a changé" — on la
+     supprime ». Les trois facettes (change · force · ouvert) ne s'affichent
+     plus. La colonne `great_dream_facets` reste en base et reste transmise
+     telle quelle par `onChange` : on retire un écran, on ne détruit pas une
+     donnée qu'un rêveur aurait déjà posée. */
 
   // La note s'enregistre toute seule (pas de bouton « Enregistrer » : §0.5, zéro friction).
   const onNote = (v: string) => {
@@ -116,9 +126,53 @@ export default function GreatDreamFlag({
   const dateStr = (iso?: string | null) =>
     iso ? new Date(iso).toLocaleDateString(locale, { month: 'long', year: 'numeric' }) : ''
 
+  /* ── LE DISQUE, seul ──────────────────────────────────────
+     Pas une étoile : une étoile appelle une note, et l'app ne note rien
+     (§2.4). Un disque qui s'allume, comme la lune de l'accueil en plus petit —
+     c'est le même geste, à l'échelle d'un seul rêve. */
+  const disc = (lit: boolean) => (
+    <span
+      aria-hidden
+      style={{
+        width: 21, height: 21, borderRadius: '50%', flexShrink: 0, display: 'block',
+        background: lit ? `radial-gradient(circle at 38% 32%, ${T.goldLit} 0%, ${T.gold} 62%, #a8874e 100%)` : 'transparent',
+        border: lit ? 'none' : `1px solid ${T.gold}55`,
+        boxShadow: lit ? '0 0 13px 3px rgba(224,192,135,0.30)' : 'none',
+        transition: `background ${MOTION.fade}ms ${MOTION.ease}, box-shadow ${MOTION.fade}ms ${MOTION.ease}`,
+      }}
+    />
+  )
+
+  if (compact) {
+    return (
+      <button
+        onClick={toggle}
+        aria-pressed={on}
+        aria-label={t('screens.great.flag')}
+        title={on && markedAt ? t('screens.great.recognisedIn', { date: dateStr(markedAt) }) : t('screens.great.flag')}
+        style={{
+          minWidth: SCALE.touch, minHeight: SCALE.touch, display: 'flex', alignItems: 'center',
+          justifyContent: 'center', background: 'none', border: 'none', cursor: 'pointer', padding: 4,
+          /* l'invitation de l'IA ne fait pas entrer : elle allume à peine le contour */
+          opacity: on ? 1 : radiant ? 0.75 : 0.45,
+        }}
+      >
+        {disc(on)}
+      </button>
+    )
+  }
+
+  /* `mark` = « la marque est ailleurs, ne me rends que ce qui vient APRÈS ».
+     Sur la fiche, le disque est dans l'en-tête (compact) et ce bloc-ci se pose
+     sous le seuil, avec les autres écritures du rêveur — « ce que j'ai gardé »,
+     la lecture conservée. C'est sa famille : ce sont ses mots, pas une fonction.
+     Rien tant que le rêve n'est pas marqué. */
+  if (mark === false && !on) return null
+
   return (
     <div style={{ marginTop: 34 }}>
       {/* ── LE GESTE ──────────────────────────────────────────── */}
+      {mark !== false && (
       <button
         onClick={toggle}
         aria-pressed={on}
@@ -132,24 +186,12 @@ export default function GreatDreamFlag({
           borderRadius: SCALE.radius,
           cursor: 'pointer',
           textAlign: 'left',
-          background: on ? 'rgba(201,168,106,0.10)' : 'transparent',
+          background: on ? 'rgba(255,255,255,0.1)' : 'transparent',
           border: on ? `1px solid ${T.gold}66` : T.cardBorder,
           transition: `background ${MOTION.fade}ms ${MOTION.ease}, border-color ${MOTION.fade}ms ${MOTION.ease}`,
         }}
       >
-        {/* la marque : un disque qui s'allume. Pas une étoile — une étoile appelle une note. */}
-        <span
-          aria-hidden
-          style={{
-            width: 21, height: 21, borderRadius: '50%', flexShrink: 0,
-            background: on
-              ? `radial-gradient(circle at 38% 32%, ${T.goldLit} 0%, ${T.gold} 62%, #a8874e 100%)`
-              : 'transparent',
-            border: on ? 'none' : `1px solid ${T.gold}55`,
-            boxShadow: on ? `0 0 13px 3px rgba(201,168,106,0.34)` : 'none',
-            transition: `all ${MOTION.fade}ms ${MOTION.ease}`,
-          }}
-        />
+        {disc(on)}
         <span style={{ flex: 1, minWidth: 0 }}>
           <span style={{ display: 'block', fontFamily: T.sans, fontSize: SCALE.body, fontWeight: 600, color: on ? T.cream : T.dim }}>
             {t('screens.great.flag')}
@@ -168,33 +210,20 @@ export default function GreatDreamFlag({
           )}
         </span>
       </button>
+      )}
 
       {/* ── APRÈS, et seulement après ──────────────────────────── */}
       {on && (
-        <div style={{ marginTop: 13, paddingLeft: 3, animation: `dream-fade-in ${MOTION.fade}ms ${MOTION.ease}` }}>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-            {GREAT_FACETS.map(f => {
-              const active = fac.includes(f)
-              return (
-                <button
-                  key={f}
-                  onClick={() => toggleFacet(f)}
-                  aria-pressed={active}
-                  style={{
-                    padding: '8px 14px', borderRadius: SCALE.radiusPill, cursor: 'pointer',
-                    fontFamily: T.sans, fontSize: SCALE.small, fontWeight: 500,
-                    background: active ? 'rgba(201,168,106,0.14)' : 'transparent',
-                    border: active ? `1px solid ${T.gold}66` : `0.5px solid ${T.line}`,
-                    color: active ? T.cream : T.faint,
-                    transition: `all ${MOTION.fade}ms ${MOTION.ease}`,
-                  }}
-                >
-                  {t(`screens.great.facet.${f}`)}
-                </button>
-              )
-            })}
-          </div>
-
+        <div style={{ marginTop: mark === false ? 0 : 13, paddingLeft: 3, animation: `dream-fade-in ${MOTION.fade}ms ${MOTION.ease}` }}>
+          {/* La double date — « rêvé en mars 2019 · reconnu en juillet 2026 ».
+              C'est le seul fait vraiment intéressant qu'un journal de grands
+              rêves puisse raconter (BRIEF §4.6), donc il ne se cache pas
+              derrière un titre : il ouvre le bloc. */}
+          {mark === false && markedAt && (
+            <div style={{ fontFamily: T.sans, fontSize: SCALE.meta, color: T.faint, marginBottom: 10 }}>
+              {t('screens.great.recognisedIn', { date: dateStr(markedAt) })}
+            </div>
+          )}
           {!openNote && !noteVal ? (
             <button
               onClick={() => setOpenNote(true)}
@@ -204,7 +233,7 @@ export default function GreatDreamFlag({
             </button>
           ) : (
             <div style={{ marginTop: 12 }}>
-              <div style={{ fontFamily: T.mono, fontSize: 10, letterSpacing: '0.18em', textTransform: 'uppercase', color: T.faint, marginBottom: 8 }}>
+              <div style={{ fontFamily: T.sans, fontSize: SCALE.kicker, fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', color: T.faint, marginBottom: 8 }}>
                 {t('screens.great.noteKicker')}
               </div>
               <textarea
