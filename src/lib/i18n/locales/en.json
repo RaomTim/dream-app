@@ -1,0 +1,449 @@
+{
+  "app": {
+    "name": "Dream",
+    "loading": "Dream",
+    "error": {
+      "title": "Something broke",
+      "reload": "Reload"
+    }
+  },
+  "nav": {
+    "home": "Home",
+    "journal": "Journal",
+    "echos": "Echoes",
+    "figures": "Figures"
+  },
+  "topbar": {
+    "theme_night": "☽",
+    "theme_day": "☼",
+    "theme_auto": "◑"
+  },
+  "home": {
+    "seuil": "THRESHOLD",
+    "protocols": "guided protocols",
+    "espaces": "spaces",
+    "journal": "journal",
+    "entries": "entries",
+    "no_dreams": "Your journal will grow here, night after night.",
+    "no_dream_retained": "no dream recalled",
+    "night_prompt": "What are you carrying\nto the edge of night?",
+    "day_prompt": "Did you travel\nsomewhere last night?",
+    "night_cta": "evening ritual",
+    "day_cta": "capture a dream",
+    "night_of": "Night of",
+    "morning_of": "Morning of"
+  },
+  "protocols": {
+    "dream": {
+      "title": "Capture a dream",
+      "tag": "voice + AI",
+      "desc": "Sensory welcome, guided exploration, resonances, concrete action."
+    },
+    "day": {
+      "title": "Day journal",
+      "tag": "crossings",
+      "desc": "Lay down your day — the AI crosses it with your dreams."
+    },
+    "ritual": {
+      "title": "Pre-sleep ritual",
+      "tag": "incubation",
+      "desc": "Landing, intention, crossing the threshold."
+    }
+  },
+  "espaces": {
+    "oracle": "Draws & signs",
+    "conte": "Mirror-tale",
+    "foret": "270 books of wisdom",
+    "reentry": "Dream re-entry",
+    "circles": "Dream circles",
+    "body_oracle": "Body Oracle",
+    "lifeline": "Narrative arc",
+    "collective": "Collective unconscious"
+  },
+  "capture": {
+    "close": "× close",
+    "time_label": "capture",
+    "finish": "deposit →",
+    "before_fades": "before it fades",
+    "speak_softly": "speak\nsoftly.",
+    "write_tomorrow": "we'll write tomorrow. tonight,\nlet the images stay images.",
+    "listening": "listening...",
+    "transcribing": "transcribing...",
+    "press_orb": "press the orb to begin",
+    "write_here": "write your dream here...",
+    "write_mode": "⌨ writing mode",
+    "write": "⌨ write",
+    "fragment": "fragment only ◦",
+    "fragment_captured": "fragment captured",
+    "where_deposit": "where do you want to deposit it?",
+    "choose_destination": "choose →",
+    "back_to_recording": "← continue recording",
+    "dest_protocol": "DREAM PROTOCOL",
+    "dest_protocol_hint": "10 guided steps",
+    "dest_day": "DAY NOTE",
+    "dest_day_hint": "save + AI crossing",
+    "dest_oracle": "QUESTION TO THE ORACLE",
+    "dest_oracle_hint": "opens oracle chat",
+    "dest_fragment_dream": "DREAM FRAGMENT",
+    "dest_fragment_dream_hint": "quick save · ☽",
+    "dest_fragment_day": "QUICK DAY NOTE",
+    "dest_fragment_day_hint": "quick save · ☉"
+  },
+  "protocol": {
+    "back": "← back",
+    "close": "× close",
+    "step_of": "step {current} / {total}",
+    "recording": "● recording...",
+    "send": "send",
+    "next": "next threshold",
+    "complete": "complete the protocol",
+    "moving_next": "moving to next step...",
+    "closing": "closing the protocol..."
+  },
+  "chat": {
+    "back": "← back",
+    "modes": {
+      "dream": "dream",
+      "day": "day",
+      "oracle": "oracle",
+      "tale": "tale",
+      "forest": "forest",
+      "ritual": "ritual"
+    },
+    "placeholder": "write here...",
+    "send": "send"
+  },
+  "sync": {
+    "title": "echoes",
+    "header": "what the night\nreturned to the day",
+    "intro": "when a dream and a day event converge — the oracle recognizes them and weaves them together.",
+    "no_echos": "No echoes yet. Keep noting your dreams and your days.",
+    "echos_found": "{count} echo(es) found",
+    "night": "NIGHT",
+    "day": "DAY"
+  },
+  "pattern": {
+    "title": "figures",
+    "recurrences": "recurrences",
+    "intro": "the words, places, characters that recur in your journal. tap to see their appearances.",
+    "no_figures": "Your figures will appear here as you dream.",
+    "figures_found": "{count} figure(s) weave through your dreams.",
+    "frequency": "motifs · by frequency",
+    "emergent": "EMERGING",
+    "since": "since"
+  },
+  "detail": {
+    "back": "← back",
+    "entities": "extracted entities",
+    "patterns": "detected patterns",
+    "conversations": "conversations",
+    "continue": "continue exploring",
+    "delete": "delete",
+    "confirm_delete": "confirm deletion",
+    "deleting": "deleting...",
+    "loading": "loading...",
+    "not_found": "dream not found",
+    "no_title": "Untitled",
+    "prophetic": "possibly prophetic",
+    "notes_label": "INTERPRETATION NOTES",
+    "new_note": "NEW INTERPRETATION",
+    "note_prompt": "you're coming back to this dream — what do you feel in your body rereading it?",
+    "note_placeholder": "reading this again, I feel...",
+    "cancel": "cancel",
+    "saving": "saving...",
+    "save": "save",
+    "saved": "note saved ✓",
+    "add_interpretation": "add a note",
+    "explore_ai": "explore with AI",
+    "explore_dream": "explore this dream",
+    "explore_day": "deepen this note",
+    "explore_oracle": "consult the oracle",
+    "explore_ritual": "revisit this ritual",
+    "explore_forest": "ask the forest",
+    "explore_tale": "continue the tale",
+    "tap_to_name": "name this dream…",
+    "name_placeholder": "3 to 5 words",
+    "delete_entry": "DELETE THIS ENTRY",
+    "delete_confirm": "DELETE? CONFIRM",
+    "delete_progress": "DELETING...",
+    "numinosity_label": "INTENSITY",
+    "numinosity_hint": "does this dream feel ordinary or numinous?",
+    "numinosity_1": "processing",
+    "numinosity_2": "notable",
+    "numinosity_3": "significant",
+    "numinosity_4": "big dream",
+    "numinosity_5": "numinous",
+    "ondinnonk_label": "SOUL WISH",
+    "ondinnonk_prompt": "what is your soul trying to tell you through this dream?",
+    "ondinnonk_placeholder": "this dream tells me that...",
+    "somatic_label": "BODY ANCHOR",
+    "somatic_prompt": "where do you feel this dream in your body?",
+    "somatic_throat": "throat",
+    "somatic_chest": "chest",
+    "somatic_belly": "belly",
+    "somatic_head": "head",
+    "somatic_hands": "hands",
+    "somatic_legs": "legs",
+    "somatic_other": "other",
+    "somatic_unknown": "I don't know",
+    "big_dream": "big dream",
+    "similar_dreams": "resonant dreams",
+    "no_similar": "no resonances detected yet",
+    "matched_tales": "resonant tales",
+    "no_tales": "no tales resonate with this dream yet",
+    "framework_f1": "Framework 1 — event-based",
+    "framework_f2": "Framework 2 — dream territory",
+    "double_dream_label": "dream within a dream"
+  },
+  "profile": {
+    "title": "profile",
+    "back": "← back",
+    "dreamer": "Dreamer",
+    "dreams": "Dreams",
+    "days": "Days",
+    "symbols": "Symbols",
+    "your_figures": "your figures",
+    "settings": "settings",
+    "theme": "Theme",
+    "theme_auto": "auto",
+    "theme_night": "night",
+    "theme_day": "day",
+    "language": "Language",
+    "sign_out": "Sign out"
+  },
+  "onboarding": {
+    "screens": [
+      {
+        "title": "Welcome\nto the dream",
+        "body": "A companion to explore your nights,\ncross your days, and listen to what\nthe symbols have to tell you."
+      },
+      {
+        "title": "Speak or write\nyour dream",
+        "body": "Capture your dreams on waking by voice.\nThe AI guides you through 9 steps to\nexplore every layer of meaning."
+      },
+      {
+        "title": "The AI weaves\nthe threads",
+        "body": "270 books of dream wisdom.\nIt crosses your nights and your days,\nrevealing echoes and figures."
+      }
+    ],
+    "next": "Next",
+    "start": "Begin",
+    "skip": "Skip"
+  },
+  "thinking": {
+    "phrases": [
+      "the oracle listens…",
+      "the AI consults the books…",
+      "the threads are weaving…",
+      "the forest whispers…",
+      "the symbols align…",
+      "the dreams answer each other…"
+    ]
+  },
+  "modes": {
+    "dream": {
+      "label": "Dream",
+      "placeholder": "Tell your dream...",
+      "welcome": "Did you travel somewhere last night?",
+      "welcomeSub": "Tell me your dream — by text or by voice."
+    },
+    "day": {
+      "label": "Journal",
+      "placeholder": "What's on your mind today?",
+      "welcome": "How are you feeling right now?",
+      "welcomeSub": "Lay down what moves through you — synchronicities, observations, inner states."
+    },
+    "oracle": {
+      "label": "Oracle",
+      "placeholder": "Describe your draw or send a photo...",
+      "welcome": "Did you draw the cards?",
+      "welcomeSub": "Share your draw — card names, photo, or the signs you received."
+    },
+    "tale": {
+      "label": "Tale",
+      "placeholder": "Ask for a tale, or tell me what's on your mind...",
+      "welcome": "A fire burns. A tale awaits.",
+      "welcomeSub": "Tell me what moves through you, and I'll tell you a story that resonates."
+    },
+    "forest": {
+      "label": "Forest",
+      "placeholder": "What do you want to ask the Forest?",
+      "welcome": "The Forest listens.",
+      "welcomeSub": "270 books of dream wisdom, psychology & spirituality — Hillman, Gendlin, Moss, Jung, Seth, McGilchrist, Kimmerer... Ask about your dreams, your life, a symbol. The Forest crosses traditions."
+    },
+    "ritual": {
+      "label": "Ritual",
+      "placeholder": "How are you arriving tonight?",
+      "welcome": "Evening falls. We prepare the crossing.",
+      "welcomeSub": "Pre-sleep ritual — landing, intention, dream incubation."
+    },
+    "reentry": {
+      "label": "Re-entry",
+      "placeholder": "Which dream do you want to revisit?",
+      "welcome": "Ready to dive back in?",
+      "welcomeSub": "Choose a recent dream and we'll return together."
+    }
+  },
+  "reentry": {
+    "label": "Re-entry",
+    "placeholder": "let the images return...",
+    "welcome": "Ready to dive back in?",
+    "welcomeSub": "Choose an old dream and we'll return together."
+  },
+  "entry_types": {
+    "dream": "dream",
+    "day": "day",
+    "oracle": "oracle",
+    "tale": "tale",
+    "forest": "forest",
+    "ritual": "ritual",
+    "reentry": "re-entry",
+    "reve": "dream",
+    "jour": "day",
+    "conte": "tale",
+    "foret": "forest",
+    "rituel": "ritual",
+    "journal": "day",
+    "text": "fragment"
+  },
+  "journal": {
+    "all": "all",
+    "title": "journal",
+    "subtitle": "{count} entries"
+  },
+  "guide": {
+    "title": "the protocols",
+    "intro": "Three paths to lay down. Each follows a different rhythm — but all slow down deliberately. The oracle needs time to listen.",
+    "start_protocol": "begin →",
+    "footer": "protocols inspired by a living library",
+    "reve": {
+      "title": "The dream",
+      "source": "after Moss, Gendlin, Hillman, Seth",
+      "intro": "Welcoming a dream means letting it speak before wanting it to say. The protocol deliberately slows down — because the logical brain, if left to itself, crushes everything sensory, vague, symbolic.",
+      "steps": [
+        { "name": "Welcome", "desc": "Replay the dream like a film. No analysis yet. The logical brain crushes sensory details if allowed in too early." },
+        { "name": "Body", "desc": "The felt sense (Gendlin). The overall emotion lives in the body before it has a name. Where does it settle — throat, belly, shoulders?" },
+        { "name": "Figures", "desc": "Who is there? People, presences, animals, silhouettes. Hillman insists: stay with the image. Don't translate it into concept." },
+        { "name": "Place", "desc": "Where it happens. A familiar place distorted, an invented space — both count. The dream chooses its setting for a reason." },
+        { "name": "Action", "desc": "What happens, in the order it happens. Resist the urge to summarize. Seemingly insignificant details are often the heart of the dream." },
+        { "name": "Question", "desc": "What question does the dream seem to be asking? Moss calls it 'the dream's invitation'. Not an interpretation — an invitation." },
+        { "name": "Resonances", "desc": "The AI crosses with your past dreams and day events. Patterns emerge over time." },
+        { "name": "Detail", "desc": "A singular fragment that struck you — to note separately. It's often through this detail that the dream will speak to you later." },
+        { "name": "Title", "desc": "Name it. A three to five word title — to find it again, and to give it a shape that holds." }
+      ]
+    },
+    "jour": {
+      "title": "The day",
+      "source": "after Gendlin, Pennebaker, Seth",
+      "intro": "The day journal is the inverse of the dream: the conscious mind lays down, so night can work on it. Five short steps.",
+      "steps": [
+        { "name": "Crossing", "desc": "What moved through you today — emotion, thought, encounter. Naming an experience disarms its charge." },
+        { "name": "Shift", "desc": "A moment when something changed — micro or grand. This is often where the unconscious hooks in." },
+        { "name": "Resonance", "desc": "What still resonates, right now, in your body. If you feel nothing — that's a valid answer." },
+        { "name": "Figure", "desc": "A presence that returned — person, symbol, motif. Day figures often prepare dream figures." },
+        { "name": "Intention", "desc": "What you set for the night. Not a precise request — a direction." }
+      ]
+    },
+    "rituel": {
+      "title": "The ritual",
+      "source": "after Moss, Bachelard, Kimmerer",
+      "intro": "The pre-sleep ritual prepares the dream terrain. It's not magic — it's a body protocol that tells the brain: the day is over, you can let go.",
+      "steps": [
+        { "name": "Arrival", "desc": "How you arrive at night. The present state, unfiltered. Reverie begins with accepting what is." },
+        { "name": "Question", "desc": "A question to ask the night — what you want it to work on. Open phrasing, leaving room." },
+        { "name": "Anchoring", "desc": "A body gesture. Three breaths, hand on the sternum, a candle blown out. The body remembers transitions better than the mind." },
+        { "name": "Laying down", "desc": "What you leave to the day — what you don't take to sleep. Receiving the night means leaving space for it." },
+        { "name": "Crossing", "desc": "A phrase to yourself, silent or whispered. Not an affirmation — an agreement." }
+      ]
+    }
+  },
+  "anchor": {
+    "label": "ANCHOR OF THE DAY · ☽",
+    "honored_title": "honored. the dream spoke and you listened.",
+    "honored_sub": "the anchor joins your resonances",
+    "how_manifested": "how did it manifest?",
+    "note_placeholder": "free note…",
+    "honor_btn": "I HONORED MY DREAM",
+    "note_btn": "I NOTE",
+    "submit_note": "SUBMIT NOTE",
+    "back": "back"
+  },
+  "honoring": {
+    "label": "HONOR THIS DREAM",
+    "prompt": "how do you want to honor this dream? a gesture, a word, a conversation, a drawing…",
+    "placeholder": "I commit to…",
+    "pledge": "pledge",
+    "pledged_label": "PLEDGE TAKEN",
+    "mark_honored": "I honored this dream",
+    "how_honored": "how did it happen?",
+    "note_placeholder": "it manifested as…",
+    "confirm_honored": "confirm",
+    "honored": "DREAM HONORED ✦"
+  },
+  "lifeline": {
+    "title": "lifeline",
+    "subtitle": "narrative arc",
+    "intro": "the thread that connects your nights — figures, themes, confirmed prophetic echoes.",
+    "no_data": "your lifeline takes shape with your dreams. keep going.",
+    "figures_section": "RECURRING FIGURES",
+    "themes_section": "THEMES",
+    "echoes_section": "PROPHETIC ECHOES",
+    "honoring_section": "COMMITMENTS",
+    "honored_count": "{honored} / {total} honored",
+    "numinous_dreams": "BIG DREAMS",
+    "back": "← back"
+  },
+  "oracle_corps": {
+    "title": "BODY ORACLE",
+    "subtitle": "dreambody",
+    "intro": "Your dreams and your body speak the same language. Here, you see where your dreams inscribe themselves in your flesh.",
+    "active_zones": "ACTIVE ZONES",
+    "no_dreams_zone": "no dreams recorded in this zone",
+    "empty": "your body hasn't spoken yet",
+    "empty_hint": "When you record a dream, note where you feel it in your body. The Body Oracle will reveal itself.",
+    "consult": "consult the Body Oracle"
+  },
+  "circles": {
+    "title": "DREAM CIRCLES",
+    "intro": "A sacred space for sharing dreams. We don't interpret each other's dreams — we say what they awaken in us.",
+    "create_btn": "CREATE A CIRCLE",
+    "join_btn": "JOIN",
+    "loading": "loading…",
+    "empty": "No circles yet.\nCreate one or join with an invite code.",
+    "back": "back",
+    "create_title": "Create a circle",
+    "create_desc": "A circle is a small group of dreamers who share and support each other.",
+    "name_label": "CIRCLE NAME",
+    "name_placeholder": "e.g. Tuesday dreamers",
+    "desc_label": "DESCRIPTION (OPTIONAL)",
+    "desc_placeholder": "an intention, a theme…",
+    "create_submit": "CREATE CIRCLE",
+    "join_title": "Join a circle",
+    "join_desc": "Enter the invite code shared by the circle's guardian.",
+    "code_label": "INVITE CODE",
+    "display_name_label": "YOUR NAME IN THE CIRCLE",
+    "display_name_placeholder": "how you want to be called",
+    "join_submit": "JOIN",
+    "invite_code": "CODE",
+    "copied": "copied!",
+    "copy": "copy",
+    "members": "members",
+    "role_guardian": "guardian",
+    "role_dreamer": "dreamer",
+    "shared_dreams": "SHARED DREAMS",
+    "no_shares": "No dreams shared yet. Who goes first?",
+    "mirrors": "MIRRORS — IF THIS WERE MY DREAM",
+    "write_mirror": "WRITE A MIRROR",
+    "mirror_placeholder": "if this were my dream, I would feel that…",
+    "share_mirror_btn": "SHARE"
+  },
+  "time": {
+    "just_now": "just now",
+    "minutes_ago": "{n}min ago",
+    "hours_ago": "{n}h ago",
+    "yesterday": "yesterday",
+    "days_ago": "{n}d ago"
+  },
+  "days": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+  "months": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+}

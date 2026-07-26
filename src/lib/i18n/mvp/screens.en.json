@@ -1,0 +1,573 @@
+{
+  "common": {
+    "back": "back",
+    "backCap": "Back",
+    "cancel": "cancel",
+    "cancelCap": "Cancel",
+    "save": "save",
+    "saveCap": "Save",
+    "close": "close",
+    "closeCap": "Close",
+    "continue": "continue",
+    "continueCap": "Continue",
+    "ok": "OK",
+    "working": "…",
+    "aMoment": "one moment…",
+    "someone": "Someone",
+    "aDreamer": "A dreamer",
+    "me": "you",
+    "retry": "Try again"
+  },
+  "settings": {
+    "title": "Settings",
+    "privacy": "Privacy",
+    "legal": "Legal",
+    "account": {
+      "title": "Account",
+      "signedInAs": "signed in as",
+      "changePassword": "Change my password",
+      "newPassword": "new password",
+      "tooShort": "6 characters minimum",
+      "saved": "password saved",
+      "signOut": "Sign out"
+    },
+    "language": {
+      "title": "Language",
+      "fr": "Français",
+      "en": "English",
+      "note": "this changes the app, and the language Dream answers you in — the interpretation, the guides. dreams you’ve already written aren’t translated: they stay in the language you wrote them in."
+    },
+    "appointments": {
+      "title": "Meeting points",
+      "intro": "Dream can come to you. You choose — nothing is imposed.",
+      "morning": "In the morning",
+      "evening": "In the evening",
+      "at": "at",
+      "none": "No meeting points. Dream won’t come to you — you come to it."
+    },
+    "wakeup": {
+      "title": "Waking",
+      "soft": "The soft wake-up",
+      "softSub": "wake up with your dreams still warm"
+    },
+    "wall": {
+      "title": "The Wall",
+      "intro": "The Wall is completely anonymous. Take a share back whenever you want — it disappears from the Wall.",
+      "soon": "The Wall is coming soon. You’ll manage your shares here.",
+      "empty": "You haven’t shared anything on the Wall yet.",
+      "untitled": "a share without text",
+      "touched": {
+        "one": "{{n}} person was touched by it",
+        "other": "{{n}} people were touched by it"
+      },
+      "notTouched": "not touched yet",
+      "remove": "take it back"
+    },
+    "notifications": {
+      "title": "Notifications",
+      "groups": "Replies in my groups",
+      "groupsSub": "when someone responds to a shared dream",
+      "works": "A piece is ready",
+      "worksSub": "when the Forge has finished creating",
+      "wallNever": "The Wall never notifies anything. That’s on purpose: you visit it, it never calls for you."
+    },
+    "credits": {
+      "title": "Plan & credits",
+      "row": "My credits & plan",
+      "sub": "what the Forge uses, and how to top up"
+    },
+    "help": {
+      "title": "Help",
+      "how": "How Dream works",
+      "howSub": "Dream’s little explanations, all in one place"
+    },
+    "data": {
+      "title": "My data",
+      "export": "Export everything",
+      "exporting": "getting it ready…",
+      "exportSub": "your dreams, your moments, your notes — in a file that’s yours",
+      "exportError": "the export didn’t go through — try again",
+      "deleteScheduledOn": "Deletion set for {{date}}",
+      "deleteScheduledSoon": "Deletion set for 7 days from now",
+      "deletePending": "Your data is still here. You can cancel until the delay runs out.",
+      "cancelDelete": "cancel the deletion",
+      "delete": "Delete my account",
+      "confirm1Title": "Delete your account?",
+      "confirm1Body": "We keep everything for seven days, then it’s erased for good. You can cancel before that.",
+      "confirm2Title": "Sure? This starts the erasing.",
+      "confirm2Body": "Last step. After the seven days, your dreams are erased for good.",
+      "keepAccount": "keep my account",
+      "yesDelete": "yes, delete",
+      "requested": "Request recorded.",
+      "deleteError": "not possible right now — try again"
+    }
+  },
+  "onboarding": {
+    "notifNow": "now",
+    "o1": {
+      "title": "Dream — for your dreams.",
+      "body": "Tell your dreams. Dream helps you understand them — and see what they say about your life.",
+      "cta": "Begin"
+    },
+    "o2": {
+      "p1": "You speak, Dream writes.",
+      "p2": "Your dreams stay yours — nothing is erased, nothing is shared without you.",
+      "p3": "The more you use it, the more it sounds like you.",
+      "cta": "OK"
+    },
+    "o3": {
+      "title": "Dream can come to you.",
+      "sub": "Choose — you can change your mind in Settings."
+    },
+    "o4": {
+      "line1": "Do you remember a dream?",
+      "line2": "Any one of them.",
+      "tell": "Tell it",
+      "later": "Not now",
+      "elsewhere": "I have dreams written or recorded elsewhere"
+    },
+    "chooser": {
+      "morning": "In the morning",
+      "evening": "In the evening",
+      "never": "Never",
+      "neverBody": "I come when I want to.",
+      "softWake": "a soft wake-up is also possible in Settings.",
+      "at": "at",
+      "confirm": "Continue",
+      "validate": "Done"
+    },
+    "sheet": {
+      "title": "Your meeting points"
+    },
+    "repropose": {
+      "line": "Dream can meet you in the morning or the evening, if you want.",
+      "choose": "Choose",
+      "dismiss": "no thanks"
+    },
+    "firstWeek": {
+      "kicker": "Your first week",
+      "title": "Your first week: a few dreams, a thread beginning.",
+      "countWithDate": {
+        "one": "You’ve kept one thing since {{date}}. Nothing to perform — just what settled.",
+        "other": "You’ve kept {{n}} things since {{date}}. Nothing to perform — just what settled."
+      },
+      "count": {
+        "one": "You’ve kept one thing. Nothing to perform — just what settled.",
+        "other": "You’ve kept {{n}} things. Nothing to perform — just what settled."
+      },
+      "nothing": "A thread begins, at your pace. Nothing to perform.",
+      "symbol": "one symbol keeps coming back: {{symbol}}",
+      "chooseAppts": "Choose my meeting points"
+    }
+  },
+  "wall": {
+    "tabDreams": "Dreams",
+    "tabHeart": "Heart",
+    "error": "The Wall isn’t answering.",
+    "empty": "The Wall wakes with its first dreamers.",
+    "signature": "Someone · {{when}}",
+    "touch": "This touches me",
+    "reportTitle": "Something wrong with this share?",
+    "report": "Report",
+    "reported": "Thank you. It’s reported.",
+    "reportFailed": "Couldn’t report it — try again."
+  },
+  "share": {
+    "aria": "Share",
+    "title": "Share to…",
+    "yourGroups": "Your groups",
+    "loadingGroups": "your groups…",
+    "noGroups": "You’re not in any group yet.",
+    "alreadyShared": "already shared",
+    "wallConsent": "On the Wall, no one will know it’s you. Not even your groups. You can take it back whenever you want.",
+    "wallConsentOk": "OK, share it",
+    "wallOption": "The Wall, anonymously",
+    "soon": "soon",
+    "submit": "Share",
+    "submitting": "Sharing…",
+    "done": "Shared.",
+    "wallSoon": "The Wall is coming soon.",
+    "failed": "the share didn’t go through — try again"
+  },
+  "scan": {
+    "frameTitle": "Frame your page",
+    "frameSub": "one notebook page at a time — I read what’s written by hand.",
+    "takePhoto": "Take a photo",
+    "typeInstead": "type it out instead →",
+    "reading": "I’m reading your page…",
+    "readingSub": "one moment",
+    "failedTitle": "I can’t read this page.",
+    "failedSub": "Try again with more light?",
+    "typeIt": "Type it out by hand",
+    "manualTitle": "type out what’s on this page",
+    "manualPlaceholder": "last night…",
+    "backToPhoto": "back to the photo"
+  },
+  "group": {
+    "fallbackName": "Group",
+    "crossing": "You’re going through:",
+    "askDream": "Ask Dream for a reading",
+    "askDreamBusy": "Dream is listening to the group…",
+    "askDreamDone": "A reading was already asked for today",
+    "seenTitle": "What Dream sees",
+    "seenPending": "Dream is rereading the group… the reading will appear here.",
+    "reactResonates": "this resonates",
+    "reactUnfamiliar": "this feels foreign",
+    "reactQuestion": "a question",
+    "challengeStart": "Start a challenge",
+    "challengeLabel": "Challenge: {{title}}",
+    "challengeFinish": "Finish",
+    "challengeIn": "you’re in",
+    "challengeJoin": "I’m in",
+    "challengePlaceholder": "the challenge, in one line",
+    "challengeSuggestion1": "Write down your dreams for 7 mornings",
+    "challengeSuggestion2": "One intention every evening",
+    "challengeLaunch": "Start",
+    "sharedTitle": "Dreams & moments shared",
+    "sharesLoading": "the fire is opening…",
+    "sharesEmpty1": "No one has shared anything yet.",
+    "sharesEmpty2": "The first dream breaks the ice.",
+    "conversation": "The conversation",
+    "olderMessages": "see older messages",
+    "noMessages": "Nothing has been said yet. It’s yours.",
+    "composerPlaceholder": "a word to the group…",
+    "ariaPhoto": "send a photo",
+    "ariaSend": "send",
+    "ariaRecord": "record a voice message",
+    "ariaStopRecord": "stop the voice message",
+    "aVoice": "a voice message",
+    "aPhoto": "a photo",
+    "photoAlt": "shared photo",
+    "aSharedDream": "a shared dream",
+    "readerOwnership": "This dream belongs to the person who shared it.",
+    "type": {
+      "dream": "dream",
+      "moment": "moment",
+      "mirror": "reflection",
+      "resonance": "resonance",
+      "other": "share"
+    },
+    "settings": {
+      "title": "Group settings",
+      "name": "Group name",
+      "saveName": "Save the name",
+      "nameSaved": "name updated",
+      "intention": "Group intention",
+      "intentionPlaceholder": "what you’re going through together (optional)",
+      "intentionSaved": "intention updated",
+      "clearIntention": "Remove the intention",
+      "intentionCleared": "intention removed",
+      "alias": "My name in this group",
+      "aliasPlaceholder": "your first name, or a name just for here",
+      "saveAlias": "Save my name",
+      "aliasSaved": "name updated",
+      "saveFailed": "failed — {{msg}}",
+      "members": "Members ({{n}})",
+      "guardian": "keeper",
+      "invite": "Invite",
+      "copyCode": "Copy the code",
+      "leave": "Leave the group",
+      "leaveConfirm": "Sure? Tap again to leave.",
+      "leaveFinal": "Leave for good"
+    }
+  },
+  "guide": {
+    "pause": "Pause",
+    "meta": {
+      "one": "{{duration}} · {{n}} question",
+      "other": "{{duration}} · {{n}} questions"
+    },
+    "later": "later",
+    "start": "let’s go",
+    "backStep": "go back",
+    "next": "continue",
+    "finish": "finish",
+    "placeholder": "…",
+    "feltTitle": "And now, how does that feel?",
+    "feltMoved": "Something moved",
+    "feltSame": "Same as before",
+    "feltDunno": "I don’t know",
+    "feltSkip": "skip",
+    "keptWithDream": "It’s kept with your dream.",
+    "keptInJournal": "It’s kept in your journal.",
+    "backHome": "back",
+    "count": {
+      "one": "Done once already",
+      "other": "Done {{n}} times already"
+    },
+    "sheetTitle": "For this dream, here’s what I’d suggest:",
+    "allGuides": "All the guides →",
+    "libraryTitle": "The guides",
+    "libraryIntro": "Small crossings, one question at a time. Take the one that calls you."
+  },
+  "info": {
+    "about": "About: {{term}}",
+    "thanks": "thanks",
+    "more": "Tell me more",
+    "howTitle": "How Dream works",
+    "howIntro": "Dream’s little explanations, all in one place. Everything the ⓘ shows you in context lives here too."
+  },
+  "resonance": {
+    "title": "what resonates",
+    "empty": "nothing resonates yet — tell a few more nights, and the threads will weave.",
+    "emptyAlone": "this dream stands on its own for now. nothing else answers it — that is an answer, not a gap.",
+    "intro": "dreams and moments that answer each other — open them to follow the thread.",
+    "tagDay": "day",
+    "tagDream": "dream",
+    "noted": "✓ noted",
+    "yes": "resonates",
+    "no": "not really",
+    "propheticTitle": "⟡ an older dream seems to have prepared this one",
+    "dreamtOn": "dreamt on {{date}}",
+    "daysBefore": {
+      "one": " · {{n}} day before",
+      "other": " · {{n}} days before"
+    },
+    "collapse": "fold back ↑",
+    "sideBySide": "see them side by side →",
+    "thisDream": "this dream · {{date}}",
+    "today": "today",
+    "oldDream": "the older dream · {{date}}",
+    "whatLinks": "what links them:",
+    "openDream": "open this dream →",
+    "disclaimer": "a possible echo across time — not a certainty. it’s yours to feel whether it resonates."
+  },
+  "kept": {
+    "title": "interpretation kept",
+    "notePlaceholder": "what resonates for you, in one sentence…",
+    "noteLabel": "what resonates for you",
+    "corrections": {
+      "one": "{{n}} correction",
+      "other": "{{n}} corrections"
+    },
+    "youSaid": "you said: ",
+    "editNote": "Edit the note",
+    "addNote": "Add a note",
+    "confirmDelete": "Sure? This erases it for good",
+    "remove": "Remove"
+  },
+  "care": {
+    "humanTitle": "what you’re going through deserves a real, human presence.",
+    "humanBody": "what you wrote is kept. and if you want to talk to someone, right now:",
+    "line3114": "3114 — suicide prevention · 24/7 · free",
+    "lineSos": "SOS Amitié · 09 72 39 40 50 · 24/7",
+    "elsewhere": "these lines are in France. wherever you are, a listening service exists near you — call your local emergency number.",
+    "kicker": "what insists",
+    "title": "this dream keeps pressing on something that’s asking for your attention — it’s yours to feel where.",
+    "note": "Dream predicts nothing. It only notices what your dream repeats. What that means, you alone know.",
+    "seen": "seen",
+    "resonates": "this speaks to me",
+    "notForMe": "not for me"
+  },
+  "import": {
+    "dropIdle": "your voice notes, your notebooks, your files",
+    "dropOver": "let them come…",
+    "dropSub": "drag them here, or tap to choose — several at once",
+    "dropFormats": "m4a · mp3 · wav · long m4a · txt · md",
+    "skipped": {
+      "one": "{{n}} file set aside — I read audio and text.",
+      "other": "{{n}} files set aside — I read audio and text."
+    },
+    "filesCount": {
+      "one": "{{n}} file",
+      "other": "{{n}} files"
+    },
+    "toListen": " · {{n}} to listen to",
+    "bigOne": "the long recording will be cut up before I listen to it — this can take a few minutes.",
+    "bigMany": "the long recordings will be cut up before I listen to them — this can take a few minutes.",
+    "removeFile": "remove {{name}}",
+    "mb": "{{n}} MB",
+    "kb": "{{n}} KB",
+    "pasteHelp1": "or paste them here — from a notebook, from notes, from another app. separate them with a",
+    "pasteHelp2": "line, or with two blank lines.",
+    "pastePlaceholder": "i was walking through a forest that was singing…\n\n---\n\nlast night, my grandmother handed me a key…",
+    "detected": {
+      "one": "{{n}} dream detected",
+      "other": "{{n}} dreams detected"
+    },
+    "filesReady": {
+      "one": "{{n}} file ready",
+      "other": "{{n}} files ready"
+    },
+    "nothingYet": "nothing yet",
+    "cta": "keep these dreams",
+    "pastedName": "your pasted dreams",
+    "working": "i’m working…",
+    "workingDone": "it’s done",
+    "clearList": "clear the list",
+    "footerWorking": "you can go elsewhere in the app, i’ll keep going. if you reload the page, whatever isn’t kept yet will have to be started over.",
+    "footerDone": "their deeper reading is weaving in the background — you’ll see them light up over the coming hours.",
+    "status": {
+      "queued": "waiting",
+      "reading": "i’m reading…",
+      "splitting": "i’m cutting it up…",
+      "listening": "i’m listening…",
+      "listeningPart": "i’m listening… {{part}}/{{parts}}",
+      "saving": "i’m keeping it…",
+      "done": "kept",
+      "savedCount": {
+        "one": "{{n}} dream kept",
+        "other": "{{n}} dreams kept"
+      }
+    },
+    "err": {
+      "generic": "that didn’t work",
+      "nothingHere": "nothing to keep here",
+      "nothingInFile": "nothing to keep in this file",
+      "unreadableAudio": "i can’t read this audio",
+      "nothingHeard": "i didn’t hear anything clear"
+    },
+    "back": "back",
+    "progress": "{{n}}/{{total}}",
+    "doors": {
+      "audioTitle": "My voice memos",
+      "audioSub": "your phone recordings, your notebooks — several at once",
+      "harvestTitle": "Gather from your other AIs",
+      "harvestSub": "ready-to-copy prompts to gather what you’ve already confided elsewhere"
+    },
+    "type": {
+      "q": "it was…",
+      "reve": "a dream",
+      "note_jour": "a moment of the day",
+      "signe": "a sign"
+    },
+    "pasteAs": "what you’re pasting is…",
+    "when": {
+      "label": "roughly when? (optional)",
+      "hint": "if your files carry no date, i’ll place them around this moment.",
+      "clear": "doesn’t matter"
+    },
+    "tooBigOne": "one recording is over 25 MB — i’ll still listen to it, but i won’t keep the original.",
+    "tooBigMany": "some recordings are over 25 MB — i’ll still listen to them, but i won’t keep the originals.",
+    "harvest": {
+      "intro": "You’ve surely already poured a lot of yourself elsewhere — into another AI, across conversations. Copy one of these prompts, paste it to your AI, then bring its answer back here. Dream isn’t a silo: it’s a hearth where all your inner material can come together.",
+      "copy": "copy",
+      "copied": "copied ✓",
+      "pasteHint": "Copy your AI’s answer, come back here and paste it into the paste box — mark it “a moment of the day” so it joins your waking voice.",
+      "goPaste": "go paste my answer",
+      "prompts": [
+        {
+          "title": "What I’m facing right now",
+          "prompt": "Read back over our recent exchanges and list what I’m going through right now: my challenges, the decisions ahead of me, my fears, my impulses. Write one line per item, in my own words, without rephrasing or embellishing. Separate each item with a line containing only ---."
+        },
+        {
+          "title": "My doubts and questions",
+          "prompt": "Read back over our conversations and gather the doubts and questions I carry, even the ones I never named clearly. One line per doubt or question, in my own language. Separate each item with a line containing only ---."
+        },
+        {
+          "title": "Messages from my heart",
+          "prompt": "Pick out the moments when I spoke to you from the heart: what moves me, what I love, what hurts me, what I hold dear. Give them back as I said them, one per line. Separate each item with a line containing only ---."
+        },
+        {
+          "title": "What I’ve learned about myself",
+          "prompt": "From everything we’ve exchanged, list what I’ve discovered or understood about myself: how I work, what I need, the patterns that keep returning. One realization per line, in my words. Separate each item with a line containing only ---."
+        },
+        {
+          "title": "My recurring intuitions",
+          "prompt": "Spot the intuitions, hunches and ideas that come up often in our exchanges. List them plainly, one per line, without interpreting them. Separate each item with a line containing only ---."
+        }
+      ]
+    }
+  },
+  "voice": {
+    "record": "Record",
+    "stop": "Stop",
+    "transcribing": "Transcribing…"
+  },
+  "feedback": {
+    "ariaOpen": "Give feedback",
+    "ariaDialog": "User feedback",
+    "ariaClose": "Close",
+    "step": "Feedback · step {{n}}/3",
+    "doneTitle": "Received.",
+    "doneBody": "Thank you. Every word helps sharpen this.",
+    "step1Title": "What do you want to tell us?",
+    "youAreOn": "You’re on:",
+    "theApp": "the app",
+    "step2Title": "How urgent?",
+    "sevLow": "A gentle note",
+    "sevLowSub": "an idea, a suggestion, something you noticed",
+    "sevMedium": "Important",
+    "sevMediumSub": "a bug or real friction",
+    "sevHigh": "Urgent · distress",
+    "sevHighSub": "immediate help · safety",
+    "step3Title": "Tell us everything.",
+    "sosKicker": "You’re not alone",
+    "sosIntro": "If you’re in immediate distress, these lines answer 24/7:",
+    "sos3114": " — National suicide prevention line (France, free)",
+    "sosEmergency": " — Medical emergencies",
+    "sosAmitie": "SOS Amitié: ",
+    "sosElsewhere": "these lines are in France. wherever you are, a listening service exists near you — call your local emergency number.",
+    "textPlaceholder": "Type freely…",
+    "emailPlaceholder": "your email (optional, so we can come back to you)",
+    "emptyText": "One word is enough, but we need at least one.",
+    "sendFailed": "Sending failed",
+    "sending": "Sending…",
+    "send": "Send"
+  },
+  "auth": {
+    "tagline": "dream intelligence",
+    "nameLabel": "NAME",
+    "namePlaceholder": "What you want to be called",
+    "emailLabel": "EMAIL",
+    "emailPlaceholder": "you@email.com",
+    "passwordLabel": "PASSWORD",
+    "signupDone": "Account created. Check your email to confirm.",
+    "magicSent": "Magic link sent. Check your email.",
+    "resetSent": "Recovery email sent.",
+    "errBadCredentials": "Wrong email or password",
+    "errAlreadyRegistered": "This email is already in use",
+    "errGeneric": "Something went wrong",
+    "ctaLogin": "Enter",
+    "ctaSignup": "Create my account",
+    "ctaMagic": "Send the magic link",
+    "ctaForgot": "Recover my access",
+    "forgot": "Forgot your password?",
+    "magicLink": "Sign in with a magic link",
+    "toSignup": "No account yet? Sign up",
+    "toLogin": "Already have an account? Sign in",
+    "backToLogin": "Back to sign in"
+  },
+  "great": {
+    "flag": "a great dream",
+    "recognisedIn": "recognised in {{date}}",
+    "radiantHint": "this dream is radiant",
+    "facet": {
+      "change": "it changed me",
+      "force": "it gives me strength",
+      "ouvert": "I haven’t finished understanding it"
+    },
+    "addNote": "why this one?",
+    "noteKicker": "why this one",
+    "notePlaceholder": "what you want to remember about this dream, in your own words.",
+    "noteSaved": "kept",
+    "title": "the great dreams",
+    "tabJournal": "the journal",
+    "tabConsult": "ask",
+    "untitled": "untitled",
+    "keptKicker": "what I kept",
+    "emptyL1": "Nothing here yet.",
+    "emptyL2": "Some dreams are only recognised years later. When one of them comes back to you, you’ll mark it — and it will be waiting here.",
+    "entry": "the great dreams",
+    "entryFromHeart": "ask my dreams",
+    "consultAsk": "What are you going through, right now?",
+    "consultPlaceholder": "say it however it comes. No one else will read it.",
+    "consultGo": "search my dreams",
+    "consultBusy": "searching…",
+    "consultErr": "that didn’t work. Try again in a moment.",
+    "consultLater": "You’ve already asked three times today. Let what came back do its work — come back tomorrow.",
+    "consultSilence": "Nothing really comes up for this today. That’s an answer too: your ground is still thin on this question.",
+    "readingA": "among your great dreams",
+    "readingB": "in everything else",
+    "readingAEmpty": "none of your great dreams really speaks to this.",
+    "readingBEmpty": "nothing else really speaks to this.",
+    "candKickerOne": "one dream stands out",
+    "candKickerMany": "the ones that stand out",
+    "candInvite": "You have enough to look back on. If you want, I’ll go through your dreams and show you the ones that stand out — you’re the one who says which ones count.",
+    "candRun": "show me the ones that stand out",
+    "candSearching": "looking…",
+    "candSilence": "Nothing particularly stands out right now. That’s an answer too.",
+    "candNo": "not this one",
+    "candNoRush": "You can also decide nothing. Nothing is lost, and I won’t ask again."
+  }
+}

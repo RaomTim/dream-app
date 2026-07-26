@@ -1,0 +1,90 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "crons": [
+    {
+      "path": "/api/dream-chat/threads/detect?cron_secret=$CRON_SECRET&all_users=1",
+      "schedule": "0 4 * * *"
+    },
+    {
+      "path": "/api/admin/forest-cache/purge?cron_secret=$CRON_SECRET&ttl_hours=24",
+      "schedule": "0 5 * * *"
+    },
+    {
+      "path": "/api/admin/circles/ephemeral-close?cron_secret=$CRON_SECRET",
+      "schedule": "30 5 * * *"
+    },
+    {
+      "path": "/api/dream-chat/prophetic/detect?cron_secret=$CRON_SECRET&all_users=1",
+      "schedule": "0 6 * * *"
+    },
+    {
+      "path": "/api/personal-dictionary/refresh?cron_secret=$CRON_SECRET&all_users=1",
+      "schedule": "0 7 * * *"
+    },
+    {
+      "path": "/api/dream-chat/recurring/detect?cron_secret=$CRON_SECRET&all_users=1",
+      "schedule": "30 6 * * *"
+    },
+    {
+      "path": "/api/mvp/enrich-batch?cron_secret=$CRON_SECRET",
+      "schedule": "*/2 * * * *"
+    },
+    {
+      "path": "/api/mvp/repair-capture-audio?cron_secret=$CRON_SECRET&limit=5",
+      "schedule": "*/10 * * * *"
+    }
+  ],
+  "functions": {
+    "src/app/api/dream-chat/converse/route.ts": {
+      "maxDuration": 60
+    },
+    "src/app/api/dream-chat/threads/detect/route.ts": {
+      "maxDuration": 300
+    },
+    "src/app/api/dream-chat/prophetic/detect/route.ts": {
+      "maxDuration": 300
+    },
+    "src/app/api/personal-dictionary/refresh/route.ts": {
+      "maxDuration": 300
+    },
+    "src/app/api/personal-dictionary/[symbol_id]/generate-angles/route.ts": {
+      "maxDuration": 60
+    },
+    "src/app/api/circles/[id]/chat/converse/route.ts": {
+      "maxDuration": 60
+    },
+    "src/app/api/circles/[id]/portrait/generate/route.ts": {
+      "maxDuration": 120
+    },
+    "src/app/api/circles/[id]/synchronicities/route.ts": {
+      "maxDuration": 60
+    },
+    "src/app/api/oracle-corps/reading/route.ts": {
+      "maxDuration": 60
+    },
+    "src/app/api/nightmares/forest-reading/route.ts": {
+      "maxDuration": 60
+    },
+    "src/app/api/portrait/narrative-reading/route.ts": {
+      "maxDuration": 60
+    },
+    "src/app/api/dream-chat/recurring/detect/route.ts": {
+      "maxDuration": 300
+    },
+    "src/app/api/dream-chat/recurring/[id]/re-entry-session/route.ts": {
+      "maxDuration": 60
+    },
+    "src/app/api/bigdream/workflow/[id]/closing-letter/route.ts": {
+      "maxDuration": 60
+    },
+    "src/app/api/admin/bigdream/human-push/[id]/respond/route.ts": {
+      "maxDuration": 60
+    },
+    "src/app/api/transcribe/route.ts": {
+      "maxDuration": 300
+    },
+    "src/app/api/transcribe-from-storage/route.ts": {
+      "maxDuration": 300
+    }
+  }
+}

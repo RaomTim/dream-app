@@ -1,0 +1,1062 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dream — Visual System V1.2 (Playground)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet" />
+
+<template id="__bundler_thumbnail" data-bg-color="#0E0F14">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#0E0F14"/>
+    <!-- spirale logarithmique silk-gold -->
+    <g transform="translate(600 400)">
+      <path d="M0,0 m0,-4 a4,4 0 1,1 -2.472,6.472 a6.472,6.472 0 1,1 8.944,-4 a10.472,10.472 0 1,1 -14.472,-6.472 a16.944,16.944 0 1,1 23.416,10.472 a27.416,27.416 0 1,1 -37.888,-16.944 a44.36,44.36 0 1,1 61.304,27.416 a71.776,71.776 0 1,1 -99.192,-44.36 a116.136,116.136 0 1,1 160.496,71.776 a187.912,187.912 0 1,1 -259.688,-116.136"
+        fill="none" stroke="#C8A04E" stroke-width="3.5" stroke-linecap="round" opacity="0.85"/>
+    </g>
+    <text x="600" y="720" font-family="Georgia, serif" font-style="italic" font-size="34" fill="#C4B9AD" text-anchor="middle" opacity="0.7">Visual System V1.2</text>
+  </svg>
+</template>
+<style>
+:root {
+  /* 7 base oklch */
+  --night-floor: oklch(0.12 0.012 280);
+  --night-warm:  oklch(0.16 0.015 60);
+  --ash-deep:    oklch(0.22 0.008 280);
+  --ash-mid:     oklch(0.34 0.010 60);
+  --ash-light:   oklch(0.52 0.012 60);
+  --bone:        oklch(0.78 0.015 70);
+  --embryonic:   oklch(0.92 0.008 80);
+  /* 7 accents matter-couleurs */
+  --paper-warm:  oklch(0.62 0.045 70);
+  --stone-cool:  oklch(0.55 0.025 230);
+  --silk-gold:   oklch(0.70 0.080 80);
+  --clay-earth:  oklch(0.50 0.060 50);
+  --obsidian:    oklch(0.28 0.030 290);
+  --ember-live:  oklch(0.65 0.140 40);
+  --ember-soft:  oklch(0.55 0.080 40 / 0.45);
+  /* tempi V1 */
+  --tempo-instant: 100ms;
+  --tempo-tisse:   380ms;
+  --tempo-ceremoniel: 920ms;
+  /* tempi organiques V1.2 */
+  --tempo-souffle: 6000ms;
+  --tempo-braise:  3500ms;
+  --tempo-derive:  12000ms;
+  /* easing */
+  --ease-respire: cubic-bezier(0.32, 0.04, 0.25, 1);
+  --ease-tenue:   cubic-bezier(0.45, 0, 0.15, 1);
+  --ease-rituel:  cubic-bezier(0.7, 0.0, 0.3, 1);
+  --ease-souffle: cubic-bezier(0.45, 0, 0.55, 1);
+  --ease-braise:  cubic-bezier(0.4, 0.1, 0.6, 0.9);
+  /* space */
+  --s-1:4px; --s-2:8px; --s-3:16px; --s-4:24px;
+  --s-5:40px; --s-6:64px; --s-7:104px; --s-8:168px;
+  /* type */
+  --serif: 'EB Garamond', Garamond, 'Times New Roman', serif;
+  --sans:  'Inter', system-ui, sans-serif;
+  --mono:  'JetBrains Mono', ui-monospace, monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--night-floor);color:var(--bone);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+button{font-family:inherit;color:inherit;background:none;border:none;cursor:pointer}
+
+/* layout */
+.page{max-width:1080px;margin:0 auto;padding:var(--s-7) var(--s-4) var(--s-8)}
+.masthead{padding:var(--s-7) 0 var(--s-6);border-bottom:1px solid color-mix(in oklch, var(--ash-deep) 80%, transparent)}
+.masthead .kicker{font-family:var(--mono);font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--ash-light);margin-bottom:var(--s-3)}
+.masthead h1{font-family:var(--serif);font-weight:300;font-size:48px;line-height:1.1;letter-spacing:-0.005em;color:var(--embryonic);margin:0 0 var(--s-3)}
+.masthead .lede{font-family:var(--serif);font-style:italic;font-size:21px;line-height:1.45;color:var(--bone);max-width:62ch;text-wrap:pretty}
+.masthead .toc{margin-top:var(--s-5);display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--s-3) var(--s-4);font-family:var(--mono);font-size:12px;color:var(--ash-light)}
+.masthead .toc a{text-decoration:none;display:block;padding:var(--s-2) 0;border-top:1px solid color-mix(in oklch, var(--ash-deep) 70%, transparent);transition:color var(--tempo-tisse) var(--ease-respire)}
+.masthead .toc a:hover{color:var(--bone)}
+.masthead .toc a span{color:var(--ash-mid);margin-right:var(--s-2)}
+
+section.s{padding:var(--s-7) 0;border-bottom:1px solid color-mix(in oklch, var(--ash-deep) 60%, transparent)}
+section.s > header{margin-bottom:var(--s-5)}
+section.s .label{font-family:var(--mono);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--ash-light);margin-bottom:var(--s-3)}
+section.s h2{font-family:var(--serif);font-weight:400;font-size:34px;line-height:1.15;color:var(--embryonic);margin:0 0 var(--s-3);letter-spacing:-0.005em}
+section.s h2 em{font-style:italic;color:var(--silk-gold)}
+section.s .seuil{font-family:var(--serif);font-style:italic;font-size:18px;line-height:1.55;color:var(--ash-light);max-width:62ch;text-wrap:pretty}
+
+h3{font-family:var(--serif);font-weight:400;font-size:22px;line-height:1.3;color:var(--bone);margin:0 0 var(--s-3)}
+h4{font-family:var(--sans);font-weight:500;font-size:13px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ash-light);margin:0 0 var(--s-3)}
+.meta{font-family:var(--mono);font-size:11px;letter-spacing:0.05em;color:var(--ash-light)}
+.divider{height:1px;background:color-mix(in oklch, var(--ash-deep) 70%, transparent);margin:var(--s-4) 0}
+
+/* SECTION A — palette */
+.swatch-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:var(--s-2)}
+@media (max-width:720px){.swatch-grid{grid-template-columns:repeat(2,1fr)}}
+.swatch{position:relative;aspect-ratio:1;border-radius:2px;overflow:hidden;border:1px solid color-mix(in oklch, var(--ash-deep) 70%, transparent);display:flex;flex-direction:column;justify-content:flex-end;padding:var(--s-3)}
+.swatch .name{font-family:var(--mono);font-size:10px;letter-spacing:0.05em;line-height:1.3;text-shadow:0 1px 2px rgba(0,0,0,0.6)}
+.swatch .hex{font-family:var(--mono);font-size:9px;opacity:0.7;line-height:1.3}
+.swatch.dark .name,.swatch.dark .hex{color:var(--bone)}
+.swatch.light .name,.swatch.light .hex{color:var(--night-floor)}
+
+.usage-list{margin-top:var(--s-4);font-family:var(--mono);font-size:11px;color:var(--ash-light);line-height:1.7;display:grid;grid-template-columns:1fr 1fr;gap:var(--s-2) var(--s-4)}
+@media (max-width:720px){.usage-list{grid-template-columns:1fr}}
+.usage-list .tok{color:var(--bone);min-width:120px;display:inline-block}
+
+/* SECTION B — matters */
+.matter-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--s-4)}
+@media (max-width:720px){.matter-grid{grid-template-columns:1fr}}
+.matter-card{position:relative;aspect-ratio:4/3;border:1px solid color-mix(in oklch, var(--ash-deep) 80%, transparent);overflow:hidden;border-radius:2px}
+.matter-card .label-bar{position:absolute;left:0;right:0;bottom:0;padding:var(--s-3) var(--s-4);background:linear-gradient(to top, color-mix(in oklch, var(--night-floor) 92%, transparent), transparent);z-index:5}
+.matter-card .label-bar .name{font-family:var(--serif);font-size:19px;color:var(--embryonic);letter-spacing:-0.005em}
+.matter-card .label-bar .name em{font-style:italic;color:var(--silk-gold);font-size:14px;margin-left:var(--s-2)}
+.matter-card .label-bar .desc{font-family:var(--mono);font-size:10px;color:var(--ash-light);letter-spacing:0.05em;margin-top:2px}
+.matter-bed{position:absolute;inset:0}
+
+/* matter pattern bases (visible textures) */
+.bed-linen{background:
+  radial-gradient(ellipse at 30% 20%, color-mix(in oklch, var(--paper-warm) 8%, transparent), transparent 60%),
+  radial-gradient(ellipse at 70% 80%, color-mix(in oklch, var(--paper-warm) 5%, transparent), transparent 60%),
+  var(--night-warm);
+}
+.bed-silk{background:
+  radial-gradient(ellipse at 50% 50%, color-mix(in oklch, var(--silk-gold) 14%, transparent), transparent 65%),
+  var(--night-floor);
+}
+.bed-stone{background:
+  radial-gradient(ellipse at 25% 30%, color-mix(in oklch, var(--stone-cool) 10%, transparent), transparent 50%),
+  radial-gradient(ellipse at 75% 70%, color-mix(in oklch, var(--stone-cool) 7%, transparent), transparent 55%),
+  var(--ash-deep);
+}
+.bed-paper{background:
+  linear-gradient(135deg, color-mix(in oklch, var(--paper-warm) 12%, transparent) 0%, transparent 70%),
+  var(--night-warm);
+}
+.bed-ash{background:var(--night-floor)}
+.bed-water{background:
+  linear-gradient(180deg, color-mix(in oklch, var(--stone-cool) 12%, transparent) 0%, color-mix(in oklch, var(--obsidian) 60%, transparent) 100%),
+  var(--night-floor);
+}
+.bed-ember{background:
+  radial-gradient(circle at 50% 60%, color-mix(in oklch, var(--ember-live) 22%, transparent), transparent 55%),
+  var(--night-warm);
+}
+.bed-earth{background:
+  radial-gradient(ellipse at 50% 70%, color-mix(in oklch, var(--clay-earth) 18%, transparent), transparent 60%),
+  color-mix(in oklch, var(--night-warm) 80%, var(--clay-earth));
+}
+
+/* SVG noise overlay layer */
+.bed-noise{position:absolute;inset:0;mix-blend-mode:overlay;opacity:0.55;pointer-events:none}
+
+/* organic motion patterns */
+@keyframes breathe-souffle{
+  0%,100%{opacity:0.62;transform:scale(1)}
+  50%{opacity:0.92;transform:scale(1.015)}
+}
+@keyframes pulse-braise{
+  0%,100%{opacity:0.62}
+  35%{opacity:0.95}
+  60%{opacity:0.78}
+}
+@keyframes drift-derive{
+  0%{transform:translate3d(-4%,0,0)}
+  100%{transform:translate3d(4%,0,0)}
+}
+@keyframes drift-vertical{
+  0%{transform:translate3d(0,-3%,0)}
+  100%{transform:translate3d(0,3%,0)}
+}
+@keyframes water-flow-down{
+  0%{transform:translate3d(0,-30%,0);opacity:0.3}
+  60%{opacity:0.7}
+  100%{transform:translate3d(0,30%,0);opacity:0.2}
+}
+@keyframes flicker-ember{
+  0%,100%{opacity:0.55}
+  20%{opacity:0.78}
+  45%{opacity:0.62}
+  70%{opacity:0.88}
+  90%{opacity:0.7}
+}
+@keyframes silk-flow{
+  0%{transform:translate3d(-2%,-2%,0) rotate(0.2deg)}
+  50%{transform:translate3d(2%,2%,0) rotate(-0.2deg)}
+  100%{transform:translate3d(-2%,-2%,0) rotate(0.2deg)}
+}
+@keyframes spiral-spin{
+  0%{transform:rotate(0deg)}
+  100%{transform:rotate(360deg)}
+}
+
+.motion-linen{animation:breathe-souffle var(--tempo-souffle) var(--ease-souffle) infinite}
+.motion-silk-halo{animation:breathe-souffle var(--tempo-souffle) var(--ease-souffle) infinite}
+.motion-silk-drift{animation:silk-flow 16s ease-in-out infinite}
+.motion-stone{animation:drift-derive var(--tempo-derive) linear infinite alternate}
+.motion-paper{animation:breathe-souffle calc(var(--tempo-souffle) * 1.4) var(--ease-souffle) infinite}
+.motion-ash{animation:drift-derive var(--tempo-derive) linear infinite alternate}
+.motion-water{animation:water-flow-down 14s linear infinite}
+.motion-ember{animation:pulse-braise var(--tempo-braise) var(--ease-braise) infinite}
+.motion-ember-flicker{animation:flicker-ember 9s ease-in-out infinite}
+.motion-earth{animation:drift-derive calc(var(--tempo-derive) * 1.2) linear infinite alternate}
+
+/* matter detail rows */
+.matter-detail{margin-top:var(--s-3);padding:var(--s-3);border-left:1px solid color-mix(in oklch, var(--ash-deep) 80%, transparent);background:color-mix(in oklch, var(--ash-deep) 22%, transparent);border-radius:0 2px 2px 0}
+.matter-detail dt{font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ash-light);margin-bottom:2px}
+.matter-detail dd{margin:0 0 var(--s-2);font-family:var(--sans);font-size:13px;line-height:1.5;color:var(--bone)}
+.matter-detail dd em{color:var(--silk-gold);font-style:italic;font-family:var(--serif);font-size:14px}
+
+/* SECTION C — type */
+.type-row{display:grid;grid-template-columns:120px 1fr;gap:var(--s-4);align-items:baseline;padding:var(--s-3) 0;border-bottom:1px solid color-mix(in oklch, var(--ash-deep) 50%, transparent)}
+.type-row:last-child{border-bottom:none}
+.type-row .lvl{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ash-light)}
+.type-row .lvl .px{display:block;color:var(--bone);margin-top:2px}
+.type-row .ex{color:var(--bone)}
+.h1-seuil{font-family:var(--serif);font-weight:300;font-size:39.06px;line-height:1.15;color:var(--embryonic);letter-spacing:-0.005em}
+.h2-section{font-family:var(--serif);font-weight:400;font-size:31.25px;line-height:1.2;color:var(--embryonic)}
+.h3-lecture{font-family:var(--serif);font-weight:400;font-size:25px;line-height:1.3;color:var(--bone)}
+.h4-repere{font-family:var(--sans);font-weight:500;font-size:20px;line-height:1.4;color:var(--bone)}
+.body-default{font-family:var(--sans);font-weight:400;font-size:16px;line-height:1.55;color:var(--bone)}
+.meta-default{font-family:var(--mono);font-weight:300;font-size:12.8px;line-height:1.4;letter-spacing:0.05em;color:var(--ash-light)}
+.seuil-italic{font-family:var(--serif);font-style:italic;font-size:18px;line-height:1.6;letter-spacing:0.005em;color:var(--bone)}
+.drop-cap{position:relative}
+.drop-cap::first-letter{font-family:var(--serif);font-style:italic;font-weight:400;font-size:48px;line-height:0.85;float:left;padding:6px 8px 0 0;color:var(--silk-gold)}
+
+/* SECTION D — motion demos */
+.motion-demos{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-3)}
+@media (max-width:720px){.motion-demos{grid-template-columns:1fr 1fr}}
+.motion-demo{aspect-ratio:1;border:1px solid color-mix(in oklch, var(--ash-deep) 70%, transparent);border-radius:2px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;background:var(--night-warm)}
+.motion-demo .label{position:absolute;left:var(--s-2);bottom:var(--s-2);font-family:var(--mono);font-size:9px;color:var(--ash-light);letter-spacing:0.06em;line-height:1.3}
+.motion-demo .label strong{color:var(--bone);font-weight:400}
+.motion-blob{width:55%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 50% 50%, color-mix(in oklch, var(--silk-gold) 30%, transparent), transparent 70%)}
+.motion-line{height:1px;background:linear-gradient(to right, transparent, color-mix(in oklch, var(--bone) 60%, transparent), transparent);width:80%}
+.motion-bead{width:10px;height:10px;border-radius:50%;background:var(--ember-live);box-shadow:0 0 16px color-mix(in oklch, var(--ember-live) 70%, transparent)}
+.motion-particle{width:80%;height:1px;background:linear-gradient(to right, transparent, color-mix(in oklch, var(--paper-warm) 50%, transparent), transparent)}
+.motion-sheet{width:60%;height:60%;background:color-mix(in oklch, var(--paper-warm) 22%, transparent);border:1px solid color-mix(in oklch, var(--paper-warm) 35%, transparent)}
+
+/* SECTION E — geosymbols */
+.geo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-3)}
+@media (max-width:720px){.geo-grid{grid-template-columns:1fr 1fr}}
+.geo-card{aspect-ratio:1;border:1px solid color-mix(in oklch, var(--ash-deep) 70%, transparent);border-radius:2px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--s-3);padding:var(--s-3);background:var(--night-warm);position:relative;overflow:hidden}
+.geo-card svg{display:block}
+.geo-card .name{font-family:var(--serif);font-style:italic;font-size:14px;color:var(--bone);text-align:center}
+.geo-card .use{font-family:var(--mono);font-size:9px;color:var(--ash-light);letter-spacing:0.06em;text-align:center;line-height:1.4}
+
+/* SECTION F — wow demos */
+.wow-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-3)}
+@media (max-width:720px){.wow-grid{grid-template-columns:1fr}}
+.wow-card{border:1px solid color-mix(in oklch, var(--ash-deep) 70%, transparent);border-radius:2px;padding:var(--s-4);background:var(--night-warm);cursor:pointer;transition:border-color var(--tempo-tisse) var(--ease-respire)}
+.wow-card:hover{border-color:color-mix(in oklch, var(--silk-gold) 30%, var(--ash-deep))}
+.wow-card .num{font-family:var(--mono);font-size:10px;letter-spacing:0.15em;color:var(--silk-gold);margin-bottom:var(--s-2)}
+.wow-card .name{font-family:var(--serif);font-size:21px;line-height:1.3;color:var(--embryonic);margin-bottom:var(--s-2)}
+.wow-card .trig{font-family:var(--mono);font-size:11px;color:var(--ash-light);line-height:1.5;margin-bottom:var(--s-2)}
+.wow-card .play{font-family:var(--sans);font-size:12px;color:var(--bone);text-decoration:underline;text-underline-offset:3px;text-decoration-color:color-mix(in oklch, var(--silk-gold) 50%, transparent)}
+
+/* wow modal */
+.wow-modal{position:fixed;inset:0;z-index:100;background:color-mix(in oklch, var(--night-floor) 92%, transparent);backdrop-filter:blur(12px);display:none;align-items:center;justify-content:center;padding:var(--s-4)}
+.wow-modal.open{display:flex;animation:fade-in var(--tempo-tisse) var(--ease-respire)}
+.wow-stage{width:100%;max-width:560px;aspect-ratio:1;position:relative;display:flex;align-items:center;justify-content:center}
+.wow-close{position:absolute;top:var(--s-4);right:var(--s-4);font-family:var(--mono);font-size:11px;letter-spacing:0.15em;color:var(--ash-light);text-decoration:underline;text-underline-offset:3px}
+@keyframes fade-in{from{opacity:0}to{opacity:1}}
+
+/* SECTION G — sounds */
+.sound-row{display:grid;grid-template-columns:auto 1fr auto;gap:var(--s-3);align-items:center;padding:var(--s-3) 0;border-bottom:1px solid color-mix(in oklch, var(--ash-deep) 50%, transparent)}
+.sound-row:last-child{border-bottom:none}
+.sound-num{font-family:var(--mono);font-size:11px;color:var(--silk-gold);min-width:24px}
+.sound-name{font-family:var(--serif);font-size:17px;color:var(--bone)}
+.sound-meta{font-family:var(--mono);font-size:11px;color:var(--ash-light);margin-top:2px}
+.sound-play{font-family:var(--sans);font-size:12px;color:var(--bone);padding:var(--s-2) var(--s-3);border:1px solid color-mix(in oklch, var(--ash-deep) 80%, var(--bone));border-radius:2px;letter-spacing:0.05em}
+.sound-play:hover{border-color:var(--silk-gold);color:var(--silk-gold)}
+
+.sound-toggle{display:flex;align-items:center;gap:var(--s-2);font-family:var(--mono);font-size:12px;color:var(--ash-light);margin-bottom:var(--s-3);user-select:none;cursor:pointer}
+.sound-toggle .switch{width:36px;height:20px;background:var(--ash-deep);border:1px solid var(--ash-mid);border-radius:10px;position:relative;transition:background var(--tempo-tisse)}
+.sound-toggle .switch::after{content:'';position:absolute;top:1px;left:1px;width:16px;height:16px;border-radius:50%;background:var(--ash-light);transition:left var(--tempo-tisse) var(--ease-respire), background var(--tempo-tisse)}
+.sound-toggle.on .switch{background:color-mix(in oklch, var(--silk-gold) 20%, var(--ash-deep))}
+.sound-toggle.on .switch::after{left:17px;background:var(--silk-gold)}
+
+/* shared utilities */
+.row{display:flex;align-items:center;gap:var(--s-3)}
+.stack{display:flex;flex-direction:column;gap:var(--s-3)}
+.muted{color:var(--ash-light)}
+.gold{color:var(--silk-gold)}
+.right-rule{padding-right:var(--s-4);border-right:1px solid color-mix(in oklch, var(--ash-deep) 80%, transparent)}
+.note-card{padding:var(--s-3) var(--s-4);border:1px solid color-mix(in oklch, var(--silk-gold) 25%, var(--ash-deep));background:color-mix(in oklch, var(--silk-gold) 4%, transparent);border-radius:2px;font-family:var(--serif);font-style:italic;font-size:15px;line-height:1.55;color:var(--bone);text-wrap:pretty}
+.note-card .src{display:block;font-family:var(--mono);font-style:normal;font-size:10px;color:var(--ash-light);letter-spacing:0.08em;margin-top:var(--s-2)}
+</style>
+</head>
+<body>
+
+<!-- Inline SVG defs: matter noise filters (8 — V1.2 complets) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="n-linen" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.012 0.018" numOctaves="3" seed="1"/>
+      <feColorMatrix values="0 0 0 0 0.62  0 0 0 0 0.55  0 0 0 0 0.45  0 0 0 0.18 0"/>
+    </filter>
+    <filter id="n-silk" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.008 0.014" numOctaves="2" seed="3"/>
+      <feColorMatrix values="0 0 0 0 0.78  0 0 0 0 0.62  0 0 0 0 0.32  0 0 0 0.32 0"/>
+    </filter>
+    <filter id="n-stone" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="turbulence" baseFrequency="0.02 0.018" numOctaves="2" seed="5"/>
+      <feColorMatrix values="0 0 0 0 0.45  0 0 0 0 0.5  0 0 0 0 0.6  0 0 0 0.22 0"/>
+    </filter>
+    <filter id="n-paper" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04 0.06" numOctaves="2" seed="7"/>
+      <feColorMatrix values="0 0 0 0 0.62  0 0 0 0 0.55  0 0 0 0 0.45  0 0 0 0.16 0"/>
+    </filter>
+    <filter id="n-ash" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="1" seed="9"/>
+      <feColorMatrix values="0 0 0 0 0.55  0 0 0 0 0.55  0 0 0 0 0.55  0 0 0 0.10 0"/>
+    </filter>
+    <filter id="n-water" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="turbulence" baseFrequency="0.015 0.025" numOctaves="2" seed="11"/>
+      <feDisplacementMap in="SourceGraphic" scale="3"/>
+      <feColorMatrix values="0 0 0 0 0.4  0 0 0 0 0.5  0 0 0 0 0.62  0 0 0 0.32 0"/>
+    </filter>
+    <filter id="n-ember" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="3" seed="13"/>
+      <feColorMatrix values="0.6 0 0 0 0  0.3 0 0 0 0  0.1 0 0 0 0  0 0 0 0.5 0"/>
+    </filter>
+    <filter id="n-earth" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.25 0.35" numOctaves="2" seed="15"/>
+      <feColorMatrix values="0 0 0 0 0.55  0 0 0 0 0.40  0 0 0 0 0.28  0 0 0 0.34 0"/>
+    </filter>
+
+    <!-- Aurore arc gradient -->
+    <linearGradient id="aurore" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="oklch(0.70 0.080 80)" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="oklch(0.70 0.080 80)" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="grad-silk" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="oklch(0.70 0.080 80)" stop-opacity="0.7"/>
+      <stop offset="60%" stop-color="oklch(0.70 0.080 80)" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="oklch(0.70 0.080 80)" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="grad-conc" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="oklch(0.70 0.080 80)" stop-opacity="0.85"/>
+      <stop offset="50%" stop-color="oklch(0.62 0.045 70)" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="oklch(0.62 0.045 70)" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>
+
+<div class="page">
+
+<header class="masthead">
+  <div class="kicker">Dream App · Visual System V1.2</div>
+  <h1>L'atmosphère vivante</h1>
+  <p class="lede">
+    Un playground de référence — palette, matters réveillés, typographie, motion organique,
+    formes géosymboliques, moments Wow, sons rituels. Chaque choix doit pouvoir être tenu
+    devant Bachelard, Tarkovsky et Tanizaki, sans rougir.
+  </p>
+  <nav class="toc">
+    <a href="#A"><span>A</span>Palette oklch (14 valeurs)</a>
+    <a href="#B"><span>B</span>8 matters réveillés</a>
+    <a href="#C"><span>C</span>Typographie — 3 familles, 6 niveaux</a>
+    <a href="#D"><span>D</span>Motion organique — 6 tempi</a>
+    <a href="#E"><span>E</span>6 formes géosymboliques</a>
+    <a href="#F"><span>F</span>5 moments Wow démontrés</a>
+    <a href="#G"><span>G</span>Sons rituels (opt-in)</a>
+  </nav>
+</header>
+
+<!-- ════════ SECTION A — PALETTE ════════ -->
+<section class="s" id="A">
+  <header>
+    <div class="label">A — Palette oklch · 7 base + 7 accents</div>
+    <h2>La nuit comme sol, l'<em>or voilé</em> comme verbe rare.</h2>
+    <p class="seuil">Pas de pur noir, pas de pur blanc. Aucun accent saturé au-delà de 0.14 chroma.
+      Les valeurs existent en relation, jamais isolées — Albers.</p>
+  </header>
+
+  <h4 style="margin-top:var(--s-5)">7 valeurs de base — dark-first</h4>
+  <div class="swatch-grid">
+    <div class="swatch dark" style="background:var(--night-floor)"><span class="name">night-floor</span><span class="hex">0.12 0.012 280</span></div>
+    <div class="swatch dark" style="background:var(--night-warm)"><span class="name">night-warm</span><span class="hex">0.16 0.015 60</span></div>
+    <div class="swatch dark" style="background:var(--ash-deep)"><span class="name">ash-deep</span><span class="hex">0.22 0.008 280</span></div>
+    <div class="swatch dark" style="background:var(--ash-mid)"><span class="name">ash-mid</span><span class="hex">0.34 0.010 60</span></div>
+    <div class="swatch dark" style="background:var(--ash-light)"><span class="name">ash-light</span><span class="hex">0.52 0.012 60</span></div>
+    <div class="swatch light" style="background:var(--bone)"><span class="name">bone</span><span class="hex">0.78 0.015 70</span></div>
+    <div class="swatch light" style="background:var(--embryonic)"><span class="name">embryonic</span><span class="hex">0.92 0.008 80</span></div>
+  </div>
+
+  <h4 style="margin-top:var(--s-5)">7 accents matter-couleurs — par dimension</h4>
+  <div class="swatch-grid">
+    <div class="swatch light" style="background:var(--paper-warm)"><span class="name">paper-warm <span class="muted">D1</span></span><span class="hex">0.62 0.045 70</span></div>
+    <div class="swatch light" style="background:var(--stone-cool)"><span class="name">stone-cool <span class="muted">D2</span></span><span class="hex">0.55 0.025 230</span></div>
+    <div class="swatch light" style="background:var(--silk-gold)"><span class="name">silk-gold <span class="muted">D3</span></span><span class="hex">0.70 0.080 80</span></div>
+    <div class="swatch light" style="background:var(--clay-earth)"><span class="name">clay-earth <span class="muted">D4</span></span><span class="hex">0.50 0.060 50</span></div>
+    <div class="swatch dark" style="background:var(--obsidian)"><span class="name">obsidian-deep <span class="muted">D5</span></span><span class="hex">0.28 0.030 290</span></div>
+    <div class="swatch light" style="background:var(--ember-live)"><span class="name">ember-live <span class="muted">D6</span></span><span class="hex">0.65 0.140 40</span></div>
+    <div class="swatch dark" style="background:color-mix(in oklch, var(--ember-soft) 100%, transparent)"><span class="name">ember-soft <span class="muted">α</span></span><span class="hex">0.55 0.080 40 / 0.45</span></div>
+  </div>
+
+  <div class="usage-list">
+    <div><span class="tok">night-floor</span> Fond global app. Le sol.</div>
+    <div><span class="tok">night-warm</span> Lecture profonde, capture intime.</div>
+    <div><span class="tok">ash-deep</span> Strates structurelles, séparateurs.</div>
+    <div><span class="tok">ash-mid</span> UI passive, métadonnées.</div>
+    <div><span class="tok">ash-light</span> Texte secondaire, chips muted.</div>
+    <div><span class="tok">bone</span> Texte courant — l'os patiné, jamais blanc.</div>
+    <div><span class="tok">embryonic</span> Titres-seuils, &lt;5% surface.</div>
+    <div><span class="tok">paper-warm</span> D1 logique associative — le carnet.</div>
+    <div><span class="tok">stone-cool</span> D2 échos inverses — l'envers.</div>
+    <div><span class="tok">silk-gold</span> D3 prophétique, Big Dream, Wow.</div>
+    <div><span class="tok">clay-earth</span> D4 complétion, résolu, terre cuite.</div>
+    <div><span class="tok">obsidian-deep</span> D5 root dreams, profondeur.</div>
+    <div><span class="tok">ember-live</span> D6 numinosity 4-5, EXIT_TO_HUMAN.</div>
+    <div><span class="tok">ember-soft</span> Halos braise, présence (≈ succès).</div>
+  </div>
+
+  <div class="divider"></div>
+  <div class="note-card">
+    « Pas de rouge web, pas de vert succès. La réussite et l'échec sont des catégories de Hercules. »
+    <span class="src">— Hillman, posture sémantique V1.2</span>
+  </div>
+</section>
+
+<!-- ════════ SECTION B — MATTERS ════════ -->
+<section class="s" id="B">
+  <header>
+    <div class="label">B — 8 matters réveillés · pattern + mouvement organique</div>
+    <h2>La <em>tactilité</em> est à la matière ce que la couleur est à la vision.</h2>
+    <p class="seuil">Chaque matter est un élément vivant Bachelard avec son propre rythme,
+      son propre mouvement, son propre usage écran. Survole une carte pour figer le mouvement.</p>
+  </header>
+
+  <div class="matter-grid">
+
+    <!-- 1 LINEN -->
+    <div class="matter-card">
+      <div class="matter-bed bed-linen motion-linen"></div>
+      <div class="bed-noise" style="filter:url(#n-linen)"></div>
+      <div class="label-bar">
+        <div class="name">linen <em>eau-air composée</em></div>
+        <div class="desc">Bachelard · Vermeer drapés · breathe-souffle 6000ms</div>
+      </div>
+    </div>
+
+    <!-- 2 SILK-GOLD -->
+    <div class="matter-card">
+      <div class="matter-bed bed-silk motion-silk-halo"></div>
+      <div class="bed-noise motion-silk-drift" style="filter:url(#n-silk)"></div>
+      <div class="label-bar">
+        <div class="name">silk-gold <em>air pur prophétique D3</em></div>
+        <div class="desc">af Klint · Roublev · breathe-souffle + drift-derive</div>
+      </div>
+    </div>
+
+    <!-- 3 STONE -->
+    <div class="matter-card">
+      <div class="matter-bed bed-stone motion-stone"></div>
+      <div class="bed-noise" style="filter:url(#n-stone)"></div>
+      <div class="label-bar">
+        <div class="name">stone-cool <em>terre IN — D2</em></div>
+        <div class="desc">Albers · Goldsworthy · drift-derive 12000ms</div>
+      </div>
+    </div>
+
+    <!-- 4 PAPER -->
+    <div class="matter-card">
+      <div class="matter-bed bed-paper motion-paper"></div>
+      <div class="bed-noise" style="filter:url(#n-paper)"></div>
+      <div class="label-bar">
+        <div class="name">paper <em>eau séchée — D1</em></div>
+        <div class="desc">washi · Mi Fu · breathe-souffle ultra-subtile</div>
+      </div>
+    </div>
+
+    <!-- 5 ASH -->
+    <div class="matter-card">
+      <div class="matter-bed bed-ash"></div>
+      <div class="bed-noise motion-ash" style="filter:url(#n-ash)"></div>
+      <div class="label-bar">
+        <div class="name">ash <em>air-feu mort, fond universel</em></div>
+        <div class="desc">Tanizaki · Soulages · drift horizontal lent</div>
+      </div>
+    </div>
+
+    <!-- 6 WATER -->
+    <div class="matter-card">
+      <div class="matter-bed bed-water"></div>
+      <div class="bed-noise motion-water" style="filter:url(#n-water)"></div>
+      <div class="label-bar">
+        <div class="name">water <em>eau Bachelard pure (V1.2 réveillé)</em></div>
+        <div class="desc">Tarkovsky Solaris · flow descendant 14s</div>
+      </div>
+    </div>
+
+    <!-- 7 EMBER -->
+    <div class="matter-card">
+      <div class="matter-bed bed-ember motion-ember"></div>
+      <div class="bed-noise motion-ember-flicker" style="filter:url(#n-ember)"></div>
+      <div class="label-bar">
+        <div class="name">ember <em>feu, incandescence intérieure (V1.2 réveillé)</em></div>
+        <div class="desc">Rothko · pulse-braise 3500ms ~17 BPM</div>
+      </div>
+    </div>
+
+    <!-- 8 EARTH -->
+    <div class="matter-card">
+      <div class="matter-bed bed-earth motion-earth"></div>
+      <div class="bed-noise" style="filter:url(#n-earth)"></div>
+      <div class="label-bar">
+        <div class="name">earth <em>terre intériorité (V1.2 réveillé)</em></div>
+        <div class="desc">Goldsworthy · Kapoor · drift-derive sédiment</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="divider"></div>
+
+  <h4>Compatibilités — règles d'association</h4>
+  <div class="usage-list" style="margin-top:var(--s-3)">
+    <div><span class="tok gold">linen + paper</span> ✓ contemplatifs, eau composée mat</div>
+    <div><span class="tok gold">stone + earth</span> ✓ chaleur communautaire ancrée (Cercle)</div>
+    <div><span class="tok gold">silk + water</span> ✓ Forêt FIRST D3 prophétique</div>
+    <div><span class="tok gold">silk + ember-soft</span> ✓ Wow 3 Big Dream — incandescence sous voile</div>
+    <div><span class="tok" style="color:var(--ember-live)">ember + paper</span> ✗ trop chaud sur lecture longue</div>
+    <div><span class="tok" style="color:var(--ember-live)">water + ash</span> ✗ deux fonds neutres se diluent</div>
+  </div>
+</section>
+
+<!-- ════════ SECTION C — TYPOGRAPHY ════════ -->
+<section class="s" id="C">
+  <header>
+    <div class="label">C — 3 familles · 6 niveaux · ratio 1.250</div>
+    <h2>EB Garamond pour <em>les seuils</em>, Inter pour le sol, Mono pour les méta.</h2>
+    <p class="seuil">Curseur de ritualisation : boutons stricts en Inter, moments-seuils en Garamond italic.
+      Drop cap 48px réservé au Big Dream marquage (Wow 3).</p>
+  </header>
+
+  <div class="type-row">
+    <div class="lvl">H1 Seuil<span class="px">39.06px / 1.15</span></div>
+    <div class="ex h1-seuil">Le journal respire avec toi.</div>
+  </div>
+  <div class="type-row">
+    <div class="lvl">H2 Section<span class="px">31.25px / 1.20</span></div>
+    <div class="ex h2-section">Constellation des figures</div>
+  </div>
+  <div class="type-row">
+    <div class="lvl">H3 Lecture<span class="px">25px / 1.30</span></div>
+    <div class="ex h3-lecture">« Et la grand-mère préparait du linge à laver. »</div>
+  </div>
+  <div class="type-row">
+    <div class="lvl">H4 Repère<span class="px">20px / 1.40</span></div>
+    <div class="ex h4-repere">Échos depuis le passé</div>
+  </div>
+  <div class="type-row">
+    <div class="lvl">Body<span class="px">16px / 1.55</span></div>
+    <div class="ex body-default">Tu peux déposer un kairos, ou simplement écrire une note de vie nue. L'app accueille les deux pareillement, sans ranger.</div>
+  </div>
+  <div class="type-row">
+    <div class="lvl">Meta<span class="px">12.8px / 1.40</span></div>
+    <div class="ex meta-default">déposé · lune de mars · délai rituel 14j</div>
+  </div>
+  <div class="type-row">
+    <div class="lvl">Seuil italic<span class="px">18px / 1.60</span></div>
+    <div class="ex seuil-italic">Quelque chose vient de commencer.</div>
+  </div>
+  <div class="type-row">
+    <div class="lvl">Drop cap<span class="px">48px Big Dream</span></div>
+    <div class="ex drop-cap" style="font-family:var(--serif);font-size:18px;line-height:1.6;font-style:italic">Quelque chose en moi se penche, ce matin, vers une porte que je n'ai jamais ouverte. La grand-mère y est, et elle prépare du linge à laver — comme si rien n'avait jamais été perdu.</div>
+  </div>
+</section>
+
+<!-- ════════ SECTION D — MOTION ════════ -->
+<section class="s" id="D">
+  <header>
+    <div class="label">D — 6 tempi · 3 V1 + 3 organiques V1.2 · ban du fade plat</div>
+    <h2>Sculpter dans le temps. <em>Une transition n'est pas un effet</em>.</h2>
+    <p class="seuil">tempo-souffle 6000ms ≈ 10 cycles/min — respiration méditative.
+      tempo-braise 3500ms ≈ 17 BPM — cœur ralenti.
+      tempo-derive 12000ms — dérive cosmologique.</p>
+  </header>
+
+  <div class="motion-demos">
+    <div class="motion-demo"><div class="motion-blob motion-linen"></div><div class="label"><strong>tempo-souffle</strong> 6000ms · ease-souffle</div></div>
+    <div class="motion-demo"><div class="motion-bead motion-ember"></div><div class="label"><strong>tempo-braise</strong> 3500ms · pulse cardiaque</div></div>
+    <div class="motion-demo"><div class="motion-particle motion-ash"></div><div class="label"><strong>tempo-derive</strong> 12000ms · linear</div></div>
+    <div class="motion-demo"><div class="motion-line"></div><div class="label"><strong>tempo-instant</strong> 100ms · feedback tactile</div></div>
+    <div class="motion-demo"><div class="motion-sheet" style="animation:fade-in var(--tempo-tisse) var(--ease-respire) infinite alternate"></div><div class="label"><strong>tempo-tisse</strong> 380ms · sheet/modal</div></div>
+    <div class="motion-demo"><div class="motion-blob" style="background:radial-gradient(circle, color-mix(in oklch, var(--paper-warm) 35%, transparent), transparent 70%);animation:fade-in var(--tempo-ceremoniel) var(--ease-rituel) infinite alternate"></div><div class="label"><strong>tempo-ceremoniel</strong> 920ms · Van Gennep</div></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <h4>Van Gennep tripartite — passage rituel ~1000ms</h4>
+  <div class="usage-list">
+    <div><span class="tok">Séparation 200ms</span> opacity 1→0.3, scale 1→0.98, ease-out doux</div>
+    <div><span class="tok">Marge 400ms</span> spirale logarithmique silk-gold qui se densifie au centre</div>
+    <div><span class="tok">Agrégation 400ms</span> matter monte d'abord, puis contenu, puis interactif</div>
+  </div>
+
+  <div class="divider"></div>
+  <div class="note-card">
+    « Aucun fade-in plat sans matière. Si tu fades juste opacity 0→1 sans matter qui vit derrière, refonde.
+    Aucun linear, aucun ease par défaut — sauf ease-derive qui est linear par essence. »
+    <span class="src">— Discipline V1.2 §4.9</span>
+  </div>
+</section>
+
+<!-- ════════ SECTION E — GEOSYMBOLS ════════ -->
+<section class="s" id="E">
+  <header>
+    <div class="label">E — 6 formes géosymboliques · inline SVG pures</div>
+    <h2>Des formes qui <em>chantent</em>, pas qui décorent.</h2>
+    <p class="seuil">Spirale d'or, cercles concentriques, triangle alchimique, demi-cercle aurore,
+      lignes ondulantes songlines, croissant lunaire. Aucun autre ornement V1.2.</p>
+  </header>
+
+  <div class="geo-grid">
+
+    <div class="geo-card">
+      <svg width="100" height="100" viewBox="-50 -50 100 100">
+        <path d="M0,0 m0,-2 a2,2 0 1,1 -1.236,3.236 a3.236,3.236 0 1,1 4.472,-2 a5.236,5.236 0 1,1 -7.236,-3.236 a8.472,8.472 0 1,1 11.708,5.236 a13.708,13.708 0 1,1 -18.944,-8.472 a22.18,22.18 0 1,1 30.652,13.708"
+          fill="none" stroke="var(--silk-gold)" stroke-width="0.7" stroke-linecap="round"
+          class="motion-silk-halo"/>
+      </svg>
+      <div class="name">spirale logarithmique</div>
+      <div class="use">Wow 1 · Big Dream · onboarding séparation</div>
+    </div>
+
+    <div class="geo-card">
+      <svg width="100" height="100" viewBox="-50 -50 100 100">
+        <circle cx="0" cy="0" r="34" fill="none" stroke="var(--paper-warm)" stroke-width="0.5" opacity="0.4"/>
+        <circle cx="0" cy="0" r="24" fill="none" stroke="var(--paper-warm)" stroke-width="0.6" opacity="0.55"/>
+        <circle cx="0" cy="0" r="16" fill="none" stroke="var(--silk-gold)" stroke-width="0.7" opacity="0.7"/>
+        <circle cx="0" cy="0" r="9" fill="url(#grad-conc)" opacity="0.85" class="motion-silk-halo"/>
+      </svg>
+      <div class="name">cercles concentriques</div>
+      <div class="use">Portrait centre · AHA capture modal</div>
+    </div>
+
+    <div class="geo-card">
+      <svg width="100" height="100" viewBox="-50 -50 100 100">
+        <polygon points="0,-38 33,22 -33,22"
+          fill="none" stroke="var(--stone-cool)" stroke-width="0.7"
+          opacity="0.55" class="motion-water"/>
+      </svg>
+      <div class="name">triangle équilatéral water</div>
+      <div class="use">Réentrée gate · burn rituel · alchimie</div>
+    </div>
+
+    <div class="geo-card">
+      <svg width="120" height="60" viewBox="-60 -60 120 60">
+        <path d="M -55 0 A 55 55 0 0 1 55 0" fill="none"
+          stroke="url(#aurore)" stroke-width="1.2" class="motion-silk-halo"/>
+        <path d="M -45 0 A 45 45 0 0 1 45 0" fill="none"
+          stroke="var(--silk-gold)" stroke-width="0.4" opacity="0.4"/>
+      </svg>
+      <div class="name">demi-cercle aurore</div>
+      <div class="use">Voûte Anima Mundi — en haut écran</div>
+    </div>
+
+    <div class="geo-card">
+      <svg width="120" height="100" viewBox="0 0 120 100">
+        <path d="M 0 20 Q 20 12, 40 20 T 80 20 T 120 20" fill="none" stroke="var(--stone-cool)" stroke-width="0.6" opacity="0.45"/>
+        <path d="M 0 40 Q 20 32, 40 40 T 80 40 T 120 40" fill="none" stroke="var(--stone-cool)" stroke-width="0.5" opacity="0.55"/>
+        <path d="M 0 60 Q 20 52, 40 60 T 80 60 T 120 60" fill="none" stroke="var(--stone-cool)" stroke-width="0.6" opacity="0.65"/>
+        <path d="M 0 80 Q 20 72, 40 80 T 80 80 T 120 80" fill="none" stroke="var(--stone-cool)" stroke-width="0.5" opacity="0.45"/>
+      </svg>
+      <div class="name">lignes ondulantes</div>
+      <div class="use">Songlines · backgrounds nuit · Météo</div>
+    </div>
+
+    <div class="geo-card">
+      <svg width="100" height="100" viewBox="-50 -50 100 100">
+        <path d="M 0 -34 A 34 34 0 1 0 0 34 A 26 26 0 1 1 0 -34 Z"
+          fill="var(--silk-gold)" opacity="0.55" class="motion-silk-halo"/>
+      </svg>
+      <div class="name">croissant lunaire fin</div>
+      <div class="use">Polyphonie lunaire · phases · cycles</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════ SECTION F — WOW MOMENTS ════════ -->
+<section class="s" id="F">
+  <header>
+    <div class="label">F — 5 moments Wow · seuils initiatiques</div>
+    <h2>Sobre. Sacré. <em>Sans jingle</em>.</h2>
+    <p class="seuil">Une fois à vie (Wow 1, 2, 5) ou marquage permanent (Wow 3). Haptique numinous,
+      texte EB Garamond italic, animation Van Gennep cérémonielle. Anti-gamification absolu.
+      Touche une carte pour jouer la mini-démo.</p>
+  </header>
+
+  <div class="wow-grid">
+    <div class="wow-card" data-wow="1">
+      <div class="num">WOW · 01 — à vie, une fois</div>
+      <div class="name">Premier kairos déposé</div>
+      <div class="trig">Trigger · post-capture initiale, après "Ton kairos est arrivé."</div>
+      <div class="play">▶ jouer la spirale silk-gold</div>
+    </div>
+    <div class="wow-card" data-wow="2">
+      <div class="num">WOW · 02 — à vie, une fois</div>
+      <div class="name">Premier écho prophétique</div>
+      <div class="trig">Trigger · type 7 détecté à seuil 0.75/0.4 sensible</div>
+      <div class="play">▶ jouer l'arc silk-gold reliant deux kairos</div>
+    </div>
+    <div class="wow-card" data-wow="3">
+      <div class="num">WOW · 03 — permanent à chaque Big Dream</div>
+      <div class="name">Big Dream marquage</div>
+      <div class="trig">Trigger · numinosity score atteint seuil composite ou marquage manuel</div>
+      <div class="play">▶ jouer halo silk-gold + ember-soft + drop cap</div>
+    </div>
+    <div class="wow-card" data-wow="4">
+      <div class="num">WOW · 04 — à chaque nouveau noeud</div>
+      <div class="name">Nouveau noeud constellation</div>
+      <div class="trig">Trigger · figure / motif / symbole chaud émerge dans la constellation</div>
+      <div class="play">▶ jouer naissance noeud + edges Bézier</div>
+    </div>
+    <div class="wow-card" data-wow="5">
+      <div class="num">WOW · 05 — à vie, une fois par cercle</div>
+      <div class="name">Première restitution cercle</div>
+      <div class="trig">Trigger · première "Lecture du cercle" demandée</div>
+      <div class="play">▶ jouer eau ascendante (inversion gravité)</div>
+    </div>
+    <div class="wow-card" style="opacity:0.55">
+      <div class="num">WOW · BONUS — proposé V1.2</div>
+      <div class="name">Premier dialogue figure tenu</div>
+      <div class="trig">Trigger · figure d'archétype répond au-delà du tour 3 (à calibrer)</div>
+      <div class="play">▶ démo à venir</div>
+    </div>
+  </div>
+</section>
+
+<!-- WOW Modal -->
+<div class="wow-modal" id="wowModal">
+  <button class="wow-close" onclick="closeWow()">FERMER ✕</button>
+  <div class="wow-stage" id="wowStage"></div>
+</div>
+
+<!-- ════════ SECTION G — SOUNDS ════════ -->
+<section class="s" id="G">
+  <header>
+    <div class="label">G — Sons rituels · opt-in absolu · Bresson</div>
+    <h2>« Aucune musique en accompagnement. <em>Aucune musique du tout.</em> »</h2>
+    <p class="seuil">Toggle off par défaut. 5 sons rituels, &lt; -32 LUFS. Le silence absolu reste
+      la posture première. Démos audio synthétisées en Web Audio (pas d'asset externe — référence atmosphère seulement).</p>
+  </header>
+
+  <div class="sound-toggle" id="soundToggle" onclick="toggleSounds()">
+    <div class="switch"></div>
+    <span>Sons rituels — <span id="soundState">désactivés</span></span>
+  </div>
+
+  <div class="sound-row">
+    <div class="sound-num">1</div>
+    <div>
+      <div class="sound-name">Drone ambient au launch</div>
+      <div class="sound-meta">3-5s fade · 60-200 Hz dominante · 1× par session · -32 LUFS</div>
+    </div>
+    <button class="sound-play" onclick="playSound('drone')">▶ écouter</button>
+  </div>
+  <div class="sound-row">
+    <div class="sound-num">2</div>
+    <div>
+      <div class="sound-name">Cloche cristal — Wow 1 et Wow 3</div>
+      <div class="sound-meta">1 coup unique · fade 2s · A4 singing bowl · jamais Wow 2/4/5</div>
+    </div>
+    <button class="sound-play" onclick="playSound('bell')">▶ écouter</button>
+  </div>
+  <div class="sound-row">
+    <div class="sound-num">3</div>
+    <div>
+      <div class="sound-name">Texture papier au tap</div>
+      <div class="sound-meta">&lt;0.5s · paper rustle hi-freq atténué · boutons primaires uniquement</div>
+    </div>
+    <button class="sound-play" onclick="playSound('paper')">▶ écouter</button>
+  </div>
+  <div class="sound-row">
+    <div class="sound-num">4</div>
+    <div>
+      <div class="sound-name">Pluie distante (loop) — écrans nuit</div>
+      <div class="sound-meta">après 30s · Météo / Voûte / Réentrée · loop atténué</div>
+    </div>
+    <button class="sound-play" onclick="playSound('rain')">▶ écouter</button>
+  </div>
+  <div class="sound-row">
+    <div class="sound-num">5</div>
+    <div>
+      <div class="sound-name">Vent dans feuilles — Oracle du Corps</div>
+      <div class="sound-meta">à l'ouverture · loop low-volume · fade in/out</div>
+    </div>
+    <button class="sound-play" onclick="playSound('wind')">▶ écouter</button>
+  </div>
+
+  <div class="divider"></div>
+  <div class="note-card">
+    « Pas de cloche pour Wow 2, 4, 5 — silence absolu. Le silence amplifie le frisson. »
+    <span class="src">— Discipline §4.X Wow Moments + Bresson</span>
+  </div>
+</section>
+
+<footer style="padding:var(--s-7) 0 var(--s-3);text-align:center">
+  <div class="meta">DREAM · VISUAL SYSTEM V1.2 · PLAYGROUND · POSTURE BACHELARD / TARKOVSKY / TANIZAKI</div>
+  <div class="meta" style="margin-top:var(--s-2)">la lecture est un acte d'attention</div>
+</footer>
+
+</div>
+
+<script>
+// ═══════════════ Wow demos ═══════════════
+const wowModal = document.getElementById('wowModal');
+const wowStage = document.getElementById('wowStage');
+
+function openWow(n){
+  wowStage.innerHTML = '';
+  wowStage.appendChild(buildWow(n));
+  wowModal.classList.add('open');
+  if(soundsOn && (n==='1' || n==='3')) playSound('bell');
+}
+function closeWow(){ wowModal.classList.remove('open'); wowStage.innerHTML=''; }
+
+document.querySelectorAll('.wow-card[data-wow]').forEach(c => {
+  c.addEventListener('click', () => openWow(c.dataset.wow));
+});
+wowModal.addEventListener('click', (e) => { if(e.target === wowModal) closeWow(); });
+
+function buildWow(n){
+  const wrap = document.createElement('div');
+  wrap.style.cssText = 'position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:32px';
+
+  if(n === '1'){
+    // Spirale silk-gold + sol qui devient water + texte
+    wrap.innerHTML = `
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 60%, oklch(0.16 0.015 60) 0%, oklch(0.12 0.012 280) 70%);overflow:hidden">
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg, transparent 0%, color-mix(in oklch, oklch(0.55 0.025 230) 12%, transparent) 100%);animation:water-flow-down 14s linear infinite"></div>
+      </div>
+      <svg width="200" height="200" viewBox="-100 -100 200 200" style="z-index:2;animation:fade-in 1200ms cubic-bezier(0.7,0,0.3,1) both">
+        <path d="M0,0 m0,-2 a2,2 0 1,1 -1.236,3.236 a3.236,3.236 0 1,1 4.472,-2 a5.236,5.236 0 1,1 -7.236,-3.236 a8.472,8.472 0 1,1 11.708,5.236 a13.708,13.708 0 1,1 -18.944,-8.472 a22.18,22.18 0 1,1 30.652,13.708 a35.888,35.888 0 1,1 -49.596,-22.18 a58.068,58.068 0 1,1 80.248,35.888"
+          fill="none" stroke="oklch(0.70 0.080 80)" stroke-width="0.9" stroke-linecap="round"
+          stroke-dasharray="600" stroke-dashoffset="600"
+          style="animation:dash 1500ms cubic-bezier(0.7,0,0.3,1) forwards"/>
+      </svg>
+      <div style="font-family:var(--serif);font-style:italic;font-size:25px;color:var(--bone);text-align:center;max-width:380px;z-index:2;opacity:0;animation:fade-in 600ms cubic-bezier(0.32,0.04,0.25,1) 1800ms forwards;text-wrap:pretty">
+        Ton premier kairos.<br>Quelque chose vient de commencer.
+      </div>
+      <style>@keyframes dash { to { stroke-dashoffset: 0; } }</style>
+    `;
+  }
+
+  if(n === '2'){
+    // Deux kairos côte-à-côte avec arc silk-gold
+    wrap.innerHTML = `
+      <div style="position:absolute;inset:0;background:oklch(0.12 0.012 280);overflow:hidden">
+        <div style="position:absolute;inset:0;opacity:0.4;animation:water-flow-down 14s linear infinite;background:linear-gradient(180deg, transparent, color-mix(in oklch, oklch(0.55 0.025 230) 18%, transparent))"></div>
+      </div>
+      <div style="font-family:var(--serif);font-style:italic;font-size:18px;color:var(--ash-light);text-align:center;z-index:2;max-width:360px;text-wrap:pretty">
+        Ce kairos en a réveillé un autre,<br>déposé il y a 6 mois.
+      </div>
+      <div style="display:flex;align-items:center;gap:24px;z-index:2;width:100%;justify-content:center;padding:0 24px">
+        <div style="width:140px;padding:16px;border:1px solid color-mix(in oklch, oklch(0.70 0.080 80) 35%, oklch(0.22 0.008 280));border-radius:2px;background:oklch(0.16 0.015 60);position:relative">
+          <div style="position:absolute;left:-1px;top:0;bottom:0;width:2px;background:oklch(0.70 0.080 80);opacity:0.6;animation:breathe-souffle 6000ms cubic-bezier(0.45,0,0.55,1) infinite"></div>
+          <div style="font-family:var(--serif);font-size:15px;line-height:1.4;color:var(--bone);text-wrap:pretty">Une porte s'ouvrait sur une cuisine vide.</div>
+          <div style="font-family:var(--mono);font-size:9px;color:var(--ash-light);margin-top:8px">aujourd'hui</div>
+        </div>
+        <svg width="80" height="60" viewBox="0 0 80 60">
+          <path d="M 4 30 Q 25 8, 40 30 T 76 30" fill="none"
+            stroke="oklch(0.70 0.080 80)" stroke-width="1.2"
+            stroke-dasharray="200" stroke-dashoffset="200"
+            style="animation:dash 1500ms cubic-bezier(0.7,0,0.3,1) forwards"/>
+        </svg>
+        <div style="width:140px;padding:16px;border:1px solid color-mix(in oklch, oklch(0.70 0.080 80) 35%, oklch(0.22 0.008 280));border-radius:2px;background:oklch(0.16 0.015 60);position:relative">
+          <div style="position:absolute;left:-1px;top:0;bottom:0;width:2px;background:oklch(0.70 0.080 80);opacity:0.6;animation:breathe-souffle 6000ms cubic-bezier(0.45,0,0.55,1) infinite"></div>
+          <div style="font-family:var(--serif);font-size:15px;line-height:1.4;color:var(--bone);text-wrap:pretty">La grand-mère préparait le linge à laver.</div>
+          <div style="font-family:var(--mono);font-size:9px;color:var(--ash-light);margin-top:8px">il y a 6 mois</div>
+        </div>
+      </div>
+      <button style="font-family:var(--mono);font-size:11px;color:var(--ash-light);text-decoration:underline;letter-spacing:0.08em;background:none;border:none;z-index:2;cursor:pointer">[ cet écho ne touche pas ]</button>
+      <style>@keyframes dash { to { stroke-dashoffset: 0; } }</style>
+    `;
+  }
+
+  if(n === '3'){
+    // Big Dream — halo silk-gold + ember-soft + drop cap
+    wrap.innerHTML = `
+      <div style="position:absolute;inset:0;background:oklch(0.16 0.015 60)"></div>
+      <div style="position:relative;z-index:2;width:90%;max-width:440px;padding:32px;background:oklch(0.12 0.012 280);border-radius:2px;border:1px solid color-mix(in oklch, oklch(0.22 0.008 280) 90%, transparent);overflow:hidden">
+        <div style="position:absolute;left:0;top:0;bottom:0;width:6px;background:oklch(0.70 0.080 80);opacity:0.55;animation:breathe-souffle 6000ms cubic-bezier(0.45,0,0.55,1) infinite"></div>
+        <div style="position:absolute;inset:-40px -40px auto auto;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle at center, color-mix(in oklch, oklch(0.65 0.140 40) 22%, transparent), transparent 60%);animation:pulse-braise 3500ms cubic-bezier(0.4,0.1,0.6,0.9) infinite;pointer-events:none"></div>
+        <div style="position:absolute;inset:-60px;border-radius:50%;background:radial-gradient(circle at center, color-mix(in oklch, oklch(0.70 0.080 80) 12%, transparent), transparent 70%);animation:breathe-souffle 8000ms cubic-bezier(0.45,0,0.55,1) infinite;pointer-events:none"></div>
+        <div style="font-family:var(--serif);font-style:italic;font-size:14px;color:var(--ash-light);margin-bottom:12px;letter-spacing:0.02em">— marqué Big Dream ·</div>
+        <p class="drop-cap" style="font-family:var(--serif);font-size:18px;line-height:1.65;color:var(--bone);margin:0;text-wrap:pretty">Quelque chose en moi se penche, ce matin, vers une porte que je n'ai jamais ouverte. La grand-mère y est, et elle prépare du linge à laver — comme si rien n'avait jamais été perdu.</p>
+        <div style="font-family:var(--serif);font-style:italic;font-size:13px;color:var(--silk-gold);margin-top:24px;opacity:0;animation:fade-in 800ms cubic-bezier(0.32,0.04,0.25,1) 1500ms forwards;letter-spacing:0.02em">Ce rêve est venu te chercher. On va le tenir longtemps.</div>
+      </div>
+    `;
+  }
+
+  if(n === '4'){
+    // Nouveau noeud constellation
+    wrap.innerHTML = `
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%, oklch(0.22 0.008 280) 0%, oklch(0.12 0.012 280) 70%)"></div>
+      <svg viewBox="-150 -100 300 200" width="100%" height="100%" style="z-index:2;max-height:80%">
+        <!-- existing edges -->
+        <path d="M -90 -40 Q -50 -20, -10 -10" fill="none" stroke="color-mix(in oklch, var(--silk-gold) 40%, transparent)" stroke-width="0.5" opacity="0.4"/>
+        <path d="M -10 -10 Q 20 30, 60 50" fill="none" stroke="color-mix(in oklch, var(--silk-gold) 40%, transparent)" stroke-width="0.5" opacity="0.4"/>
+        <path d="M 60 50 Q 100 20, 110 -30" fill="none" stroke="color-mix(in oklch, var(--silk-gold) 40%, transparent)" stroke-width="0.5" opacity="0.4"/>
+        <!-- existing nodes -->
+        <circle cx="-90" cy="-40" r="4" fill="var(--bone)" opacity="0.7"/>
+        <circle cx="-10" cy="-10" r="5" fill="var(--paper-warm)" opacity="0.8"/>
+        <circle cx="60" cy="50" r="3" fill="var(--stone-cool)" opacity="0.7"/>
+        <circle cx="110" cy="-30" r="3" fill="var(--bone)" opacity="0.6"/>
+        <!-- new edge being drawn -->
+        <path d="M -10 -10 Q 30 -55, 70 -70" fill="none" stroke="var(--silk-gold)" stroke-width="0.8"
+          stroke-dasharray="200" stroke-dashoffset="200"
+          style="animation:dash 1600ms cubic-bezier(0.7,0,0.3,1) 600ms forwards"/>
+        <!-- new node — born -->
+        <circle cx="70" cy="-70" r="0" fill="var(--silk-gold)"
+          style="animation:nodeBorn 1200ms cubic-bezier(0.32,0.04,0.25,1) 1800ms forwards"/>
+        <circle cx="70" cy="-70" r="0" fill="none" stroke="var(--silk-gold)" opacity="0.3"
+          style="animation:haloBorn 2000ms cubic-bezier(0.32,0.04,0.25,1) 2000ms forwards"/>
+      </svg>
+      <div style="font-family:var(--serif);font-style:italic;font-size:18px;color:var(--bone);text-align:center;z-index:2;max-width:340px;opacity:0;animation:fade-in 800ms cubic-bezier(0.32,0.04,0.25,1) 2400ms forwards;text-wrap:pretty">
+        Une figure nouvelle est entrée dans ta constellation.
+      </div>
+      <style>
+        @keyframes dash { to { stroke-dashoffset: 0; } }
+        @keyframes nodeBorn { 0%{r:0} 60%{r:9} 100%{r:6} }
+        @keyframes haloBorn { 0%{r:0;opacity:0.6} 100%{r:24;opacity:0} }
+      </style>
+    `;
+  }
+
+  if(n === '5'){
+    // Première restitution cercle — eau ascendante (inversion gravité)
+    wrap.innerHTML = `
+      <div style="position:absolute;inset:0;background:oklch(0.16 0.015 60);overflow:hidden">
+        <!-- ascending water particles -->
+        <div style="position:absolute;inset:-20% 0;animation:water-flow-up 2400ms cubic-bezier(0.7,0,0.3,1) infinite;background:repeating-linear-gradient(180deg, transparent 0px, transparent 24px, color-mix(in oklch, oklch(0.55 0.025 230) 14%, transparent) 24px, color-mix(in oklch, oklch(0.55 0.025 230) 14%, transparent) 26px)"></div>
+      </div>
+      <svg width="120" height="120" viewBox="-60 -60 120 120" style="z-index:2">
+        <polygon points="0,-44 38,26 -38,26"
+          fill="none" stroke="oklch(0.55 0.025 230)" stroke-width="0.7" opacity="0.4"
+          stroke-dasharray="180" stroke-dashoffset="180"
+          style="animation:dash 1600ms cubic-bezier(0.7,0,0.3,1) forwards"/>
+      </svg>
+      <div style="font-family:var(--serif);font-style:italic;font-size:21px;color:var(--bone);text-align:center;z-index:2;max-width:380px;opacity:0;animation:fade-in 800ms cubic-bezier(0.32,0.04,0.25,1) 1800ms forwards;text-wrap:pretty">
+        Le cercle te répond pour la première fois.
+      </div>
+      <style>
+        @keyframes water-flow-up { 0%{transform:translate3d(0,30%,0)} 100%{transform:translate3d(0,-30%,0)} }
+        @keyframes dash { to { stroke-dashoffset: 0; } }
+      </style>
+    `;
+  }
+
+  return wrap;
+}
+
+// ═══════════════ Sounds ═══════════════
+let soundsOn = false;
+let audioCtx = null;
+
+function ensureCtx(){
+  if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  if(audioCtx.state === 'suspended') audioCtx.resume();
+  return audioCtx;
+}
+
+function toggleSounds(){
+  soundsOn = !soundsOn;
+  const t = document.getElementById('soundToggle');
+  const s = document.getElementById('soundState');
+  if(soundsOn){ t.classList.add('on'); s.textContent = 'activés'; ensureCtx(); }
+  else { t.classList.remove('on'); s.textContent = 'désactivés'; }
+}
+
+function playSound(kind){
+  ensureCtx();
+  const ctx = audioCtx;
+  const now = ctx.currentTime;
+  const master = ctx.createGain();
+  master.gain.value = 0.35;
+  master.connect(ctx.destination);
+
+  if(kind === 'drone'){
+    // 3-5s drone, 60-200 Hz, fade
+    const dur = 4;
+    [60, 92, 138].forEach((f, i) => {
+      const o = ctx.createOscillator();
+      const g = ctx.createGain();
+      o.type = 'sine'; o.frequency.value = f;
+      g.gain.value = 0;
+      g.gain.linearRampToValueAtTime(0.18 / (i+1), now + 1.2);
+      g.gain.linearRampToValueAtTime(0.0, now + dur);
+      o.connect(g).connect(master);
+      o.start(now); o.stop(now + dur + 0.1);
+    });
+  }
+  if(kind === 'bell'){
+    // Crystal bell — A4 (440) with overtones, 2s fade
+    const fund = 440;
+    [1, 2.76, 5.4, 8.93].forEach((mult, i) => {
+      const o = ctx.createOscillator();
+      const g = ctx.createGain();
+      o.type = 'sine'; o.frequency.value = fund * mult;
+      g.gain.value = 0;
+      g.gain.linearRampToValueAtTime(0.25 / (i+1), now + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, now + 2.2 - i*0.15);
+      o.connect(g).connect(master);
+      o.start(now); o.stop(now + 2.5);
+    });
+  }
+  if(kind === 'paper'){
+    // Paper rustle — short noise burst high-freq
+    const dur = 0.35;
+    const buf = ctx.createBuffer(1, ctx.sampleRate * dur, ctx.sampleRate);
+    const data = buf.getChannelData(0);
+    for(let i=0; i<data.length; i++){
+      const env = Math.pow(1 - i/data.length, 1.6);
+      data[i] = (Math.random()*2 - 1) * env * 0.25;
+    }
+    const src = ctx.createBufferSource();
+    const filt = ctx.createBiquadFilter();
+    filt.type = 'highpass'; filt.frequency.value = 2200;
+    src.buffer = buf;
+    src.connect(filt).connect(master);
+    src.start(now);
+  }
+  if(kind === 'rain'){
+    // Distant rain — pink-ish noise, low-pass, 4s loop preview
+    const dur = 4;
+    const buf = ctx.createBuffer(1, ctx.sampleRate * dur, ctx.sampleRate);
+    const data = buf.getChannelData(0);
+    for(let i=0; i<data.length; i++) data[i] = (Math.random()*2 - 1) * 0.6;
+    const src = ctx.createBufferSource();
+    src.buffer = buf;
+    const lp = ctx.createBiquadFilter();
+    lp.type = 'lowpass'; lp.frequency.value = 800;
+    const g = ctx.createGain(); g.gain.value = 0;
+    g.gain.linearRampToValueAtTime(0.3, now + 1);
+    g.gain.linearRampToValueAtTime(0.0, now + dur);
+    src.connect(lp).connect(g).connect(master);
+    src.start(now);
+  }
+  if(kind === 'wind'){
+    // Wind in leaves — filtered noise with slow modulation
+    const dur = 4;
+    const buf = ctx.createBuffer(1, ctx.sampleRate * dur, ctx.sampleRate);
+    const data = buf.getChannelData(0);
+    for(let i=0; i<data.length; i++) data[i] = (Math.random()*2 - 1) * 0.5;
+    const src = ctx.createBufferSource();
+    src.buffer = buf;
+    const bp = ctx.createBiquadFilter();
+    bp.type = 'bandpass'; bp.frequency.value = 600; bp.Q.value = 1.4;
+    const lfo = ctx.createOscillator();
+    const lfoGain = ctx.createGain();
+    lfo.frequency.value = 0.4; lfoGain.gain.value = 200;
+    lfo.connect(lfoGain).connect(bp.frequency);
+    const g = ctx.createGain(); g.gain.value = 0;
+    g.gain.linearRampToValueAtTime(0.28, now + 1);
+    g.gain.linearRampToValueAtTime(0.0, now + dur);
+    src.connect(bp).connect(g).connect(master);
+    lfo.start(now); src.start(now); lfo.stop(now + dur);
+  }
+}
+</script>
+
+</body>
+</html>

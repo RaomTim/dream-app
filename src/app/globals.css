@@ -1,0 +1,29 @@
+/* ──────────────────────────────────────────────────────────
+   Dream V1.2 — Refonte radicale 2026-04-25
+   Globals.css minimal qui:
+     1. Importe le pack V1.2 complet depuis /public/v12/styles.css
+     2. Ajoute un pont (compat layer) pour FeedbackButton + AuthScreen
+   Tous les écrans V1.2 utilisent les tokens définis dans /v12/styles.css.
+   ────────────────────────────────────────────────────────── */
+
+@import url('/v12/styles.css');
+
+/* ── Bridge layer — alias kemet vars vers tokens V1.2 ──────── */
+:root {
+  /* fallback alias — pour FeedbackButton / AuthScreen */
+  --bg-wash:        var(--night-floor);
+  --bg-elev:        var(--night-warm);
+  --bg-card:        color-mix(in oklch, var(--bone) 6%, transparent);
+  --fg:             var(--bone);
+  --fg-dim:         var(--ash-light);
+  --fg-mute:        var(--ash-mid);
+  --border:         var(--ash-deep);
+  --accent:         var(--silk-gold);
+  --structural-bg:  color-mix(in oklch, var(--silk-gold) 8%, var(--night-warm));
+  --structural-line: var(--silk-gold);
+
+  /* fonts (next/font fallback aliases) */
+  --font-serif:     var(--serif);
+  --font-sans:      var(--sans);
+  --font-mono:      var(--mono);
+}

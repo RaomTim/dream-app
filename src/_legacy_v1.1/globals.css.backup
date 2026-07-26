@@ -1,0 +1,666 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Dream App — Design tokens
+ * Two themes : night (Grimoire Lapis) · day (Papyrus de Kemet)
+ * Raw tokens are constant. Semantic tokens flip on [data-theme].
+ */
+
+:root {
+  /* ─── Raw tokens ─────────────────────────────────── */
+
+  /* Noir de Kemet */
+  --kemet:          #08080b;
+  --kemet-elev:     #111117;
+  --kemet-card:     #161621;
+
+  /* Indigo lapis */
+  --lapis:          #2a3a7a;
+  --lapis-dim:      #1a2550;
+  --lapis-ink:      #0e1230;
+
+  /* Or de Nebu */
+  --nebu:           #b8975a;
+  --nebu-hi:        #d8b87a;
+  --nebu-pat:       #8a6a38;
+
+  /* Stone & bone (night) */
+  --stone:          #2a2830;
+  --bone:           #e8e3d8;
+  --bone-dim:       #9a948a;
+  --bone-mut:       #6a6460;
+
+  /* Papyrus (day) */
+  --papyrus:        #ece3cf;
+  --papyrus-hi:     #f3ecda;
+  --papyrus-lo:     #d8ceb5;
+
+  /* Ink & red ochre */
+  --ink:            #1b1510;
+  --ink-soft:       #3a2f24;
+  --ink-mute:       #6e5f4e;
+  --rouge:          #7a2418;
+
+  /* Fonts */
+  --font-serif:     "Cormorant Garamond", "EB Garamond", Georgia, serif;
+  --font-mono:      "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-sans:      Inter, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+
+  /* Spacing scale (4-base) */
+  --sp-1:  4px;
+  --sp-2:  8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-5:  20px;
+  --sp-6:  24px;
+  --sp-8:  32px;
+  --sp-10: 40px;
+  --sp-12: 48px;
+
+  /* Radii — minimal, hard-edged */
+  --r-0: 0;
+  --r-1: 2px;
+  --r-2: 4px;
+  --r-full: 9999px;
+
+  /* Type scale (display → caption) */
+  --ts-display: 38px;
+  --ts-h1:      30px;
+  --ts-h2:      24px;
+  --ts-body:    17px;
+  --ts-meta:    10px;
+  --ts-caption: 9px;
+}
+
+/* ─── Semantic tokens — night (default) ─────────────────────────── */
+:root,
+[data-theme="night"] {
+  --bg:             var(--kemet);
+  --bg-elev:        var(--kemet-elev);
+  --bg-card:        var(--kemet-card);
+
+  --fg:             var(--bone);
+  --fg-dim:         var(--bone-dim);
+  --fg-mute:        var(--bone-mut);
+
+  --border:         var(--stone);
+  --border-strong:  #3a3840;
+
+  --accent:         var(--nebu);
+  --accent-hi:      var(--nebu-hi);
+  --accent-dim:     var(--nebu-pat);
+
+  --structural:     var(--lapis);
+  --structural-bg:  rgba(42, 58, 122, 0.22);
+  --structural-line:rgba(42, 58, 122, 0.55);
+
+  --grain-opacity:  0.55;
+  --grain-blend:    overlay;
+
+  --bg-rise: var(--kemet-elev);
+  --bg-edge: var(--kemet-card);
+  --fg-whisper: rgba(232,227,216,0.35);
+  --border-hair: rgba(42,56,80,0.4);
+  --wash: var(--bg-wash);
+  --struct: var(--lapis);
+  --alert: var(--rouge);
+
+  --bg-wash:
+    radial-gradient(120% 80% at 20% 0%, rgba(42,58,122,0.35) 0%, rgba(42,58,122,0) 55%),
+    radial-gradient(100% 90% at 90% 110%, rgba(184,151,90,0.08) 0%, rgba(184,151,90,0) 60%),
+    var(--kemet);
+}
+
+/* ─── Semantic tokens — day ────────────────────────────────────── */
+[data-theme="day"] {
+  --bg:             var(--papyrus);
+  --bg-elev:        var(--papyrus-hi);
+  --bg-card:        #f3ecda;
+
+  --fg:             var(--ink);
+  --fg-dim:         var(--ink-soft);
+  --fg-mute:        var(--ink-mute);
+
+  --border:         rgba(27, 21, 16, 0.28);
+  --border-strong:  rgba(27, 21, 16, 0.55);
+
+  --accent:         var(--rouge);
+  --accent-hi:      #a3341f;
+  --accent-dim:     var(--nebu-pat);
+
+  --structural:     #223066;
+  --structural-bg:  rgba(34, 48, 102, 0.10);
+  --structural-line:rgba(34, 48, 102, 0.40);
+
+  --grain-opacity:  0.9;
+  --grain-blend:    multiply;
+
+  --bg-rise: var(--papyrus-hi);
+  --bg-edge: #f3ecda;
+  --fg-whisper: rgba(27,21,16,0.25);
+  --border-hair: rgba(27,21,16,0.12);
+  --wash: var(--bg-wash);
+  --struct: #223066;
+  --alert: var(--rouge);
+
+  --bg-wash:
+    radial-gradient(80% 60% at 30% 20%, rgba(243,236,218,0.8), rgba(236,227,207,0) 60%),
+    radial-gradient(100% 80% at 90% 100%, rgba(216,206,181,0.45), rgba(216,206,181,0) 60%),
+    var(--papyrus);
+}
+
+/* ─── Mode ambiance accents ───────────────────────────── */
+:root {
+  --mode-reve-accent:    var(--nebu);
+  --mode-jour-accent:    #c8a24a;
+  --mode-oracle-accent:  #a06fb5;
+  --mode-conte-accent:   #c4483e;
+  --mode-foret-accent:   #6a8a62;
+  --mode-rituel-accent:  #4a78a8;
+}
+
+/* Smooth transition when mode flips */
+html { transition: background-color 600ms ease, color 600ms ease; }
+
+/* Universal grain overlay — paste on any surface via `.grain` */
+.grain { position: relative; }
+.grain::before {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.9  0 0 0 0 0.88  0 0 0 0 0.82  0 0 0 0.11 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  mix-blend-mode: var(--grain-blend);
+  opacity: var(--grain-opacity);
+}
+
+/* ═══════════════════════════════════════════════════════
+   App utilities
+   ═══════════════════════════════════════════════════════ */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-serif, Georgia, serif);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100dvh;
+  overflow-x: hidden;
+}
+
+body {
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in { animation: fadeIn 0.3s ease-out; }
+
+@keyframes pulse-record {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(184, 151, 90, 0.4); }
+  50% { box-shadow: 0 0 0 12px rgba(184, 151, 90, 0); }
+}
+.animate-pulse-record { animation: pulse-record 1.5s ease-in-out infinite; }
+
+@keyframes typing {
+  0%, 60%, 100% { opacity: 0.3; }
+  30% { opacity: 1; }
+}
+.typing-dot:nth-child(1) { animation: typing 1.4s infinite 0s; }
+.typing-dot:nth-child(2) { animation: typing 1.4s infinite 0.2s; }
+.typing-dot:nth-child(3) { animation: typing 1.4s infinite 0.4s; }
+
+@keyframes dreamPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.04); opacity: 0.7; }
+}
+
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+@keyframes dreamPulseRec {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(184,151,90,0.5); }
+  50% { transform: scale(1.06); box-shadow: 0 0 0 18px rgba(184,151,90,0); }
+}
+
+@keyframes thinkFade {
+  0%, 100% { opacity: 0; }
+  15%, 85% { opacity: 1; }
+}
+
+@keyframes breath {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.screen-enter-right { animation: slideInRight 220ms ease-out; }
+.screen-enter-left { animation: slideInLeft 220ms ease-out; }
+.screen-enter-fade { animation: fadeIn 260ms ease-out; }
+
+/* Bottom nav safe zone */
+.has-bottom-nav { padding-bottom: 100px; }
+
+/* ════════════════════════════════════════════════════════════
+   ▼▼▼ Dream V1.2 — AMPLIFICATION LAYER ▼▼▼
+   Imported from handoff-v12-final/styles.css (post-patch V5).
+   8 matters réveillés · 6 tempi · géosymboles · halos respirants
+   Coexiste avec Kemet design tokens (ne les écrase pas).
+   ════════════════════════════════════════════════════════════ */
+
+/* ── V1.2 raw tokens (préfixés v12) ────────────────────── */
+:root {
+  /* matter-couleurs V1.2 (non-saturées, propres au design system V1.2) */
+  --v12-paper-warm:   oklch(0.62 0.045 70);
+  --v12-stone-cool:   oklch(0.55 0.025 230);
+  --v12-silk-gold:    oklch(0.70 0.080 80);
+  --v12-clay-earth:   oklch(0.50 0.060 50);
+  --v12-obsidian:     oklch(0.28 0.030 290);
+  --v12-ember-live:   oklch(0.65 0.140 40);
+  --v12-ember-soft:   oklch(0.55 0.080 40 / 0.35);
+  --v12-night-floor:  oklch(0.12 0.012 280);
+  --v12-night-warm:   oklch(0.16 0.015 60);
+  --v12-ash-deep:     oklch(0.22 0.008 280);
+  --v12-ash-mid:      oklch(0.34 0.010 60);
+  --v12-ash-light:    oklch(0.52 0.012 60);
+  --v12-bone:         oklch(0.78 0.015 70);
+
+  /* tempi organiques V1.2 */
+  --tempo-souffle: 6000ms;       /* respiration méditative ~10 cycles/min */
+  --tempo-braise:  3500ms;       /* pulsation cardiaque ~17 BPM */
+  --tempo-derive:  12000ms;      /* dérive cosmologique */
+  --tempo-tisse:   380ms;        /* tisse rapide */
+  --tempo-ceremoniel: 920ms;     /* passage rituel */
+  --ease-souffle:  cubic-bezier(0.45, 0, 0.55, 1);
+  --ease-braise:   cubic-bezier(0.4, 0.1, 0.6, 0.9);
+  --ease-rituel:   cubic-bezier(0.7, 0.0, 0.3, 1);
+  --ease-tenue:    cubic-bezier(0.45, 0, 0.15, 1);
+  --ease-respire-v12: cubic-bezier(0.32, 0.04, 0.25, 1);
+}
+
+/* ── Matter beds (lits chromatiques visibles) ──────────── */
+.bed { position: absolute; inset: 0; pointer-events: none; }
+
+.bed-linen { background:
+  radial-gradient(ellipse at 30% 20%, color-mix(in oklch, var(--v12-paper-warm) 16%, transparent), transparent 60%),
+  radial-gradient(ellipse at 70% 80%, color-mix(in oklch, var(--v12-paper-warm) 11%, transparent), transparent 60%),
+  var(--v12-night-warm); }
+.bed-silk { background:
+  radial-gradient(ellipse at 50% 50%, color-mix(in oklch, var(--v12-silk-gold) 28%, transparent), transparent 65%),
+  var(--v12-night-floor); }
+.bed-stone { background:
+  radial-gradient(ellipse at 25% 30%, color-mix(in oklch, var(--v12-stone-cool) 14%, transparent), transparent 50%),
+  radial-gradient(ellipse at 75% 70%, color-mix(in oklch, var(--v12-stone-cool) 10%, transparent), transparent 55%),
+  var(--v12-ash-deep); }
+.bed-paper { background:
+  linear-gradient(135deg, color-mix(in oklch, var(--v12-paper-warm) 22%, transparent) 0%, transparent 70%),
+  var(--v12-night-warm); }
+.bed-ash { background:
+  radial-gradient(ellipse at 50% 50%, color-mix(in oklch, var(--v12-ash-light) 8%, transparent), transparent 75%),
+  var(--v12-night-floor); }
+.bed-water { background:
+  linear-gradient(180deg, color-mix(in oklch, var(--v12-stone-cool) 28%, transparent) 0%, color-mix(in oklch, var(--v12-obsidian) 90%, transparent) 100%),
+  var(--v12-night-floor); }
+.bed-ember { background:
+  radial-gradient(circle at 50% 60%, color-mix(in oklch, var(--v12-ember-live) 38%, transparent), transparent 55%),
+  var(--v12-night-warm); }
+.bed-earth { background:
+  radial-gradient(ellipse at 50% 70%, color-mix(in oklch, var(--v12-clay-earth) 30%, transparent), transparent 60%),
+  color-mix(in oklch, var(--v12-night-warm) 70%, var(--v12-clay-earth)); }
+.bed-bone { background:
+  radial-gradient(ellipse at 50% 30%, color-mix(in oklch, var(--v12-bone) 14%, transparent), transparent 60%),
+  radial-gradient(ellipse at 50% 70%, color-mix(in oklch, var(--v12-bone) 8%, transparent), transparent 65%),
+  var(--v12-night-warm); }
+
+/* ── SVG noise overlay ─────────────────────────────────── */
+.bed-noise { position: absolute; inset: 0; mix-blend-mode: overlay; opacity: 0.55; pointer-events: none; }
+.bed-noise.boost-paper { opacity: 0.85; }
+.bed-noise.boost-silk  { opacity: 0.95; }
+.bed-noise.boost-water { opacity: 1; }
+.bed-noise.boost-ember { opacity: 0.95; }
+.bed-noise.boost-earth { opacity: 0.9; }
+
+/* ── Motion patterns par matter ────────────────────────── */
+@keyframes breathe-souffle {
+  0%, 100% { opacity: 0.7; transform: scale(1); }
+  50%      { opacity: 1; transform: scale(1.02); }
+}
+@keyframes breathe-silk-strong {
+  0%, 100% { opacity: 0.75; transform: scale(1); }
+  50%      { opacity: 1; transform: scale(1.03); }
+}
+@keyframes pulse-braise {
+  0%, 100% { opacity: 0.75; }
+  35%      { opacity: 1; }
+  60%      { opacity: 0.88; }
+}
+@keyframes drift-derive {
+  0%   { transform: translate3d(-4%, 0, 0); }
+  100% { transform: translate3d(4%, 0, 0); }
+}
+@keyframes water-flow-down {
+  0%   { transform: translate3d(0, -30%, 0); opacity: 0.3; }
+  60%  { opacity: 0.7; }
+  100% { transform: translate3d(0, 30%, 0); opacity: 0.2; }
+}
+@keyframes flicker-ember {
+  0%, 100% { opacity: 0.55; }
+  20%      { opacity: 0.78; }
+  45%      { opacity: 0.62; }
+  70%      { opacity: 0.85; }
+  90%      { opacity: 0.7; }
+}
+@keyframes silk-flow {
+  0%   { transform: translate3d(-2%, -2%, 0) rotate(0.2deg); }
+  50%  { transform: translate3d(2%, 2%, 0) rotate(-0.2deg); }
+  100% { transform: translate3d(-2%, -2%, 0) rotate(0.2deg); }
+}
+
+.motion-linen      { animation: breathe-souffle var(--tempo-souffle) var(--ease-souffle) infinite; }
+.motion-silk-halo  { animation: breathe-silk-strong var(--tempo-souffle) var(--ease-souffle) infinite; }
+.motion-silk-drift { animation: silk-flow 16s ease-in-out infinite; }
+.motion-stone      { animation: drift-derive var(--tempo-derive) linear infinite alternate; }
+.motion-paper      { animation: breathe-souffle calc(var(--tempo-souffle) * 1.4) var(--ease-souffle) infinite; }
+.motion-ash        { animation: drift-derive var(--tempo-derive) linear infinite alternate; }
+.motion-water      { animation: water-flow-down 14s linear infinite; }
+.motion-ember      { animation: pulse-braise var(--tempo-braise) var(--ease-braise) infinite; }
+.motion-ember-flicker { animation: flicker-ember 9s ease-in-out infinite; }
+.motion-earth      { animation: drift-derive calc(var(--tempo-derive) * 1.2) linear infinite alternate; }
+.motion-bone       { animation: breathe-souffle calc(var(--tempo-souffle) * 1.3) var(--ease-souffle) infinite; }
+
+/* ── Surface utility — applique bed + noise sur n'importe quel container ── */
+.surface { position: relative; overflow: hidden; }
+.surface > .bed,
+.surface > .bed-noise { z-index: 0; }
+.surface > *:not(.bed):not(.bed-noise) { position: relative; z-index: 1; }
+
+/* ── Halos respirants V1.2 (Big Dream, écho prophétique, Aha) ── */
+.halo-silk-respire {
+  position: absolute;
+  inset: -20%;
+  background: radial-gradient(circle at 50% 50%,
+    color-mix(in oklch, var(--v12-silk-gold) 22%, transparent) 0%,
+    color-mix(in oklch, var(--v12-silk-gold) 8%, transparent) 35%,
+    transparent 70%);
+  pointer-events: none;
+  animation: halo-silk-respire-anim var(--tempo-souffle) var(--ease-souffle) infinite;
+  filter: blur(8px);
+  z-index: 0;
+}
+@keyframes halo-silk-respire-anim {
+  0%, 100% { opacity: 0.5; transform: scale(0.95); }
+  50%      { opacity: 1; transform: scale(1.05); }
+}
+.halo-ember-respire {
+  position: absolute;
+  inset: -15%;
+  background: radial-gradient(circle at 50% 60%,
+    color-mix(in oklch, var(--v12-ember-live) 30%, transparent) 0%,
+    color-mix(in oklch, var(--v12-ember-live) 10%, transparent) 35%,
+    transparent 70%);
+  pointer-events: none;
+  animation: halo-ember-respire-anim var(--tempo-braise) var(--ease-braise) infinite;
+  filter: blur(6px);
+  mix-blend-mode: screen;
+  z-index: 0;
+}
+@keyframes halo-ember-respire-anim {
+  0%, 100% { opacity: 0.6; transform: scale(0.96); }
+  35%      { opacity: 1; transform: scale(1.04); }
+  60%      { opacity: 0.78; transform: scale(1); }
+}
+.halo-bigdream-combine {
+  position: absolute; inset: -25%;
+  pointer-events: none;
+  z-index: 0;
+}
+.halo-bigdream-combine::before {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(circle at 50% 50%,
+    color-mix(in oklch, var(--v12-silk-gold) 28%, transparent),
+    transparent 60%);
+  filter: blur(12px);
+  animation: halo-silk-respire-anim var(--tempo-souffle) var(--ease-souffle) infinite;
+}
+.halo-bigdream-combine::after {
+  content: ""; position: absolute; inset: 5%;
+  background: radial-gradient(circle at 50% 55%,
+    color-mix(in oklch, var(--v12-ember-live) 18%, transparent),
+    transparent 55%);
+  filter: blur(10px);
+  mix-blend-mode: screen;
+  animation: halo-ember-respire-anim var(--tempo-braise) var(--ease-braise) infinite;
+}
+
+/* ── Tempo Wow Moments (déclenchement éclatant) ────────── */
+@keyframes wow-flash {
+  0%   { opacity: 0; transform: scale(0.6); filter: blur(4px); }
+  20%  { opacity: 1; transform: scale(1.08); filter: blur(0); }
+  60%  { opacity: 0.92; transform: scale(1); }
+  100% { opacity: 0.85; transform: scale(1); }
+}
+.wow-trigger {
+  animation: wow-flash var(--tempo-ceremoniel) var(--ease-rituel) both;
+}
+
+/* ── Drop cap (Big Dream marquage permanent) ───────────── */
+.drop-cap::first-letter {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 48px;
+  line-height: 0.9;
+  float: left;
+  margin: 6px 8px 0 0;
+  color: var(--v12-silk-gold);
+  text-shadow: 0 0 12px color-mix(in oklch, var(--v12-silk-gold) 35%, transparent);
+}
+
+/* ── Géosymboles helpers (positionnement) ──────────────── */
+.geo-symbol {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.42;
+  z-index: 0;
+}
+.geo-symbol svg { width: 100%; height: 100%; display: block; }
+.geo-symbol path,
+.geo-symbol circle,
+.geo-symbol line { fill: none; stroke: var(--v12-silk-gold); stroke-width: 0.6; vector-effect: non-scaling-stroke; }
+.geo-symbol--ember path,
+.geo-symbol--ember circle,
+.geo-symbol--ember line { stroke: var(--v12-ember-live); }
+.geo-symbol--bone path,
+.geo-symbol--bone circle,
+.geo-symbol--bone line { stroke: var(--v12-bone); }
+
+/* ── Constellation D3 styles (vivante, edges Bézier) ───── */
+.constellation-d3 {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 50% 55%,
+    color-mix(in oklch, var(--v12-night-warm) 70%, transparent),
+    var(--v12-night-floor) 75%);
+}
+.constellation-d3 svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.constellation-d3 .edge {
+  stroke: color-mix(in oklch, var(--v12-silk-gold) 28%, transparent);
+  stroke-width: 0.8;
+  fill: none;
+  opacity: 0.6;
+}
+.constellation-d3 .edge.alive {
+  stroke: var(--v12-silk-gold);
+  opacity: 0.45;
+  stroke-dasharray: 2 4;
+  animation: edge-pulse 4s ease-in-out infinite;
+}
+@keyframes edge-pulse {
+  0%, 100% { stroke-dashoffset: 0; opacity: 0.35; }
+  50%      { stroke-dashoffset: 12; opacity: 0.7; }
+}
+.constellation-d3 .node circle.core {
+  fill: color-mix(in oklch, var(--v12-night-warm) 80%, transparent);
+  stroke: var(--v12-ash-mid);
+  stroke-width: 1;
+  cursor: pointer;
+  transition: stroke var(--tempo-tisse), r var(--tempo-tisse);
+}
+.constellation-d3 .node:hover circle.core { stroke: var(--v12-bone); }
+.constellation-d3 .node.self circle.core { stroke: var(--v12-silk-gold); }
+.constellation-d3 .node.bigdream circle.core {
+  stroke: var(--v12-silk-gold);
+  filter: drop-shadow(0 0 6px color-mix(in oklch, var(--v12-silk-gold) 60%, transparent));
+}
+.constellation-d3 .node circle.halo {
+  fill: none;
+  stroke: var(--v12-silk-gold);
+  stroke-width: 0.5;
+  opacity: 0;
+  animation: node-halo-pulse var(--tempo-souffle) var(--ease-souffle) infinite;
+}
+.constellation-d3 .node.bigdream circle.halo,
+.constellation-d3 .node.holding circle.halo { opacity: 0.4; }
+@keyframes node-halo-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.25; }
+  50%      { transform: scale(1.4); opacity: 0.55; }
+}
+.constellation-d3 .node text {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  fill: var(--v12-ash-light);
+  text-anchor: middle;
+  pointer-events: none;
+}
+.constellation-d3 .particle {
+  fill: var(--v12-silk-gold);
+  opacity: 0.5;
+}
+
+/* ── Songlines (Météo / backgrounds) ───────────────────── */
+.songlines-bg { position: absolute; inset: 0; pointer-events: none; opacity: 0.18; z-index: 0; }
+.songlines-bg path { fill: none; stroke: var(--v12-silk-gold); stroke-width: 0.4; vector-effect: non-scaling-stroke; }
+
+/* ── Spirale Wow 1 (premier kairos déposé) ─────────────── */
+.spirale-wow {
+  position: fixed; inset: 0; pointer-events: none;
+  display: grid; place-items: center;
+  z-index: 250;
+}
+.spirale-wow svg { width: 280px; height: 280px; }
+.spirale-wow path {
+  fill: none;
+  stroke: var(--v12-silk-gold);
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-dasharray: 800;
+  stroke-dashoffset: 800;
+  filter: drop-shadow(0 0 8px color-mix(in oklch, var(--v12-silk-gold) 50%, transparent));
+  animation: spirale-draw 1800ms cubic-bezier(0.7, 0, 0.3, 1) forwards;
+}
+@keyframes spirale-draw {
+  0%   { stroke-dashoffset: 800; opacity: 0; }
+  20%  { opacity: 0.9; }
+  85%  { stroke-dashoffset: 0; opacity: 0.85; }
+  100% { stroke-dashoffset: 0; opacity: 0; }
+}
+
+/* ── Triangle Réentrée (rituel) ────────────────────────── */
+.triangle-rituel {
+  position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  width: 240px; height: 240px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.32;
+}
+.triangle-rituel polygon { fill: none; stroke: var(--v12-silk-gold); stroke-width: 0.6; }
+
+/* ── Cercles concentriques (Portrait, AHA capture) ─────── */
+.concentric-rings {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+}
+.concentric-rings circle {
+  fill: none;
+  stroke: var(--v12-silk-gold);
+  stroke-width: 0.5;
+  opacity: 0.3;
+  animation: concentric-breath var(--tempo-souffle) var(--ease-souffle) infinite;
+}
+.concentric-rings circle:nth-child(2) { animation-delay: -1500ms; opacity: 0.22; }
+.concentric-rings circle:nth-child(3) { animation-delay: -3000ms; opacity: 0.16; }
+@keyframes concentric-breath {
+  0%, 100% { transform: scale(0.95); }
+  50%      { transform: scale(1.05); }
+}
+
+/* ── Demi-cercle aurore (Anima Mundi Voûte) ────────────── */
+.demi-cercle-aurore {
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 100%; max-width: 720px;
+  height: 200px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+.demi-cercle-aurore svg { width: 100%; height: 100%; overflow: visible; }
+.demi-cercle-aurore path {
+  fill: none;
+  stroke: url(#aurore-gradient);
+  stroke-width: 1;
+}
+
+/* ── Croissant lunaire (Polyphonies) ───────────────────── */
+.croissant-lune {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.35;
+  z-index: 0;
+}
+.croissant-lune path { fill: color-mix(in oklch, var(--v12-bone) 8%, transparent); stroke: var(--v12-bone); stroke-width: 0.4; }
+
+/* ── Réduit la motion si l'utilisateur le demande ──────── */
+@media (prefers-reduced-motion: reduce) {
+  .motion-linen, .motion-silk-halo, .motion-silk-drift,
+  .motion-stone, .motion-paper, .motion-ash, .motion-water,
+  .motion-ember, .motion-ember-flicker, .motion-earth, .motion-bone,
+  .halo-silk-respire, .halo-ember-respire,
+  .halo-bigdream-combine::before, .halo-bigdream-combine::after,
+  .concentric-rings circle, .constellation-d3 .node circle.halo,
+  .constellation-d3 .edge.alive {
+    animation-duration: 0s !important;
+    animation: none !important;
+  }
+  .spirale-wow svg,
+  .spirale-wow path {
+    animation: none !important;
+    stroke-dashoffset: 0 !important;
+    opacity: 0.5 !important;
+  }
+}
+/* ════════════════════════════════════════════════════════════
+   ▲▲▲ END Dream V1.2 — AMPLIFICATION LAYER ▲▲▲
+   ════════════════════════════════════════════════════════════ */

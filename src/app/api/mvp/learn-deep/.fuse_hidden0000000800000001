@@ -1,0 +1,167 @@
+import { NextRequest, NextResponse } from 'next/server'
+import Anthropic from '@anthropic-ai/sdk'
+import { createServerClient } from '@/lib/supabase'
+import { requireAuth } from '@/lib/auth-server'
+import { corsify, corsOptions } from '@/lib/mvp-cors'
+
+/**
+ * POST /api/mvp/learn-deep — l'apprentissage en profondeur (DREAM-MVP-SPEC-ECRANS-A-Z §C1bis).
+ *
+ * Chaque garde / correction / note de résonance N'EST PAS un simple like : elle
+ * enseigne le langage symbolique personnel du rêveur. On extrait légèrement les
+ * symboles nommés dans SON texte (Haiku), on les rattache à ce qui est déjà ancré
+ * (son dictionnaire personnel + les images du rêve), et on upsert user_meaning_layer
+ * avec une source distincte et un poids différencié :
+ *
+ *   correction        → 0.85   (le rêveur ENSEIGNE son langage : signal le plus fort)
+ *   resonance_note    → 0.75   (ses propres mots sur ce qui résonne)
+ *   kept_interpretation → 0.6   (il endorse la lecture de Dream : provisoire, overridable)
+ *
+ * Intégrité (triptyque vérité) : on n'INVENTE jamais un sens. Haiku n'extrait que ce
+ * qui est explicitement dit dans le texte du rêveur. Pour kept_interpretation (texte =
+ * la lecture de Dream, pas celle du rêveur), on reste bas en poids ET on ne garde que
+ * les symboles déjà ancrés — c'est un sens ENDOSSÉ, jamais fabriqué, toujours dominé
+ * par les sens directs (user_direct) et les corrections.
+ *
+ * Body: { kairos_id, text, source: 'kept_interpretation' | 'correction' | 'resonance_note' }
+ * → { learned: n, source }   (best-effort — jamais bloquant pour l'UX)
+ *
+ * Réutilise les conventions de user_meaning_layer (cf. /api/mvp/meaning) :
+ * unique (user_id, symbol_concept, context_lang), weight ∈ [0,5], upsert weight-aware.
+ *
+ * Yeshua (Opus), 2026-07-11.
+ */
+export const maxDuration = 30
+
+const SOURCE_WEIGHT: Record<string, number> = {
+  correction: 0.85,
+  resonance_note: 0.75,
+  kept_interpretation: 0.6,
+}
+
+const norm = (s: string) => (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').trim()
+
+export async function OPTIONS() { return corsOptions() }
+
+export async function POST(req: NextRequest) {
+  try {
+    const body = await req.json()
+    const auth = await requireAuth(req, body)
+    if ('error' in auth) return auth.error
+    const { userId } = auth
+
+    const kairosId = typeof body.kairos_id === 'string' ? body.kairos_id : ''
+    const text = typeof body.text === 'string' ? body.text.trim().slice(0, 3000) : ''
+    const source = ['kept_interpretation', 'correction', 'resonance_note'].includes(body.source) ? body.source : null
+    if (!kairosId || text.length < 4 || !source) {
+      return corsify(NextResponse.json({ error: 'kairos_id, text et source valides requis' }, { status: 400 }))
+    }
+    const weight = SOURCE_WEIGHT[source]
+
+    const supabase = createServerClient()
+
+    // Ownership + images du rêve
+    const { data: k } = await supabase
+      .from('kairos')
+      .select('id, motif_tags, figures')
+      .eq('id', kairosId)
+      .eq('user_id', userId)
+      .single()
+    if (!k) return corsify(NextResponse.json({ error: 'rêve introuvable' }, { status: 404 }))
+
+    // Termes ancrés : dictionnaire personnel ∪ images du rêve (motifs + figures)
+    const figureNames: string[] = Array.isArray(k.figures) ? (k.figures as any[]).map(f => f?.name).filter(Boolean) : []
+    const { data: dict } = await supabase
+      .from('personal_dictionary_symbols')
+      .select('symbol_text')
+      .eq('user_id', userId)
+      .is('archived_at', null)
+      .order('last_seen_at', { ascending: false })
+      .limit(300)
+    const dictTerms = (dict || []).map((d: any) => d.symbol_text).filter(Boolean)
+    const groundedRaw: string[] = Array.from(new Set([...(k.motif_tags || []), ...figureNames, ...dictTerms].filter(Boolean)))
+    // map normalisé → forme canonique (on préfère la forme du dictionnaire/rêve)
+    const canon = new Map<string, string>()
+    for (const t of groundedRaw) { const n = norm(t); if (n && !canon.has(n)) canon.set(n, t) }
+
+    // Extraction légère (Haiku) : { symbol, meaning } que le rêveur donne dans SON texte
+    const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! })
+    const groundedHint = groundedRaw.slice(0, 40).join(', ')
+    const extractSystem = `Tu extrais, d'un court texte écrit par un rêveur à propos de SON rêve, les symboles auxquels il donne un sens personnel.
+
+Réponds UNIQUEMENT un JSON strict : {"pairs":[{"symbol":"…","meaning":"…"}]}.
+- "symbol" = une image/un mot du rêve (ex: eau, maison, ma sœur, la route). De préférence pris dans cette liste d'images déjà connues du rêveur : ${groundedHint || '(aucune)'}. Tu peux en ajouter un hors liste s'il est clairement nommé dans le texte.
+- "meaning" = ce que CE texte dit que ce symbole signifie ou évoque POUR LUI. Court (≤ 120 caractères), fidèle à ses mots, jamais inventé.
+- N'invente RIEN. Si le texte ne donne de sens à aucun symbole, renvoie {"pairs":[]}. Maximum 6 paires.
+- Minuscules. Pas de guillemets à l'intérieur des valeurs.`
+
+    let pairs: { symbol: string; meaning: string }[] = []
+    try {
+      const res = await anthropic.messages.create({
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 380,
+        system: extractSystem,
+        messages: [{ role: 'user', content: text }],
+      })
+      const raw = res.content[0]?.type === 'text' ? res.content[0].text : '{}'
+      const parsed = JSON.parse(raw.slice(raw.indexOf('{'), raw.lastIndexOf('}') + 1))
+      pairs = Array.isArray(parsed.pairs) ? parsed.pairs : []
+    } catch (e: any) {
+      console.warn('[mvp.learn-deep] extraction failed (non-blocking):', e?.message)
+      pairs = []
+    }
+
+    // Filtrage + canonicalisation
+    const clean: { symbol: string; meaning: string }[] = []
+    const seen = new Set<string>()
+    for (const p of pairs) {
+      const sym = typeof p?.symbol === 'string' ? p.symbol.trim().slice(0, 120) : ''
+      const mean = typeof p?.meaning === 'string' ? p.meaning.trim().slice(0, 300) : ''
+      if (!sym || mean.length < 2) continue
+      const n = norm(sym)
+      if (!n || seen.has(n)) continue
+      // kept_interpretation (texte = lecture de Dream) : uniquement des symboles DÉJÀ ancrés
+      if (source === 'kept_interpretation' && !canon.has(n)) continue
+      const canonical = canon.get(n) || sym
+      seen.add(n)
+      clean.push({ symbol: canonical, meaning: mean })
+    }
+
+    // Upsert weight-aware dans user_meaning_layer.
+    // Unique = (user_id, symbol_concept, context_lang). On ne dilue jamais un sens plus fort :
+    // on n'écrase que si le nouveau poids >= poids existant.
+    let learned = 0
+    for (const { symbol, meaning } of clean) {
+      try {
+        const { data: existing } = await supabase
+          .from('user_meaning_layer')
+          .select('id, weight')
+          .eq('user_id', userId)
+          .eq('context_lang', 'fr')
+          .ilike('symbol_concept', symbol)
+          .maybeSingle()
+
+        if (existing) {
+          if ((existing.weight ?? 0) > weight) continue // sens plus fort déjà en place → on respecte
+          const { error } = await supabase
+            .from('user_meaning_layer')
+            .update({ user_meaning: meaning, weight, source, updated_at: new Date().toISOString() })
+            .eq('id', existing.id)
+          if (!error) learned++
+        } else {
+          const { error } = await supabase
+            .from('user_meaning_layer')
+            .insert({ user_id: userId, symbol_concept: symbol, user_meaning: meaning, weight, source, context_lang: 'fr' })
+          if (!error) learned++
+        }
+      } catch (e: any) {
+        console.warn('[mvp.learn-deep] upsert failed for', symbol, e?.message)
+      }
+    }
+
+    return corsify(NextResponse.json({ learned, source }))
+  } catch (e: any) {
+    console.error('[mvp.learn-deep]', e)
+    return corsify(NextResponse.json({ error: e.message || 'failed' }, { status: 500 }))
+  }
+}

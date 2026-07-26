@@ -1,0 +1,144 @@
+/* Dream App — Design tokens
+ * Two themes : night (Grimoire Lapis) · day (Papyrus de Kemet)
+ * Raw tokens are constant. Semantic tokens flip on [data-theme].
+ */
+
+:root {
+  /* ─── Raw tokens ─────────────────────────────────── */
+
+  /* Noir de Kemet */
+  --kemet:          #08080b;
+  --kemet-elev:     #111117;
+  --kemet-card:     #161621;
+
+  /* Indigo lapis */
+  --lapis:          #2a3a7a;
+  --lapis-dim:      #1a2550;
+  --lapis-ink:      #0e1230;
+
+  /* Or de Nebu */
+  --nebu:           #b8975a;
+  --nebu-hi:        #d8b87a;
+  --nebu-pat:       #8a6a38;
+
+  /* Stone & bone (night) */
+  --stone:          #2a2830;
+  --bone:           #e8e3d8;
+  --bone-dim:       #9a948a;
+  --bone-mut:       #6a6460;
+
+  /* Papyrus (day) */
+  --papyrus:        #ece3cf;
+  --papyrus-hi:     #f3ecda;
+  --papyrus-lo:     #d8ceb5;
+
+  /* Ink & red ochre */
+  --ink:            #1b1510;
+  --ink-soft:       #3a2f24;
+  --ink-mute:       #6e5f4e;
+  --rouge:          #7a2418;
+
+  /* Fonts */
+  --font-serif:     "Cormorant Garamond", "EB Garamond", Georgia, serif;
+  --font-mono:      "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-sans:      Inter, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+
+  /* Spacing scale (4-base) */
+  --sp-1:  4px;
+  --sp-2:  8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-5:  20px;
+  --sp-6:  24px;
+  --sp-8:  32px;
+  --sp-10: 40px;
+  --sp-12: 48px;
+
+  /* Radii — minimal, hard-edged */
+  --r-0: 0;
+  --r-1: 2px;
+  --r-2: 4px;
+  --r-full: 9999px;
+
+  /* Type scale (display → caption) */
+  --ts-display: 38px;
+  --ts-h1:      30px;
+  --ts-h2:      24px;
+  --ts-body:    17px;
+  --ts-meta:    10px;
+  --ts-caption: 9px;
+}
+
+/* ─── Semantic tokens — night (default) ─────────────────────────── */
+:root,
+[data-theme="night"] {
+  --bg:             var(--kemet);
+  --bg-elev:        var(--kemet-elev);
+  --bg-card:        var(--kemet-card);
+
+  --fg:             var(--bone);
+  --fg-dim:         var(--bone-dim);
+  --fg-mute:        var(--bone-mut);
+
+  --border:         var(--stone);
+  --border-strong:  #3a3840;
+
+  --accent:         var(--nebu);
+  --accent-hi:      var(--nebu-hi);
+  --accent-dim:     var(--nebu-pat);
+
+  --structural:     var(--lapis);
+  --structural-bg:  rgba(42, 58, 122, 0.22);
+  --structural-line:rgba(42, 58, 122, 0.55);
+
+  --grain-opacity:  0.55;
+  --grain-blend:    overlay;
+
+  --bg-wash:
+    radial-gradient(120% 80% at 20% 0%, rgba(42,58,122,0.35) 0%, rgba(42,58,122,0) 55%),
+    radial-gradient(100% 90% at 90% 110%, rgba(184,151,90,0.08) 0%, rgba(184,151,90,0) 60%),
+    var(--kemet);
+}
+
+/* ─── Semantic tokens — day ────────────────────────────────────── */
+[data-theme="day"] {
+  --bg:             var(--papyrus);
+  --bg-elev:        var(--papyrus-hi);
+  --bg-card:        #f3ecda;
+
+  --fg:             var(--ink);
+  --fg-dim:         var(--ink-soft);
+  --fg-mute:        var(--ink-mute);
+
+  --border:         rgba(27, 21, 16, 0.28);
+  --border-strong:  rgba(27, 21, 16, 0.55);
+
+  --accent:         var(--rouge);
+  --accent-hi:      #a3341f;
+  --accent-dim:     var(--nebu-pat);
+
+  --structural:     #223066;
+  --structural-bg:  rgba(34, 48, 102, 0.10);
+  --structural-line:rgba(34, 48, 102, 0.40);
+
+  --grain-opacity:  0.9;
+  --grain-blend:    multiply;
+
+  --bg-wash:
+    radial-gradient(80% 60% at 30% 20%, rgba(243,236,218,0.8), rgba(236,227,207,0) 60%),
+    radial-gradient(100% 80% at 90% 100%, rgba(216,206,181,0.45), rgba(216,206,181,0) 60%),
+    var(--papyrus);
+}
+
+/* Smooth transition when mode flips */
+html { transition: background-color 600ms ease, color 600ms ease; }
+
+/* Universal grain overlay — paste on any surface via `.grain` */
+.grain { position: relative; }
+.grain::before {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.9  0 0 0 0 0.88  0 0 0 0 0.82  0 0 0 0.11 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  mix-blend-mode: var(--grain-blend);
+  opacity: var(--grain-opacity);
+}

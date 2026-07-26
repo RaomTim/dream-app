@@ -1,0 +1,66 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Dream — .gitignore
+# Écrit le 26/07/2026, au moment de la sortie d'iCloud (voir _MOVED.md dans
+# l'ancien dossier). Deux catégories : ce qui se régénère, et ce qui ne doit
+# JAMAIS partir en ligne.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ── ce qui se régénère ───────────────────────────────────────────────────────
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+.turbo/
+.swc/
+
+# ── secrets — JAMAIS committés ───────────────────────────────────────────────
+.env
+.env.local
+.env*.local
+.env.production
+_keystores/
+*.jks
+*.keystore
+*.p12
+*.mobileprovision
+android/keystore.properties
+
+# ── Vercel (le lien local au projet, pas du code) ────────────────────────────
+.vercel
+
+# ── binaires de release ──────────────────────────────────────────────────────
+*.aab
+*.apk
+*.ipa
+
+# ── doublons iCloud ──────────────────────────────────────────────────────────
+# La cause racine est réglée (le projet n'est plus dans iCloud), mais si une
+# copie y repasse un jour, ces fichiers ne reviendront pas dans le dépôt.
+* [0-9].*
+*\ 2.*
+
+# ── macOS / éditeurs ─────────────────────────────────────────────────────────
+.DS_Store
+._*
+.AppleDouble
+Thumbs.db
+*.swp
+*~
+
+# ── natif : build outputs ────────────────────────────────────────────────────
+android/.gradle/
+android/build/
+android/app/build/
+android/app/release/
+android/local.properties
+ios/App/build/
+ios/App/Pods/
+ios/App/output/
+ios/App/App/public/
+DerivedData/
+xcuserdata/
+
+# ── logs ─────────────────────────────────────────────────────────────────────
+*.log
+npm-debug.log*

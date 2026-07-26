@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dream — 3 directions design-godmode (ANIMA home)</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ease:cubic-bezier(0.382,0,0.618,1)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#050507;color:#C8BEB0;font-family:"Inter",sans-serif;-webkit-font-smoothing:antialiased;padding:34px 20px 70px}
+.wrap{display:flex;gap:36px;justify-content:center;flex-wrap:wrap;align-items:flex-start;max-width:1280px;margin:0 auto}
+.col{display:flex;flex-direction:column;align-items:center;gap:14px;width:362px}
+.tag{font:500 11px/1.5 "Inter";letter-spacing:.16em;text-transform:uppercase;color:#5a606c}
+.name{font:italic 400 22px "EB Garamond",serif;color:#C8BEB0}
+.desc{font:400 11.5px/1.6 "Inter";color:#7a8090;text-align:center;max-width:330px}
+.phone{width:362px;height:760px;border-radius:42px;position:relative;overflow:hidden;box-shadow:0 0 0 10px #14151b,0 0 0 12px #24252e,0 40px 90px -28px #000}
+.grain{position:absolute;inset:0;pointer-events:none;opacity:.05;mix-blend-mode:overlay;z-index:8;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>")}
+.status{position:absolute;top:0;left:0;right:0;height:40px;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font:500 12px "Inter";z-index:7}
+.stage{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:5;padding:0 28px 152px}
+.eyebrow{position:absolute;top:58px;left:0;right:0;text-align:center;font:500 11px "Cinzel",serif;letter-spacing:.42em}
+.q{font:italic 400 31px/1.14 "EB Garamond",serif;text-align:center;margin-top:42px}
+.sub{font:300 12.5px/1.5 "Inter";text-align:center;margin-top:11px}
+.cta{position:absolute;left:28px;right:28px;bottom:96px;display:flex;align-items:center;justify-content:center;gap:9px;padding:15px;border-radius:999px;cursor:pointer;z-index:6;transition:all 233ms var(--ease)}
+.cta span{font:500 14.5px "Inter"}
+.rail{position:absolute;left:0;right:0;bottom:0;height:74px;display:flex;justify-content:center;gap:52px;align-items:center;padding-bottom:18px;z-index:7}
+.rail b{font:500 9.5px "Inter";letter-spacing:.04em}
+@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.045)}}
+@keyframes pulse{0%,100%{opacity:.5;transform:translate(-50%,-50%) scale(.9)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.08)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes draw{0%{stroke-dashoffset:560}60%,100%{stroke-dashoffset:0}}
+@keyframes inkbreath{0%,100%{opacity:.55}50%{opacity:1}}
+@keyframes caust{0%{transform:translate(0,0) scale(1)}50%{transform:translate(-4px,3px) scale(1.06)}100%{transform:translate(0,0) scale(1)}}
+@keyframes ripple{0%{transform:scale(.2);opacity:.7}100%{transform:scale(2.4);opacity:0}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+
+/* ───── A · LE SEUIL OBSCUR (nuit froide, mercure + cœur) ───── */
+.A{background:radial-gradient(120% 78% at 50% 40%,#13141f 0%,#0E0F14 56%,#0a0b10 100%)}
+.A .status,.A .eyebrow{color:#8b93a3}.A .eyebrow{color:#9aa0b2}
+.A .q{color:#C8BEB0}.A .sub{color:#6b7280}
+.A .ow{position:relative;width:200px;height:200px;display:grid;place-items:center}
+.A .halo{position:absolute;width:230px;height:230px;border-radius:50%;background:radial-gradient(circle,rgba(190,150,100,.10) 0%,rgba(120,134,180,.2) 24%,transparent 64%);filter:blur(7px);animation:breathe 6765ms var(--ease) infinite}
+.A .ring{position:absolute;width:182px;height:182px;border-radius:50%;border:1px solid rgba(180,184,203,.1);animation:spin 52000ms linear infinite}
+.A .ring::before{content:"";position:absolute;top:-2px;left:50%;width:3px;height:3px;border-radius:50%;background:#b4b8cb;box-shadow:0 0 6px #b4b8cb}
+.A .orb{position:relative;width:142px;height:142px;border-radius:50%;background:radial-gradient(circle at 50% 50%,rgba(228,212,182,.24) 0%,transparent 46%),radial-gradient(32% 28% at 37% 31%,#6a7290 0%,transparent 58%),radial-gradient(125% 125% at 35% 28%,#535a70 0%,#2f3546 36%,#181b27 64%,#0c0d14 100%);box-shadow:inset 0 3px 16px rgba(210,220,245,.14),inset 0 -16px 30px #06070b,0 0 60px -12px rgba(132,146,196,.5);animation:breathe 6765ms var(--ease) infinite}
+.A .heart{position:absolute;top:50%;left:50%;width:54px;height:54px;border-radius:50%;background:radial-gradient(circle,rgba(234,154,94,.9) 0%,rgba(201,112,60,.4) 44%,transparent 76%);filter:blur(3px);animation:pulse 4181ms var(--ease) infinite}
+.A .cta{background:linear-gradient(180deg,rgba(184,154,106,.10),rgba(20,21,30,.55));border:1px solid rgba(184,154,106,.42);box-shadow:inset 0 1px 0 rgba(184,154,106,.16)}
+.A .cta span{color:#C8BEB0}.A .rail b{color:rgba(180,184,203,.42)}
+
+/* ───── B · L'ENCRE VIVANTE (botanique or, l'orbe se dessine) ───── */
+.B{background:radial-gradient(110% 66% at 50% 42%,#17130c 0%,#100d08 56%,#0a0805 100%)}
+.B .status{color:#9a8a6a}.B .eyebrow{color:#c9a84b;letter-spacing:.48em}
+.B .q{color:#ede0c4}.B .sub{color:#9a8a6a}
+.B .ow{position:relative;width:210px;height:210px;display:grid;place-items:center}
+.B .ink{position:absolute;width:210px;height:210px}
+.B .ink circle,.B .ink path{fill:none;stroke:#c9a84b;stroke-linecap:round}
+.B .ink .r1{stroke-width:1;opacity:.5;stroke-dasharray:560;animation:draw 3400ms var(--ease) forwards,inkbreath 6765ms var(--ease) infinite 3400ms}
+.B .ink .r2{stroke-width:1.4;stroke-dasharray:420;animation:draw 3000ms var(--ease) .3s forwards}
+.B .ink .vine{stroke-width:1.6;stroke-dasharray:300;animation:draw 3600ms var(--ease) .6s forwards}
+.B .core{position:absolute;width:30px;height:30px;border-radius:50%;background:radial-gradient(circle,rgba(232,200,120,.85),rgba(201,168,75,.2) 60%,transparent);filter:blur(2px);animation:inkbreath 4181ms var(--ease) infinite}
+.B .cta{background:linear-gradient(180deg,rgba(201,168,75,.12),rgba(18,14,9,.5));border:1px solid rgba(201,168,75,.5);box-shadow:inset 0 1px 0 rgba(232,200,120,.2)}
+.B .cta span{color:#ede0c4}.B .rail b{color:rgba(201,168,75,.45)}
+.B .corner{position:absolute;width:50px;height:50px;z-index:6;opacity:.5}
+.B .corner svg{width:100%;height:100%}.B .corner path{fill:none;stroke:#c9a84b;stroke-width:1}
+.B .c1{top:46px;left:22px}.B .c2{top:46px;right:22px;transform:scaleX(-1)}
+
+/* ───── C · L'EAU NOIRE (descente, eau + caustiques) ───── */
+.C{background:radial-gradient(120% 80% at 50% 42%,#0c1018 0%,#080b12 58%,#05070c 100%)}
+.C .status{color:#6f8198}.C .eyebrow{color:#7fa0c0;letter-spacing:.4em}
+.C .q{color:#cdd6df}.C .sub{color:#5d6f86}
+.C .ow{position:relative;width:200px;height:200px;display:grid;place-items:center}
+.C .halo{position:absolute;width:236px;height:236px;border-radius:50%;background:radial-gradient(circle,rgba(110,150,200,.16) 0%,rgba(70,100,150,.06) 42%,transparent 66%);filter:blur(8px);animation:breathe 6765ms var(--ease) infinite}
+.C .orb{position:relative;width:150px;height:150px;border-radius:50%;overflow:hidden;background:radial-gradient(125% 125% at 38% 30%,#2a4156 0%,#16283a 42%,#0c1622 70%,#070d16 100%);box-shadow:inset 0 4px 18px rgba(150,200,240,.16),inset 0 -16px 30px #04070d,0 0 56px -14px rgba(90,140,200,.5)}
+.C .caustic{position:absolute;inset:-20%;background:radial-gradient(circle at 30% 35%,rgba(160,210,255,.35),transparent 28%),radial-gradient(circle at 65% 55%,rgba(140,190,240,.28),transparent 24%),radial-gradient(circle at 50% 75%,rgba(120,170,220,.22),transparent 30%);mix-blend-mode:screen;animation:caust 7000ms ease-in-out infinite;filter:blur(2px)}
+.C .drop{position:absolute;top:50%;left:50%;width:30px;height:30px;border-radius:50%;border:1.5px solid rgba(190,225,255,.6);transform:translate(-50%,-50%);animation:ripple 4181ms var(--ease) infinite}
+.C .cta{background:linear-gradient(180deg,rgba(127,160,192,.12),rgba(8,11,18,.5));border:1px solid rgba(127,160,192,.4);box-shadow:inset 0 1px 0 rgba(170,205,240,.16)}
+.C .cta span{color:#cdd6df}.C .rail b{color:rgba(127,160,192,.42)}
+</style></head>
+<body>
+<div class="wrap">
+
+  <div class="col">
+    <div class="tag">Direction A</div><div class="name">Le Seuil obscur</div>
+    <div class="phone A">
+      <div class="grain"></div>
+      <div class="status"><span>9:41</span><span>●●● 84%</span></div>
+      <div class="stage">
+        <div class="eyebrow">DREAM</div>
+        <div class="ow"><div class="halo"></div><div class="ring"></div><div class="orb"><div class="heart"></div></div></div>
+        <div class="q">qu'as-tu rêvé&nbsp;?</div>
+        <div class="sub">tu seras le premier à le comprendre</div>
+      </div>
+      <div class="cta"><span>maintenir pour raconter</span></div>
+      <div class="rail"><b>ATLAS</b><b>UNIVERS</b></div>
+    </div>
+    <div class="desc"><b>Le silence tenu.</b> Mercure froid, cœur ember rare, réticule d'argent qui tourne. Retenue Cartier/Terminal. Le sanctuaire de la nuit.</div>
+  </div>
+
+  <div class="col">
+    <div class="tag">Direction B</div><div class="name">L'encre vivante</div>
+    <div class="phone B">
+      <div class="grain"></div>
+      <div class="status"><span>9:41</span><span>●●● 84%</span></div>
+      <div class="corner c1"><svg viewBox="0 0 50 50"><path d="M48 2 Q10 2 6 22 Q4 34 18 38 Q26 40 24 30"/></svg></div>
+      <div class="corner c2"><svg viewBox="0 0 50 50"><path d="M48 2 Q10 2 6 22 Q4 34 18 38 Q26 40 24 30"/></svg></div>
+      <div class="stage">
+        <div class="eyebrow">DREAM</div>
+        <div class="ow">
+          <svg class="ink" viewBox="0 0 210 210">
+            <circle class="r1" cx="105" cy="105" r="86"/>
+            <circle class="r2" cx="105" cy="105" r="64"/>
+            <path class="vine" d="M105 168 Q88 130 105 105 Q124 78 105 44 Q92 70 105 105 Q120 134 105 168"/>
+          </svg>
+          <div class="core"></div>
+        </div>
+        <div class="q">qu'as-tu rêvé&nbsp;?</div>
+        <div class="sub">tu seras le premier à le comprendre</div>
+      </div>
+      <div class="cta"><span>maintenir pour raconter</span></div>
+      <div class="rail"><b>ATLAS</b><b>UNIVERS</b></div>
+    </div>
+    <div class="desc"><b>Le rêve se dessine.</b> L'orbe = encre d'or botanique qui se trace (Art Nouveau, Mucha sobre). La sève qui monte. Chaleur Microsoft.ai dans le noir.</div>
+  </div>
+
+  <div class="col">
+    <div class="tag">Direction C</div><div class="name">L'eau noire</div>
+    <div class="phone C">
+      <div class="grain"></div>
+      <div class="status"><span>9:41</span><span>●●● 84%</span></div>
+      <div class="stage">
+        <div class="eyebrow">DREAM</div>
+        <div class="ow"><div class="halo"></div><div class="orb"><div class="caustic"></div><div class="drop"></div></div></div>
+        <div class="q">qu'as-tu rêvé&nbsp;?</div>
+        <div class="sub">descends — tu seras le premier à le comprendre</div>
+      </div>
+      <div class="cta"><span>maintenir pour raconter</span></div>
+      <div class="rail"><b>ATLAS</b><b>UNIVERS</b></div>
+    </div>
+    <div class="desc"><b>La descente.</b> L'orbe = eau noire, caustiques, une goutte qui fait l'onde. On ne lit pas le rêve, on y plonge. Immersive Garden / sensoriel profond.</div>
+  </div>
+
+</div>
+</body></html>

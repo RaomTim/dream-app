@@ -1,0 +1,93 @@
+import type { Metadata, Viewport } from 'next'
+import { Cormorant_Garamond, IBM_Plex_Mono, Inter } from 'next/font/google'
+import './globals.css'
+import AuthProvider from '@/components/AuthProvider'
+import FeedbackButton from '@/components/FeedbackButton'
+import { DreamThemeProvider } from '@/lib/dream/theme-provider'
+import { I18nProvider } from '@/lib/i18n'
+import { MatterDefs } from '@/components/dream-v12'
+import GlobalDepositFAB from '@/components/dream-v12/GlobalDepositFAB'
+
+const serif = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600'],
+  style: ['normal', 'italic'],
+  variable: '--font-serif',
+})
+
+const mono = IBM_Plex_Mono({
+  subsets: ['latin'],
+  weight: ['300', '400', '500'],
+  variable: '--font-mono',
+})
+
+const sans = Inter({
+  subsets: ['latin'],
+  variable: '--font-sans',
+})
+
+export const metadata: Metadata = {
+  title: 'Dream',
+  description: 'Journal onirique guidé. 270 livres de sagesse. Protocoles de rêve, rituel, synchronicité.',
+  manifest: '/manifest.json',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'black-translucent',
+    title: 'Dream',
+  },
+  other: {
+    'mobile-web-app-capable': 'yes',
+  },
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  themeColor: '#08080b',
+}
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="fr" className={`${serif.variable} ${mono.variable} ${sans.variable}`}>
+      <head>
+        <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png" />
+        <link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png" />
+        {/* iOS splash screens — kemet background */}
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+      </head>
+      <body>
+        {/* Dream V1.2 — SVG noise filters + aurore gradient (mounted once) */}
+        <MatterDefs />
+        <AuthProvider>
+          <I18nProvider>
+            <DreamThemeProvider defaultMode="auto">
+              {children}
+              <FeedbackButton />
+              {/* Dream V1.2 — bouton déposer omniprésent (bas-gauche) */}
+              <GlobalDepositFAB />
+            </DreamThemeProvider>
+          </I18nProvider>
+        </AuthProvider>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                  navigator.serviceWorker.register('/sw.js')
+                })
+              }
+            `,
+          }}
+        />
+      </body>
+    </html>
+  )
+}

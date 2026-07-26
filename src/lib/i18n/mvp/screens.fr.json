@@ -1,0 +1,573 @@
+{
+  "common": {
+    "back": "retour",
+    "backCap": "Retour",
+    "cancel": "annuler",
+    "cancelCap": "Annuler",
+    "save": "enregistrer",
+    "saveCap": "Enregistrer",
+    "close": "fermer",
+    "closeCap": "Fermer",
+    "continue": "continuer",
+    "continueCap": "Continuer",
+    "ok": "OK",
+    "working": "…",
+    "aMoment": "un instant…",
+    "someone": "Quelqu’un",
+    "aDreamer": "Un rêveur",
+    "me": "toi",
+    "retry": "Réessayer"
+  },
+  "settings": {
+    "title": "Réglages",
+    "privacy": "Confidentialité",
+    "legal": "Mentions",
+    "account": {
+      "title": "Compte",
+      "signedInAs": "connecté·e en tant que",
+      "changePassword": "Changer mon mot de passe",
+      "newPassword": "nouveau mot de passe",
+      "tooShort": "6 caractères minimum",
+      "saved": "mot de passe enregistré",
+      "signOut": "Se déconnecter"
+    },
+    "language": {
+      "title": "Langue",
+      "fr": "Français",
+      "en": "English",
+      "note": "la langue change l’app, et la langue dans laquelle Dream te répond — l’interprétation, les guides. tes rêves déjà écrits ne sont pas traduits : ils restent dans la langue où tu les as écrits."
+    },
+    "appointments": {
+      "title": "Rendez-vous",
+      "intro": "Dream peut venir à ta rencontre. Tu choisis — rien ne t’est imposé.",
+      "morning": "Le matin",
+      "evening": "Le soir",
+      "at": "à",
+      "none": "Aucun rendez-vous. Dream ne viendra pas à toi — c’est toi qui viens."
+    },
+    "wakeup": {
+      "title": "Réveil",
+      "soft": "Le réveil doux",
+      "softSub": "se réveiller avec ses rêves encore frais"
+    },
+    "wall": {
+      "title": "Le Mur",
+      "intro": "Le Mur est totalement anonyme. Retire un partage quand tu veux — il disparaît du Mur.",
+      "soon": "Le Mur arrive bientôt. Tu pourras gérer tes partages ici.",
+      "empty": "Tu n’as encore rien partagé sur le Mur.",
+      "untitled": "partage sans texte",
+      "touched": {
+        "one": "{{n}} personne l’a touché",
+        "other": "{{n}} personnes l’ont touché"
+      },
+      "notTouched": "pas encore touché",
+      "remove": "retirer"
+    },
+    "notifications": {
+      "title": "Notifications",
+      "groups": "Réponses dans mes groupes",
+      "groupsSub": "quand quelqu’un réagit à un rêve partagé",
+      "works": "Une œuvre est prête",
+      "worksSub": "quand la Forge a fini de créer",
+      "wallNever": "Le Mur ne notifie jamais rien. C’est un principe : il se visite, il ne réclame pas."
+    },
+    "credits": {
+      "title": "Abonnement & crédits",
+      "row": "Mes crédits & abonnement",
+      "sub": "ce que la Forge consomme, et comment recharger"
+    },
+    "help": {
+      "title": "Aide",
+      "how": "Comment marche Dream",
+      "howSub": "les petites explications de Dream, réunies"
+    },
+    "data": {
+      "title": "Mes données",
+      "export": "Exporter tout",
+      "exporting": "préparation…",
+      "exportSub": "tes rêves, tes moments, tes notes — dans un fichier à toi",
+      "exportError": "l’export n’a pas pu se faire — réessaie",
+      "deleteScheduledOn": "Suppression prévue le {{date}}",
+      "deleteScheduledSoon": "Suppression prévue dans 7 jours",
+      "deletePending": "Tes données sont encore là. Tu peux annuler tant que le délai n’est pas passé.",
+      "cancelDelete": "annuler la suppression",
+      "delete": "Supprimer mon compte",
+      "confirm1Title": "Supprimer ton compte ?",
+      "confirm1Body": "On garde tout pendant sept jours, puis on efface pour de bon. Tu peux annuler avant.",
+      "confirm2Title": "Sûr ? Ça lance l’effacement.",
+      "confirm2Body": "Dernière étape. Après le délai de sept jours, tes rêves seront effacés pour de bon.",
+      "keepAccount": "garder mon compte",
+      "yesDelete": "oui, supprimer",
+      "requested": "Demande enregistrée.",
+      "deleteError": "impossible pour l’instant — réessaie"
+    }
+  },
+  "onboarding": {
+    "notifNow": "maintenant",
+    "o1": {
+      "title": "Dream — pour tes rêves.",
+      "body": "Raconte tes rêves. Dream t’aide à les comprendre — et à voir ce qu’ils disent de ta vie.",
+      "cta": "Commencer"
+    },
+    "o2": {
+      "p1": "Tu parles, Dream écrit.",
+      "p2": "Tes rêves restent à toi — rien ne s’efface, rien ne se partage sans toi.",
+      "p3": "Plus tu l’utilises, plus il te ressemble.",
+      "cta": "OK"
+    },
+    "o3": {
+      "title": "Dream peut venir à ta rencontre.",
+      "sub": "Choisis — tu pourras changer d’avis dans Réglages."
+    },
+    "o4": {
+      "line1": "Tu te souviens d’un rêve ?",
+      "line2": "N’importe lequel.",
+      "tell": "Raconte-le",
+      "later": "Pas maintenant",
+      "elsewhere": "J’ai des rêves notés ou enregistrés ailleurs"
+    },
+    "chooser": {
+      "morning": "Le matin",
+      "evening": "Le soir",
+      "never": "Jamais",
+      "neverBody": "Je viens quand je veux.",
+      "softWake": "un réveil doux est aussi possible dans Réglages.",
+      "at": "à",
+      "confirm": "Continuer",
+      "validate": "Valider"
+    },
+    "sheet": {
+      "title": "Tes rendez-vous"
+    },
+    "repropose": {
+      "line": "Dream peut te retrouver le matin ou le soir, si tu veux.",
+      "choose": "Choisir",
+      "dismiss": "non merci"
+    },
+    "firstWeek": {
+      "kicker": "Ta première semaine",
+      "title": "Ta première semaine : des rêves, un fil qui commence.",
+      "countWithDate": {
+        "one": "Tu as gardé une chose depuis le {{date}}. Rien à performer — juste ce qui s’est posé.",
+        "other": "Tu as gardé {{n}} choses depuis le {{date}}. Rien à performer — juste ce qui s’est posé."
+      },
+      "count": {
+        "one": "Tu as gardé une chose. Rien à performer — juste ce qui s’est posé.",
+        "other": "Tu as gardé {{n}} choses. Rien à performer — juste ce qui s’est posé."
+      },
+      "nothing": "Un fil commence, à ton rythme. Rien à performer.",
+      "symbol": "un symbole revient : {{symbol}}",
+      "chooseAppts": "Choisir mes rendez-vous"
+    }
+  },
+  "wall": {
+    "tabDreams": "Rêves",
+    "tabHeart": "Cœur",
+    "error": "Le Mur ne répond pas.",
+    "empty": "Le Mur s’éveille avec ses premiers rêveurs.",
+    "signature": "Quelqu’un · {{when}}",
+    "touch": "Ça me touche",
+    "reportTitle": "Quelque chose ne va pas avec ce partage ?",
+    "report": "Signaler",
+    "reported": "Merci. C’est signalé.",
+    "reportFailed": "Impossible de signaler — réessaie."
+  },
+  "share": {
+    "aria": "Partager",
+    "title": "Partager vers…",
+    "yourGroups": "Tes groupes",
+    "loadingGroups": "tes groupes…",
+    "noGroups": "Tu n’es dans aucun groupe pour l’instant.",
+    "alreadyShared": "déjà partagé",
+    "wallConsent": "Sur le Mur, personne ne saura que c’est toi. Même pas tes groupes. Tu peux le retirer quand tu veux.",
+    "wallConsentOk": "OK, partager",
+    "wallOption": "Le Mur, anonymement",
+    "soon": "bientôt",
+    "submit": "Partager",
+    "submitting": "Partage…",
+    "done": "Partagé.",
+    "wallSoon": "Le Mur arrive bientôt.",
+    "failed": "le partage a échoué — réessaie"
+  },
+  "scan": {
+    "frameTitle": "Cadre ta page",
+    "frameSub": "une page de carnet à la fois — je lis ce qui est écrit à la main.",
+    "takePhoto": "Prendre une photo",
+    "typeInstead": "taper le texte à la main →",
+    "reading": "Je lis ta page…",
+    "readingSub": "un instant",
+    "failedTitle": "Je n’arrive pas à lire cette page.",
+    "failedSub": "Réessaie avec plus de lumière ?",
+    "typeIt": "Taper le texte à la main",
+    "manualTitle": "tape le texte de cette page",
+    "manualPlaceholder": "cette nuit…",
+    "backToPhoto": "retour à la photo"
+  },
+  "group": {
+    "fallbackName": "Groupe",
+    "crossing": "Vous traversez :",
+    "askDream": "Demander une lecture à Dream",
+    "askDreamBusy": "Dream écoute le groupe…",
+    "askDreamDone": "Lecture déjà demandée aujourd’hui",
+    "seenTitle": "Ce que Dream voit",
+    "seenPending": "Dream relit le groupe… la lecture apparaîtra ici.",
+    "reactResonates": "ça résonne",
+    "reactUnfamiliar": "ça m’est étranger",
+    "reactQuestion": "une question",
+    "challengeStart": "Lancer un défi",
+    "challengeLabel": "Défi : {{title}}",
+    "challengeFinish": "Terminer",
+    "challengeIn": "tu en es",
+    "challengeJoin": "J’en suis",
+    "challengePlaceholder": "le défi, en une ligne",
+    "challengeSuggestion1": "Noter ses rêves 7 matins",
+    "challengeSuggestion2": "Une intention chaque soir",
+    "challengeLaunch": "Lancer",
+    "sharedTitle": "Rêves & moments partagés",
+    "sharesLoading": "le feu s’ouvre…",
+    "sharesEmpty1": "Personne n’a encore rien partagé.",
+    "sharesEmpty2": "Le premier rêve brise la glace.",
+    "conversation": "La conversation",
+    "olderMessages": "voir les messages plus anciens",
+    "noMessages": "Rien n’a encore été dit. À vous.",
+    "composerPlaceholder": "un mot au groupe…",
+    "ariaPhoto": "envoyer une photo",
+    "ariaSend": "envoyer",
+    "ariaRecord": "enregistrer un vocal",
+    "ariaStopRecord": "arrêter le vocal",
+    "aVoice": "un vocal",
+    "aPhoto": "une photo",
+    "photoAlt": "photo partagée",
+    "aSharedDream": "un rêve partagé",
+    "readerOwnership": "Ce rêve reste la propriété de celui qui l’a partagé.",
+    "type": {
+      "dream": "rêve",
+      "moment": "moment",
+      "mirror": "reflet",
+      "resonance": "résonance",
+      "other": "partage"
+    },
+    "settings": {
+      "title": "Réglages du groupe",
+      "name": "Nom du groupe",
+      "saveName": "Enregistrer le nom",
+      "nameSaved": "nom mis à jour",
+      "intention": "Intention du groupe",
+      "intentionPlaceholder": "ce que vous traversez ensemble (optionnel)",
+      "intentionSaved": "intention mise à jour",
+      "clearIntention": "Retirer l’intention",
+      "intentionCleared": "intention retirée",
+      "alias": "Mon alias dans ce groupe",
+      "aliasPlaceholder": "ton prénom, ou un nom pour ici",
+      "saveAlias": "Enregistrer mon alias",
+      "aliasSaved": "alias mis à jour",
+      "saveFailed": "échec — {{msg}}",
+      "members": "Membres ({{n}})",
+      "guardian": "gardien",
+      "invite": "Inviter",
+      "copyCode": "Copier le code",
+      "leave": "Quitter le groupe",
+      "leaveConfirm": "Sûr ? Tape encore pour quitter.",
+      "leaveFinal": "Quitter pour de bon"
+    }
+  },
+  "guide": {
+    "pause": "Pause",
+    "meta": {
+      "one": "{{duration}} · {{n}} question",
+      "other": "{{duration}} · {{n}} questions"
+    },
+    "later": "plus tard",
+    "start": "on y va",
+    "backStep": "revenir",
+    "next": "continuer",
+    "finish": "terminer",
+    "placeholder": "…",
+    "feltTitle": "Et là, ça te fait quoi ?",
+    "feltMoved": "Quelque chose a bougé",
+    "feltSame": "Pareil qu’avant",
+    "feltDunno": "Je sais pas",
+    "feltSkip": "passer",
+    "keptWithDream": "C’est gardé avec ton rêve.",
+    "keptInJournal": "C’est gardé dans ton journal.",
+    "backHome": "retour",
+    "count": {
+      "one": "Déjà fait une fois",
+      "other": "Déjà fait {{n}} fois"
+    },
+    "sheetTitle": "Pour ce rêve, je te propose :",
+    "allGuides": "Tous les guides →",
+    "libraryTitle": "Les guides",
+    "libraryIntro": "Des petites traversées, une question à la fois. Prends celui qui t’appelle."
+  },
+  "info": {
+    "about": "À propos : {{term}}",
+    "thanks": "merci",
+    "more": "En savoir plus",
+    "howTitle": "Comment marche Dream",
+    "howIntro": "Les petites explications de Dream, réunies. Tout ce que le ⓘ montre en contexte se retrouve ici."
+  },
+  "resonance": {
+    "title": "ce qui résonne",
+    "empty": "rien ne résonne encore — raconte d’autres nuits, et les fils se tisseront.",
+    "emptyAlone": "ce rêve se tient seul pour l’instant. rien d’autre ne lui répond — c’est une réponse, pas un manque.",
+    "intro": "des rêves et des moments qui se répondent — ouvre-les pour suivre le fil.",
+    "tagDay": "jour",
+    "tagDream": "rêve",
+    "noted": "✓ noté",
+    "yes": "résonne",
+    "no": "pas vraiment",
+    "propheticTitle": "⟡ un rêve ancien semble avoir préparé celui-ci",
+    "dreamtOn": "rêvé le {{date}}",
+    "daysBefore": {
+      "one": " · {{n}} jour avant",
+      "other": " · {{n}} jours avant"
+    },
+    "collapse": "replier ↑",
+    "sideBySide": "les voir côte à côte →",
+    "thisDream": "ce rêve · {{date}}",
+    "today": "aujourd’hui",
+    "oldDream": "le rêve ancien · {{date}}",
+    "whatLinks": "ce qui les relie :",
+    "openDream": "ouvrir ce rêve →",
+    "disclaimer": "un écho possible à travers le temps — pas une certitude. à toi de sentir s’il résonne."
+  },
+  "kept": {
+    "title": "interprétation gardée",
+    "notePlaceholder": "ce qui résonne pour toi, en une phrase…",
+    "noteLabel": "ce qui résonne pour toi",
+    "corrections": {
+      "one": "{{n}} correction",
+      "other": "{{n}} corrections"
+    },
+    "youSaid": "tu as dit : ",
+    "editNote": "Modifier la note",
+    "addNote": "Ajouter une note",
+    "confirmDelete": "Sûr ? Ça efface pour de bon",
+    "remove": "Retirer"
+  },
+  "care": {
+    "humanTitle": "ce que tu traverses mérite une présence en chair et en os.",
+    "humanBody": "ce que tu as écrit est gardé. et si tu veux parler à quelqu’un, maintenant :",
+    "line3114": "3114 — prévention suicide · 24/7 · gratuit",
+    "lineSos": "SOS Amitié · 09 72 39 40 50 · 24/7",
+    "elsewhere": "ces lignes sont en France. où que tu sois, un service d’écoute existe près de toi — appelle ton numéro d’urgence local.",
+    "kicker": "ce qui insiste",
+    "title": "ce rêve insiste sur quelque chose qui demande ton attention — à toi de sentir où.",
+    "note": "Dream ne prédit rien. Il remarque seulement ce que ton rêve répète. Ce que ça veut dire, toi seul le sais.",
+    "seen": "j’ai vu",
+    "resonates": "ça me parle",
+    "notForMe": "pas pour moi"
+  },
+  "import": {
+    "dropIdle": "tes notes vocales, tes carnets, tes fichiers",
+    "dropOver": "laisse-les venir…",
+    "dropSub": "glisse-les ici, ou touche pour choisir — plusieurs d’un coup",
+    "dropFormats": "m4a · mp3 · wav · m4a long · txt · md",
+    "skipped": {
+      "one": "{{n}} fichier mis de côté — je lis l’audio et le texte.",
+      "other": "{{n}} fichiers mis de côté — je lis l’audio et le texte."
+    },
+    "filesCount": {
+      "one": "{{n}} fichier",
+      "other": "{{n}} fichiers"
+    },
+    "toListen": " · {{n}} à écouter",
+    "bigOne": "le long enregistrement sera découpé avant que je l’écoute — ça peut prendre quelques minutes.",
+    "bigMany": "les longs enregistrements seront découpés avant que je les écoute — ça peut prendre quelques minutes.",
+    "removeFile": "retirer {{name}}",
+    "mb": "{{n}} Mo",
+    "kb": "{{n}} ko",
+    "pasteHelp1": "ou colle-les ici — d’un carnet, de notes, d’une autre app. sépare-les par une ligne",
+    "pasteHelp2": "ou par deux lignes vides.",
+    "pastePlaceholder": "je marchais dans une forêt qui chantait…\n\n---\n\ncette nuit, ma grand-mère me tendait une clé…",
+    "detected": {
+      "one": "{{n}} rêve détecté",
+      "other": "{{n}} rêves détectés"
+    },
+    "filesReady": {
+      "one": "{{n}} fichier prêt",
+      "other": "{{n}} fichiers prêts"
+    },
+    "nothingYet": "rien encore",
+    "cta": "garder ces rêves",
+    "pastedName": "tes rêves collés",
+    "working": "je travaille…",
+    "workingDone": "c’est fait",
+    "clearList": "effacer la liste",
+    "footerWorking": "tu peux aller ailleurs dans l’app, je continue. si tu recharges la page, ce qui n’est pas encore gardé sera à reprendre.",
+    "footerDone": "leur lecture profonde se tisse en arrière-plan — tu les verras s’éclairer au fil des heures.",
+    "status": {
+      "queued": "en attente",
+      "reading": "je lis…",
+      "splitting": "je découpe…",
+      "listening": "j’écoute…",
+      "listeningPart": "j’écoute… {{part}}/{{parts}}",
+      "saving": "je garde…",
+      "done": "gardé",
+      "savedCount": {
+        "one": "{{n}} rêve gardé",
+        "other": "{{n}} rêves gardés"
+      }
+    },
+    "err": {
+      "generic": "ça n’a pas marché",
+      "nothingHere": "rien à garder ici",
+      "nothingInFile": "rien à garder dans ce fichier",
+      "unreadableAudio": "je n’arrive pas à lire cet audio",
+      "nothingHeard": "je n’ai rien entendu de clair"
+    },
+    "back": "retour",
+    "progress": "{{n}}/{{total}}",
+    "doors": {
+      "audioTitle": "Mes mémos vocaux",
+      "audioSub": "tes enregistrements du téléphone, tes carnets — plusieurs d’un coup",
+      "harvestTitle": "Récolter depuis tes autres IA",
+      "harvestSub": "des prompts prêts à copier pour rassembler ce que tu as déjà confié ailleurs"
+    },
+    "type": {
+      "q": "c’était…",
+      "reve": "un rêve",
+      "note_jour": "un moment de jour",
+      "signe": "un signe"
+    },
+    "pasteAs": "ce que tu colles, c’est…",
+    "when": {
+      "label": "à peu près quand ? (facultatif)",
+      "hint": "si tes fichiers ne portent pas de date, je les rangerai autour de ce moment.",
+      "clear": "peu importe"
+    },
+    "tooBigOne": "un enregistrement dépasse 25 Mo — je l’écoute quand même, mais je ne garderai pas l’original.",
+    "tooBigMany": "certains enregistrements dépassent 25 Mo — je les écoute quand même, mais je ne garderai pas les originaux.",
+    "harvest": {
+      "intro": "Tu as sûrement déjà déposé beaucoup de toi ailleurs — dans une autre IA, au fil des conversations. Copie l’un de ces prompts, colle-le à ton IA, puis ramène sa réponse ici. Dream n’est pas un silo : c’est un foyer où tout ton matériau intérieur peut se rassembler.",
+      "copy": "copier",
+      "copied": "copié ✓",
+      "pasteHint": "Copie la réponse de ton IA, reviens ici et colle-la dans la zone de collage — marque-la « un moment de jour » pour qu’elle rejoigne ta voix consciente.",
+      "goPaste": "aller coller ma réponse",
+      "prompts": [
+        {
+          "title": "Mes défis du moment",
+          "prompt": "Relis nos échanges récents et liste ce que je traverse en ce moment : mes défis, les décisions qui m’attendent, mes peurs, mes élans. Écris une ligne par élément, avec mes mots à moi, sans reformuler ni embellir. Sépare chaque élément par une ligne contenant seulement ---."
+        },
+        {
+          "title": "Mes doutes et mes questions",
+          "prompt": "Relis nos conversations et rassemble les doutes et les questions que je porte, même ceux que je n’ai pas nommés clairement. Une ligne par doute ou question, dans ma langue à moi. Sépare chaque élément par une ligne contenant seulement ---."
+        },
+        {
+          "title": "Mes messages du cœur",
+          "prompt": "Reprends les moments où je t’ai parlé depuis le cœur : ce qui me touche, ce que j’aime, ce qui me fait mal, ce à quoi je tiens. Restitue-les tels que je les ai dits, un par ligne. Sépare chaque élément par une ligne contenant seulement ---."
+        },
+        {
+          "title": "Ce que j’ai appris sur moi",
+          "prompt": "À partir de tout ce que nous avons échangé, liste ce que j’ai découvert ou compris sur moi-même : mes fonctionnements, mes besoins, mes schémas qui reviennent. Une réalisation par ligne, avec mes mots. Sépare chaque élément par une ligne contenant seulement ---."
+        },
+        {
+          "title": "Mes intuitions récurrentes",
+          "prompt": "Repère les intuitions, les pressentiments et les idées qui reviennent souvent dans nos échanges. Liste-les simplement, une par ligne, sans les interpréter. Sépare chaque élément par une ligne contenant seulement ---."
+        }
+      ]
+    }
+  },
+  "voice": {
+    "record": "Enregistrer",
+    "stop": "Arrêter",
+    "transcribing": "Transcription…"
+  },
+  "feedback": {
+    "ariaOpen": "Donner un retour",
+    "ariaDialog": "Retour utilisateur",
+    "ariaClose": "Fermer",
+    "step": "Retour · étape {{n}}/3",
+    "doneTitle": "Reçu.",
+    "doneBody": "Merci. Chaque retour aide à affiner.",
+    "step1Title": "Que veux-tu nous dire ?",
+    "youAreOn": "Tu es sur :",
+    "theApp": "l’app",
+    "step2Title": "Quelle urgence ?",
+    "sevLow": "Doux retour",
+    "sevLowSub": "idée, suggestion, observation",
+    "sevMedium": "Important",
+    "sevMediumSub": "bug ou friction notable",
+    "sevHigh": "Urgent · détresse",
+    "sevHighSub": "aide immédiate · sécurité",
+    "step3Title": "Dis-nous tout.",
+    "sosKicker": "Tu n’es pas seul·e",
+    "sosIntro": "Si tu traverses une détresse immédiate, ces lignes répondent 24/7 :",
+    "sos3114": " — Numéro national de prévention du suicide (France, gratuit)",
+    "sosEmergency": " — Urgences médicales",
+    "sosAmitie": "SOS Amitié : ",
+    "sosElsewhere": "ces lignes sont en France. où que tu sois, un service d’écoute existe près de toi — appelle ton numéro d’urgence local.",
+    "textPlaceholder": "Tape librement…",
+    "emailPlaceholder": "ton email (optionnel, pour qu’on revienne vers toi)",
+    "emptyText": "Un mot suffit, mais il en faut au moins un.",
+    "sendFailed": "Envoi échoué",
+    "sending": "Envoi…",
+    "send": "Envoyer"
+  },
+  "auth": {
+    "tagline": "intelligence onirique",
+    "nameLabel": "NOM",
+    "namePlaceholder": "Comment tu veux être appelé",
+    "emailLabel": "EMAIL",
+    "emailPlaceholder": "ton@email.com",
+    "passwordLabel": "MOT DE PASSE",
+    "signupDone": "Compte créé. Vérifie tes emails pour confirmer.",
+    "magicSent": "Lien magique envoyé. Vérifie tes emails.",
+    "resetSent": "Email de récupération envoyé.",
+    "errBadCredentials": "Email ou mot de passe incorrect",
+    "errAlreadyRegistered": "Cet email est déjà utilisé",
+    "errGeneric": "Une erreur est survenue",
+    "ctaLogin": "Entrer",
+    "ctaSignup": "Créer mon compte",
+    "ctaMagic": "Envoyer le lien magique",
+    "ctaForgot": "Récupérer mon accès",
+    "forgot": "Mot de passe oublié ?",
+    "magicLink": "Connexion par lien magique",
+    "toSignup": "Pas encore de compte ? Inscris-toi",
+    "toLogin": "Déjà un compte ? Connecte-toi",
+    "backToLogin": "Retour à la connexion"
+  },
+  "great": {
+    "flag": "un grand rêve",
+    "recognisedIn": "reconnu en {{date}}",
+    "radiantHint": "ce rêve rayonne",
+    "facet": {
+      "change": "ça m’a changé",
+      "force": "ça me donne de la force",
+      "ouvert": "je n’ai pas fini de le comprendre"
+    },
+    "addNote": "pourquoi celui-là ?",
+    "noteKicker": "pourquoi celui-là",
+    "notePlaceholder": "ce que tu veux te rappeler de ce rêve, dans tes mots.",
+    "noteSaved": "gardé",
+    "title": "les grands rêves",
+    "tabJournal": "le journal",
+    "tabConsult": "demander",
+    "untitled": "sans titre",
+    "keptKicker": "ce que j’ai gardé",
+    "emptyL1": "Rien ici pour l’instant.",
+    "emptyL2": "Certains rêves se reconnaissent des années après. Quand l’un d’eux te reviendra, tu le marqueras — et il t’attendra ici.",
+    "entry": "les grands rêves",
+    "entryFromHeart": "demander à mes rêves",
+    "consultAsk": "Qu’est-ce que tu traverses, là, maintenant ?",
+    "consultPlaceholder": "dis-le comme ça vient. Personne d’autre ne le lira.",
+    "consultGo": "chercher dans mes rêves",
+    "consultBusy": "je cherche…",
+    "consultErr": "ça n’a pas marché. Réessaie dans un instant.",
+    "consultLater": "Tu as déjà demandé trois fois aujourd’hui. Laisse ce qui est remonté travailler — reviens demain.",
+    "consultSilence": "Rien ne remonte vraiment sur ça aujourd’hui. C’est une réponse aussi : ton sol est encore peu peuplé sur cette question.",
+    "readingA": "parmi tes grands rêves",
+    "readingB": "dans tout le reste",
+    "readingAEmpty": "aucun de tes grands rêves ne parle vraiment de ça.",
+    "readingBEmpty": "rien d’autre ne parle vraiment de ça.",
+    "candKickerOne": "un rêve ressort",
+    "candKickerMany": "ceux qui ressortent",
+    "candInvite": "Tu as de quoi regarder en arrière. Si tu veux, je parcours tes rêves et je te montre ceux qui ressortent — c’est toi qui dis lesquels comptent.",
+    "candRun": "me montrer ceux qui ressortent",
+    "candSearching": "je regarde…",
+    "candSilence": "Rien ne ressort particulièrement pour l’instant. C’est une réponse aussi.",
+    "candNo": "pas celui-là",
+    "candNoRush": "Tu peux aussi ne rien décider. Rien ne se perd, et je ne le redemanderai pas."
+  }
+}

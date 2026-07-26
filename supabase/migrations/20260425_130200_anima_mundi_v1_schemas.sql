@@ -1,0 +1,21 @@
+-- =============================================================================
+-- MIGRATION : Anima Mundi V1 schemas
+-- File: 20260425_130200_anima_mundi_v1_schemas.sql
+-- Author: Yeshua — Chantier 6
+-- Applied via MCP 2026-04-25
+-- D3 Tim 2026-04-25 : k-anon dynamique 5 min global (pas 250 strict V1)
+-- =============================================================================
+
+-- 7 tables :
+-- - kairos_global_optin (granulaire 3 niveaux)
+-- - annales_circulation
+-- - annales_tenir
+-- - polyphonies_lunaires
+-- - meteos_inconscient
+-- - polarites_lunaires
+-- - initiations_collectives
+--
+-- + RPC compute_meteo_inconscient
+-- + RLS surgical (lecture publique pour annales/météo/polyphonie approved)
+--
+-- Voir migration appliquée via MCP pour le code complet.

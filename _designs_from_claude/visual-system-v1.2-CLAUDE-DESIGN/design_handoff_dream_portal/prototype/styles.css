@@ -1,0 +1,501 @@
+/* ──────────────────────────────────────────────────────────
+   Dream — design tokens. Dark-first. No pure black, no pure white.
+   ────────────────────────────────────────────────────────── */
+
+:root {
+  /* 7-step dark palette */
+  --night-floor: oklch(0.12 0.012 280);
+  --night-warm:  oklch(0.16 0.015 60);
+  --ash-deep:    oklch(0.22 0.008 280);
+  --ash-mid:     oklch(0.34 0.010 60);
+  --ash-light:   oklch(0.52 0.012 60);
+  --bone:        oklch(0.78 0.015 70);
+  --embryonic:   oklch(0.92 0.008 80);
+
+  /* matter-couleurs (accents, never saturated) */
+  --paper-warm:   oklch(0.62 0.045 70);
+  --stone-cool:   oklch(0.55 0.025 230);
+  --silk-gold:    oklch(0.70 0.080 80);
+  --clay-earth:   oklch(0.50 0.060 50);
+  --obsidian:     oklch(0.28 0.030 290);
+  --ember-live:   oklch(0.65 0.140 40);
+  --ember-soft:   oklch(0.55 0.080 40 / 0.35);
+
+  /* tempi */
+  --tempo-instant: 100ms;
+  --tempo-tisse:   380ms;
+  --tempo-ceremoniel: 920ms;
+
+  /* easing */
+  --ease-respire: cubic-bezier(0.32, 0.04, 0.25, 1);
+  --ease-tenue:   cubic-bezier(0.45, 0, 0.15, 1);
+  --ease-rituel:  cubic-bezier(0.7, 0.0, 0.3, 1);
+
+  /* space scale */
+  --s-1: 4px;  --s-2: 8px;  --s-3: 16px;  --s-4: 24px;
+  --s-5: 40px; --s-6: 64px; --s-7: 104px; --s-8: 168px;
+
+  /* type */
+  --serif: 'EB Garamond', Garamond, 'Times New Roman', serif;
+  --sans:  'Inter', system-ui, sans-serif;
+  --mono:  'JetBrains Mono', ui-monospace, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--night-floor);
+  color: var(--bone);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.55;
+  font-feature-settings: "liga", "kern";
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ── Matter layers (SVG noise backdrops) ───────────────── */
+.matter {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: 0.5;
+}
+.matter.linen   { background-image: url('#noise-linen');   }
+.matter.paper   { background-image: url('#noise-paper');   }
+.matter.stone   { background-image: url('#noise-stone');   }
+.matter.water   { background-image: url('#noise-water');   }
+.matter.ember   { background-image: url('#noise-ember');   }
+.matter.silk    { background-image: url('#noise-silk');    }
+.matter.ash     { background-image: url('#noise-ash');     }
+.matter.earth   { background-image: url('#noise-earth');   }
+
+/* matter renders via inline <svg> filters — see the defs in index */
+.matter-fill {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+}
+
+/* ── Typography primitives ─────────────────────────────── */
+.h1-seuil {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: 39px;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--bone);
+  margin: 0;
+}
+.h2-section {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 31.25px;
+  line-height: 1.20;
+  letter-spacing: -0.005em;
+  color: var(--bone);
+  margin: 0;
+}
+.h3-lecture {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 1.30;
+  color: var(--bone);
+  margin: 0;
+}
+.h4-repere {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1.40;
+  color: var(--bone);
+  margin: 0;
+}
+.body { font-size: 16px; line-height: 1.55; color: var(--bone); }
+.meta {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 12.8px;
+  line-height: 1.40;
+  color: var(--ash-light);
+  letter-spacing: 0;
+}
+.meta-mono {
+  font-family: var(--mono);
+  font-weight: 400;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--ash-light);
+}
+.seuil-italic {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 25px;
+  line-height: 1.6;
+  letter-spacing: 0.005em;
+  color: var(--bone);
+}
+.ash-italic {
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--ash-light);
+}
+
+/* ── Stage + shell ─────────────────────────────────────── */
+.stage {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.frame {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: var(--s-5) var(--s-4) var(--s-6);
+  position: relative;
+  z-index: 2;
+}
+@media (min-width: 768px) {
+  .frame { padding: var(--s-6) var(--s-5) var(--s-7); }
+}
+
+.sky {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ── Buttons & inputs ──────────────────────────────────── */
+button { font-family: inherit; color: inherit; cursor: pointer; background: transparent; border: none; padding: 0; }
+
+.btn-deposer {
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  border: 1px solid var(--ash-mid);
+  background: var(--night-warm);
+  position: relative;
+  overflow: hidden;
+  display: grid; place-items: center;
+  transition: transform var(--tempo-tisse) var(--ease-respire),
+              border-color var(--tempo-tisse) var(--ease-respire);
+}
+.btn-deposer::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at center,
+    color-mix(in oklch, var(--ember-live) 18%, transparent) 0%,
+    transparent 70%);
+  animation: pulse-ember 4s var(--ease-respire) infinite;
+}
+.btn-deposer:hover { border-color: var(--bone); transform: scale(1.02); }
+.btn-deposer svg { width: 28px; height: 28px; stroke: var(--bone); fill: none; stroke-width: 1; position: relative; z-index: 1; }
+
+@keyframes pulse-ember {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50%      { opacity: 1;   transform: scale(1.08); }
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: 8px 14px;
+  border: 1px solid var(--ash-deep);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ash-light);
+  font-size: 13px;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition: all var(--tempo-tisse) var(--ease-respire);
+}
+.chip:hover  { border-color: var(--ash-mid); color: var(--bone); }
+.chip.active {
+  border-color: var(--bone);
+  color: var(--bone);
+  background: color-mix(in oklch, var(--bone) 4%, transparent);
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid var(--ash-deep);
+  color: var(--ash-light);
+  padding: 12px 20px;
+  border-radius: 2px;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  transition: all var(--tempo-tisse) var(--ease-respire);
+}
+.btn-ghost:hover { border-color: var(--bone); color: var(--bone); }
+
+.btn-text {
+  background: none; border: none;
+  color: var(--ash-light);
+  font-size: 13px; letter-spacing: 0.02em;
+  cursor: pointer;
+  font-family: var(--serif); font-style: italic;
+  transition: color var(--tempo-tisse);
+}
+.btn-text:hover { color: var(--bone); }
+
+/* ── Top nav (discreet) ────────────────────────────────── */
+.nav {
+  position: sticky; top: 0; z-index: 50;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--s-3) var(--s-4);
+  backdrop-filter: blur(16px);
+  background: color-mix(in oklch, var(--night-floor) 85%, transparent);
+  border-bottom: 1px solid color-mix(in oklch, var(--ash-deep) 50%, transparent);
+}
+.nav-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--bone);
+  opacity: 0.6;
+}
+.nav-compass {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 13px;
+  color: var(--ash-light);
+  letter-spacing: 0.02em;
+}
+.nav-compass .glyph {
+  display: inline-block;
+  margin-right: 6px;
+  opacity: 0.7;
+}
+
+/* ── Cards ─────────────────────────────────────────────── */
+.card {
+  position: relative;
+  padding: var(--s-5);
+  background: color-mix(in oklch, var(--night-warm) 80%, transparent);
+  border: 1px solid var(--ash-deep);
+  border-radius: 2px;
+  overflow: hidden;
+  transition: border-color var(--tempo-tisse) var(--ease-respire);
+}
+.card:hover { border-color: var(--ash-mid); }
+
+.card-bigdream::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: radial-gradient(ellipse at left center,
+    color-mix(in oklch, var(--ember-live) 50%, transparent),
+    transparent 70%);
+  animation: halo-slow 8s ease-in-out infinite;
+}
+@keyframes halo-slow {
+  0%, 100% { opacity: 0.35; }
+  50%      { opacity: 0.8;  }
+}
+
+/* ── Focus ring — sober ────────────────────────────────── */
+:focus-visible {
+  outline: 1px solid var(--bone);
+  outline-offset: 3px;
+}
+
+/* ── Textarea (capture) ────────────────────────────────── */
+.capture-field {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--bone);
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 25px;
+  line-height: 1.5;
+  resize: none;
+  caret-color: var(--ash-light);
+}
+.capture-field::placeholder { color: var(--ash-mid); }
+
+/* ── Breath glyph (somatic gate) ───────────────────────── */
+.breath {
+  width: 120px; height: 120px;
+  border: 1px solid var(--ash-mid);
+  border-radius: 50%;
+  margin: 0 auto;
+  animation: breathe 10s var(--ease-respire) infinite;
+}
+@keyframes breathe {
+  0%, 100% { transform: scale(0.82); opacity: 0.5; }
+  50%      { transform: scale(1.00); opacity: 0.9; }
+}
+
+/* ── Divider ───────────────────────────────────────────── */
+.divider {
+  width: 100%;
+  height: 1px;
+  background: var(--ash-deep);
+  margin: var(--s-5) 0;
+  opacity: 0.6;
+}
+.divider-moon {
+  display: flex; align-items: center; gap: var(--s-3);
+  margin: var(--s-6) 0 var(--s-5);
+  color: var(--ash-mid);
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 13px;
+}
+.divider-moon::before, .divider-moon::after {
+  content: ""; flex: 1;
+  height: 1px; background: var(--ash-deep); opacity: 0.5;
+}
+
+/* ── Whisper (subtle in-app nudge) ─────────────────────── */
+.whisper {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 16px;
+  color: var(--ash-light);
+  text-align: center;
+  padding: var(--s-4) var(--s-5);
+  background: transparent;
+  border: none;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+  transition: color var(--tempo-tisse);
+  display: block;
+  width: 100%;
+  letter-spacing: inherit;
+}
+.whisper:hover { color: var(--bone); }
+
+/* ── Transitions between screens ───────────────────────── */
+.screen-enter {
+  animation: screen-in var(--tempo-ceremoniel) var(--ease-rituel) both;
+}
+@keyframes screen-in {
+  0%   { opacity: 0; transform: translateY(8px); }
+  30%  { opacity: 0.3; }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Constellation (Portrait + Voûte) ──────────────────── */
+.constellation {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  position: relative;
+  border: 1px solid var(--ash-deep);
+  background: radial-gradient(ellipse at center,
+    color-mix(in oklch, var(--night-warm) 70%, transparent),
+    var(--night-floor) 70%);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.anima-constellation {
+  width: 100%;
+  height: 340px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Figure silhouette (Oracle du Corps) ───────────────── */
+.silhouette { width: 180px; }
+
+/* ── Scroll affordance ─────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--ash-deep); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--ash-mid); }
+
+/* ── Section cards on Voûte ────────────────────────────── */
+.chamber-card {
+  padding: var(--s-5);
+  border: 1px solid var(--ash-deep);
+  background: color-mix(in oklch, var(--night-warm) 50%, transparent);
+  cursor: pointer;
+  transition: border-color var(--tempo-tisse) var(--ease-respire),
+              transform var(--tempo-tisse) var(--ease-respire);
+  position: relative;
+  overflow: hidden;
+}
+.chamber-card:hover { border-color: var(--bone); }
+.chamber-card::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 80% 50%,
+    color-mix(in oklch, var(--bone) 4%, transparent),
+    transparent 60%);
+  opacity: 0;
+  animation: chamber-breathe 4s ease-in-out infinite;
+}
+@keyframes chamber-breathe {
+  0%, 100% { opacity: 0.3; }
+  50%      { opacity: 0.9; }
+}
+
+/* ── Chat bubbles ──────────────────────────────────────── */
+.bubble {
+  max-width: 80%;
+  padding: var(--s-4);
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.55;
+  position: relative;
+}
+.bubble.ai {
+  background: color-mix(in oklch, var(--night-warm) 70%, transparent);
+  border: 1px solid var(--ash-deep);
+  align-self: flex-start;
+  color: var(--bone);
+}
+.bubble.user {
+  background: transparent;
+  border: 1px solid var(--ash-mid);
+  align-self: flex-end;
+  font-style: italic;
+  color: var(--bone);
+}
+
+/* ── Toggles (Portrait) ────────────────────────────────── */
+.toggle-row { display: flex; gap: var(--s-3); flex-wrap: wrap; }
+.toggle-row .chip.active { background: color-mix(in oklch, var(--bone) 6%, transparent); }
+
+/* ── Halo for big dream ─────────────────────────────────── */
+.halo-big {
+  position: absolute;
+  left: -12px; top: 0; bottom: 0;
+  width: 36px;
+  background: radial-gradient(ellipse at left center,
+    color-mix(in oklch, var(--ember-live) 22%, transparent),
+    transparent 70%);
+  pointer-events: none;
+  animation: halo-slow 8s ease-in-out infinite;
+}
+
+/* ── Utility ────────────────────────────────────────────── */
+.stack  { display: flex; flex-direction: column; }
+.row    { display: flex; align-items: center; }
+.center { display: grid; place-items: center; }
+.mb-s   { margin-bottom: var(--s-3); }
+.mb-m   { margin-bottom: var(--s-4); }
+.mb-l   { margin-bottom: var(--s-5); }
+.mb-xl  { margin-bottom: var(--s-6); }
+.mt-s   { margin-top: var(--s-3); }
+.mt-m   { margin-top: var(--s-4); }
+.mt-l   { margin-top: var(--s-5); }
+.mt-xl  { margin-top: var(--s-6); }
+.text-center { text-align: center; }
+.op-50  { opacity: 0.5; }
+.op-70  { opacity: 0.7; }
+.flex-1 { flex: 1; }
+.gap-s  { gap: var(--s-3); }
+.gap-m  { gap: var(--s-4); }
+.gap-l  { gap: var(--s-5); }

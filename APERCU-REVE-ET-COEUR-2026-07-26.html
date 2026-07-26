@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dream — Rêve &amp; Cœur · avant / après (passe B5, 26/07)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+/* ─────────────────────────────────────────────────────────────────────────
+   Tokens repris À L'IDENTIQUE de src/lib/dream-design.ts — aucun hex inventé.
+   Échelles φ/Fibonacci de DESIGN-MATHEMATIQUES-SACREES.md.
+   ───────────────────────────────────────────────────────────────────────── */
+:root{
+  --bg: radial-gradient(120% 72% at 50% 38%, #241a12 0%, #1a1310 58%, #140e0a 100%);
+  --gold:#c9a86a; --gold-lit:#e4cf9e;
+  --cream:#f2e8d5; --ink:#e5d8bd;
+  --dim:rgba(242,232,213,0.55); --faint:rgba(242,232,213,0.34);
+  --card:rgba(201,168,106,0.06); --card-border:0.5px solid rgba(201,168,106,0.16);
+  --line:rgba(201,168,106,0.14);
+  --paper: radial-gradient(122% 78% at 50% 32%, #faf3e2 0%, #f4ead1 56%, #ecdfbe 100%);
+  --d-ink:#2b2115; --d-ink-soft:#4a3b28; --d-dim:rgba(43,33,21,0.58); --d-faint:rgba(43,33,21,0.36);
+  --d-gold:#8f7134; --d-sun:#f0dfae;
+  --d-card:rgba(143,113,52,0.07); --d-card-border:0.5px solid rgba(143,113,52,0.20);
+  --d-line:rgba(143,113,52,0.18);
+  --serif:"EB Garamond","Cormorant Garamond",Georgia,serif;
+  --sans:"Inter",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SF Mono",monospace;
+  --ease:cubic-bezier(0.382,0,0.618,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#141210;color:#e8ddc8;font-family:var(--sans);padding:55px 34px 144px;min-height:100vh}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:99;opacity:.025;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='144' height='144'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-repeat:repeat}
+
+.wrap{max-width:1400px;margin:0 auto}
+header.page{max-width:1180px;margin:0 auto 89px}
+header.page .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(232,221,200,.42);margin-bottom:13px}
+header.page h1{font-family:var(--serif);font-style:italic;font-weight:400;font-size:57px;line-height:1.0;color:var(--cream);margin-bottom:21px}
+header.page .quote{max-width:62ch;font-family:var(--serif);font-style:italic;font-size:22px;line-height:1.5;color:var(--gold-lit);
+  border-left:1px solid rgba(201,168,106,.34);padding-left:21px;margin:21px 0 21px}
+header.page p{max-width:68ch;font-size:17px;line-height:1.618;color:rgba(232,221,200,.72)}
+header.page p+p{margin-top:13px}
+header.page b{color:var(--cream);font-weight:500}
+
+section{margin:0 auto 89px;max-width:1400px}
+h2{font-family:var(--serif);font-style:italic;font-weight:400;font-size:35px;color:var(--cream);margin-bottom:8px}
+h2 .num{font-family:var(--mono);font-style:normal;font-size:13px;color:var(--gold);letter-spacing:.14em;margin-right:13px;vertical-align:middle}
+section>.lead{max-width:72ch;font-size:16px;line-height:1.618;color:rgba(232,221,200,.66);margin-bottom:34px}
+section>.lead b{color:var(--gold-lit);font-weight:500}
+.rule{height:1px;background:linear-gradient(90deg,rgba(201,168,106,.34),transparent);margin:0 0 34px}
+
+.frames{display:flex;flex-wrap:wrap;gap:55px;justify-content:center}
+.slot{width:390px}
+.slot .label{margin-bottom:13px;height:144px}
+.slot .label .n{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(232,221,200,.38)}
+.slot .label .t{font-family:var(--serif);font-style:italic;font-size:22px;color:var(--cream);margin-top:5px}
+.slot .label .s{font-size:13px;line-height:1.55;color:rgba(232,221,200,.55);margin-top:5px}
+.badge{display:inline-block;margin-top:8px;padding:4px 11px;border-radius:999px;font-family:var(--mono);font-size:10.5px;letter-spacing:.09em}
+.badge.bad{background:rgba(197,86,52,.14);border:.5px solid rgba(197,86,52,.5);color:#e0a184}
+.badge.ok{background:rgba(201,168,106,.12);border:.5px solid rgba(201,168,106,.5);color:var(--gold-lit)}
+
+/* ── le téléphone ── */
+.phone{position:relative;width:390px;height:790px;border-radius:34px;overflow:hidden;
+  box-shadow:0 21px 55px rgba(0,0,0,.55), 0 0 0 1px rgba(201,168,106,.13)}
+.phone.short{height:610px}
+.phone .grain{position:absolute;inset:0;pointer-events:none;z-index:6;opacity:.025;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='144' height='144'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.night{background:var(--bg)}
+.day{background:var(--paper)}
+.glow-night{position:absolute;inset:0;pointer-events:none;background:radial-gradient(70% 50% at 50% 38.2%,rgba(201,168,106,.12),transparent 70%)}
+.glow-day{position:absolute;inset:0;pointer-events:none;background:radial-gradient(66% 46% at 50% 38.2%,rgba(230,166,54,.16),transparent 70%)}
+.inner{position:relative;z-index:2;height:100%}
+
+/* seuil */
+.seuil{position:absolute;top:0;bottom:0;width:21px;z-index:3;pointer-events:none;
+  -webkit-mask-image:linear-gradient(180deg,transparent,#000 21%,#000 79%,transparent);
+  mask-image:linear-gradient(180deg,transparent,#000 21%,#000 79%,transparent)}
+.seuil.r{right:0;background:linear-gradient(270deg,rgba(233,170,64,.85),transparent)}
+.seuil.l{left:0;background:linear-gradient(90deg,rgba(36,26,18,.55),transparent)}
+.seuil.l.old{background:linear-gradient(90deg,rgba(242,232,213,.92),transparent)}
+
+/* bandeau méta */
+.meta{padding:47px 21px 0 26px;display:flex;justify-content:space-between;align-items:center;min-height:76px}
+.meta .date{font-size:12.5px;color:var(--faint);letter-spacing:.01em}
+.meta.d .date{color:var(--d-faint)}
+
+/* le foyer */
+.focus{display:flex;flex-direction:column;align-items:center}
+.moon{width:196px;height:196px;border-radius:50%;
+  background:radial-gradient(circle at 38% 32%, #fbf4e3 0%, #f2e8d5 55%, #dfd0b0 100%);
+  box-shadow:0 0 98px 25px rgba(242,232,213,.22), 0 0 215px 59px rgba(201,168,106,.10);
+  animation:breathe 5s var(--ease) infinite}
+.ember{width:168px;height:168px;border-radius:50%;
+  background:radial-gradient(circle at 38% 32%, #fdf4d8 0%, #f0dfae 42%, #e0bf78 78%, #cfa456 100%);
+  box-shadow:0 0 76px 20px rgba(240,223,174,.55), 0 0 150px 35px rgba(197,138,52,.24);
+  animation:breathe 5s var(--ease) infinite}
+@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.015)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+
+/* le bloc de texte sous le foyer */
+.say{margin-top:34px;padding:0 34px;text-align:center}
+.mot{font-family:var(--serif);font-style:italic;font-size:40px;line-height:1.05;color:var(--cream)}
+.mot.d{color:var(--d-ink)}
+/* ★ LA TRAÎNE — l'objet de cette passe */
+.traine{margin-top:5px;font-family:var(--serif);font-style:italic;font-size:17px;line-height:1.25;color:var(--dim)}
+.traine.d{color:var(--d-ink-soft)} /* AA : d-dim donnait 3,79:1 sur le parchemin — sous la barre */
+.micro{margin-top:13px;font-size:13px;line-height:1.4;color:var(--dim);display:inline-flex;align-items:center;gap:8px;justify-content:center}
+.micro.d{color:var(--d-ink-soft)}
+.micro.old{font-size:13.5px}
+.micro svg{opacity:.62}
+
+/* zone basse */
+.low{padding:34px 24px 0}
+.thread{display:flex;flex-direction:column;gap:8px;max-width:340px;margin:0 auto}
+.item{display:flex;align-items:center;gap:11px;width:100%;padding:11px 13px;border-radius:13px 21px 13px 21px;
+  background:var(--card);border:var(--card-border);text-align:left}
+.item.d{border-radius:21px 13px 21px 13px;background:var(--d-card);border:var(--d-card-border)}
+.item .ti{flex:1;font-size:15px;font-weight:500;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.item.d .ti{color:var(--d-ink)}
+.item .da{font-size:12.5px;color:var(--faint)}
+.item.d .da{color:var(--d-faint)}
+.pass{margin-top:21px;text-align:center;display:flex;flex-direction:column;gap:5px;align-items:center}
+.pass button,.passlink{background:none;border:none;color:var(--gold);font-weight:500;font-size:13.5px;font-family:var(--sans);
+  padding:8px 13px;display:inline-flex;align-items:center;gap:8px;letter-spacing:.02em}
+.passlink.d{color:var(--d-gold);font-weight:600}
+.passlink.sub{color:var(--d-ink-soft);font-weight:600}
+.fil{display:inline-block;width:21px;height:1px}
+.fil.r{background:linear-gradient(90deg,transparent,var(--gold))}
+.fil.l{background:linear-gradient(270deg,transparent,var(--gold))}
+.fil.ld{background:linear-gradient(270deg,transparent,var(--d-gold))}
+
+/* nav */
+.nav{position:absolute;left:0;right:0;bottom:0;height:89px;display:flex;justify-content:center;align-items:center;gap:26px;
+  padding-bottom:21px;z-index:5}
+.nav.n{background:linear-gradient(180deg,transparent,rgba(22,13,10,.9) 55%)}
+.nav.d{background:linear-gradient(180deg,transparent,rgba(244,234,209,.94) 55%)}
+.nav a{display:flex;flex-direction:column;align-items:center;gap:5px}
+.nav span{font-size:9.5px;letter-spacing:.02em}
+
+/* tableau */
+table{width:100%;max-width:1000px;border-collapse:collapse;font-size:14.5px}
+th,td{text-align:left;padding:11px 13px;border-bottom:1px solid rgba(201,168,106,.13);vertical-align:top;line-height:1.5}
+th{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:400}
+td.n{font-family:var(--mono);font-size:12px;color:var(--faint);width:34px}
+td b{color:var(--cream);font-weight:500}
+.tick{color:var(--gold-lit)}
+
+/* les 3 formulations */
+.copyrow{display:flex;flex-wrap:wrap;gap:34px;justify-content:center}
+.copycard{width:390px;padding:34px 21px 27px;border-radius:13px 21px 13px 21px;background:var(--card);border:var(--card-border);text-align:center}
+.copycard .letter{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--gold);text-transform:uppercase}
+.copycard .demo{margin:21px 0 21px;padding:21px 8px;border-radius:8px;background:rgba(20,14,10,.55)}
+.copycard .why{font-size:13.5px;line-height:1.6;color:rgba(232,221,200,.62);text-align:left}
+.copycard .why b{color:var(--gold-lit);font-weight:500}
+.copycard.chosen{border:1px solid rgba(201,168,106,.5);background:rgba(201,168,106,.09)}
+
+/* post-dépôt */
+.chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.chips.old{gap:6px;flex-wrap:nowrap;overflow:hidden;justify-content:flex-start;padding-left:13px}
+.chip{display:inline-flex;align-items:center;gap:5px;min-height:34px;padding:8px 13px;border-radius:999px;font-size:13px;
+  border:1px solid rgba(242,232,213,.14);color:var(--dim)}
+.chips.old .chip{min-height:0;padding:6px 12px;font-size:12px}
+.chip.on{background:rgba(201,168,106,.16);border-color:rgba(201,168,106,.4);color:var(--cream)}
+.kick-old{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(242,232,213,.42)}
+.kick-new{font-family:var(--serif);font-style:italic;font-size:17px;color:var(--dim)}
+.cut{position:absolute;right:0;top:0;bottom:0;width:55px;background:linear-gradient(270deg,#1a1310,transparent);pointer-events:none}
+
+footer{max-width:1180px;margin:89px auto 0;padding-top:34px;border-top:1px solid rgba(201,168,106,.16);
+  font-size:14px;line-height:1.7;color:rgba(232,221,200,.55)}
+footer b{color:var(--gold-lit);font-weight:500}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="page">
+  <div class="kicker">Dream · passe design B5 · 26 juillet 2026</div>
+  <h1>Rêve &amp; Cœur</h1>
+  <div class="quote">« le nouveau double écran c'est Rêve et Cœur, mais Rêve c'est donc aussi Kaïros etc… faut que ce soit clair. Sans pour autant alourdir l'écran. Chai pas comment faire, fais-le. »</div>
+  <p>Le budget d'éléments était <b>plein — 9 sur 9</b> (loi d'épure §15.1). Le dixième élément devait en tuer un. Donc : <b>aucun élément ajouté</b>. Le périmètre est porté par un emplacement qui existait déjà.</p>
+  <p>Le mot « rêve » ne bouge pas d'un pixel — <b>§1.6 est intouchable</b> : la porte d'entrée dit « rêve », et elle doit continuer à le dire. Ce qui change, c'est que le mot <b>respire une ligne de plus</b>, dans sa propre voix : « <em style="color:var(--gold-lit)">rêve — ou un signe, un frisson…</em> ». Une phrase, pas un titre + un sous-titre.</p>
+</header>
+
+<!-- ══════════ 1. LA FACE RÊVE ══════════ -->
+<section>
+  <h2><span class="num">01</span>La face Rêve</h2>
+  <div class="lead">Ce que voit un rêveur qui vit une synchronicité à 14 h et se demande « est-ce qu'il y a une place pour ça ? ». <b>Avant : rien ne le lui dit.</b> Le foyer est une lune, le mot est « rêve », la ligne d'usage parle du geste. Il referme l'app.</div>
+  <div class="rule"></div>
+  <div class="frames">
+
+    <div class="slot">
+      <div class="label"><div class="n">Avant</div><div class="t">« rêve », et rien d'autre</div>
+        <div class="s">Le mot est seul. Un signe, un frisson, une synchronicité n'ont aucune adresse visible.</div>
+        <span class="badge bad">périmètre invisible · 9/9</span></div>
+      <div class="phone night"><div class="glow-night"></div><div class="seuil r"></div><div class="grain"></div>
+        <div class="inner">
+          <div class="meta"><div class="date">samedi 26 juillet</div>
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8.5" r="3.6" stroke="rgba(242,232,213,0.45)" stroke-width="1.4"/><path d="M5 20c1.2-3.6 4-5.4 7-5.4s5.8 1.8 7 5.4" stroke="rgba(242,232,213,0.45)" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+          <div class="focus" style="margin-top:76px"><div class="moon"></div>
+            <div class="say">
+              <div class="mot">rêve</div>
+              <div class="micro old">maintiens · ou écris
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M4 8.5h3.2l1.4-2h6.8l1.4 2H20v10H4z" stroke="rgba(242,232,213,0.55)" stroke-width="1.4" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.2" stroke="rgba(242,232,213,0.55)" stroke-width="1.4"/></svg></div>
+            </div>
+          </div>
+          <div class="low">
+            <div class="thread">
+              <div class="item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z" stroke="#c9a86a" stroke-width="1.5" stroke-linejoin="round"/></svg><span class="ti">La maison aux escaliers</span><span class="da">hier</span></div>
+              <div class="item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z" stroke="#c9a86a" stroke-width="1.5" stroke-linejoin="round"/></svg><span class="ti">Le cheval blanc</span><span class="da">il y a 3 jours</span></div>
+            </div>
+            <div class="pass"><span class="passlink"><span class="fil r"></span>le cœur →</span></div>
+          </div>
+          <div class="nav n">
+            <a><svg width="21" height="21" viewBox="0 0 24 24" fill="none"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z" stroke="#f2e8d5" stroke-width="1.5" stroke-linejoin="round"/></svg><span style="color:#f2e8d5;font-weight:600">Accueil</span></a>
+            <a><svg width="21" height="21" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="10" r="4.2" stroke="rgba(242,232,213,.32)" stroke-width="1.5"/><circle cx="15.5" cy="13.5" r="4.2" stroke="rgba(242,232,213,.32)" stroke-width="1.5"/></svg><span style="color:rgba(242,232,213,.32)">Groupes</span></a>
+            <a><svg width="21" height="21" viewBox="0 0 24 24" fill="none"><rect x="3.5" y="4.5" width="17" height="15" rx="1.5" stroke="rgba(242,232,213,.32)" stroke-width="1.5"/><path d="M3.5 9.5h17M3.5 14.5h17M9 4.5v5M15 9.5v5M9 14.5v5" stroke="rgba(242,232,213,.32)" stroke-width="1.3"/></svg><span style="color:rgba(242,232,213,.32)">Mur</span></a>
+            <a><svg width="21" height="21" viewBox="0 0 24 24" fill="none"><path d="M5.5 4.5h13v15h-13z" stroke="rgba(242,232,213,.32)" stroke-width="1.5"/><path d="M8.5 8.5h7M8.5 12h7M8.5 15.5h4" stroke="rgba(242,232,213,.32)" stroke-width="1.3" stroke-linecap="round"/></svg><span style="color:rgba(242,232,213,.32)">Journal</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="label"><div class="n">Après</div><div class="t">le mot respire une ligne de plus</div>
+        <div class="s">La traîne vit <em>dans</em> l'emplacement du mot : même serif, même italique, collée à 5 px, un cran plus bas sur l'échelle φ (40 → 17). Une phrase, pas un sous-titre.</div>
+        <span class="badge ok">périmètre lisible · toujours 9/9</span></div>
+      <div class="phone night"><div class="glow-night"></div><div class="seuil r"></div><div class="grain"></div>
+        <div class="inner">
+          <div class="meta"><div class="date">samedi 26 juillet</div>
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8.5" r="3.6" stroke="rgba(242,232,213,0.45)" stroke-width="1.4"/><path d="M5 20c1.2-3.6 4-5.4 7-5.4s5.8 1.8 7 5.4" stroke="rgba(242,232,213,0.45)" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+          <div class="focus" style="margin-top:76px"><div class="moon"></div>
+            <div class="say">
+              <div class="mot">rêve</div>
+              <div class="traine">ou un signe, un frisson…</div>
+              <div class="micro">maintiens · ou écris
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M4 8.5h3.2l1.4-2h6.8l1.4 2H20v10H4z" stroke="rgba(242,232,213,0.55)" stroke-width="1.4" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.2" stroke="rgba(242,232,213,0.55)" stroke-width="1.4"/></svg></div>
+            </div>
+          </div>
+          <div class="low">
+            <div class="thread">
+              <div class="item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z" stroke="#c9a86a" stroke-width="1.5" stroke-linejoin="round"/></svg><span class="ti">La maison aux escaliers</span><span class="da">hier</span></div>
+              <div class="item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 5c4.5 0 8 4.2 9 7-1 2.8-4.5 7-9 7s-8-4.2-9-7c1-2.8 4.5-7 9-7z" stroke="#c9a86a" stroke-width="1.5"/><circle cx="12" cy="12" r="2.6" fill="#c9a86a"/></svg><span class="ti">Le corbeau, deux fois</span><span class="da">il y a 3 jours</span></div>
+            </div>
+            <div class="pass"><span class="passlink"><span class="fil r"></span>le cœur →</span></div>
+          </div>
+          <div class="nav n">
+            <a><svg width="21" height="21" viewBox="0 0 24 24" fill="none"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z" stroke="#f2e8d5" stroke-width="1.5" stroke-linejoin="round"/></svg><span style="color:#f2e8d5;font-weight:600">Rêve</span></a>
+            <a><svg width="21" height="21" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="10" r="4.2" stroke="rgba(242,232,213,.32)" stroke-width="1.5"/><circle cx="15.5" cy="13.5" r="4.2" stroke="rgba(242,232,213,.32)" stroke-width="1.5"/></svg><span style="color:rgba(242,232,213,.32)">Groupes</span></a>
+            <a><svg width="21" height="21" viewBox="0 0 24 24" fill="none"><rect x="3.5" y="4.5" width="17" height="15" rx="1.5" stroke="rgba(242,232,213,.32)" stroke-width="1.5"/><path d="M3.5 9.5h17M3.5 14.5h17M9 4.5v5M15 9.5v5M9 14.5v5" stroke="rgba(242,232,213,.32)" stroke-width="1.3"/></svg><span style="color:rgba(242,232,213,.32)">Mur</span></a>
+            <a><svg width="21" height="21" viewBox="0 0 24 24" fill="none"><path d="M5.5 4.5h13v15h-13z" stroke="rgba(242,232,213,.32)" stroke-width="1.5"/><path d="M8.5 8.5h7M8.5 12h7M8.5 15.5h4" stroke="rgba(242,232,213,.32)" stroke-width="1.3" stroke-linecap="round"/></svg><span style="color:rgba(242,232,213,.32)">Journal</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════ 2. LA FACE CŒUR ══════════ -->
+<section>
+  <h2><span class="num">02</span>La face Cœur — la même anatomie</h2>
+  <div class="lead">C'était ta question ouverte n°5 (« la micro-ligne du Cœur porte une phrase entière et déséquilibre la face »). <b>Ta propre option (b) est appliquée</b> : la question remonte dans le mot, la ligne d'usage redevient le geste nu — <b>la même sur les deux faces</b>. Aucun mot de ta copie n'a été réécrit ; ils ont changé d'étage. Résultat : les deux faces n'ont plus une ressemblance, elles ont <b>la même anatomie — mot · traîne · geste</b>. Seule la lumière change de camp.<br><br>🔴 <b>Et deux défauts que seul le rendu montre</b>, tous deux du même genre : la nav était peinte en nuit <em>en dur</em>, donc barre sombre au bas d'un écran de papier ; et le liseré de seuil du jour portait de la crème sur du parchemin — <b>deux clairs identiques, aucun bord</b>. On avait réparé la moitié nuit du seuil le 23 et laissé l'autre morte. Regarde les deux bords gauches ci-dessous.</div>
+  <div class="rule"></div>
+  <div class="frames">
+
+    <div class="slot">
+      <div class="label"><div class="n">Avant</div><div class="t">la face jour, plus lourde que la nuit</div>
+        <div class="s">Une phrase de neuf mots sur la ligne d'usage. Une nav peinte en nuit, en dur, posant une barre sombre au bas d'un écran de papier. Et un liseré de seuil <b style="color:#e0a184">littéralement invisible</b> — crème sur parchemin.</div>
+        <span class="badge bad">déséquilibre · nav nocturne · seuil mort</span></div>
+      <div class="phone day"><div class="glow-day"></div><div class="seuil l old"></div><div class="grain"></div>
+        <div class="inner">
+          <div class="meta d"><div class="date">samedi 26 juillet</div></div>
+          <div class="focus" style="margin-top:90px"><div class="ember"></div>
+            <div class="say">
+              <div class="mot d">le cœur</div>
+              <div class="micro d old" style="display:block;padding:0 8px">comment tu te sens, là ? — maintiens · ou écris</div>
+            </div>
+          </div>
+          <div class="low">
+            <div class="thread"><div class="item d"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4.2" stroke="#8f7134" stroke-width="1.5"/><path d="M12 3v2.4M12 18.6V21M3 12h2.4M18.6 12H21" stroke="#8f7134" stroke-width="1.4" stroke-linecap="round"/></svg><span class="ti">Le doute de ce matin</span><span class="da">hier</span></div></div>
+            <div class="pass">
+              <span class="passlink sub">les grands rêves →</span>
+              <span class="passlink d"><span class="fil ld"></span>l'orbe →</span>
+            </div>
+          </div>
+          <div class="nav n">
+            <a><svg width="21" height="21" viewBox="0 0 24 24" fill="none"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z" stroke="#f2e8d5" stroke-width="1.5" stroke-linejoin="round"/></svg><span style="color:#f2e8d5;font-weight:600">Accueil</span></a>
+            <a><svg width="21" height="21" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="10" r="4.2" stroke="rgba(242,232,213,.32)" stroke-width="1.5"/><circle cx="15.5" cy="13.5" r="4.2" stroke="rgba(242,232,213,.32)" stroke-width="1.5"/></svg><span style="color:rgba(242,232,213,.32)">Groupes</span></a>
+            <a><svg width="21" height="21" viewBox="0 0 24 24" fill="none"><rect x="3.5" y="4.5" width="17" height="15" rx="1.5" stroke="rgba(242,232,213,.32)" stroke-width="1.5"/><path d="M3.5 9.5h17M3.5 14.5h17M9 4.5v5M15 9.5v5M9 14.5v5" stroke="rgba(242,232,213,.32)" stroke-width="1.3"/></svg><span style="color:rgba(242,232,213,.32)">Mur</span></a>
+            <a><svg width="21" height="21" viewBox="0 0 24 24" fill="none"><path d="M5.5 4.5h13v15h-13z" stroke="rgba(242,232,213,.32)" stroke-width="1.5"/><path d="M8.5 8.5h7M8.5 12h7M8.5 15.5h4" stroke="rgba(242,232,213,.32)" stroke-width="1.3" stroke-linecap="round"/></svg><span style="color:rgba(242,232,213,.32)">Journal</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="label"><div class="n">Après</div><div class="t">mot · traîne · geste — identique au Rêve</div>
+        <div class="s">La question devient la traîne du mot. La nav se retourne avec la face : soleil / « Cœur », lumière parchemin. Et le seuil porte enfin <b style="color:var(--gold-lit)">l'obscur de la nuit</b> — ce qu'on devine par le bord, c'est le monde de l'autre face, pas son astre.</div>
+        <span class="badge ok">deux faces, une anatomie · 9/9</span></div>
+      <div class="phone day"><div class="glow-day"></div><div class="seuil l"></div><div class="grain"></div>
+        <div class="inner">
+          <div class="meta d"><div class="date">samedi 26 juillet</div></div>
+          <div class="focus" style="margin-top:90px"><div class="ember"></div>
+            <div class="say">
+              <div class="mot d">le cœur</div>
+              <div class="traine d">comment tu te sens, là ?</div>
+              <div class="micro d">maintiens · ou écris</div>
+            </div>
+          </div>
+          <div class="low">
+            <div class="thread"><div class="item d"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4.2" stroke="#8f7134" stroke-width="1.5"/><path d="M12 3v2.4M12 18.6V21M3 12h2.4M18.6 12H21" stroke="#8f7134" stroke-width="1.4" stroke-linecap="round"/></svg><span class="ti">Le doute de ce matin</span><span class="da">hier</span></div></div>
+            <div class="pass">
+              <span class="passlink sub">les grands rêves →</span>
+              <span class="passlink d"><span class="fil ld"></span>rêve →</span>
+            </div>
+          </div>
+          <div class="nav d">
+            <a><svg width="21" height="21" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4.2" stroke="#2b2115" stroke-width="1.5"/><path d="M12 3v2.4M12 18.6V21M3 12h2.4M18.6 12H21M5.6 5.6l1.7 1.7M16.7 16.7l1.7 1.7M18.4 5.6l-1.7 1.7M7.3 16.7l-1.7 1.7" stroke="#2b2115" stroke-width="1.4" stroke-linecap="round"/></svg><span style="color:#2b2115;font-weight:600">Cœur</span></a>
+            <a><svg width="21" height="21" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="10" r="4.2" stroke="rgba(43,33,21,.34)" stroke-width="1.5"/><circle cx="15.5" cy="13.5" r="4.2" stroke="rgba(43,33,21,.34)" stroke-width="1.5"/></svg><span style="color:rgba(43,33,21,.34)">Groupes</span></a>
+            <a><svg width="21" height="21" viewBox="0 0 24 24" fill="none"><rect x="3.5" y="4.5" width="17" height="15" rx="1.5" stroke="rgba(43,33,21,.34)" stroke-width="1.5"/><path d="M3.5 9.5h17M3.5 14.5h17M9 4.5v5M15 9.5v5M9 14.5v5" stroke="rgba(43,33,21,.34)" stroke-width="1.3"/></svg><span style="color:rgba(43,33,21,.34)">Mur</span></a>
+            <a><svg width="21" height="21" viewBox="0 0 24 24" fill="none"><path d="M5.5 4.5h13v15h-13z" stroke="rgba(43,33,21,.34)" stroke-width="1.5"/><path d="M8.5 8.5h7M8.5 12h7M8.5 15.5h4" stroke="rgba(43,33,21,.34)" stroke-width="1.3" stroke-linecap="round"/></svg><span style="color:rgba(43,33,21,.34)">Journal</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════ 3. LE MOMENT QUI ENSEIGNE ══════════ -->
+<section>
+  <h2><span class="num">03</span>Le moment qui enseigne vraiment le périmètre</h2>
+  <div class="lead">La traîne <b>annonce</b> ; c'est ce moment-ci qui <b>enseigne</b>. Juste après un dépôt, l'app demande « c'était… ». C'est la seule seconde de la journée où lister rêve · signe · rêverie · hypnagogie · frisson · synchro sert à quelque chose. Il était traité comme un champ de formulaire : kicker en capitales espacées (le registre du code, adressé à personne) et puces de 12 px dans <b>une rangée à défilement horizontal</b> — donc des types qu'on ne voyait jamais. <b>Un périmètre à moitié hors de l'écran ne s'enseigne pas.</b></div>
+  <div class="rule"></div>
+  <div class="frames">
+    <div class="slot" style="width:440px">
+      <div class="label"><div class="n">Avant</div><div class="t">un champ de formulaire</div>
+        <div class="s">« synchro » et « jour » sont hors du cadre. Cible tactile 28 px.</div>
+        <span class="badge bad">3 types sur 7 visibles</span></div>
+      <div style="position:relative;padding:34px 0 34px;border-radius:13px 21px 13px 21px;background:var(--bg);border:var(--card-border);overflow:hidden">
+        <div style="text-align:center;margin-bottom:6px"><span class="kick-old">c'était…</span></div>
+        <div class="chips old">
+          <span class="chip on">☾ rêve</span><span class="chip">◉ signe</span><span class="chip">☁ rêverie</span><span class="chip">◗ hypnagogie</span><span class="chip">∿ frisson</span><span class="chip">✦ synchro</span>
+        </div>
+        <div class="cut"></div>
+      </div>
+    </div>
+    <div class="slot" style="width:440px">
+      <div class="label"><div class="n">Après</div><div class="t">une question, dans la voix de l'app</div>
+        <div class="s">Le kicker prend le registre serif italique 17 — <b>exactement celui de la traîne du mot</b>. Dans toute l'app, « ce qui appartient à cet endroit » n'a plus qu'une typographie.</div>
+        <span class="badge ok">7 types sur 7 · cible 34 px</span></div>
+      <div style="padding:34px 21px;border-radius:13px 21px 13px 21px;background:var(--bg);border:var(--card-border)">
+        <div style="text-align:center;margin-bottom:13px"><span class="kick-new">c'était…</span></div>
+        <div class="chips">
+          <span class="chip on">☾ rêve</span><span class="chip">◉ signe</span><span class="chip">☁ rêverie</span><span class="chip">◗ hypnagogie</span><span class="chip">∿ frisson</span><span class="chip">✦ synchro</span><span class="chip">☀ jour</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 4. LA COPIE — TU CHOISIS ══════════ -->
+<section>
+  <h2><span class="num">04</span>La traîne — trois formulations, tu tranches</h2>
+  <div class="lead">La structure, je l'ai décidée. <b>La copie est ta voix, pas la mienne</b> — donc voici les trois que j'ai vraiment considérées, avec ce que chacune gagne et perd. (A) est en place ; changer se fait sur <b>une seule clé i18n</b> : <code style="font-family:var(--mono);font-size:13px;color:var(--gold-lit)">core.home.also</code>.</div>
+  <div class="rule"></div>
+  <div class="copyrow">
+    <div class="copycard chosen">
+      <div class="letter">A — en place</div>
+      <div class="demo"><div class="mot">rêve</div><div class="traine">ou un signe, un frisson…</div></div>
+      <div class="why"><b>Gagne :</b> c'est <b>clair</b>, et tu as demandé clair. « signe » et « frisson » sont déjà deux puces de l'app — le rêveur retrouvera ces mots trois secondes après son dépôt. Les points de suspension disent « la liste continue » sans lister.<br><br><b>Perd :</b> c'est de l'information, pas de la poésie. Ça énumère.</div>
+    </div>
+    <div class="copycard">
+      <div class="letter">B — la plus belle</div>
+      <div class="demo"><div class="mot">rêve</div><div class="traine">et tout ce que la vie te chante</div></div>
+      <div class="why"><b>Gagne :</b> ce sont <b>tes mots</b> (VISION-CHANT §5, canonisés en 1_BIBLE §1.5). C'est la phrase qui porte toute la cosmologie des deux faces, en six mots.<br><br><b>Perd :</b> abstraite. Quelqu'un qui vient de vivre une coïncidence troublante ne fait pas forcément le lien avec « ce que la vie me chante ». Elle dit l'âme, pas l'adresse.</div>
+    </div>
+    <div class="copycard">
+      <div class="letter">C — la symétrique</div>
+      <div class="demo"><div class="mot">rêve</div><div class="traine">qu'est-ce qui t'a été donné ?</div></div>
+      <div class="why"><b>Gagne :</b> une <b>question</b>, comme le Cœur — symétrie parfaite entre les deux faces, et c'est la question d'entrée canonique de 1_BIBLE §1.5. Respecte la règle : <em>« un espace de dépôt sans question est un vide poli ».</em><br><br><b>Perd :</b> « donné » ne couvre pas bien le frisson (qui est senti, pas reçu comme un objet). Et une question sans réponse évidente laisse le rêveur seul.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 5. LE BUDGET ══════════ -->
+<section>
+  <h2><span class="num">05</span>Le compte d'emplacements — toujours 9 sur 9</h2>
+  <div class="lead">La loi §15.1 dit : <b>neuf emplacements, et le dixième doit en tuer un</b>. Rien n'a été tué, parce que rien n'a été ajouté. La traîne vit à l'intérieur de l'emplacement n°3.</div>
+  <div class="rule"></div>
+  <table>
+    <tr><th>n°</th><th>emplacement (§15.1)</th><th>face Rêve</th><th>face Cœur</th></tr>
+    <tr><td class="n">1</td><td>1 méta discrète</td><td>la date</td><td>la date</td></tr>
+    <tr><td class="n">2</td><td>1 foyer</td><td>la lune</td><td>la braise</td></tr>
+    <tr><td class="n">3</td><td><b>1 mot</b></td><td><b>« rêve »</b> <span class="tick">+ sa traîne</span></td><td><b>« le cœur »</b> <span class="tick">+ sa traîne</span></td></tr>
+    <tr><td class="n">4</td><td>1 micro-ligne d'usage</td><td>maintiens · ou écris (+ 📷)</td><td>maintiens · ou écris</td></tr>
+    <tr><td class="n">5</td><td>1 geste — le foyer EST le bouton</td><td>anneau de maintien</td><td>anneau de maintien</td></tr>
+    <tr><td class="n">6-7</td><td>≤ 2 liens secondaires</td><td>« le cœur → » <em style="color:rgba(232,221,200,.4)">(1 seul — il reste une place)</em></td><td>« les grands rêves » · « rêve → »</td></tr>
+    <tr><td class="n">8</td><td>fil ≤ 2 items</td><td>2 derniers dépôts</td><td>2 derniers dits</td></tr>
+    <tr><td class="n">9</td><td>nav</td><td>lune / « Rêve »</td><td>soleil / « Cœur »</td></tr>
+  </table>
+</section>
+
+<!-- ══════════ 6. CE QUE J'AI ÉCARTÉ ══════════ -->
+<section>
+  <h2><span class="num">06</span>Ce que j'ai écarté, et pourquoi</h2>
+  <div class="lead">Quatre pistes considérées sérieusement, quatre refus argumentés. Si tu n'es pas d'accord sur l'une, dis-le — chacune est à une heure de travail.</div>
+  <div class="rule"></div>
+  <table>
+    <tr><th>la piste</th><th>pourquoi non</th></tr>
+    <tr><td><b>Une rangée de puces de type sur l'accueil</b><br><span style="color:rgba(232,221,200,.5)">(rêve · signe · frisson · synchro…)</span></td><td>§15.1 la bannit <b>nommément</b> (« le carrousel de suggestions ou de chips »). Et le type se choisit <b>après</b> le dépôt — c'est ta décision du 13/07, et elle est juste : à 6 h du matin il reste quarante secondes de mémoire, aucune question ne doit précéder le geste.</td></tr>
+    <tr><td><b>Charger la micro-ligne</b><br><span style="color:rgba(232,221,200,.5)">« un signe, un frisson · maintiens ou écris »</span></td><td>Mesuré : 44 caractères + le glyphe photo <b>débordent sur un écran de 360 px</b>. Ça passe sur deux lignes — et deux lignes sous un mot de 40 px, c'est exactement le « double sous-titre » que §15.1 interdit. Et surtout : la ligne d'usage enseigne le <b>geste</b>, qui est plus urgent que le périmètre.</td></tr>
+    <tr><td><b>Le porter dans l'onboarding</b></td><td>C'est <b>ta règle §1.6 qui l'interdit</b> : « on entre dans une cathédrale par la grande porte qui annonce cathédrale », et le reste est « une découverte surprenante permanente ». Déclarer les six types kaïros à l'écran O1 ferait de la porte d'entrée une notice. Le périmètre se découvre — traîne d'abord, puces après le premier dépôt.</td></tr>
+    <tr><td><b>Renommer le fil « Reçus ☾ / Dits ♥ » du Journal</b></td><td>Vérifié, et <b>ils tiennent mieux que jamais</b>. « Reçus » ne nomme pas l'écran, il nomme le <b>contenu</b> — et c'est précisément la vérité de 1_BIBLE §1.5 (« ce que la vie nous chante » / « ce qu'on chante en retour »). Les renommer « Rêve / Cœur » réintroduirait le rétrécissement qu'on est en train de réparer : un filtre « Rêve » suggérerait <em>rien que des rêves</em>.</td></tr>
+  </table>
+</section>
+
+<footer>
+  <b>Où en est la vérité.</b> Tout ce qui est au-dessus est du code réel, pas une maquette : <code style="font-family:var(--mono);font-size:13px">src/app/mvp/page.tsx</code> + les deux fichiers i18n (fr &amp; en, les deux seules langues du repo). Typecheck passé sur mes fichiers.<br><br>
+  <b>Ce que je ne peux toujours pas certifier.</b> Les cinq frames « NUIT ULTRA SIMPLE » validées le 10/07 <b>n'existent nulle part dans le repo</b>. Je travaille sur <code style="font-family:var(--mono);font-size:13px">dream-design.ts</code>, une transcription à la main. Je peux dire qu'aucune règle écrite n'est violée. Je ne peux pas dire « on est au niveau de la maquette ».<br><br>
+  <b>Et la question honnête que je te pose.</b> La traîne fait de l'accueil un écran qui <em>explique</em> un peu. C'est un pas vers la clarté et un pas hors du silence. Regarde-la sur ton téléphone : si elle bavarde, on la coupe, et le périmètre vit alors uniquement dans les puces d'après-dépôt — c'est défendable aussi.
+</footer>
+
+</div>
+</body>
+</html>

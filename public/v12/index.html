@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0E0F14">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
+<title>Dream — V1.2 amplified</title>
+
+<!-- 2026-04-29 — Fix mobile black screen (Yeshua) :
+     1. Fallback colors hex AVANT styles.css : si oklch() pas supporté
+        (iOS Safari < 16.4), html/body restent lisibles au lieu de black-on-black.
+     2. Background hex assure que SI styles.css échoue à charger
+        (réseau mobile lent ou HTTP/2 stalled), on a au moins un fond cohérent. -->
+<style>
+  html, body {
+    background: #0E0F14;
+    color: #D9D2C4;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+  #root { min-height: 100vh; }
+  /* Diagnostic message si React ne se charge pas en 8s (mobile) */
+  .__dream_boot_diag {
+    position: fixed; inset: 0;
+    display: none;
+    align-items: center; justify-content: center;
+    padding: 24px; text-align: center;
+    background: #0E0F14; color: #D9D2C4;
+    font-family: Garamond, "EB Garamond", Georgia, serif;
+    font-style: italic; font-size: 16px; line-height: 1.6;
+    z-index: 9999;
+  }
+  .__dream_boot_diag.show { display: flex; }
+  .__dream_boot_diag .diag-inner { max-width: 320px; opacity: 0.85; }
+  .__dream_boot_diag .diag-btn {
+    margin-top: 20px; padding: 10px 20px;
+    border: 1px solid #6C6557; background: transparent;
+    color: #D9D2C4; font-style: italic;
+    border-radius: 2px; cursor: pointer;
+    font-family: inherit; font-size: 14px;
+  }
+</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- 2026-04-29 — Bootstrap mobile (Yeshua) :
+     1. Unregister tout vieux service worker qui pourrait servir un cache cassé.
+        L'app n'enregistre PLUS le SW (sw.js dans /public/ mais jamais register())
+        — donc les users qui l'ont enregistré dans une version antérieure ont
+        peut-être un cache stale qui sert un index.html cassé pour `/`.
+     2. Diagnostic timer : si après 8s React/AuthGate/#root pas prêts, on
+        affiche un message lisible au lieu d'un écran noir. -->
+<script>
+(function dreamBootstrap() {
+  // Unregister stale service workers (depuis ancienne version v1.1)
+  try {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function(regs) {
+        regs.forEach(function(r) { try { r.unregister(); } catch (e) {} });
+      }).catch(function() {});
+    }
+  } catch (e) {}
+
+  // 2026-04-29 (Yeshua, FIX P0 mobile #2) — Diag boot enrichi.
+  // Babel @standalone supprimé : on check React + ReactDOM (UMD CDN)
+  // ET window.AuthGate (premier script app loadé, défini par auth.js).
+  // Si AuthGate manque alors que React est là → un script app a échoué
+  // silencieusement (404, parse error, etc.). On affiche le fallback.
+  // Aussi : on check que #root a au moins un enfant (App monté).
+  setTimeout(function () {
+    var rootEl = document.getElementById("root");
+    var ok = typeof window.React !== "undefined"
+          && typeof window.ReactDOM !== "undefined"
+          && typeof window.AuthGate !== "undefined"
+          && rootEl && rootEl.children.length > 0;
+    if (!ok) {
+      var diag = document.getElementById("__dream_boot_diag");
+      if (diag) diag.classList.add("show");
+      try {
+        console.error("[Dream Boot] runtime partiel — React=" + typeof window.React +
+          " ReactDOM=" + typeof window.ReactDOM +
+          " AuthGate=" + typeof window.AuthGate +
+          " rootChildren=" + (rootEl ? rootEl.children.length : "no-root"));
+      } catch(_) {}
+    }
+  }, 8000);
+})();
+</script>
+
+<!-- SVG noise defs (matter) — referenced as background-image url(#…) via inline svg -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="noise-linen"><feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="3" seed="2"/><feColorMatrix values="0 0 0 0 0.75  0 0 0 0 0.72  0 0 0 0 0.68  0 0 0 0.06 0"/></filter>
+    <filter id="noise-paper"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="5"/><feColorMatrix values="0 0 0 0 0.72  0 0 0 0 0.68  0 0 0 0 0.62  0 0 0 0.08 0"/></filter>
+    <filter id="noise-stone"><feTurbulence type="fractalNoise" baseFrequency="0.008" numOctaves="2" seed="9"/><feColorMatrix values="0 0 0 0 0.52  0 0 0 0 0.55  0 0 0 0 0.6  0 0 0 0.1 0"/></filter>
+    <filter id="noise-ash"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="1" seed="1"/><feColorMatrix values="0 0 0 0 0.4  0 0 0 0 0.4  0 0 0 0 0.4  0 0 0 0.03 0"/></filter>
+    <filter id="noise-water"><feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="3" seed="3"/><feColorMatrix values="0 0 0 0 0.45  0 0 0 0 0.55  0 0 0 0 0.66  0 0 0 0.07 0"/></filter>
+    <filter id="noise-ember"><feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="7"/><feColorMatrix values="0 0 0 0 0.7  0 0 0 0 0.45  0 0 0 0 0.32  0 0 0 0.06 0"/></filter>
+    <filter id="noise-silk"><feTurbulence type="fractalNoise" baseFrequency="0.006" numOctaves="2" seed="4"/><feColorMatrix values="0 0 0 0 0.78  0 0 0 0 0.7  0 0 0 0 0.5  0 0 0 0.05 0"/></filter>
+    <filter id="noise-earth"><feTurbulence type="fractalNoise" baseFrequency="0.025" numOctaves="3" seed="6"/><feColorMatrix values="0 0 0 0 0.55  0 0 0 0 0.45  0 0 0 0 0.35  0 0 0 0.08 0"/></filter>
+    <filter id="noise-bone"><feTurbulence type="fractalNoise" baseFrequency="0.014" numOctaves="2" seed="11"/><feColorMatrix values="0 0 0 0 0.78  0 0 0 0 0.72  0 0 0 0 0.62  0 0 0 0.05 0"/></filter>
+    <linearGradient id="aurore-gradient" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="oklch(0.70 0.080 80)" stop-opacity="0"/>
+      <stop offset="50%" stop-color="oklch(0.70 0.080 80)" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="oklch(0.70 0.080 80)" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<!-- Fixed night sky (ash grain) -->
+<div class="sky">
+  <svg width="100%" height="100%" preserveAspectRatio="none" style="display:block">
+    <rect width="100%" height="100%" filter="url(#noise-ash)" />
+  </svg>
+</div>
+
+<div id="root"></div>
+
+<!-- Diagnostic fallback (caché par défaut, montré par le bootstrap si timeout 8s) -->
+<div id="__dream_boot_diag" class="__dream_boot_diag" role="alert">
+  <div class="diag-inner">
+    Le rêve ne s'éveille pas. Réessaie dans un instant.<br>
+    <span style="opacity:0.6; font-size:13px; font-style:normal; font-family:monospace;">
+      (chargement runtime échoué — réseau ou navigateur)
+    </span>
+    <br>
+    <button class="diag-btn" onclick="location.reload()">recommencer</button>
+  </div>
+</div>
+
+<!-- Env vars injected at build/runtime — voir /v12/env-public.js servi par /api/v12-env -->
+<script src="/api/v12-env" data-purpose="dream-public-env"></script>
+
+<!-- 2026-04-29 (Yeshua, FIX P0 mobile) — React UMD via jsDelivr.
+     Babel @standalone SUPPRIMÉ : les .jsx sont maintenant pré-transformés
+     en .js par `scripts/precompile-jsx.mjs` (script `prebuild`) et servis
+     depuis /v12-built/. Plus de compilation côté client = plus d'écran
+     noir mobile (gain 6-10s sur iPhone milieu de gamme, pas de tab crash). -->
+<script src="https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
+
+<!-- Supabase JS UMD (auth + storage) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.0/dist/umd/supabase.js" crossorigin="anonymous"></script>
+
+<!-- d3-force pour constellations vivantes (Voûte / Portrait / Cercle) -->
+<script src="https://cdn.jsdelivr.net/npm/d3-dispatch@3.0.1/dist/d3-dispatch.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-quadtree@3.0.1/dist/d3-quadtree.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-timer@3.0.1/dist/d3-timer.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-force@3.0.0/dist/d3-force.min.js" crossorigin="anonymous"></script>
+
+<!-- 2026-04-29 (Yeshua, FIX P0 mobile) — Tous les scripts ci-dessous pointent
+     sur les .js précompilés dans /v12-built/ (générés par scripts/precompile-jsx.mjs
+     au `prebuild`). Plus de `type="text/babel"` = plus de @babel/standalone côté
+     client = plus d'écran noir mobile. Ordre de chargement préservé à l'identique.
+     Si /v12-built/*.js absent en local : exécuter `npm run precompile:v12`. -->
+
+<!-- Auth + API bridge (must load BEFORE screens that use DreamAPI) -->
+<script src="/v12-built/auth.js"></script>
+<script src="/v12-built/api.js"></script>
+
+<!-- 2026-04-27 — Sprint P0.5 + P1.4 : Loading primitives partagées (Design §11.bis.19)
+     CHARGÉ EN PREMIER (juste après api.jsx) pour que <SkeletonShimmer>,
+     <LoadingHalo>, <OptimisticToast>, <SyncStatus> + window.dreamSyncBegin/End
+     soient dispo dans tous les screens et app.jsx. -->
+<script src="/v12-built/loading-primitives.js"></script>
+
+<!-- Shared + screens -->
+<!-- 2026-04-27 — Sprint P0.4 : Glossaire tap-long (Design §11.bis.18)
+     CHARGÉ EN PREMIER pour que window.TermDef soit dispo dans tous les screens. -->
+<script src="/v12-built/glossaire-dream.js"></script>
+<script src="/v12-built/screens-shared.js"></script>
+<script src="/v12-built/shared-v12.js"></script>
+<!-- 2026-04-29 — Overlays plein écran (Yeshua) :
+     ConstellationOverlay (nouvelle figure) + EchoPropheticOverlay (écho passé)
+     Doivent être chargés APRÈS shared-v12.jsx (n'utilisent pas window.X mais
+     dépendent de window.d3) et AVANT app.jsx (qui monte les Roots). -->
+<script src="/v12-built/screens-constellation-overlay.js"></script>
+<script src="/v12-built/screens-echo-prophetic-overlay.js"></script>
+<script src="/v12-built/screens-core.js"></script>
+<script src="/v12-built/screens-deep.js"></script>
+<script src="/v12-built/screens-cercle.js"></script>
+<script src="/v12-built/screens-anima.js"></script>
+<script src="/v12-built/screens-soma.js"></script>
+<script src="/v12-built/screens-meta.js"></script>
+<script src="/v12-built/screens-figure.js"></script>
+<script src="/v12-built/screens-v12-amplified.js"></script>
+<script src="/v12-built/screens-v12-vague3.js"></script>
+<script src="/v12-built/screens-v12-vague4.js"></script>
+<!-- 2026-04-25 — Refonte JOUR/NUIT (Bible §3.1.bis + Design §7.1 + §7.6) -->
+<script src="/v12-built/screens-journal-jour.js"></script>
+<script src="/v12-built/screens-portrait-narrative.js"></script>
+<!-- 2026-04-26 — Refonte B+D (Design §11.bis) : onboarding rituel 3 écrans -->
+<script src="/v12-built/screens-onboarding-rituel.js"></script>
+<!-- 2026-04-26 — Sous-app Lucid Dreaming (Bible §17, opt-in strict) -->
+<script src="/v12-built/screens-lucid.js"></script>
+<!-- 2026-04-26 — Sanctuaire Cauchemars & Deuil (Bible §17.3, MODE INTÉGRÉ + écran dédié) -->
+<script src="/v12-built/screens-nightmares.js"></script>
+<!-- 2026-04-26 (soir) — Pivot porte d'entrée RÊVE (Bible §1.6 + Design §11.bis.12) -->
+<script src="/v12-built/screens-dream-home.js"></script>
+<!-- 2026-04-26 (nuit profonde) — Architecture Quick vs Protocole Accompagné (Bible §3.11 + Design §11.bis.13) -->
+<script src="/v12-built/protocoles-catalog.js"></script>
+<script src="/v12-built/screens-protocoles.js"></script>
+<!-- 2026-04-27 — Sprint P0.2 : Explorer hub centralisé sous-apps (Design §11.bis.17) -->
+<script src="/v12-built/screens-explorer.js"></script>
+<!-- 2026-04-27 — Sprint P0.4 : Page "Comment ça marche" FAQ par persona (Design §11.bis.18)
+     CHARGÉ APRÈS explorer.jsx pour OVERRIDE le stub CommentScreen. -->
+<script src="/v12-built/screens-comment.js"></script>
+<!-- 2026-04-28 — Sprint A pivot Chat IA Dream personnel (Design §11.bis.20 + Technical §39) -->
+<script src="/v12-built/screens-dream-chat-home.js"></script>
+<!-- 2026-04-29 — Mon dictionnaire (moat épistémique, 4_LOG.md 2026-04-29)
+     CHARGÉ APRÈS dream-chat-home pour réutiliser window.MatterBubble. -->
+<script src="/v12-built/screens-personal-dictionary.js"></script>
+<!-- 2026-04-28 — Cercle SubApp 5 onglets (Design §11.bis.20.11 + Technical §39.5/39.6)
+     CHARGÉ APRÈS screens-cercle.jsx pour pouvoir wrapper / déléguer à CercleDetail legacy. -->
+<script src="/v12-built/screens-cercle-subapp.js"></script>
+<!-- 2026-04-28 (nuit) — Cercle SubApp DEEP : Synchronicités / Météo / Annales / Rituels / Voice (C.5-C.9)
+     CHARGÉ APRÈS screens-cercle-subapp.jsx car expose des window.Tab* utilisés par CercleSubApp. -->
+<script src="/v12-built/screens-cercle-subapp-deep.js"></script>
+<!-- 2026-04-29 — Big Dream Workflow 7 jours + Push humain (Feature 3) -->
+<script src="/v12-built/screens-bigdream.js"></script>
+<!-- 2026-04-29 — Recurring Re-entry UI (Feature 4 — fermeture boucle ouverte LOG 29/04) -->
+<script src="/v12-built/screens-recurring.js"></script>
+<script src="/v12-built/app.js"></script>
+
+</body>
+</html>

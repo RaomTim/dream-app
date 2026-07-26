@@ -1,0 +1,489 @@
+[
+  {
+    "id": "952cbe43-2e6a-4ffc-a86e-6f1686d6141c",
+    "title": "L'École des Cœurs en Compétition",
+    "len": 4714,
+    "status": "proposed",
+    "reason": null,
+    "confidence": 0.75,
+    "spans": [
+      {
+        "kind": "cadre",
+        "start": 0,
+        "end": 17,
+        "text": "Rêve du 24 avril."
+      },
+      {
+        "kind": "cadre",
+        "start": 18,
+        "end": 78,
+        "text": "Bon déjà j'ai bien dormi, ça fait du bien, il est 11 heures."
+      },
+      {
+        "kind": "cadre",
+        "start": 662,
+        "end": 760,
+        "text": "J'espère que vous avez aimé cette vidéo, si c'est le cas n'hésitez pas à vous abonner à la chaîne,"
+      },
+      {
+        "kind": "lecture",
+        "start": 4385,
+        "end": 4470,
+        "text": "En tout cas, du coup, ce que ça montre, c'est des jeux, des aventures, école, course."
+      },
+      {
+        "kind": "lecture",
+        "start": 4471,
+        "end": 4518,
+        "text": "Il y a vraiment cet aspect de jeu qui est fort."
+      },
+      {
+        "kind": "lecture",
+        "start": 4519,
+        "end": 4611,
+        "text": "Hier, je me suis endormi avec l'intention d'avoir quelles histoires j'avais envie de conter."
+      },
+      {
+        "kind": "lecture",
+        "start": 4612,
+        "end": 4692,
+        "text": "Peut-être que plus qu'une histoire, c'est un jeu en fait. Des jeux et une école."
+      },
+      {
+        "kind": "cadre",
+        "start": 4693,
+        "end": 4713,
+        "text": "Sous-titrage ST' 501"
+      }
+    ],
+    "ratio_cadre": 0.041,
+    "ratio_lecture": 0.064,
+    "recit_len": 4514,
+    "recit_only_len": 4206
+  },
+  {
+    "id": "13a8cce5-5452-47eb-9ada-198f8351ce0a",
+    "title": "# Les militaires et le panda blanc recherché",
+    "len": 3509,
+    "status": "proposed",
+    "reason": null,
+    "confidence": 0.75,
+    "spans": [
+      {
+        "kind": "cadre",
+        "start": 0,
+        "end": 105,
+        "text": "Bon, rêve du 4 avril, parce que c'est important que je prenne le temps de les enregistrer tous les jours."
+      },
+      {
+        "kind": "lecture",
+        "start": 2484,
+        "end": 2694,
+        "text": "C'est intéressant, étant donné que je me suis endormi hier avec l'intention, avec la question de quelles étaient mes couleurs. Je me retrouve avec ce petit sens de passeport. Tout le monde a un passeport blanc."
+      },
+      {
+        "kind": "lecture",
+        "start": 2751,
+        "end": 2810,
+        "text": "Est-ce que j'ai fait quelque chose de mal ? Je ne sais pas."
+      },
+      {
+        "kind": "lecture",
+        "start": 3023,
+        "end": 3143,
+        "text": "À quels endroits est-ce que je suis encore compétitif ? Je pense que c'est quelque chose de très intéressant d'observer."
+      },
+      {
+        "kind": "lecture",
+        "start": 3144,
+        "end": 3474,
+        "text": "Parce que c'est exactement la seule chose qui me sépare des autres. Qui me sépare de rencontrer des maîtres. Qui me sépare de me sentir naturel face à des gens qui m'inspirent. C'est les racines de la compétition. Et j'aimerais les déraciner. Vraiment. Parce que ce n'est pas le jeu que mon âme a envie de jouer. Certainement pas."
+      }
+    ],
+    "ratio_cadre": 0.03,
+    "ratio_lecture": 0.205,
+    "recit_len": 3402,
+    "recit_only_len": 2679
+  },
+  {
+    "id": "bc6671a9-ce08-4723-a617-1fe6c79f2c7d",
+    "title": "Les murs qui s'effondrent silencieusement",
+    "len": 12185,
+    "status": "proposed",
+    "reason": null,
+    "confidence": 0.45,
+    "spans": [
+      {
+        "kind": "cadre",
+        "start": 0,
+        "end": 461,
+        "text": "Petit enregistrement du rêve du 1er juillet, pas qu'il soit vraiment facile à enregistrer ou intéressant, mais parce que j'ai vraiment envie de prendre le réflexe d'ailleurs aujourd'hui j'ai une petite mission, j'aimerais vraiment me trouver un téléphone portable spécialement pour mes rêves, je téléchargerais des applications, je pourrais faire des vidéos en selfie là, mettre une carte, mettre un petit micro, pour avoir de la bête de qualité, et voilà quoi."
+      },
+      {
+        "kind": "lecture",
+        "start": 10674,
+        "end": 10794,
+        "text": "c'est pour prendre clarté le niveau de ma capacité à présenter mon business, mes vues, ma société, et ma fonction dedans"
+      },
+      {
+        "kind": "lecture",
+        "start": 11306,
+        "end": 11401,
+        "text": "le premier rêve, la fidélité, la loyauté, la transparence, l'intégrité, l'honnêteté, clairement"
+      },
+      {
+        "kind": "lecture",
+        "start": 11619,
+        "end": 11757,
+        "text": "j'imagine que j'aurais mieux fait de ne pas m'en mêler, et quand je me suis mêlé, même si j'ai appuyé sur le frein à main, ça n'allait pas"
+      },
+      {
+        "kind": "lecture",
+        "start": 11974,
+        "end": 12119,
+        "text": "je pense que ça, ce n'est pas un bon combo, quand Jacques me conduit, je me conduis, et que lui, ça contient, je pense qu'il y a un truc comme ça"
+      }
+    ],
+    "ratio_cadre": 0.038,
+    "ratio_lecture": 0.041,
+    "recit_len": 11722,
+    "recit_only_len": 11224
+  },
+  {
+    "id": "34d34a9c-2d68-43c7-8460-f67fd19ba53e",
+    "title": "L'épée de Jade et la lumière retrouvée",
+    "len": 9567,
+    "status": "proposed",
+    "reason": null,
+    "confidence": 0.6,
+    "spans": [
+      {
+        "kind": "cadre",
+        "start": 0,
+        "end": 112,
+        "text": "Reprise de l'enregistrement de mes rêves en ce, mais en ce 2 août 2023, pas en mauge, dans la salle de pratique."
+      },
+      {
+        "kind": "lecture",
+        "start": 1423,
+        "end": 1606,
+        "text": "Quelque part ça c'est lié à la sexualité, je ne sais pas pourquoi. Mais il y a quelque chose lié à la sexualité et l'ascension qui est tout à fait possible. Peut-être même nécessaire."
+      },
+      {
+        "kind": "lecture",
+        "start": 2875,
+        "end": 3112,
+        "text": "Et moi je l'ai interprété au réveil en tout cas comme étant d'accepter que mon énergie masculine, ma puissance, elle s'enfonce dans les profondeurs de la terre, donc dans mes trois premiers chakras du bas, ensuite en dessous de mon cœur."
+      },
+      {
+        "kind": "lecture",
+        "start": 4929,
+        "end": 5053,
+        "text": "Quelque part je sens que j'étais challengé à n'imposer absolument aucun jugement, à l'accepter exactement telle qu'elle est."
+      },
+      {
+        "kind": "lecture",
+        "start": 6722,
+        "end": 6836,
+        "text": "Voilà, ce rêve, ça me donne un peu envie de, déjà, clarifier mes fantasmes. Déjà, j'ai fait un processus ce matin."
+      },
+      {
+        "kind": "lecture",
+        "start": 8849,
+        "end": 8947,
+        "text": "Ce qui est ça. Du coup, je pense que je vais écrire sur Things. J'ai des intentions, des demandes."
+      }
+    ],
+    "ratio_cadre": 0.012,
+    "ratio_lecture": 0.079,
+    "recit_len": 9453,
+    "recit_only_len": 8692
+  },
+  {
+    "id": "1df61b80-7f1c-4b24-8968-85bf8048fe87",
+    "title": "Le Temple Vide de la Montagne",
+    "len": 3237,
+    "status": "proposed",
+    "reason": null,
+    "confidence": 0.75,
+    "spans": [
+      {
+        "kind": "cadre",
+        "start": 0,
+        "end": 86,
+        "text": "J'ai endormi, j'ai fait une super grasse mat' et là normalement je raconte mes règles."
+      },
+      {
+        "kind": "cadre",
+        "start": 87,
+        "end": 199,
+        "text": "Il est 11h, waouh, incroyable, ça fait un temps que j'avais pas fait ça. Sur l'un de mes derniers jours en Inde."
+      },
+      {
+        "kind": "lecture",
+        "start": 856,
+        "end": 897,
+        "text": "Je sens qu'on avait des projets en cours."
+      },
+      {
+        "kind": "lecture",
+        "start": 2455,
+        "end": 2614,
+        "text": "C'était stylé parce que je pouvais la trouver depuis n'importe où. Hyper stylé. Juste en écoutant mon coeur, en me faisant confiance. Ça c'est une belle image."
+      },
+      {
+        "kind": "lecture",
+        "start": 2615,
+        "end": 2757,
+        "text": "Donc ouais, c'est rêve de trouver la communauté, tout ça, d'aller un peu communautaire, savoir qui je laisse entrer, qui je laisse pas entrer."
+      },
+      {
+        "kind": "lecture",
+        "start": 2758,
+        "end": 3018,
+        "text": "Je pense qu'il y a des trucs qui se préparent au niveau de mon leadership, et du fait d'organiser des événements, et aussi du fait d'acheter une terre plus tard, et aussi du fait d'ouvrir les portes de ma maison, d'une façon consciente. Tout ça qui se prépare."
+      }
+    ],
+    "ratio_cadre": 0.061,
+    "ratio_lecture": 0.186,
+    "recit_len": 3036,
+    "recit_only_len": 2430
+  },
+  {
+    "id": "5b32b168-a6de-4310-9b1e-e516e0774318",
+    "title": "Les fantômes du parking et les retrouvailles perdues",
+    "len": 9945,
+    "status": "proposed",
+    "reason": null,
+    "confidence": 0.65,
+    "spans": [
+      {
+        "kind": "cadre",
+        "start": 0,
+        "end": 15,
+        "text": "Rêve du 8 août,"
+      },
+      {
+        "kind": "lecture",
+        "start": 2693,
+        "end": 2871,
+        "text": "Je crois qu'il y avait son mec qui apparaissait derrière elle et je faisais comprendre à son mec là, télépathiquement, qu'il n'avait pas à s'inquiéter parce que j'étais ma fille."
+      },
+      {
+        "kind": "lecture",
+        "start": 3647,
+        "end": 3792,
+        "text": "Après je sentais que je commençais à devenir un peu self-conscious une fois qu'ils avaient répondu. Il y avait peut-être un peu d'ego qui venait."
+      },
+      {
+        "kind": "lecture",
+        "start": 3793,
+        "end": 4145,
+        "text": "Et du coup j'ai recommencé à chanter, je pensais que c'était un autre chant. Un autre cri qui était dans un autre chant, qui était un tout petit peu moins spontané quelque part. Un peu plus dans le jeu, mais un peu plus dans l'ego aussi. Et du coup, je sens que je perdais mon flow et que je chantais un petit peu moins bien. C'était un peu moins beau."
+      },
+      {
+        "kind": "lecture",
+        "start": 8049,
+        "end": 8510,
+        "text": "Quand je me suis réveillé, je me suis dit que ça voulait dire que... Il fallait que je travaille ma connexion, mon pouvoir d'invocateur. Que je recommence à me connecter à mon travail de chamane. Mon travail de chamane géobiologue qui connaît mes capacités spirituelles. Qui connaît mes alliés spirituels. Qui connaît les sorts que je peux lancer, les attaques que je peux faire. Qui a une conscience de ses capacités magiques et d'invocation. Un truc comme ça."
+      },
+      {
+        "kind": "lecture",
+        "start": 8631,
+        "end": 8717,
+        "text": "Voilà ce que je peux en dire. Il y a beaucoup d'autres choses mais j'ai un peu de mal."
+      },
+      {
+        "kind": "lecture",
+        "start": 8718,
+        "end": 8807,
+        "text": "Je me réveille avec l'envie d'être autant un guerrier physique là. Un guerrier spirituel."
+      },
+      {
+        "kind": "lecture",
+        "start": 9623,
+        "end": 9814,
+        "text": "Maintenant que je continue de récupérer mon intégrité en tant qu'humain. Je suis bien travaillé, je fais bien des trucs déjà là. Voilà, je sens qu'il y a une nouvelle page qui s'ouvre. Voilà."
+      }
+    ],
+    "ratio_cadre": 0.002,
+    "ratio_lecture": 0.151,
+    "recit_len": 9928,
+    "recit_only_len": 8419
+  },
+  {
+    "id": "fb3a9ec1-531f-4077-b81f-ebeadd1d6a6a",
+    "title": "L'envol lucide entre deux mondes",
+    "len": 1279,
+    "status": "skipped",
+    "reason": "over_marked",
+    "confidence": 0.4,
+    "spans": [],
+    "ratio_cadre": 0,
+    "ratio_lecture": 0,
+    "recit_len": 1279,
+    "recit_only_len": 1279
+  },
+  {
+    "id": "60b53989-6ffb-4dfc-940a-ecc2997412c9",
+    "title": "Les masques tombent à Hellfest",
+    "len": 6243,
+    "status": "proposed",
+    "reason": null,
+    "confidence": 0.62,
+    "spans": [
+      {
+        "kind": "cadre",
+        "start": 0,
+        "end": 29,
+        "text": "Alors, cette nuit, mes rêves,"
+      },
+      {
+        "kind": "lecture",
+        "start": 1249,
+        "end": 1305,
+        "text": "Je sens vraiment que c'était une vraie école. Qui sait ?"
+      },
+      {
+        "kind": "lecture",
+        "start": 1306,
+        "end": 1416,
+        "text": "Curieux d'avoir des messages dans l'autre sens, peut-être. De recevoir des messages du futur. Ça serait stylé."
+      },
+      {
+        "kind": "lecture",
+        "start": 1417,
+        "end": 1573,
+        "text": "Mais voilà, en tout cas, le grand éloquent à l'intérieur de moi... C'est vraiment quelque chose. Faire des speechs, c'est vraiment mon fort. C'est vraiment."
+      },
+      {
+        "kind": "lecture",
+        "start": 1576,
+        "end": 1654,
+        "text": "Faire des speechs, c'est vraiment mon fort. Ça m'arrive assez souvent en rêve."
+      },
+      {
+        "kind": "lecture",
+        "start": 2874,
+        "end": 3183,
+        "text": "Je sais pas trop ce que ça veut dire. Je me demande, je me demande. Hum, hum, hum. Est-ce que c'est un encouragement ? Encore plus. Qu'il me plaît. À me rendre compte que je peux réaliser tous mes rêves d'enfant. En faisant du business. Est-ce que c'est aussi une invitation ? À pas être greedy ? Je sais pas."
+      },
+      {
+        "kind": "lecture",
+        "start": 3235,
+        "end": 3481,
+        "text": "Après, quand en tant qu'adulte... Je pouvais réaliser tous mes rêves d'enfant. C'est pas pour autant que... Que je voulais la même chose que quand j'étais enfant. Que c'est vraiment... Forcément ça que je dois faire. Mais voilà, je peux le faire."
+      },
+      {
+        "kind": "lecture",
+        "start": 5573,
+        "end": 5859,
+        "text": "Et quand je me suis réveillé, j'ai ressenti que peut-être, quelque part, c'était une invitation à... Peut-être que j'avais déjà reçu cet honneur à un certain niveau. Et que, quelque part, ça n'attendait que moi. Pour ouvrir la danse, pour ouvrir le festival, pour lancer les festivités."
+      }
+    ],
+    "ratio_cadre": 0.005,
+    "ratio_lecture": 0.199,
+    "recit_len": 6212,
+    "recit_only_len": 4965
+  },
+  {
+    "id": "a2240f4b-6b15-420a-bf50-11997954ec7a",
+    "title": "Les chaînes invisibles de l'amour ancestral",
+    "len": 6565,
+    "status": "proposed",
+    "reason": null,
+    "confidence": 0.45,
+    "spans": [
+      {
+        "kind": "lecture",
+        "start": 0,
+        "end": 124,
+        "text": "Je me suis réveillé en sentant qu'il fallait aller prendre soin de mes ancêtres et en particulier des dernières générations."
+      },
+      {
+        "kind": "cadre",
+        "start": 125,
+        "end": 218,
+        "text": "Du coup, je vais appeler ce matin cette thérapeute qui travaille avec les ancêtres et puis..."
+      },
+      {
+        "kind": "lecture",
+        "start": 219,
+        "end": 304,
+        "text": "C'est tellement beau comme on s'aime, c'est tellement tellement beau comme on s'aime."
+      },
+      {
+        "kind": "lecture",
+        "start": 305,
+        "end": 371,
+        "text": "Je vais vraiment vraiment avoir envie de travailler cette présence"
+      },
+      {
+        "kind": "lecture",
+        "start": 3503,
+        "end": 3573,
+        "text": "Ça m'a inspiré de vivre en ville, dans des belles villes occidentales."
+      },
+      {
+        "kind": "lecture",
+        "start": 4538,
+        "end": 4693,
+        "text": "J'aimerais bien que ça se passe en 2024, l'aspect vente dans des magasins et armée d'emmassadeurs. Moi, je ne me sens pas pressé là-dessus. Et voilà, quoi."
+      },
+      {
+        "kind": "lecture",
+        "start": 6055,
+        "end": 6116,
+        "text": "Ça me parle très bien. C'est tout ce que j'ai envie de faire."
+      },
+      {
+        "kind": "lecture",
+        "start": 6362,
+        "end": 6447,
+        "text": "Ce que je veux offrir à ma femme, c'est de la présence. La pure and divided presence."
+      }
+    ],
+    "ratio_cadre": 0.014,
+    "ratio_lecture": 0.098,
+    "recit_len": 6470,
+    "recit_only_len": 5817
+  },
+  {
+    "id": "eb570de6-98ce-41a1-8cbb-ed29d78ff1f5",
+    "title": "Les Voyageurs Engloutis dans la Mémoire",
+    "len": 2794,
+    "status": "proposed",
+    "reason": null,
+    "confidence": 0.45,
+    "spans": [
+      {
+        "kind": "cadre",
+        "start": 0,
+        "end": 75,
+        "text": "Eh bien... J'ai bien rêvé cette nuit. Ouais, j'ai fait des rêves puissants."
+      },
+      {
+        "kind": "lecture",
+        "start": 1118,
+        "end": 1147,
+        "text": "C'était stylé. C'était stylé."
+      },
+      {
+        "kind": "lecture",
+        "start": 2276,
+        "end": 2310,
+        "text": "On va grandir dans cette violence."
+      },
+      {
+        "kind": "cadre",
+        "start": 2743,
+        "end": 2793,
+        "text": "Sous-titres réalisés par la communauté d'Amara.org"
+      }
+    ],
+    "ratio_cadre": 0.045,
+    "ratio_lecture": 0.023,
+    "recit_len": 2666,
+    "recit_only_len": 2601
+  }
+]

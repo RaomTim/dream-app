@@ -1,0 +1,14 @@
+-- =============================================================================
+-- MIGRATION : Cercles V1 enrichis
+-- File: 20260425_130100_circles_v1_extended.sql
+-- Author: Yeshua — Chantier 5
+-- Applied via MCP 2026-04-25
+-- NOTE: legacy circle_members.user_id is TEXT → cast partout dans RLS
+-- =============================================================================
+
+-- ALTER circles + circle_members + 4 nouvelles tables :
+-- kairos_circle_optin, kairos_circle_shared, circle_restitutions,
+-- circle_restitution_reactions
+-- + RPCs request_circle_restitution, get_circle_patterns
+--
+-- Voir migration appliquée via MCP pour le code complet.

@@ -1,0 +1,441 @@
+{
+  "guides": {
+    "raconter": {
+      "name": "Raconter en entier",
+      "phrase": "Des questions simples pour retrouver les détails qui manquent.",
+      "duration": "~5 min",
+      "intro": "On reprend ton rêve ensemble, tranquillement. Quelques questions pour en retrouver les morceaux.",
+      "steps": {
+        "film": {
+          "q": "Raconte-moi ce rêve, comme un film. Prends ton temps.",
+          "placeholder": "j'étais dans une maison que je ne connais pas…"
+        },
+        "details": {
+          "q": "Quels détails te reviennent nets ? Une couleur, un bruit, une odeur ?",
+          "placeholder": "la lumière était orange…"
+        },
+        "corps": {
+          "q": "Ferme les yeux un instant. Ce rêve, ça te fait quoi dans le corps ?",
+          "hint": "pas besoin de mettre un nom dessus — juste la sensation",
+          "placeholder": "un poids dans la poitrine…"
+        },
+        "reel": {
+          "q": "Est-ce que ça pourrait être réel ? Ce lieu, ces gens, tu les connais ?",
+          "placeholder": "la maison ressemble à celle de…"
+        },
+        "rappelle": {
+          "q": "Ça te rappelle quelque chose ? Un autre rêve, un moment récent ?",
+          "placeholder": "hier, au travail…"
+        },
+        "garde": {
+          "q": "De tout ça, qu'est-ce que tu veux garder pour aujourd'hui ?",
+          "placeholder": "l'envie de…"
+        }
+      }
+    },
+    "retour": {
+      "name": "Retourner dans le rêve",
+      "phrase": "Fermer les yeux et revisiter ton rêve, éveillé, pour voir la suite.",
+      "duration": "~6 min",
+      "intro": "Les yeux fermés, tu vas retourner dans ton rêve — juste pour voir ce qui s'y passe si tu restes un peu.",
+      "steps": {
+        "installe": {
+          "q": "Installe-toi. Ferme les yeux, quelques respirations. Laisse la journée partir."
+        },
+        "revois": {
+          "q": "Revois l'image la plus forte du rêve. Juste elle. Laisse-la revenir."
+        },
+        "entre": {
+          "q": "Entre dans l'image, les yeux fermés. Regarde autour. Laisse la suite venir, sans forcer."
+        },
+        "depose": {
+          "q": "Quand ça s'arrête tout seul, reviens doucement. Écris ce qui est venu — même trois mots.",
+          "placeholder": "ce que j'ai vu, senti…"
+        }
+      }
+    },
+    "geste": {
+      "name": "Un geste concret",
+      "phrase": "Prolonger ton rêve par une petite action réelle : dessiner, noter, poser.",
+      "duration": "~3 min",
+      "intro": "Ton rêve t'a marqué. On va lui donner une suite dans la vraie vie — une petite chose, faisable aujourd'hui.",
+      "steps": {
+        "envie": {
+          "q": "Ce rêve, qu'est-ce qu'il te donne envie de faire, là, en vrai ?",
+          "placeholder": "écrire à quelqu'un, dessiner, marcher…"
+        },
+        "choix": {
+          "q": "Choisis une petite action, faisable aujourd'hui. La plus simple.",
+          "hint": "dessiner, écrire un mot, appeler, poser un objet quelque part",
+          "placeholder": "je vais…"
+        },
+        "quand": {
+          "q": "Tu le fais quand ? Note-le, comme ça c'est réel.",
+          "placeholder": "ce soir, après le dîner…"
+        }
+      }
+    },
+    "intention": {
+      "name": "Une intention pour la nuit",
+      "phrase": "Avant de dormir : poser une question à ta nuit.",
+      "duration": "~5 min",
+      "intro": "Avant de t'endormir, on prépare la nuit. Tu vas confier une question à ton sommeil.",
+      "steps": {
+        "journee": {
+          "q": "Ta journée en une phrase ? Rapide, pas besoin de bien dire.",
+          "placeholder": "longue, douce, bizarre…"
+        },
+        "question": {
+          "q": "Une question que tu aimerais poser à ta nuit ?",
+          "placeholder": "qu'est-ce que je dois savoir sur…"
+        },
+        "image": {
+          "q": "Une image qui pourrait t'accompagner en t'endormant ?",
+          "hint": "une porte, un visage, une lumière — ce qui vient",
+          "placeholder": "une porte bleue…"
+        },
+        "confie": {
+          "q": "Répète ta question tout bas, une dernière fois. Puis laisse-la partir."
+        }
+      }
+    },
+    "rendormir": {
+      "name": "Se rendormir en douceur",
+      "phrase": "Après un mauvais rêve ou un réveil brutal : revenir au calme.",
+      "duration": "~5 min",
+      "intro": "Tu t'es réveillé secoué. C'est ok. On va revenir au calme, doucement, ensemble.",
+      "steps": {
+        "ici": {
+          "q": "Sens le lit sous toi, la couverture, l'air sur ta peau. Tu es là, en sécurité."
+        },
+        "respire": {
+          "q": "Respire lentement. Inspire… retiens un instant… souffle plus long. Encore deux fois."
+        },
+        "main": {
+          "q": "Le mauvais rêve n'est plus là. Pose une main sur ta poitrine si ça aide."
+        },
+        "lieu": {
+          "q": "Pense à un endroit où tu te sens bien. Imagine-le autour de toi, en détail.",
+          "placeholder": "une plage, une chambre d'enfant… (ou garde-le pour toi)"
+        },
+        "laisse": {
+          "q": "Laisse tes yeux se fermer. Rien à faire de plus. Le sommeil revient tout seul."
+        }
+      }
+    },
+    "relire": {
+      "name": "Relire sa journée",
+      "phrase": "5 minutes le soir pour repasser le film du jour.",
+      "duration": "~5 min",
+      "intro": "On repasse le film de ta journée, tranquillement, avant la nuit.",
+      "steps": {
+        "passe": {
+          "q": "Qu'est-ce qui s'est passé aujourd'hui ? Une rencontre, un moment, une question ?",
+          "placeholder": "ce matin…"
+        },
+        "corps": {
+          "q": "Comment ton corps porte cette journée ? Où c'est tendu, où c'est calme ?",
+          "placeholder": "les épaules serrées…"
+        },
+        "echo": {
+          "q": "Un moment d'aujourd'hui fait-il écho à un rêve récent ?",
+          "placeholder": "cette personne croisée…"
+        },
+        "coinc": {
+          "q": "Y a-t-il eu une drôle de coïncidence aujourd'hui ?",
+          "placeholder": "j'ai pensé à… et puis…"
+        },
+        "endors": {
+          "q": "Avec quoi tu aimerais t'endormir ce soir ? Une image, un mot ?",
+          "placeholder": "le calme, une couleur…"
+        }
+      }
+    },
+    "ecouter-corps": {
+      "name": "Écouter son corps",
+      "phrase": "Où ça se loge dans ton corps, et qu'est-ce que ça demande.",
+      "duration": "~6 min",
+      "intro": "On va écouter ton corps un moment. Il sait souvent des choses avant la tête.",
+      "steps": {
+        "ou": {
+          "q": "Ce rêve, ou ce moment, où est-ce que tu le sens dans ton corps ?",
+          "hint": "gorge, ventre, poitrine, épaules…",
+          "placeholder": "dans le ventre…"
+        },
+        "quoi": {
+          "q": "Cette sensation, c'est quoi ? Chaud, froid, serré, léger, lourd ?",
+          "placeholder": "serré et chaud…"
+        },
+        "mot": {
+          "q": "Si tu devais mettre un seul mot dessus, ce serait lequel ?",
+          "placeholder": "tendu, doux, vibrant…"
+        },
+        "demande": {
+          "q": "Reste avec elle un instant. Qu'est-ce qu'elle voudrait, cette sensation ?",
+          "hint": "attends quelques secondes en silence, puis écris ce qui vient",
+          "placeholder": "qu'on la laisse tranquille, qu'on l'écoute…"
+        }
+      }
+    },
+    "parler-image": {
+      "name": "Parler à une image",
+      "phrase": "Choisir une image du rêve et la laisser répondre.",
+      "duration": "~6 min",
+      "intro": "On choisit une image de ton rêve et on la laisse te parler. Oui, ça marche mieux qu'on croit.",
+      "steps": {
+        "choix": {
+          "q": "Choisis une image de ton rêve. La première qui vient. Laquelle ?",
+          "placeholder": "la porte, le chien, la rivière…"
+        },
+        "decris": {
+          "q": "Décris-la, comme si je ne la voyais pas. Couleurs, forme, détails.",
+          "placeholder": "elle est grande, sombre, elle bouge un peu…"
+        },
+        "dit": {
+          "q": "Regarde-la un moment. Si elle pouvait parler, qu'est-ce qu'elle te dirait ?",
+          "hint": "laisse venir, même si ça semble inventé",
+          "placeholder": "elle me dirait…"
+        },
+        "reponds": {
+          "q": "Et toi, qu'est-ce que tu as envie de lui répondre ?",
+          "placeholder": "je lui dirais…"
+        }
+      }
+    },
+    "coincidence": {
+      "name": "Raconter la coïncidence",
+      "phrase": "Dérouler ce qui s'est passé, dans l'ordre — souvent ça éclaire tout seul.",
+      "duration": "~5 min",
+      "intro": "On déroule cette coïncidence, du début à la fin. Souvent, la raconter suffit à l'éclairer.",
+      "steps": {
+        "ordre": {
+          "q": "Raconte ce qui s'est passé. Dans l'ordre, du début à la fin.",
+          "placeholder": "d'abord… puis…"
+        },
+        "avant": {
+          "q": "Qu'est-ce que tu étais en train de faire, ou de penser, juste avant ?",
+          "placeholder": "je pensais à…"
+        },
+        "touche": {
+          "q": "Qu'est-ce que ça a touché en toi, sur le moment ?",
+          "placeholder": "un frisson, une évidence…"
+        },
+        "histoire": {
+          "q": "Si tu racontes tout ça comme une seule histoire, ça donne quoi ?",
+          "placeholder": "en une phrase…"
+        }
+      }
+    },
+    "intuition": {
+      "name": "Attraper une intuition",
+      "phrase": "Noter ce qui vient de te traverser avant que ça s'envole.",
+      "duration": "~3 min",
+      "intro": "Quelque chose vient de te traverser. On l'attrape vite, avant que ça file.",
+      "steps": {
+        "note": {
+          "q": "Note vite ce qui vient de te traverser. Sans chercher les bons mots.",
+          "placeholder": "…"
+        },
+        "contexte": {
+          "q": "Tu étais où, tu faisais quoi quand c'est arrivé ?",
+          "placeholder": "sous la douche, en marchant…"
+        },
+        "ressemble": {
+          "q": "Ça ressemblait à quoi ? Une image, une phrase, une sensation ?",
+          "placeholder": "comme une petite voix qui…"
+        }
+      }
+    }
+  },
+  "info": {
+    "groups": {
+      "words": { "title": "Les mots de Dream" },
+      "how": { "title": "Comment ça marche" },
+      "guides": { "title": "Les guides" }
+    },
+    "sheets": {
+      "kairos": {
+        "term": "Kaïros",
+        "bubble": "Un kaïros, c’est un moment qui compte — pas n’importe quel instant, celui qui te marque.",
+        "body": [
+          "Dans l’app, on écrit « moment ». Mais son vrai nom, c’est kaïros.",
+          "Un kaïros, ce n’est pas l’heure qu’il est. C’est un instant qui a du poids : un rêve fort, une coïncidence troublante, un frisson, une intuition qui arrive d’un coup.",
+          "On garde ce mot pour une raison simple. La plupart de nos instants filent sans qu’on les remarque. Quelques-uns, non. Ceux-là méritent qu’on s’arrête.",
+          "Chaque fois que tu écris quelque chose dans Dream, tu attrapes un kaïros avant qu’il s’efface. Avec le temps, ils forment une carte de ce qui te touche vraiment."
+        ],
+        "source": "D’où ça vient : les anciens Grecs avaient deux mots pour le temps. Chronos, le temps qui passe, minute après minute. Et kaïros, le moment juste — celui qu’il ne faut pas laisser filer."
+      },
+      "intuition": {
+        "term": "Intuition",
+        "bubble": "Une intuition, c’est une idée ou une image qui arrive toute seule, sans que tu l’aies cherchée.",
+        "body": [
+          "Une intuition, c’est une idée ou une image qui arrive toute seule. Tu ne l’as pas cherchée : elle est là.",
+          "Sous la douche, en marchant, en conduisant. Souvent elle apporte une réponse — parfois une question.",
+          "Les artistes et les scientifiques racontent que leurs meilleures idées arrivent comme ça, quand ils ne forcent pas.",
+          "Dream te propose juste de les noter. Avec le recul, tu verras lesquelles disaient vrai."
+        ],
+        "source": "D’où ça vient : les rêveurs de toutes les époques ont observé que l’esprit continue de travailler quand on ne le regarde pas. (Pour les curieux : Gaston Bachelard a écrit de belles pages sur la rêverie.)"
+      },
+      "signe": {
+        "term": "Signe",
+        "bubble": "Un signe, c’est quelque chose de banal qui, pour toi, prend soudain un sens particulier.",
+        "body": [
+          "Un oiseau qui se pose, un mot qui revient trois fois dans la journée, une chanson au bon moment.",
+          "Rien de magique en soi. Ce qui compte, c’est que ça te parle, à toi, maintenant.",
+          "Dream ne te dira jamais « ça veut dire ceci ». Un signe n’a pas de sens fixe : il a le sens que tu lui donnes, au moment où tu le remarques.",
+          "Le noter, c’est garder une trace de ces instants où le monde a eu l’air de te faire un clin d’œil. En les relisant plus tard, tu verras parfois un fil que tu n’avais pas vu sur le coup."
+        ],
+        "source": "D’où ça vient : dans presque toutes les cultures, les gens ont prêté attention aux signes. Ce n’est pas croire n’importe quoi — c’est rester attentif à ce qui nous touche."
+      },
+      "coincidence": {
+        "term": "Coïncidence",
+        "bubble": "Une coïncidence, c’est deux choses qui arrivent ensemble et qui, mises côte à côte, semblent avoir un sens.",
+        "body": [
+          "Tu penses à quelqu’un, il t’appelle. Tu rêves d’un lieu, tu le croises le lendemain.",
+          "Le plus souvent, c’est le hasard. Mais certaines coïncidences nous restent, parce qu’elles tombent pile à un moment où on se posait une question.",
+          "Dream ne prétend pas qu’une coïncidence est un message. Il te propose juste de la raconter dans l’ordre où elle s’est passée — souvent, ça éclaire tout seul ce qu’elle venait remuer en toi."
+        ],
+        "source": "D’où ça vient : un psychiatre suisse, Carl Jung, a donné un nom à ces coïncidences qui semblent porter un sens : la « synchronicité ». Il ne disait pas qu’elles étaient magiques, mais qu’elles valaient la peine d’être regardées."
+      },
+      "frisson": {
+        "term": "Frisson",
+        "bubble": "Un frisson, c’est cette réaction du corps quand quelque chose te touche pile juste.",
+        "body": [
+          "La chair de poule devant une musique, un souvenir qui serre la gorge, une phrase qui te traverse.",
+          "Le corps réagit souvent avant les mots. Le frisson, c’est un peu son « oui, ça, c’est important ».",
+          "Beaucoup de gens racontent ce frisson au moment où une chose sonne vraie pour eux.",
+          "Dream te propose de noter quand ça arrive, et devant quoi. Avec le temps, tu repères ce qui te met en mouvement — ce qui compte vraiment pour toi."
+        ],
+        "source": "D’où ça vient : depuis longtemps, on observe que le corps sait des choses avant la tête. Écouter ses frissons, c’est écouter cette part-là."
+      },
+      "sieste": {
+        "term": "Sieste",
+        "bubble": "La sieste, ce n’est pas que du repos : c’est un bon moment pour attraper des images qui passent.",
+        "body": [
+          "Juste avant de t’endormir, ou juste au réveil, l’esprit produit des images étranges et libres, entre le jour et le rêve.",
+          "Ces images filent vite. Une courte sieste est une belle occasion de les cueillir.",
+          "Le peintre Salvador Dalí faisait de très courtes siestes pour attraper ces images d’entre-deux, avant de plonger dans le sommeil profond.",
+          "Si tu écris un moment juste après une sieste, dis-le à Dream : ces images-là sont souvent parmi les plus surprenantes."
+        ],
+        "source": "D’où ça vient : cet état d’entre-deux, entre l’éveil et le sommeil, porte un nom : l’hypnagogie. Beaucoup de créateurs l’ont utilisé exprès pour trouver des idées neuves."
+      },
+      "how-interpret": {
+        "term": "Comment Dream interprète",
+        "bubble": "Plus tu dis ce que tu vois, plus Dream apprend TON langage — et plus ses lectures te ressemblent.",
+        "body": [
+          "Dream commence toujours par toi. Avant de proposer quoi que ce soit, il te demande ce que tu vois, toi, dans ton rêve.",
+          "Ta lecture compte le plus. C’est elle que Dream garde en premier.",
+          "Ensuite, et seulement ensuite, il propose la sienne : ce qui ressort, un lien possible avec ta vie, une question pour finir. Jamais un verdict. Toujours « voici une piste », pas « voilà ce que ça veut dire ».",
+          "Dream ne lit pas dans un dictionnaire des rêves. L’eau, pour toi, ne veut pas dire la même chose que pour un autre. C’est TON sens qui se construit ici, rêve après rêve."
+        ],
+        "source": "D’où ça vient : beaucoup de gens qui accompagnent les rêves partagent la même règle — celui qui a rêvé reste le seul maître du sens. Le rôle de l’autre, c’est d’aider à chercher, pas de trancher."
+      },
+      "wall-anon": {
+        "term": "Le Mur et l’anonymat",
+        "bubble": "Sur le Mur, personne ne saura que c’est toi. Même pas tes groupes. Tu peux retirer ton rêve quand tu veux.",
+        "body": [
+          "Le Mur, c’est l’endroit où des rêves sont partagés sans nom. Tu peux en partager un, et lire ceux des autres.",
+          "Quand tu partages sur le Mur, ce que tu écris devient anonyme. Ton nom n’apparaît pas. Tes groupes ne savent pas que c’est toi. Personne ne peut remonter jusqu’à ton compte.",
+          "Tu gardes la main : à tout moment, dans Réglages, tu peux retirer un de tes rêves du Mur. Il disparaît.",
+          "Le Mur se renouvelle à son rythme, à chaque fois que tu l’ouvres. Rien à rafraîchir, rien à faire tourner."
+        ],
+        "source": "D’où ça vient : partager un rêve sans dire qui on est, c’est une vieille idée. Ça permet de se montrer vrai sans se sentir exposé."
+      },
+      "credits": {
+        "term": "Les crédits",
+        "bubble": "Créer des images ou des mondes coûte de la vraie puissance de calcul. Les crédits paient ça — rien d’autre.",
+        "body": [
+          "Écrire tes rêves, les comprendre, les garder : ça, c’est le cœur de Dream, et ça ne coûte pas de crédits.",
+          "Les crédits servent seulement quand tu demandes à la Forge de créer quelque chose de lourd : une image, un monde, une œuvre à partir de ton rêve.",
+          "Ces créations tournent sur de gros ordinateurs qui consomment beaucoup d’énergie. Les crédits couvrent ce coût réel. Ce n’est pas une monnaie de jeu.",
+          "Pas de piège : pas de compte à rebours, pas d’« offre qui expire ». Tu recharges quand tu veux, et tu vois toujours ce que tu paies et pourquoi."
+        ],
+        "source": "D’où ça vient : on préfère te dire clairement à quoi sert ce que tu paies, plutôt que de le cacher dans un abonnement flou."
+      },
+      "data": {
+        "term": "Tes données",
+        "bubble": "Tes rêves restent à toi : rien ne s’efface sauf par toi, et tu peux tout emporter quand tu veux.",
+        "body": [
+          "Ce que tu écris dans Dream t’appartient : tes rêves, tes moments, tes notes.",
+          "Rien ne s’efface tout seul. Rien ne part vers un groupe ou vers le Mur sans que tu le décides.",
+          "Tu peux tout récupérer. « Exporter tout » te donne un fichier avec l’ensemble de ce que tu as écrit, à garder où tu veux.",
+          "Et tu peux partir pour de bon. « Supprimer mon compte » efface tes données. Par sécurité, on attend sept jours avant l’effacement définitif, au cas où tu changerais d’avis — tu peux annuler pendant ce délai."
+        ],
+        "source": "D’où ça vient : on pense qu’un rêve est une chose intime. Tu dois pouvoir le garder, l’emporter ou l’effacer sans avoir à demander la permission."
+      },
+      "guide-image": {
+        "term": "Parler à une image",
+        "bubble": "Tu choisis une image de ton rêve, et tu la laisses te répondre, comme si elle pouvait parler.",
+        "body": [
+          "Dans un rêve, une image revient souvent : une porte, un animal, une personne, un objet.",
+          "Ce guide te propose de t’adresser à elle. Pas pour jouer — pour voir ce qui vient quand tu la laisses « répondre ».",
+          "Tu poses une question simple : qui es-tu ? qu’est-ce que tu veux ? Puis tu écoutes ce qui monte, sans forcer.",
+          "Souvent, l’image dit quelque chose que tu savais déjà, sans avoir les mots. Ça surprend, et ça éclaire."
+        ],
+        "source": "D’où ça vient : des gens qui travaillent avec les rêves invitent à traiter les images comme vivantes, plutôt que comme des symboles à décoder. On appelle parfois ça « laisser le rêve continuer »."
+      },
+      "guide-corps": {
+        "term": "Écouter son corps",
+        "bubble": "Tu regardes où le rêve se loge dans ton corps, et ce que cet endroit a l’air de demander.",
+        "body": [
+          "Un rêve laisse souvent une trace physique : la gorge serrée, le ventre noué, une chaleur, un poids sur la poitrine.",
+          "Ce guide t’invite à poser ton attention là, doucement, sans vouloir changer quoi que ce soit.",
+          "Tu nommes ce que tu sens, tu attends. Parfois, la sensation bouge d’elle-même quand on la regarde vraiment.",
+          "Ce n’est pas un soin ni un traitement. C’est une manière de t’écouter, qui souvent suffit à y voir plus clair."
+        ],
+        "source": "D’où ça vient : un psychologue américain, Eugene Gendlin, a remarqué que prêter attention à ce qu’on ressent dans le corps aide souvent à comprendre ce qui nous travaille. Il appelait ça le « focusing »."
+      },
+      "guide-intuition": {
+        "term": "Attraper une intuition",
+        "bubble": "Tu notes ce qui vient de te traverser — une idée, une image — avant que ça s’envole.",
+        "body": [
+          "Les intuitions ne préviennent pas et ne restent pas. Quelques secondes, et c’est déjà flou.",
+          "Ce guide est très court : il t’aide à poser tout de suite ce qui vient, sans le juger, sans le trier.",
+          "Tu dis ce que tu as vu ou pensé, même si ça n’a pas de sens sur le moment.",
+          "Plus tard, en relisant, tu verras lesquelles disaient vrai. C’est comme ça qu’on apprend à faire confiance à ses intuitions."
+        ],
+        "source": "D’où ça vient : cet état où les idées arrivent librement, entre l’éveil et le sommeil ou en pleine rêverie, intéresse les créateurs depuis toujours. On l’a appelé rêverie, ou hypnagogie."
+      },
+      "guide-reentry": {
+        "term": "Retourner dans le rêve",
+        "bubble": "Tu fermes les yeux, éveillé, et tu retournes dans ton rêve pour voir ce qui se passe ensuite.",
+        "body": [
+          "Un rêve s’arrête souvent au mauvais moment : juste avant la fin, sur une porte fermée, une question en suspens.",
+          "Ce guide te propose de le reprendre, éveillé, les yeux fermés. Tu te replaces dans la scène et tu laisses la suite venir.",
+          "Rien n’est obligé d’arriver. Parfois la scène bouge, parfois non. Les deux sont bien.",
+          "C’est une façon douce de rester un moment avec un rêve qui te marque, au lieu de le laisser filer."
+        ],
+        "source": "D’où ça vient : reprendre un rêve éveillé pour le prolonger est une pratique ancienne, utilisée dans plusieurs traditions pour mieux écouter ce que le rêve avait à dire."
+      },
+      "guide-intention": {
+        "term": "Une intention pour la nuit",
+        "bubble": "Avant de dormir, tu poses une question ou une intention à ta nuit.",
+        "body": [
+          "On peut aborder le sommeil avec une petite question en tête : sur un choix, une émotion, un rêve qui revient.",
+          "Ce guide t’aide à la formuler simplement, en une phrase, juste avant de t’endormir.",
+          "Ça ne commande pas les rêves — personne ne peut faire ça. Mais ça oriente l’attention, et parfois la nuit répond à sa manière.",
+          "Au réveil, tu notes ce qui est venu, même un fragment. Avec le temps, tu verras si ta nuit aime qu’on lui parle."
+        ],
+        "source": "D’où ça vient : demander quelque chose à sa nuit avant de dormir est une pratique très ancienne, présente dans beaucoup de cultures. On l’appelle parfois « incubation » des rêves."
+      },
+      "signal-soin": {
+        "term": "Ce qui insiste",
+        "bubble": "Dream ne prédit rien. Il remarque quand ton rêve appuie plusieurs fois sur la même chose.",
+        "body": [
+          "Il arrive qu’un rêve insiste. La même dispute qui revient, une chose qui casse, un corps qui n’en peut plus, quelque chose qu’on laisse derrière soi — scène après scène.",
+          "Quand c’est net, Dream te le dit. Une fois. Sans dramatiser.",
+          "Ce n’est pas une prédiction. Ton rêve ne t’annonce pas un accident, une rupture ou une maladie, et Dream ne le fera pas non plus. Il ne fait pas de diagnostic : ce n’est pas un outil médical.",
+          "Ce qu’il fait : nommer ce qui revient dans le rêve. Rien de plus. Ce que ça touche dans ta vie, c’est toi qui le sais — ou personne.",
+          "Tu peux écarter la carte d’un geste. Elle ne reviendra pas te chercher : au plus une par semaine, jamais plus.",
+          "Et si ce que tu écris parle de vraie détresse — idées noires, violence, danger —, Dream arrête de commenter. Il te donne des numéros où quelqu’un décroche."
+        ],
+        "source": "D’où ça vient : beaucoup de rêveurs remarquent qu’un rêve peut appuyer sur ce qu’on évite en journée. Ça ne dit pas le futur. Ça dit ce qui pèse maintenant."
+      }
+    }
+  },
+  "appointments": {
+    "title": "Dream",
+    "morning": "☾ Bien dormi ? Raconte ton rêve avant qu'il file.",
+    "evening": "☀ Une intention pour la nuit ? 30 secondes."
+  }
+}

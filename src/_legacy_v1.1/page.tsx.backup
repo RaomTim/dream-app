@@ -1,0 +1,1041 @@
+'use client'
+
+import { useState, useEffect, useCallback, Component, type ReactNode } from 'react'
+import { useT } from '@/lib/i18n'
+import { useAuth } from '@/components/AuthProvider'
+import { useDreamTheme } from '@/lib/dream/theme-provider'
+import AuthScreen from '@/components/AuthScreen'
+import DreamChat from '@/components/DreamChat'
+import DreamHome from '@/components/dream/screens/DreamHome'
+import DreamCapture, { type CaptureDestination } from '@/components/dream/screens/DreamCapture'
+import ProtocolGuide from '@/components/dream/screens/ProtocolGuide'
+import DreamDetail from '@/components/dream/screens/DreamDetail'
+import DreamSync from '@/components/dream/screens/DreamSync'
+import DreamPattern from '@/components/dream/screens/DreamPattern'
+import JournalScreen from '@/components/dream/screens/JournalScreen'
+import type { JournalEntry } from '@/components/dream/screens/JournalScreen'
+import ProfileScreen from '@/components/dream/screens/ProfileScreen'
+import OnboardingScreen from '@/components/dream/screens/OnboardingScreen'
+import ProtocolExplainer from '@/components/dream/screens/ProtocolExplainer'
+import AnchorScreen from '@/components/dream/screens/AnchorScreen'
+import CirclesScreen from '@/components/dream/screens/CirclesScreen'
+import ImportHubScreen from '@/components/dream/screens/ImportHubScreen'
+import OracleCorpsScreen from '@/components/dream/screens/OracleCorpsScreen'
+import LifelineScreen from '@/components/dream/screens/LifelineScreen'
+import CollectiveScreen from '@/components/dream/screens/CollectiveScreen'
+import BottomNav, { type BottomTab } from '@/components/dream/ui/BottomNav'
+import TopBar from '@/components/dream/ui/TopBar'
+import { Glyph, MODES, ModeMotif, ThinkingLine } from '@/components/dream/ui/primitives'
+import { DREAM_PROTOCOL, DAY_PROTOCOL, RITUAL_PROTOCOL, REENTRY_PROTOCOL } from '@/lib/dream/protocols'
+import type { AppMode } from '@/components/ModeSelector'
+import type { DreamEntry } from '@/components/dream/screens/DreamHome'
+import type { Motif, MotifEdge } from '@/components/dream/screens/DreamPattern'
+import type { Correspondence } from '@/components/dream/screens/DreamSync'
+import { authFetch } from '@/lib/api-client'
+import { wowRegistry, SpiraleWowOverlay, playRitual, Surface, HaloRespire } from '@/components/dream-v12'
+
+// Map AppMode to MODES keys for accent colors
+const MODE_KEY_MAP: Record<string, keyof typeof MODES> = {
+  dream: 'reve', day: 'jour', oracle: 'oracle',
+  tale: 'conte', ritual: 'rituel',
+}
+
+// Reverse map: normalize DB entry_type (FR or EN) → AppMode
+// Note : 'forest' mode dropped 2026-04-20 — legacy entries rerouted to 'dream'.
+const ENTRY_TYPE_TO_MODE: Record<string, AppMode> = {
+  dream: 'dream', reve: 'dream', rêve: 'dream',
+  day: 'day', jour: 'day', journal: 'day',
+  oracle: 'oracle',
+  tale: 'tale', conte: 'tale',
+  forest: 'dream', foret: 'dream', forêt: 'dream', // legacy → dream
+  ritual: 'ritual', rituel: 'ritual',
+  reentry: 'dream',
+  body: 'body', corps: 'body',
+  text: 'dream', // fragments default to dream exploration
+}
+
+const normalizeMode = (entryType: string): AppMode =>
+  ENTRY_TYPE_TO_MODE[entryType] || 'dream'
+
+// Error boundary to catch client-side crashes
+class ErrorBoundary extends Component<{ children: ReactNode }, { error: string | null }> {
+  constructor(props: { children: ReactNode }) {
+    super(props)
+    this.state = { error: null }
+  }
+  static getDerivedStateFromError(error: Error) {
+    return { error: error.message }
+  }
+  render() {
+    if (this.state.error) {
+      return (
+        <div style={{
+          minHeight: '100dvh', display: 'grid', placeItems: 'center',
+          background: '#08080b', color: '#e8e3d8', fontFamily: 'Georgia, serif',
+          padding: 32, textAlign: 'center',
+        }}>
+          <div>
+            <div style={{ fontSize: 28, fontStyle: 'italic', marginBottom: 16 }}>
+              Quelque chose s&apos;est cassé
+            </div>
+            <div style={{ fontSize: 13, color: '#9a948a', marginBottom: 24, fontFamily: 'monospace' }}>
+              {this.state.error}
+            </div>
+            <button
+              onClick={() => { this.setState({ error: null }); window.location.reload() }}
+              style={{
+                padding: '10px 20px', border: '1px solid #2a3a7a',
+                background: 'rgba(42,58,122,0.22)', color: '#b8975a',
+                cursor: 'pointer', fontFamily: 'monospace', fontSize: 11,
+                letterSpacing: 1, textTransform: 'uppercase',
+              }}
+            >
+              Recharger
+            </button>
+          </div>
+        </div>
+      )
+    }
+    return this.props.children
+  }
+}
+
+type Screen =
+  | 'onboarding'
+  | 'home'
+  | 'journal'
+  | 'capture'
+  | 'import'
+  | 'protocol-dream'
+  | 'protocol-day'
+  | 'protocol-ritual'
+  | 'dream-detail'
+  | 'chat'
+  | 'sync'
+  | 'pattern'
+  | 'profile'
+  | 'protocol-guide'
+  | 'protocol-reentry'
+  | 'anchor'
+  | 'circles'
+  | 'figure-dreams'
+  | 'oracle-corps'
+  | 'lifeline'
+  | 'collective'
+
+type DBEntry = {
+  id: string
+  title: string | null
+  raw_text: string
+  created_at: string
+  mood: string | null
+  prophetic_suspect: boolean
+  entry_type: string
+}
+
+export default function Home() {
+  return (
+    <ErrorBoundary>
+      <HomeInner />
+    </ErrorBoundary>
+  )
+}
+
+function HomeInner() {
+  const { user, loading, signOut } = useAuth()
+  const { t, tRaw, locale } = useT()
+  const { resolved, mode: themeMode, setMode: setThemeMode } = useDreamTheme()
+  const [screen, setScreen] = useState<Screen>('home')
+  const [entries, setEntries] = useState<DBEntry[]>([])
+  const [activeEntryId, setActiveEntryId] = useState<string | null>(null)
+  const [chatMode, setChatMode] = useState<AppMode>('dream')
+  const [captureTranscript, setCaptureTranscript] = useState('')
+  const [protocolInitialText, setProtocolInitialText] = useState('')
+  const [mounted, setMounted] = useState(false)
+  const [motifs, setMotifs] = useState<Motif[]>([])
+  const [edges, setEdges] = useState<MotifEdge[]>([])
+  const [correspondences, setCorrespondences] = useState<Correspondence[]>([])
+  const [selectedFigure, setSelectedFigure] = useState<Motif | null>(null)
+  const [showWowSpirale, setShowWowSpirale] = useState(false)
+  const [serverWowState, setServerWowState] = useState<Record<string, string | null>>({})
+
+  // Check onboarding
+  useEffect(() => {
+    setMounted(true)
+    try {
+      if (!localStorage.getItem('dream.onboarding.done')) {
+        setScreen('onboarding')
+      }
+    } catch {}
+  }, [])
+
+  // Dream V1.2 — sync server-authoritative wow state at mount + after auth.
+  // Wow flags peuvent être tirés par triggers DB (Wow2 echo prophétique,
+  // Wow3 big dream, Wow5 restitution cercle). Le serveur est source de vérité.
+  useEffect(() => {
+    if (!user) return
+    let cancelled = false
+    const sync = async () => {
+      try {
+        const res = await authFetch('/api/user/wow-state')
+        if (!res.ok) return
+        const data = await res.json()
+        if (cancelled) return
+        const fired: Record<string, string | null> = data.fired || {}
+        setServerWowState(fired)
+
+        // Mirror server flags into local registry (idempotent), so subsequent
+        // local checks (wowRegistry.has(...)) align with DB.
+        for (const [name, ts] of Object.entries(fired)) {
+          if (ts && !wowRegistry.has(name as any)) {
+            wowRegistry.fire(name as any)
+          }
+        }
+
+        // Wow déclenchés par DB triggers depuis dernier sync : jouer le rituel
+        // visuel maintenant (ne pas le perdre). On ne joue le rituel QUE pour
+        // les Wow non encore vus localement (premier load).
+        if (fired['premier-echo-prophetique']) {
+          // discreet visual notification could be added here in V2
+        }
+        if (fired['big-dream-marquage']) {
+          // marquage déjà permanent dans DreamDetail, pas de pulse séparé
+        }
+        if (fired['premiere-restitution-cercle']) {
+          // notification déjà visible quand user ouvre cercle
+        }
+      } catch (e) {
+        console.error('[wow-state.sync] error:', e)
+      }
+    }
+    sync()
+    return () => { cancelled = true }
+  }, [user])
+
+  // Helper local : marque Wow côté serveur (idempotent + sync local).
+  const fireWowServer = useCallback(async (name: string) => {
+    try {
+      await authFetch('/api/user/wow-state', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name }),
+      })
+    } catch {}
+  }, [])
+
+  // Dream V1.2 — Wow4 (naissance noeud constellation) check au mount Pattern screen
+  useEffect(() => {
+    if (!user || screen !== 'pattern') return
+    if (wowRegistry.has('naissance-noeud')) return
+    let cancelled = false
+    const check = async () => {
+      try {
+        const res = await authFetch('/api/constellation/snapshot')
+        if (!res.ok) return
+        const data = await res.json()
+        if (cancelled) return
+        if (data.should_fire_wow4) {
+          if (wowRegistry.fire('naissance-noeud')) {
+            try { playRitual('tisse') } catch {}
+            await fireWowServer('naissance-noeud')
+            // Acquitter le snapshot pour ne pas refire en boucle
+            await authFetch('/api/constellation/snapshot', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ ack_count: data.current_count }),
+            }).catch(() => {})
+          }
+        }
+      } catch (e) {
+        console.error('[wow4.check] error:', e)
+      }
+    }
+    check()
+    return () => { cancelled = true }
+  }, [user, screen, fireWowServer])
+
+  // Dream V1.2 — listen to global FAB deposit event
+  useEffect(() => {
+    const handler = () => {
+      // Avoid pile-up when already on capture/protocol screens
+      setScreen(prev => (prev === 'capture' || prev.startsWith('protocol-')) ? prev : 'capture')
+    }
+    window.addEventListener('dream:open-capture', handler)
+    return () => window.removeEventListener('dream:open-capture', handler)
+  }, [])
+
+  // Dream V1.2 — hide global FAB on capture / protocol / onboarding screens
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const isCapture = screen === 'capture' || screen === 'onboarding' || screen.startsWith('protocol-')
+    window.dispatchEvent(new CustomEvent(isCapture ? 'dream:fab-hide' : 'dream:fab-show'))
+  }, [screen])
+
+  const fetchEntries = useCallback(async () => {
+    if (!user) return
+    try {
+      const res = await authFetch(`/api/dreams?limit=50&userId=${user.id}`)
+      const data = await res.json()
+      if (data.dreams && Array.isArray(data.dreams)) {
+        setEntries(data.dreams)
+        // Dream V1.2 — Wow1: premier kairos déposé
+        if (data.dreams.length === 1 && !wowRegistry.has('premier-kairos')) {
+          if (wowRegistry.fire('premier-kairos')) {
+            playRitual('ceremoniel')
+            setShowWowSpirale(true)
+            // Mirror serveur (idempotent)
+            authFetch('/api/user/wow-state', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ name: 'premier-kairos' }),
+            }).catch(() => {})
+          }
+        }
+      }
+    } catch (e) {
+      console.error('Erreur chargement:', e)
+    }
+  }, [user])
+
+  useEffect(() => {
+    if (user) fetchEntries()
+  }, [user, fetchEntries])
+
+  // Fetch data for pattern and sync screens
+  useEffect(() => {
+    if (!user) return
+    if (screen === 'pattern') {
+      authFetch(`/api/figures?userId=${user.id}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.motifs) setMotifs(data.motifs)
+          if (data.edges) setEdges(data.edges)
+        })
+        .catch(e => console.error('Erreur chargement figures:', e))
+    }
+    if (screen === 'sync') {
+      authFetch(`/api/echoes?userId=${user.id}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.correspondences) setCorrespondences(data.correspondences)
+        })
+        .catch(e => console.error('Erreur chargement échos:', e))
+    }
+  }, [screen, user])
+
+  // Loading
+  if (loading || !mounted) {
+    return (
+      <div style={{
+        minHeight: '100dvh', display: 'grid', placeItems: 'center',
+        background: '#08080b',
+      }}>
+        <div style={{ fontFamily: 'Georgia, serif', fontStyle: 'italic', fontSize: 24, color: '#b8975a', opacity: 0.6 }}>
+          Dream
+        </div>
+      </div>
+    )
+  }
+
+  // Auth
+  if (!user) return <AuthScreen />
+
+  // Onboarding
+  if (screen === 'onboarding') {
+    return <OnboardingScreen onDone={() => setScreen('home')} />
+  }
+
+  // Relative time helper
+  const relativeTime = (dateStr: string): string => {
+    const now = Date.now()
+    const then = new Date(dateStr).getTime()
+    const diffMs = now - then
+    const diffMin = Math.floor(diffMs / 60000)
+    const diffH = Math.floor(diffMs / 3600000)
+    const diffD = Math.floor(diffMs / 86400000)
+    if (diffMin < 2) return t('time.just_now')
+    if (diffMin < 60) return t('time.minutes_ago').replace('{n}', String(diffMin))
+    if (diffH < 24) return t('time.hours_ago').replace('{n}', String(diffH))
+    if (diffD < 2) return t('time.yesterday')
+    return t('time.days_ago').replace('{n}', String(diffD))
+  }
+
+  // Type glyph map
+  const TYPE_GLYPHS: Record<string, string> = {
+    dream: '☽', reve: '☽', day: '☉', jour: '☉', journal: '☉',
+    oracle: '✧', tale: '❦', conte: '❦', forest: '❧', foret: '❧',
+    ritual: '⚚', rituel: '⚚', reentry: '◯', text: '◇',
+  }
+
+  // Map DB entries to design format (safe)
+  let recentDreams: DreamEntry[] = []
+  try {
+    recentDreams = entries
+      .filter((e) => {
+        // Hide incomplete/abandoned protocols
+        const isIncomplete = (e.raw_text || '').includes('— en cours') || (e.title || '').includes('— en cours')
+        return !isIncomplete
+      })
+      .slice(0, 20).map((e) => {
+      const glyph = TYPE_GLYPHS[e.entry_type] || '◇'
+      const typeLabel = t(`entry_types.${e.entry_type}`) || e.entry_type
+      const rawTitle = e.title || (e.raw_text || '').substring(0, 50) + ((e.raw_text || '').length > 50 ? '...' : '')
+      return {
+        id: e.id,
+        date: relativeTime(e.created_at),
+        title: rawTitle,
+        tags: e.entry_type ? [`${glyph} ${typeLabel}`] : undefined,
+        synchronicity: e.prophetic_suspect || false,
+        empty: false,
+        incomplete: false,
+      }
+    })
+  } catch (e) {
+    console.error('Erreur mapping entries:', e)
+  }
+
+  // Date labels
+  const now = new Date()
+  const dayNames = tRaw('days') as string[]
+  const monthNames = tRaw('months') as string[]
+  const dateLabel = resolved === 'night'
+    ? `${t('home.night_of')} ${now.getDate()} ${monthNames[now.getMonth()]}`
+    : `${t('home.morning_of')} ${now.getDate()} ${monthNames[now.getMonth()]}`
+  const weekdayLabel = `${dayNames[now.getDay()]}`
+
+  // Open dream detail (tap on past dream)
+  const openDreamDetail = (entry: DreamEntry) => {
+    const dbEntry = entries.find((e) => {
+      if (entry.id) return e.id === entry.id
+      const d = new Date(e.created_at)
+      const dateStr = `${d.getDate().toString().padStart(2, '0')}.${(d.getMonth() + 1).toString().padStart(2, '0')}`
+      return dateStr === entry.date
+    })
+    if (dbEntry) {
+      setActiveEntryId(dbEntry.id)
+      setScreen('dream-detail')
+    }
+  }
+
+  // Open protocol
+  const openProtocol = (id: 'rêve' | 'journal' | 'rituel') => {
+    setProtocolInitialText('')
+    switch (id) {
+      case 'rêve': setScreen('capture'); break
+      case 'journal': setScreen('protocol-day'); break
+      case 'rituel': setScreen('protocol-ritual'); break
+    }
+  }
+
+  // After protocol completes
+  const handleProtocolComplete = (data: {
+    entryType: string
+    initialText?: string
+    answers: string[]
+    aiResponses: string[]
+    entryId?: string
+  }) => {
+    if (data.entryId) setActiveEntryId(data.entryId)
+    fetchEntries()
+    setChatMode(normalizeMode(data.entryType))
+    setCaptureTranscript('')
+    setScreen('chat')
+  }
+
+  // Bottom nav handler
+  const handleBottomTab = (tab: BottomTab) => {
+    switch (tab) {
+      case 'home': setScreen('home'); break
+      case 'journal': setScreen('journal'); break
+      case 'capture': setScreen('capture'); break
+      case 'echos': setScreen('sync'); break
+      case 'figures': setScreen('pattern'); break
+    }
+  }
+
+  // Which bottom tab is active
+  const activeBottomTab: BottomTab =
+    screen === 'journal' ? 'journal' :
+    screen === 'sync' ? 'echos' :
+    screen === 'pattern' ? 'figures' :
+    screen === 'capture' ? 'capture' :
+    'home'
+
+  // Toggle theme
+  const toggleTheme = () => {
+    const next = themeMode === 'auto' ? 'night' : themeMode === 'night' ? 'day' : 'auto'
+    setThemeMode(next)
+  }
+
+  // Screens that show the bottom nav
+  const showBottomNav = ['home', 'journal', 'sync', 'pattern'].includes(screen)
+
+  // Mode accent for chat header
+  const chatModeKey = MODE_KEY_MAP[chatMode] || 'reve'
+  const chatModeInfo = MODES[chatModeKey]
+
+  // Compute profile stats
+  const dreamCount = entries.filter(e => e.entry_type === 'dream' || e.entry_type === 'reve').length
+  const dayCount = entries.filter(e => e.entry_type === 'day' || e.entry_type === 'jour' || e.entry_type === 'journal').length
+
+  return (
+    <div style={{ position: 'relative', minHeight: '100dvh' }}>
+
+      {/* TopBar — visible on home/sync/pattern */}
+      {showBottomNav && (
+        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 95, background: 'var(--bg)' }}>
+          <TopBar
+            title="Dream"
+            subtitle={dateLabel}
+            theme={resolved}
+            onToggleTheme={toggleTheme}
+            onProfile={() => setScreen('profile')}
+          />
+        </div>
+      )}
+
+      {/* ====== SCREENS ====== */}
+
+      {screen === 'home' && (
+        <div className="screen-enter-fade" style={{ paddingTop: 56 }}>
+          <DreamHome
+            dateLabel={dateLabel}
+            weekdayLabel={weekdayLabel}
+            timeOfDay={resolved}
+            thresholdPrompt={resolved === 'night'
+              ? t('home.night_prompt')
+              : t('home.day_prompt')}
+            thresholdCTA={resolved === 'night' ? t('home.night_cta') : t('home.day_cta')}
+            recent={recentDreams}
+            moonPhase={0.63}
+            onOpenThreshold={() => {
+              if (resolved === 'night') {
+                openProtocol('rituel')
+              } else {
+                openProtocol('rêve')
+              }
+            }}
+            onOpenDream={(d) => openDreamDetail(d)}
+            onOpenMode={(mode) => {
+              setChatMode(mode as AppMode)
+              setActiveEntryId(null)
+              setScreen('chat')
+            }}
+            onOpenProtocol={openProtocol}
+            onOpenGuide={() => setScreen('protocol-guide')}
+            onOpenAnchor={() => setScreen('anchor')}
+            onOpenReentry={() => setScreen('journal')}
+            onOpenCircles={() => setScreen('circles')}
+            onOpenBodyOracle={() => setScreen('oracle-corps')}
+            onOpenLifeline={() => setScreen('lifeline')}
+            onOpenCollective={() => setScreen('collective')}
+            onOpenCapture={() => setScreen('capture')}
+            anchorFragment="Aujourd'hui, quand tu verras une porte ouverte — passe-la."
+          />
+        </div>
+      )}
+
+      {screen === 'journal' && (
+        <div className="screen-enter-fade has-bottom-nav" style={{ paddingTop: 56 }}>
+          <JournalScreen
+            entries={entries
+              .filter((e) => {
+                const isIncomplete = (e.raw_text || '').includes('— en cours') || (e.title || '').includes('— en cours')
+                return !isIncomplete
+              })
+              .map((e) => {
+              const glyph = TYPE_GLYPHS[e.entry_type] || '◇'
+              const modeKey = MODE_KEY_MAP[e.entry_type] || 'reve'
+              const modeInfo = MODES[modeKey as keyof typeof MODES]
+              const rawTitle = e.title || (e.raw_text || '').substring(0, 50) + ((e.raw_text || '').length > 50 ? '...' : '')
+              return {
+                id: e.id,
+                title: rawTitle,
+                date: relativeTime(e.created_at),
+                mode: e.entry_type,
+                excerpt: (e.raw_text || '').substring(0, 120) + ((e.raw_text || '').length > 120 ? '…' : ''),
+                glyph,
+                accentColor: modeInfo?.accent || 'var(--accent)',
+                incomplete: false,
+                synchronicity: e.prophetic_suspect || false,
+              }
+            })}
+            onOpenEntry={(entry) => {
+              setActiveEntryId(entry.id)
+              setScreen('dream-detail')
+            }}
+          />
+        </div>
+      )}
+
+      {screen === 'capture' && (
+        <div className="screen-enter-right">
+          <DreamCapture
+            onClose={() => setScreen('home')}
+            onFinish={(text) => {
+              setProtocolInitialText(text)
+              setScreen('protocol-dream')
+            }}
+            onDestination={(dest: CaptureDestination, text: string) => {
+              switch (dest) {
+                case 'protocol-dream':
+                  setProtocolInitialText(text)
+                  setScreen('protocol-dream')
+                  break
+                case 'protocol-day':
+                  setProtocolInitialText(text)
+                  setScreen('protocol-day')
+                  break
+                case 'oracle':
+                  setCaptureTranscript(text)
+                  setChatMode('oracle')
+                  setActiveEntryId(null)
+                  setScreen('chat')
+                  break
+                case 'fragment-dream':
+                case 'fragment-day':
+                  // V1.2 — POST /api/kairos (substrate principal), pipeline 8-phases
+                  // déclenché en background. La détection big_dream / echo_prophetique
+                  // / etc. émerge automatiquement.
+                  authFetch('/api/kairos', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                      raw_text: text,
+                      kairos_type: dest === 'fragment-dream' ? 'reve' : 'note_jour',
+                      capture_method: 'voice',
+                    }),
+                  })
+                    .then(async (res) => {
+                      if (!res.ok) {
+                        // Fallback legacy /api/dreams si /api/kairos indispo
+                        console.warn('[capture] /api/kairos failed, falling back /api/dreams')
+                        const fallback = await authFetch('/api/dreams', {
+                          method: 'POST',
+                          headers: { 'Content-Type': 'application/json' },
+                          body: JSON.stringify({
+                            raw_text: text,
+                            source: 'voice',
+                            entry_type: dest === 'fragment-dream' ? 'dream' : 'day',
+                            user_id: user.id,
+                          }),
+                        })
+                        return fallback.json()
+                      }
+                      return res.json()
+                    })
+                    .then(data => {
+                      fetchEntries()
+                      setScreen('home')
+                      // Si on a un kairos id (V1.2 path), naviguer vers detail
+                      // pour montrer la synthèse polyphonique au polling.
+                      const kairosId = data?.kairos?.id
+                      if (kairosId) {
+                        setActiveEntryId(kairosId)
+                        // Légère délai UX pour laisser le retour de fetchEntries arriver
+                        setTimeout(() => setScreen('dream-detail'), 200)
+                      } else if (data?.dream?.id) {
+                        // Legacy path : extract entities en background
+                        authFetch('/api/dreams/extract', {
+                          method: 'POST',
+                          headers: { 'Content-Type': 'application/json' },
+                          body: JSON.stringify({ dreamId: data.dream.id, userId: user.id }),
+                        }).catch(() => {})
+                      }
+                    })
+                    .catch(() => setScreen('home'))
+                  break
+              }
+            }}
+            onSwitchMode={(m) => {
+              if (m === 'fragment') {
+                // handled by onDestination now
+              }
+            }}
+          />
+        </div>
+      )}
+
+      {screen === 'protocol-dream' && (
+        <div className="screen-enter-right">
+          <ProtocolGuide
+            config={DREAM_PROTOCOL}
+            initialText={protocolInitialText || undefined}
+            userId={user.id}
+            onComplete={handleProtocolComplete}
+            onClose={() => setScreen('home')}
+          />
+        </div>
+      )}
+
+      {screen === 'protocol-day' && (
+        <div className="screen-enter-right">
+          <ProtocolGuide
+            config={DAY_PROTOCOL}
+            userId={user.id}
+            onComplete={handleProtocolComplete}
+            onClose={() => setScreen('home')}
+          />
+        </div>
+      )}
+
+      {screen === 'protocol-ritual' && (
+        <div className="screen-enter-right">
+          <ProtocolGuide
+            config={RITUAL_PROTOCOL}
+            userId={user.id}
+            onComplete={handleProtocolComplete}
+            onClose={() => setScreen('home')}
+          />
+        </div>
+      )}
+
+      {screen === 'protocol-reentry' && activeEntryId && (
+        <div className="screen-enter-right">
+          <ProtocolGuide
+            config={REENTRY_PROTOCOL}
+            initialText={entries.find(e => e.id === activeEntryId)?.raw_text || ''}
+            userId={user.id}
+            onComplete={handleProtocolComplete}
+            onClose={() => {
+              setScreen('dream-detail')
+            }}
+          />
+        </div>
+      )}
+
+      {screen === 'dream-detail' && activeEntryId && (
+        <div className="screen-enter-right">
+          <DreamDetail
+            dreamId={activeEntryId}
+            userId={user.id}
+            onClose={() => {
+              setScreen('home')
+              fetchEntries()
+            }}
+            onOpenReentry={(dreamId) => {
+              setActiveEntryId(dreamId)
+              setScreen('protocol-reentry')
+            }}
+            onOpenTale={(dreamId, text) => {
+              setCaptureTranscript(text)
+              setChatMode('tale')
+              setActiveEntryId(dreamId)
+              setScreen('chat')
+            }}
+            onOpenChat={(dreamId, mode) => {
+              const entry = entries.find(e => e.id === dreamId)
+              const text = entry?.raw_text || ''
+              setActiveEntryId(dreamId)
+              setChatMode(normalizeMode(mode))
+              setCaptureTranscript(text)
+              setScreen('chat')
+            }}
+          />
+        </div>
+      )}
+
+      {screen === 'chat' && (
+        <div className="grain screen-enter-right" style={{
+          position: 'relative',
+          height: '100dvh', background: 'var(--bg-wash)',
+          display: 'flex', flexDirection: 'column', overflow: 'hidden',
+        }}>
+          {/* Dream V1.2 — Surface paper amplifiée + halo silk discret en haut */}
+          <Surface
+            matter="paper"
+            motion={true}
+            style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none' }}
+          />
+          <div style={{
+            position: 'absolute', top: 60, left: '50%',
+            transform: 'translateX(-50%)',
+            width: 480, height: 220, pointerEvents: 'none', zIndex: 0, opacity: 0.55,
+          }}>
+            <HaloRespire kind="silk" style={{ width: '100%', height: '100%' }} />
+          </div>
+
+          {/* V2 Chat header with mode accent + glyph + ModeMotif */}
+          <header style={{
+            position: 'relative', overflow: 'hidden', zIndex: 1,
+            padding: 'env(safe-area-inset-top, 12px) 20px 12px',
+            background: `linear-gradient(180deg, color-mix(in srgb, ${chatModeInfo.accent} 15%, transparent) 0%, transparent 100%)`,
+            borderBottom: '1px solid var(--border)',
+          }}>
+            <ModeMotif mode={chatModeKey} size={100} />
+            <div style={{ position: 'relative', zIndex: 1 }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <button
+                  onClick={() => {
+                    if (activeEntryId) {
+                      setScreen('dream-detail')
+                    } else {
+                      setScreen('home')
+                    }
+                    setCaptureTranscript('')
+                  }}
+                  style={{ background: 'transparent', border: 'none', padding: 0, cursor: 'pointer' }}
+                >
+                  <Glyph size={10}>{t('chat.back')}</Glyph>
+                </button>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <span style={{ fontSize: 18 }}>{chatModeInfo.glyph}</span>
+                  <span style={{
+                    fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontSize: 18,
+                    color: chatModeInfo.accent,
+                  }}>
+                    {chatModeInfo.label}
+                  </span>
+                </div>
+                <div style={{ width: 40 }} /> {/* spacer */}
+              </div>
+              {/* Mode indicator — show current mode, no switching pills */}
+              <div style={{
+                marginTop: 8, fontFamily: 'var(--font-mono)', fontSize: 8,
+                letterSpacing: 1.5, textTransform: 'uppercase' as const,
+                color: 'var(--fg-mute)', opacity: 0.6,
+              }}>
+                {activeEntryId ? t(`entry_types.${entries.find(e => e.id === activeEntryId)?.entry_type || 'dream'}`) : chatModeInfo.label}
+              </div>
+            </div>
+          </header>
+          <div style={{ position: 'relative', zIndex: 1, flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+            <DreamChat
+              entryId={activeEntryId}
+              mode={chatMode}
+              userId={user.id}
+              initialMessage={captureTranscript || undefined}
+              onEntryCreated={(id) => {
+                setActiveEntryId(id)
+                fetchEntries()
+                setCaptureTranscript('')
+              }}
+            />
+          </div>
+        </div>
+      )}
+
+      {screen === 'sync' && (
+        <div className="screen-enter-fade has-bottom-nav" style={{ paddingTop: 56 }}>
+          <DreamSync
+            correspondences={correspondences}
+            subtitle={correspondences.length > 0
+              ? t('sync.echos_found').replace('{count}', String(correspondences.length))
+              : t('sync.no_echos')}
+            onClose={() => setScreen('home')}
+          />
+        </div>
+      )}
+
+      {screen === 'pattern' && (
+        <div className="screen-enter-fade has-bottom-nav" style={{ paddingTop: 56 }}>
+          <DreamPattern
+            motifs={motifs}
+            edges={edges}
+            summary={motifs.length > 0
+              ? t('pattern.figures_found').replace('{count}', String(motifs.length))
+              : t('pattern.no_figures')}
+            onOpen={(m) => {
+              setSelectedFigure(m)
+              setScreen('figure-dreams')
+            }}
+            onClose={() => setScreen('home')}
+          />
+        </div>
+      )}
+
+      {screen === 'figure-dreams' && selectedFigure && (
+        <div className="screen-enter-right has-bottom-nav" style={{ paddingTop: 56 }}>
+          <div className="grain" style={{
+            minHeight: '100dvh', background: 'var(--bg-wash)',
+            color: 'var(--fg)', fontFamily: 'var(--font-serif)',
+          }}>
+            {/* Header */}
+            <div style={{ padding: '0 20px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 8 }}>
+                <button
+                  onClick={() => setScreen('pattern')}
+                  style={{ background: 'transparent', border: 'none', cursor: 'pointer', padding: 0 }}
+                >
+                  <Glyph size={10}>← Figures</Glyph>
+                </button>
+              </div>
+              <div style={{
+                fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontSize: 24,
+                color: 'var(--fg)', marginBottom: 6,
+              }}>
+                {selectedFigure.label}
+              </div>
+              <Glyph size={9} color="var(--fg-mute)">
+                {selectedFigure.occurrences} apparition{selectedFigure.occurrences > 1 ? 's' : ''} · depuis {selectedFigure.firstSeen}
+              </Glyph>
+              <div style={{ borderBottom: '1px solid var(--border)', marginTop: 16, marginBottom: 8 }} />
+            </div>
+
+            {/* Dream list */}
+            <div style={{ padding: '0 20px 60px' }}>
+              {entries
+                .filter(e => selectedFigure.dreamIds?.includes(e.id))
+                .map(e => {
+                  const glyph = TYPE_GLYPHS[e.entry_type] || '◇'
+                  const modeKey = MODE_KEY_MAP[e.entry_type] || 'reve'
+                  const modeInfo = MODES[modeKey as keyof typeof MODES]
+                  return (
+                    <button
+                      key={e.id}
+                      onClick={() => { setActiveEntryId(e.id); setScreen('dream-detail') }}
+                      style={{
+                        width: '100%', padding: '16px 0',
+                        borderBottom: '1px solid var(--border)',
+                        background: 'transparent', border: 'none',
+                        borderBottomWidth: 1, borderBottomStyle: 'solid', borderBottomColor: 'var(--border)',
+                        cursor: 'pointer', color: 'inherit', textAlign: 'left',
+                      }}
+                    >
+                      <div style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
+                        <span style={{ color: modeInfo?.accent || 'var(--accent)', fontSize: 14, flexShrink: 0 }}>{glyph}</span>
+                        <span style={{
+                          fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontSize: 18,
+                          lineHeight: 1.2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+                        }}>
+                          {e.title || '—'}
+                        </span>
+                        <Glyph size={8} color="var(--fg-mute)" style={{ marginLeft: 'auto', flexShrink: 0 }}>
+                          {relativeTime(e.created_at)}
+                        </Glyph>
+                      </div>
+                      <div style={{
+                        marginTop: 6, marginLeft: 24,
+                        fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontSize: 13,
+                        color: 'var(--fg-mute)', lineHeight: 1.5,
+                        overflow: 'hidden', textOverflow: 'ellipsis',
+                        display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical',
+                      }}>
+                        {(e.raw_text || '').substring(0, 120)}{(e.raw_text || '').length > 120 ? '…' : ''}
+                      </div>
+                    </button>
+                  )
+                })}
+              {entries.filter(e => selectedFigure.dreamIds?.includes(e.id)).length === 0 && (
+                <div style={{
+                  fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontSize: 15,
+                  color: 'var(--fg-mute)', padding: '24px 0', textAlign: 'center',
+                }}>
+                  Aucun rêve trouvé pour cette figure.
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {screen === 'profile' && (
+        <ProfileScreen
+          userName={user.display_name || undefined}
+          email={user.email}
+          theme={themeMode}
+          onToggleTheme={toggleTheme}
+          stats={{ dreams: dreamCount, days: dayCount, symbols: motifs.length }}
+          topFigures={motifs.slice(0, 5).map(m => ({ name: m.label, count: m.occurrences }))}
+          onClose={() => setScreen('home')}
+          onSignOut={signOut}
+          onImport={() => setScreen('import')}
+        />
+      )}
+
+      {screen === 'protocol-guide' && (
+        <div className="screen-enter-right">
+          <ProtocolExplainer
+            onClose={() => setScreen('home')}
+            onStartProtocol={(type) => openProtocol(type)}
+          />
+        </div>
+      )}
+
+      {screen === 'circles' && (
+        <div className="screen-enter-right">
+          <CirclesScreen
+            userId={user.id}
+            onClose={() => setScreen('home')}
+            onOpenDream={(dreamId) => {
+              setActiveEntryId(dreamId)
+              setScreen('dream-detail')
+            }}
+          />
+        </div>
+      )}
+
+      {screen === 'oracle-corps' && (
+        <div className="screen-enter-right" style={{ paddingTop: 56 }}>
+          <OracleCorpsScreen
+            userId={user.id}
+            onClose={() => setScreen('home')}
+            onOpenDream={(dreamId) => {
+              setActiveEntryId(dreamId)
+              setScreen('dream-detail')
+            }}
+            onOpenChat={(mode) => {
+              setChatMode(mode as AppMode)
+              setScreen('chat')
+            }}
+          />
+        </div>
+      )}
+
+      {screen === 'lifeline' && (
+        <div className="screen-enter-right" style={{ paddingTop: 56 }}>
+          <LifelineScreen
+            userId={user.id}
+            onClose={() => setScreen('home')}
+            onOpenDream={(dreamId) => {
+              setActiveEntryId(dreamId)
+              setScreen('dream-detail')
+            }}
+          />
+        </div>
+      )}
+
+      {screen === 'collective' && (
+        <div className="screen-enter-right" style={{ paddingTop: 56 }}>
+          <CollectiveScreen
+            onClose={() => setScreen('home')}
+          />
+        </div>
+      )}
+
+      {screen === 'import' && (
+        <div className="screen-enter-right">
+          <ImportHubScreen
+            userId={user.id}
+            onClose={() => setScreen('profile')}
+            onComplete={(count) => {
+              if (count > 0) fetchEntries()
+            }}
+          />
+        </div>
+      )}
+
+      {screen === 'anchor' && (
+        <div className="screen-enter-fade">
+          <AnchorScreen
+            onClose={() => setScreen('home')}
+            onHonored={(note) => {
+              // TODO: save anchor honor to backend
+              console.log('Anchor honored', note)
+            }}
+          />
+        </div>
+      )}
+
+      {/* ====== BOTTOM NAV ====== */}
+      {showBottomNav && (
+        <BottomNav current={activeBottomTab} onTab={handleBottomTab} />
+      )}
+
+      {/* Dream V1.2 — Wow1 spirale overlay (premier kairos déposé) */}
+      {showWowSpirale && (
+        <SpiraleWowOverlay show onDone={() => setShowWowSpirale(false)} />
+      )}
+    </div>
+  )
+}

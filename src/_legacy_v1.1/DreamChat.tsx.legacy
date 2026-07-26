@@ -1,0 +1,472 @@
+'use client'
+
+import { useState, useRef, useEffect } from 'react'
+import VoiceRecorder from './VoiceRecorder'
+import { useLocalizedModes, type AppMode } from './ModeSelector'
+import { useLocale } from '@/lib/i18n'
+import { streamSSE } from '@/lib/sse-client'
+import { HaloRespire } from '@/components/dream-v12'
+
+type Message = {
+  role: 'user' | 'assistant'
+  content: string
+}
+
+type Props = {
+  entryId: string | null
+  mode: AppMode
+  userId?: string
+  initialMessage?: string
+  onEntryCreated: (id: string) => void
+}
+
+export default function DreamChat({ entryId, mode, userId, initialMessage, onEntryCreated }: Props) {
+  const locale = useLocale()
+  const [messages, setMessages] = useState<Message[]>([])
+  const [input, setInput] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
+  const [isFirstMessage, setIsFirstMessage] = useState(true)
+  const scrollRef = useRef<HTMLDivElement>(null)
+  const inputRef = useRef<HTMLTextAreaElement>(null)
+  const sentInitial = useRef(false)
+
+  const localizedModes = useLocalizedModes()
+  const modeConfig = localizedModes.find((m) => m.id === mode) || localizedModes[0]
+
+  // Charger la conversation existante si entryId
+  useEffect(() => {
+    if (entryId) {
+      loadConversation(entryId)
+    } else {
+      setMessages([])
+      setIsFirstMessage(true)
+    }
+  }, [entryId])
+
+  // Reset quand le mode change (sans entryId)
+  useEffect(() => {
+    if (!entryId) {
+      setMessages([])
+      setIsFirstMessage(true)
+    }
+  }, [mode])
+
+  // Send initial message from capture screen
+  useEffect(() => {
+    if (initialMessage && !sentInitial.current && isFirstMessage) {
+      sentInitial.current = true
+      sendMessage(initialMessage)
+    }
+  }, [initialMessage])
+
+  // Auto-scroll
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight
+    }
+  }, [messages])
+
+  const loadConversation = async (id: string) => {
+    try {
+      const res = await fetch(`/api/dreams/${id}`)
+      const data = await res.json()
+      if (data.conversations && data.conversations.length > 0) {
+        setMessages(data.conversations.map((c: any) => ({
+          role: c.role,
+          content: c.content,
+        })))
+        setIsFirstMessage(false)
+      }
+    } catch (e) {
+      console.error('Erreur chargement conversation:', e)
+    }
+  }
+
+  const sendMessage = async (text: string) => {
+    if (!text.trim() || isLoading) return
+
+    const userMessage: Message = { role: 'user', content: text.trim() }
+    const newMessages = [...messages, userMessage]
+
+    // Add a placeholder assistant message that will be filled progressively
+    const assistantPlaceholder: Message = { role: 'assistant', content: '' }
+    setMessages([...newMessages, assistantPlaceholder])
+    setInput('')
+    setIsLoading(true)
+
+    if (inputRef.current) {
+      inputRef.current.style.height = 'auto'
+    }
+
+    try {
+      let currentEntryId = entryId
+      if (isFirstMessage && !entryId) {
+        const sourceMap: Record<AppMode, string> = {
+          dream: 'text',
+          day: 'journal',
+          oracle: 'oracle',
+          tale: 'text',
+          ritual: 'ritual',
+          reentry: 'text',
+          body: 'body',
+        }
+
+        const entryRes = await fetch('/api/dreams', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            raw_text: text.trim(),
+            source: sourceMap[mode],
+            entry_type: mode,
+            user_id: userId,
+          }),
+        })
+        const entryData = await entryRes.json()
+        if (entryData.dream) {
+          currentEntryId = entryData.dream.id
+          onEntryCreated(entryData.dream.id)
+        }
+        setIsFirstMessage(false)
+      }
+
+      let accumulatedContent = ''
+
+      for await (const event of streamSSE('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          messages: newMessages,
+          dreamId: currentEntryId,
+          mode: mode,
+          isFirstEntry: isFirstMessage,
+          userId: userId,
+          locale,
+        }),
+      })) {
+        if (event.type === 'chunk') {
+          accumulatedContent += event.content
+          // Update the last (assistant) message progressively
+          setMessages((prev) => {
+            const updated = [...prev]
+            updated[updated.length - 1] = { role: 'assistant', content: accumulatedContent }
+            return updated
+          })
+        } else if (event.type === 'error') {
+          setMessages((prev) => {
+            const updated = [...prev]
+            updated[updated.length - 1] = {
+              role: 'assistant',
+              content: event.message || 'Erreur. Réessaie.',
+            }
+            return updated
+          })
+          break
+        }
+        // 'done' event: metadata (entities, patterns) is processed server-side; nothing to do client-side here
+      }
+
+      // If nothing was received at all, show fallback
+      if (!accumulatedContent) {
+        setMessages((prev) => {
+          const updated = [...prev]
+          updated[updated.length - 1] = {
+            role: 'assistant',
+            content: 'Pas de réponse reçue. Réessaie.',
+          }
+          return updated
+        })
+      }
+    } catch (error: unknown) {
+      const msg = error instanceof Error ? error.message : 'réseau'
+      console.error('Erreur envoi message:', error)
+      setMessages((prev) => {
+        const updated = [...prev]
+        updated[updated.length - 1] = {
+          role: 'assistant',
+          content: `Erreur de connexion : ${msg}. Réessaie.`,
+        }
+        return updated
+      })
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const handleTranscription = (text: string) => {
+    setInput(text)
+    inputRef.current?.focus()
+  }
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setInput(e.target.value)
+    e.target.style.height = 'auto'
+    e.target.style.height = Math.min(e.target.scrollHeight, 150) + 'px'
+  }
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault()
+      sendMessage(input)
+    }
+  }
+
+  // Polyphony renderer — detects [VOICE_NAME] markers in assistant messages
+  // and renders each voice as a distinct section with its own color/label
+  const VOICE_STYLES: Record<string, { label: string; color: string; icon: string }> = {
+    'GENDLIN': { label: 'Corps (Gendlin)', color: '#7CE0D8', icon: '◎' },
+    'HILLMAN': { label: 'Image (Hillman)', color: '#C77CE0', icon: '◈' },
+    'SETH': { label: 'Probabilité (Seth)', color: '#7C9AE0', icon: '◇' },
+    'MOSS': { label: 'Action (Moss)', color: '#9AE07C', icon: '◆' },
+    'MINDELL': { label: 'Dreambody (Mindell)', color: '#E0C77C', icon: '◎' },
+    'VON FRANZ': { label: 'Symbole (von Franz)', color: '#E07C7C', icon: '❦' },
+    'SOURCE': { label: 'Source', color: 'var(--fg-mute)', icon: '·' },
+  }
+
+  const renderPolyphony = (content: string) => {
+    // Check if content has voice markers like [GENDLIN], [HILLMAN], etc.
+    const voicePattern = /\[(GENDLIN|HILLMAN|SETH|MOSS|MINDELL|VON FRANZ|SOURCE)\]/g
+    const hasVoices = voicePattern.test(content)
+
+    if (!hasVoices) {
+      return <div style={{ whiteSpace: 'pre-wrap' }}>{content}</div>
+    }
+
+    // Split by voice markers
+    const parts: Array<{ voice: string | null; text: string }> = []
+    let lastIndex = 0
+    let currentVoice: string | null = null
+
+    // Reset the regex
+    voicePattern.lastIndex = 0
+    let match
+    while ((match = voicePattern.exec(content)) !== null) {
+      // Text before this marker
+      const textBefore = content.substring(lastIndex, match.index).trim()
+      if (textBefore) {
+        parts.push({ voice: currentVoice, text: textBefore })
+      }
+      currentVoice = match[1]
+      lastIndex = match.index + match[0].length
+    }
+    // Remaining text
+    const remaining = content.substring(lastIndex).trim()
+    if (remaining) {
+      parts.push({ voice: currentVoice, text: remaining })
+    }
+
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+        {parts.map((part, i) => {
+          if (!part.voice) {
+            return <div key={i} style={{ whiteSpace: 'pre-wrap' }}>{part.text}</div>
+          }
+          const style = VOICE_STYLES[part.voice] || VOICE_STYLES['SOURCE']
+          return (
+            <div key={i} style={{
+              borderLeft: `2px solid ${style.color}`,
+              paddingLeft: 14,
+              marginLeft: -18,
+            }}>
+              <div style={{
+                fontSize: 9, fontFamily: 'var(--font-sans)',
+                letterSpacing: 1, textTransform: 'uppercase' as const,
+                color: style.color, marginBottom: 6,
+              }}>
+                {style.icon} {style.label}
+              </div>
+              <div style={{ whiteSpace: 'pre-wrap' }}>{part.text}</div>
+            </div>
+          )
+        })}
+      </div>
+    )
+  }
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+      {/* Messages */}
+      <div ref={scrollRef} style={{ flex: 1, overflowY: 'auto', padding: '16px 28px' }}>
+        {messages.length === 0 && (
+          <div style={{
+            display: 'flex', flexDirection: 'column', alignItems: 'center',
+            justifyContent: 'center', height: '100%', textAlign: 'center', padding: '0 24px',
+          }}>
+            <div style={{
+              fontFamily: 'var(--font-serif)', fontStyle: 'italic',
+              fontSize: 28, color: 'var(--fg)', lineHeight: 1.2, marginBottom: 12,
+            }}>
+              {modeConfig.welcome}
+            </div>
+            <div style={{
+              fontFamily: 'var(--font-serif)', fontStyle: 'italic',
+              fontSize: 14, color: 'var(--fg-dim)',
+            }}>
+              {modeConfig.welcomeSub}
+            </div>
+
+            {/* Quick suggestions */}
+            {mode === 'ritual' && (
+              <div style={{ marginTop: 24, display: 'flex', flexWrap: 'wrap', gap: 8, justifyContent: 'center' }}>
+                {['Je suis prêt pour la nuit', 'J\'ai besoin de lâcher la journée', 'Je veux incuber un rêve'].map((s) => (
+                  <button
+                    key={s}
+                    onClick={() => sendMessage(s)}
+                    style={{
+                      fontFamily: 'var(--font-mono)', fontSize: 9, letterSpacing: 1.5,
+                      textTransform: 'uppercase',
+                      padding: '8px 14px', border: '1px solid var(--border)',
+                      background: 'transparent', color: 'var(--fg-mute)',
+                      cursor: 'pointer', borderRadius: 2,
+                    }}
+                  >
+                    {s}
+                  </button>
+                ))}
+              </div>
+            )}
+
+            {/* mode 'forest' dropped 2026-04-20 — bridge vers foret-app.vercel.app côté ModeSelector */}
+
+            {mode === 'tale' && (
+              <div style={{ marginTop: 24, display: 'flex', flexWrap: 'wrap', gap: 8, justifyContent: 'center' }}>
+                {['Un conte sur le courage', 'Une histoire de transformation', 'Un mythe sur les seuils'].map((s) => (
+                  <button
+                    key={s}
+                    onClick={() => sendMessage(s)}
+                    style={{
+                      fontFamily: 'var(--font-mono)', fontSize: 9, letterSpacing: 1.5,
+                      textTransform: 'uppercase',
+                      padding: '8px 14px', border: '1px solid var(--border)',
+                      background: 'transparent', color: 'var(--fg-mute)',
+                      cursor: 'pointer', borderRadius: 2,
+                    }}
+                  >
+                    {s}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
+        {messages.map((msg, i) => (
+          <div
+            key={i}
+            className="animate-fade-in"
+            style={{
+              display: 'flex', marginBottom: 16,
+              justifyContent: msg.role === 'user' ? 'flex-end' : 'flex-start',
+            }}
+          >
+            <div style={{
+              maxWidth: '85%', padding: '14px 18px',
+              borderRadius: 2,
+              ...(msg.role === 'user'
+                ? {
+                    background: 'var(--structural-bg)',
+                    border: '1px solid var(--structural-line)',
+                    fontFamily: 'var(--font-serif)', fontSize: 16,
+                    fontStyle: 'italic', lineHeight: 1.5,
+                    color: 'var(--fg)',
+                  }
+                : {
+                    background: 'transparent',
+                    borderLeft: '2px solid var(--accent)',
+                    paddingLeft: 18,
+                    fontFamily: 'var(--font-serif)', fontSize: 16,
+                    fontStyle: 'italic', lineHeight: 1.55,
+                    color: 'var(--fg-dim)',
+                  }),
+            }}>
+              {msg.role === 'assistant' ? renderPolyphony(msg.content) : (
+                <div style={{ whiteSpace: 'pre-wrap' }}>{msg.content}</div>
+              )}
+            </div>
+          </div>
+        ))}
+
+        {/* Typing indicator V1.2 — halo silk respirant à côté de "les liens se tissent..." */}
+        {isLoading && (
+          <div className="animate-fade-in" style={{ display: 'flex', justifyContent: 'flex-start', marginBottom: 16 }}>
+            <div style={{
+              position: 'relative',
+              borderLeft: '2px solid var(--accent)', paddingLeft: 18,
+              padding: '14px 18px',
+              fontFamily: 'var(--font-serif)', fontStyle: 'italic',
+              fontSize: 15, color: 'var(--fg-mute)',
+              display: 'flex', alignItems: 'center', gap: 12,
+            }}>
+              <div style={{
+                position: 'relative', width: 28, height: 28,
+                display: 'grid', placeItems: 'center',
+              }}>
+                <div style={{
+                  position: 'absolute', inset: '-50%', pointerEvents: 'none', opacity: 0.85,
+                }}>
+                  <HaloRespire kind="silk" style={{ width: '100%', height: '100%' }} />
+                </div>
+                <div style={{ display: 'flex', gap: 4, position: 'relative', zIndex: 1 }}>
+                  <div className="typing-dot" style={{ width: 4, height: 4, borderRadius: '50%', background: 'var(--accent)' }} />
+                  <div className="typing-dot" style={{ width: 4, height: 4, borderRadius: '50%', background: 'var(--accent)' }} />
+                  <div className="typing-dot" style={{ width: 4, height: 4, borderRadius: '50%', background: 'var(--accent)' }} />
+                </div>
+              </div>
+              <span>les liens se tissent…</span>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Input area */}
+      <div style={{
+        borderTop: '1px solid var(--border)', padding: '14px 28px',
+        background: 'var(--bg)',
+      }}>
+        <div style={{ display: 'flex', alignItems: 'flex-end', gap: 10 }}>
+          {mode !== 'tale' && (
+            <VoiceRecorder onTranscription={handleTranscription} />
+          )}
+
+          <textarea
+            ref={inputRef}
+            value={input}
+            onChange={handleInputChange}
+            onKeyDown={handleKeyDown}
+            placeholder={modeConfig.placeholder}
+            rows={1}
+            style={{
+              flex: 1, padding: '10px 14px',
+              background: 'var(--bg-elev)', border: '1px solid var(--border)',
+              borderRadius: 2, resize: 'none', maxHeight: 150,
+              fontFamily: 'var(--font-serif)', fontStyle: 'italic',
+              fontSize: 16, lineHeight: 1.4, color: 'var(--fg)',
+              outline: 'none',
+            }}
+            onFocus={(e) => e.target.style.borderColor = 'var(--structural-line)'}
+            onBlur={(e) => e.target.style.borderColor = 'var(--border)'}
+          />
+
+          <button
+            onClick={() => sendMessage(input)}
+            disabled={!input.trim() || isLoading}
+            style={{
+              width: 38, height: 38, borderRadius: '50%',
+              display: 'grid', placeItems: 'center',
+              background: input.trim() && !isLoading ? 'var(--accent)' : 'var(--bg-card)',
+              border: '1px solid var(--border)',
+              cursor: input.trim() && !isLoading ? 'pointer' : 'not-allowed',
+              opacity: input.trim() && !isLoading ? 1 : 0.3,
+              color: 'var(--bg)',
+              flexShrink: 0,
+            }}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="22" y1="2" x2="11" y2="13" />
+              <polygon points="22 2 15 22 11 13 2 9 22 2" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}

@@ -1,0 +1,91 @@
+'use client'
+
+import { useT } from '@/lib/i18n'
+
+// 2026-04-20 : mode 'forest' retiré — Dream App ne consulte plus la Forêt comme
+// un mode interne. Bridge vers foret-app.vercel.app via le bouton séparé ci-dessous.
+// Forêt App a sa propre tarification et son propre mode d'approfondissement,
+// le sens-de-Forest ne doit PAS être fusionné ici.
+export type AppMode = 'dream' | 'day' | 'oracle' | 'tale' | 'ritual' | 'reentry' | 'body'
+
+type ModeConfig = {
+  id: AppMode
+  glyph: string
+}
+
+const MODE_DEFS: ModeConfig[] = [
+  { id: 'dream', glyph: '☽' },
+  { id: 'day', glyph: '☉' },
+  { id: 'oracle', glyph: '✧' },
+  { id: 'tale', glyph: '❦' },
+  { id: 'ritual', glyph: '⚚' },
+  { id: 'reentry', glyph: '◯' },
+  { id: 'body', glyph: '❂' },
+]
+
+// Backward-compat export: MODES with all fields for components that read .welcome etc.
+// These are now populated with i18n keys as fallback IDs
+export const MODES: Array<ModeConfig & { emoji: string; label: string; placeholder: string; welcome: string; welcomeSub: string }> = MODE_DEFS.map((m) => ({
+  ...m,
+  emoji: m.glyph,
+  label: m.id,
+  placeholder: `modes.${m.id}.placeholder`,
+  welcome: `modes.${m.id}.welcome`,
+  welcomeSub: `modes.${m.id}.welcomeSub`,
+}))
+
+// Hook to get localized mode data
+export function useLocalizedModes() {
+  const { t } = useT()
+  return MODE_DEFS.map((m) => ({
+    ...m,
+    label: t(`modes.${m.id}.label`),
+    placeholder: t(`modes.${m.id}.placeholder`),
+    welcome: t(`modes.${m.id}.welcome`),
+    welcomeSub: t(`modes.${m.id}.welcomeSub`),
+  }))
+}
+
+type Props = {
+  currentMode: AppMode
+  onModeChange: (mode: AppMode) => void
+}
+
+// Bridge vers Forêt App — propre tarification, propre profondeur.
+// Target _blank pour ouvrir en nouvel onglet (foret-app.vercel.app).
+const FOREST_APP_URL = 'https://foret-app.vercel.app'
+
+export default function ModeSelector({ currentMode, onModeChange }: Props) {
+  const modes = useLocalizedModes()
+  return (
+    <div className="flex gap-1 px-4 py-2 overflow-x-auto scrollbar-hide">
+      {modes.map((mode) => (
+        <button
+          key={mode.id}
+          onClick={() => onModeChange(mode.id)}
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs whitespace-nowrap transition-all shrink-0 ${
+            currentMode === mode.id
+              ? 'bg-[#6366f1] text-white'
+              : 'bg-[#12122a] text-[#94a3b8] border border-[#2a2a4a] hover:border-[#6366f1]'
+          }`}
+        >
+          <span>{mode.glyph}</span>
+          <span>{mode.label}</span>
+        </button>
+      ))}
+
+      {/* Bridge Forêt App — invitation à l'approfondissement via la sous-app dédiée */}
+      <a
+        href={FOREST_APP_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs whitespace-nowrap transition-all shrink-0 bg-gradient-to-r from-[#1a3a2a] to-[#12122a] text-[#86efac] border border-[#2a4a3a] hover:border-[#4ade80] hover:text-[#4ade80]"
+        title="Approfondir dans la Forêt App"
+      >
+        <span>🌲</span>
+        <span>Forêt</span>
+        <span className="text-[#4ade80]/70 text-[10px]">↗</span>
+      </a>
+    </div>
+  )
+}

@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Le Maître Aveugle — un rêve jouable</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300..500;1,300..500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { height: 100%; overflow: hidden; background: #160d0a; font-family: Inter, system-ui, sans-serif; }
+  #c { display: block; width: 100%; height: 100%; touch-action: none; }
+  .serif { font-family: Fraunces, Georgia, serif; font-style: italic; }
+  #title-screen { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: radial-gradient(80% 60% at 50% 35%, #2c1810 0%, #1a1310 55%, #0e0806 100%); z-index: 30; transition: opacity 1.2s ease; }
+  #title-screen h1 { font-family: Fraunces, Georgia, serif; font-style: italic; font-weight: 400; font-size: clamp(28px, 6vw, 44px); color: #fbeeda; }
+  #title-screen .sub { margin-top: 12px; font-size: 14px; color: rgba(243,230,212,0.55); text-align: center; line-height: 1.6; padding: 0 24px; }
+  #title-screen .quote { margin-top: 26px; max-width: 480px; text-align: center; font-family: Fraunces, Georgia, serif; font-style: italic;
+    font-size: 16.5px; color: rgba(243,230,212,0.8); line-height: 1.6; padding: 0 28px; }
+  #start-btn { margin-top: 36px; padding: 15px 44px; border-radius: 999px; border: none; cursor: pointer;
+    background: linear-gradient(180deg, #fbeeda, #ecd4b4); color: #2a160e; font-size: 15.5px; font-weight: 600; font-family: Inter, sans-serif; }
+  #title-screen .keys { margin-top: 22px; font-size: 12px; color: rgba(243,230,212,0.4); text-align: center; line-height: 1.7; }
+  #hud { position: fixed; top: 0; left: 0; right: 0; padding: max(14px, env(safe-area-inset-top)) 18px 0; z-index: 20; pointer-events: none;
+    display: flex; justify-content: space-between; align-items: flex-start; }
+  #quest { background: rgba(22,13,10,0.72); border: 0.5px solid rgba(232,168,101,0.35); border-radius: 14px; padding: 10px 16px; max-width: 320px; }
+  #quest .q-label { font-size: 9.5px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #e8a865; }
+  #quest .q-text { margin-top: 3px; font-family: Fraunces, Georgia, serif; font-style: italic; font-size: 14.5px; color: #fbeeda; line-height: 1.35; }
+  #msg { position: fixed; left: 50%; bottom: 19vh; transform: translateX(-50%); z-index: 22; pointer-events: none;
+    font-family: Fraunces, Georgia, serif; font-style: italic; font-size: clamp(15px, 2.6vw, 19px); color: #fbeeda; text-align: center;
+    max-width: 88vw; line-height: 1.5; opacity: 0; transition: opacity 0.6s ease; text-shadow: 0 2px 14px rgba(0,0,0,0.8); }
+  #dialog { position: fixed; left: 50%; bottom: 0; transform: translateX(-50%); width: min(640px, 94vw); z-index: 25;
+    margin-bottom: max(16px, env(safe-area-inset-bottom)); background: rgba(26,19,16,0.95); border: 0.5px solid rgba(232,168,101,0.4);
+    border-radius: 20px; padding: 18px 22px; display: none; }
+  #dialog .who { font-size: 10px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: #e8a865; }
+  #dialog .line { margin-top: 6px; font-family: Fraunces, Georgia, serif; font-style: italic; font-size: 16.5px; color: #fbeeda; line-height: 1.55; }
+  #dialog .next { margin-top: 12px; text-align: right; font-size: 12px; color: rgba(243,230,212,0.5); }
+  #act-btn { position: fixed; right: 22px; bottom: 110px; z-index: 24; width: 64px; height: 64px; border-radius: 50%;
+    border: 1px solid rgba(232,168,101,0.6); background: rgba(232,168,101,0.16); color: #fbeeda; font-size: 13px; font-weight: 600;
+    display: none; align-items: center; justify-content: center; cursor: pointer; backdrop-filter: blur(2px); }
+  #joy { position: fixed; left: 22px; bottom: 90px; z-index: 24; width: 110px; height: 110px; border-radius: 50%;
+    border: 1px solid rgba(243,230,212,0.18); background: rgba(255,235,210,0.05); display: none; }
+  #joy-k { position: absolute; left: 50%; top: 50%; width: 44px; height: 44px; border-radius: 50%;
+    background: rgba(232,168,101,0.3); border: 1px solid rgba(232,168,101,0.5); transform: translate(-50%,-50%); }
+  #fade { position: fixed; inset: 0; background: #0c0705; opacity: 0; pointer-events: none; transition: opacity 0.8s ease; z-index: 28; }
+  #end-screen { position: fixed; inset: 0; display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 32;
+    background: radial-gradient(80% 60% at 50% 40%, rgba(232,168,101,0.20) 0%, rgba(22,13,10,0.96) 60%); text-align: center; padding: 0 26px; }
+  #end-screen h2 { font-family: Fraunces, Georgia, serif; font-style: italic; font-weight: 400; font-size: clamp(24px, 5vw, 36px); color: #fbeeda; }
+  #end-screen p { margin-top: 16px; max-width: 480px; font-family: Fraunces, Georgia, serif; font-style: italic; font-size: 16.5px;
+    color: rgba(243,230,212,0.85); line-height: 1.65; }
+  #end-screen button { margin-top: 32px; padding: 13px 36px; border-radius: 999px; border: 1px solid rgba(232,168,101,0.55);
+    background: rgba(232,168,101,0.12); color: #fbeeda; font-size: 14px; font-weight: 600; cursor: pointer; font-family: Inter, sans-serif; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="hud"><div id="quest"><div class="q-label">la vision</div><div class="q-text" id="quest-text">rejoindre la place du village</div></div></div>
+<div id="msg"></div>
+<div id="dialog"><div class="who" id="d-who"></div><div class="line" id="d-line"></div><div class="next">toucher / espace pour continuer</div></div>
+<button id="act-btn">agir</button>
+<div id="joy"><div id="joy-k"></div></div>
+<div id="fade"></div>
+<div id="title-screen">
+  <h1>Le Maître Aveugle</h1>
+  <div class="sub">un rêve de Timoté, nuit de pleine lune — rendu jouable<br>« rêve du Maître ninja de 150 ans »</div>
+  <div class="quote">« j'ai déjà eu des visions de lui, sorti de prison —<br>le grand maître de tous les samouraïs et les ninjas.<br>il faut croire que quelqu'un viendra. »</div>
+  <button id="start-btn">entrer dans le rêve</button>
+  <div class="keys">déplacement : WASD / flèches / joystick · caméra : glisser · agir : E / bouton<br>les geôliers veillent — reste dans l'ombre</div>
+</div>
+<div id="end-screen">
+  <h2>la lumière retrouvée</h2>
+  <p id="end-text"></p>
+  <button onclick="location.reload()">rêver encore</button>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const T = THREE;
+const renderer = new T.WebGLRenderer({ canvas: document.getElementById('c'), antialias: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+const scene = new T.Scene();
+scene.background = new T.Color(0x120b08);
+scene.fog = new T.FogExp2(0x120b08, 0.028);
+const camera = new T.PerspectiveCamera(58, 1, 0.1, 200);
+function resize() { const w = innerWidth, h = innerHeight; renderer.setSize(w, h); camera.aspect = w / h; camera.updateProjectionMatrix(); }
+addEventListener('resize', resize); resize();
+
+const amb = new T.AmbientLight(0x4a2e1c, 0.85); scene.add(amb);
+const moon = new T.DirectionalLight(0x8a7a9a, 0.35); moon.position.set(-20, 40, -10); scene.add(moon);
+
+const M = {
+  ground: new T.MeshLambertMaterial({ color: 0x241712 }),
+  stone: new T.MeshLambertMaterial({ color: 0x2e211a }),
+  stoneDark: new T.MeshLambertMaterial({ color: 0x1c1410 }),
+  wood: new T.MeshLambertMaterial({ color: 0x3a2417 }),
+  roof: new T.MeshLambertMaterial({ color: 0x4a2c1a }),
+  ember: new T.MeshBasicMaterial({ color: 0xe8a865 }),
+  emberDim: new T.MeshBasicMaterial({ color: 0x9a5f30 }),
+  cream: new T.MeshBasicMaterial({ color: 0xfbeeda }),
+  ninja: new T.MeshLambertMaterial({ color: 0x171210 }),
+  scarf: new T.MeshBasicMaterial({ color: 0xd87a3a }),
+  master: new T.MeshLambertMaterial({ color: 0x4a4040 }),
+  hair: new T.MeshLambertMaterial({ color: 0x9a948c }),
+  guard: new T.MeshLambertMaterial({ color: 0x2a2320 }),
+  shadowZone: new T.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.45 }),
+  gold: new T.MeshBasicMaterial({ color: 0xffd28a }),
+};
+function box(w, h, d, mat, x, y, z, parent) {
+  const m = new T.Mesh(new T.BoxGeometry(w, h, d), mat); m.position.set(x, y, z); (parent || scene).add(m); return m;
+}
+function lamp(x, y, z, intensity, dist, color) {
+  const l = new T.PointLight(color || 0xe8a865, intensity || 1.1, dist || 14, 1.8); l.position.set(x, y, z); scene.add(l);
+  const b = new T.Mesh(new T.SphereGeometry(0.12, 8, 8), M.ember); b.position.set(x, y, z); scene.add(b); return l;
+}
+
+const ground = new T.Mesh(new T.PlaneGeometry(90, 90), M.ground);
+ground.rotation.x = -Math.PI / 2; ground.position.set(0, 0, -18); scene.add(ground);
+
+function house(x, z, w, d, h, rot) {
+  const g = new T.Group();
+  box(w, h, d, M.wood, 0, h/2, 0, g);
+  const roof = new T.Mesh(new T.ConeGeometry(Math.max(w, d) * 0.78, h * 0.7, 4), M.roof);
+  roof.position.y = h + h * 0.34; roof.rotation.y = Math.PI / 4; g.add(roof);
+  const win = box(0.5, 0.5, 0.06, M.emberDim, w * 0.25, h * 0.55, d / 2 + 0.03, g);
+  g.position.set(x, 0, z); g.rotation.y = rot || 0; scene.add(g); return g;
+}
+house(-8, -4, 4, 3.4, 2.6, 0.3); house(8, -6, 3.6, 3, 2.4, -0.4); house(-7, -14, 3.2, 3, 2.2, 1.2);
+house(9, -13, 4.2, 3.4, 2.8, 0.2); house(-3, -22, 3.4, 3, 2.4, -0.8);
+lamp(-5, 1.6, -2, 1.0, 12); lamp(6, 1.6, -9, 1.0, 12); lamp(0, 1.7, -17, 1.0, 13);
+const well = box(1.6, 0.8, 1.6, M.stone, 2, 0.4, -10); box(1.2, 0.1, 1.2, M.stoneDark, 2, 0.86, -10);
+
+for (let i = 0; i < 26; i++) {
+  const px = (Math.sin(i * 7.3) * 30), pz = -Math.abs(Math.cos(i * 3.1)) * 30 + 4;
+  if (Math.abs(px) < 12 && pz > -26) continue;
+  const tr = new T.Group();
+  box(0.34, 2.2, 0.34, M.wood, 0, 1.1, 0, tr);
+  const fo = new T.Mesh(new T.ConeGeometry(1.3, 2.6, 6), M.stoneDark); fo.position.y = 3.1; tr.add(fo);
+  tr.position.set(px, 0, pz); scene.add(tr);
+}
+
+const gateGroup = new T.Group();
+box(0.8, 3.4, 0.8, M.stone, -2, 1.7, 0, gateGroup); box(0.8, 3.4, 0.8, M.stone, 2, 1.7, 0, gateGroup);
+box(5.6, 0.7, 1, M.stoneDark, 0, 3.6, 0, gateGroup);
+gateGroup.position.set(0, 0, -27); scene.add(gateGroup);
+lamp(-2, 3.2, -27, 1.3, 10); lamp(2, 3.2, -27, 1.3, 10);
+
+const tunnelFloorMat = M.stoneDark;
+const corridor = new T.Group();
+box(8, 0.2, 46, tunnelFloorMat, 0, -0.1, -23, corridor);
+box(0.4, 4, 46, M.stoneDark, -4, 2, -23, corridor);
+box(0.4, 4, 46, M.stoneDark, 4, 2, -23, corridor);
+box(8.8, 0.4, 46, M.stoneDark, 0, 4.1, -23, corridor);
+corridor.position.set(0, 0, -28); scene.add(corridor);
+lamp(-3.2, 2.4, -36, 0.8, 9, 0xc97f45); lamp(3.2, 2.4, -48, 0.8, 9, 0xc97f45); lamp(-3.2, 2.4, -60, 0.8, 9, 0xc97f45);
+
+const shadows = [];
+[[-2.4, -40, 3.2, 5], [2.4, -52, 3.2, 5], [-2.4, -63, 3.2, 5]].forEach(s => {
+  const z = new T.Mesh(new T.PlaneGeometry(s[2], s[3]), M.shadowZone);
+  z.rotation.x = -Math.PI / 2; z.position.set(s[0], 0.02, s[1]); scene.add(z);
+  shadows.push({ x: s[0], z: s[1], w: s[2] / 2, d: s[3] / 2 });
+});
+
+const keyGroup = new T.Group();
+const keyMesh = box(0.16, 0.5, 0.06, M.gold, 0, 0, 0, keyGroup);
+box(0.3, 0.16, 0.06, M.gold, 0.08, -0.22, 0, keyGroup);
+keyGroup.position.set(3.55, 1.6, -44); scene.add(keyGroup);
+const keyLight = lamp(3.4, 1.8, -44, 0.7, 5, 0xffd28a);
+
+const cell = new T.Group();
+box(10, 0.2, 12, M.stoneDark, 0, -0.1, 0, cell);
+box(0.4, 4, 12, M.stoneDark, -5, 2, 0, cell); box(0.4, 4, 12, M.stoneDark, 5, 2, 0, cell);
+box(10, 0.4, 12, M.stoneDark, 0, 4.1, 0, cell);
+box(10.4, 4, 0.4, M.stoneDark, 0, 2, -6, cell);
+cell.position.set(0, 0, -78); scene.add(cell);
+const bars = new T.Group();
+for (let i = -4; i <= 4; i++) if (Math.abs(i) > 1 || i === 0 ? true : true) box(0.12, 3.4, 0.12, M.stone, i * 0.55, 1.7, 0, bars);
+bars.position.set(0, 0, -72); scene.add(bars);
+lamp(0, 2.6, -76, 0.55, 8, 0xb06a38);
+
+const master = new T.Group();
+box(0.9, 1.0, 0.6, M.master, 0, 0.62, 0, master);
+const mHead = box(0.5, 0.5, 0.5, M.master, 0, 1.42, 0, master);
+box(0.56, 0.14, 0.52, M.ninja, 0, 1.47, 0, master);
+const hair = box(0.54, 0.9, 0.2, M.hair, 0, 1.1, -0.32, master);
+master.position.set(-2.2, 0, -80.5); scene.add(master);
+
+const guards = [];
+function makeGuard(ax, az, bx, bz, speed) {
+  const g = new T.Group();
+  box(0.8, 1.5, 0.55, M.guard, 0, 0.95, 0, g);
+  box(0.46, 0.46, 0.46, M.guard, 0, 1.95, 0, g);
+  box(0.1, 1.7, 0.1, M.wood, 0.5, 1.1, 0, g);
+  const lantern = new T.PointLight(0xd88a4a, 0.9, 7, 1.6); lantern.position.set(0, 1.6, 0.8); g.add(lantern);
+  const eye = box(0.5, 0.1, 0.1, M.emberDim, 0, 1.95, 0.26, g);
+  scene.add(g);
+  const guard = { g, ax, az, bx, bz, t: Math.random(), dir: 1, speed: speed || 0.18 };
+  guards.push(guard); return guard;
+}
+makeGuard(-2.6, -38, 2.6, -42, 0.16);
+makeGuard(2.6, -50, -2.6, -56, 0.2);
+makeGuard(-2.6, -60, 2.6, -66, 0.17);
+
+const courtyard = new T.Group();
+box(16, 0.2, 16, M.stone, 0, -0.05, 0, courtyard);
+for (let i = 0; i < 8; i++) {
+  const a = (i / 8) * Math.PI * 2;
+  const k = new T.Group();
+  box(0.7, 0.9, 0.5, M.ninja, 0, 0.45, 0, k);
+  box(0.4, 0.4, 0.4, M.ninja, 0, 1.1, 0, k);
+  box(0.5, 0.08, 0.4, M.scarf, 0, 0.92, 0, k);
+  k.position.set(Math.cos(a) * 5.5, 0, Math.sin(a) * 5.5);
+  k.lookAt(0, 0, 0);
+  courtyard.add(k);
+}
+courtyard.position.set(0, 0, -96); scene.add(courtyard);
+const courtLight = new T.PointLight(0xffd28a, 0, 30, 1.4); courtLight.position.set(0, 6, -96); scene.add(courtLight);
+
+const portal = new T.Mesh(new T.RingGeometry(1.1, 1.45, 32), new T.MeshBasicMaterial({ color: 0xffd28a, transparent: true, opacity: 0, side: T.DoubleSide }));
+portal.position.set(0, 1.8, -83.8); scene.add(portal);
+const portalLight = new T.PointLight(0xffd28a, 0, 12, 1.5); portalLight.position.set(0, 2, -84); scene.add(portalLight);
+
+const player = new T.Group();
+box(0.7, 1.0, 0.45, M.ninja, 0, 0.85, 0, player);
+box(0.42, 0.42, 0.42, M.ninja, 0, 1.62, 0, player);
+box(0.46, 0.1, 0.46, M.scarf, 0, 1.38, 0, player);
+const scarfTail = box(0.14, 0.5, 0.08, M.scarf, 0.2, 1.1, -0.3, player);
+box(0.48, 0.08, 0.12, M.cream, 0, 1.68, 0.2, player);
+player.position.set(0, 0, 6); scene.add(player);
+const playerGlow = new T.PointLight(0xe8a865, 0.5, 5, 2); playerGlow.position.set(0, 1.6, 0); player.add(playerGlow);
+
+let camYaw = 0, camPitch = 0.32, camDist = 6.4;
+const keys = {};
+addEventListener('keydown', e => { keys[e.key.toLowerCase()] = true; if (e.key === 'e' || e.key === 'E') tryAct(); if (e.code === 'Space') advanceDialog(); });
+addEventListener('keyup', e => { keys[e.key.toLowerCase()] = false; });
+let dragging = false, lx = 0, ly = 0;
+const cv = document.getElementById('c');
+cv.addEventListener('pointerdown', e => { dragging = true; lx = e.clientX; ly = e.clientY; });
+addEventListener('pointermove', e => { if (!dragging) return; camYaw -= (e.clientX - lx) * 0.005; camPitch = Math.max(0.08, Math.min(1.1, camPitch + (e.clientY - ly) * 0.004)); lx = e.clientX; ly = e.clientY; });
+addEventListener('pointerup', () => dragging = false);
+
+const isTouch = matchMedia('(pointer: coarse)').matches;
+const joy = document.getElementById('joy'), joyK = document.getElementById('joy-k');
+let joyVec = { x: 0, y: 0 }, joyId = null;
+if (isTouch) {
+  joy.style.display = 'block';
+  joy.addEventListener('touchstart', e => { joyId = e.changedTouches[0].identifier; e.preventDefault(); }, { passive: false });
+  addEventListener('touchmove', e => {
+    for (const t of e.changedTouches) if (t.identifier === joyId) {
+      const r = joy.getBoundingClientRect(); const cx = r.left + r.width/2, cy = r.top + r.height/2;
+      let dx = (t.clientX - cx) / (r.width/2), dy = (t.clientY - cy) / (r.height/2);
+      const m = Math.hypot(dx, dy); if (m > 1) { dx /= m; dy /= m; }
+      joyVec = { x: dx, y: dy };
+      joyK.style.transform = `translate(calc(-50% + ${dx*30}px), calc(-50% + ${dy*30}px))`;
+    }
+  }, { passive: true });
+  addEventListener('touchend', e => { for (const t of e.changedTouches) if (t.identifier === joyId) { joyId = null; joyVec = { x: 0, y: 0 }; joyK.style.transform = 'translate(-50%,-50%)'; } });
+}
+
+const msgEl = document.getElementById('msg');
+let msgTimer = null;
+function say(text, dur) {
+  msgEl.textContent = text; msgEl.style.opacity = 1;
+  clearTimeout(msgTimer); msgTimer = setTimeout(() => msgEl.style.opacity = 0, dur || 3200);
+}
+const dlg = document.getElementById('dialog');
+let dlgQueue = [], dlgDone = null;
+function dialog(lines, done) { dlgQueue = lines.slice(); dlgDone = done || null; nextLine(); }
+function nextLine() {
+  if (!dlgQueue.length) { dlg.style.display = 'none'; if (dlgDone) { const f = dlgDone; dlgDone = null; f(); } return; }
+  const [who, line] = dlgQueue.shift();
+  document.getElementById('d-who').textContent = who;
+  document.getElementById('d-line').textContent = line;
+  dlg.style.display = 'block';
+}
+function advanceDialog() { if (dlg.style.display === 'block') nextLine(); }
+dlg.addEventListener('pointerdown', e => { e.stopPropagation(); advanceDialog(); });
+
+const actBtn = document.getElementById('act-btn');
+actBtn.addEventListener('pointerdown', e => { e.stopPropagation(); if (dlg.style.display === 'block') advanceDialog(); else tryAct(); });
+
+const fadeEl = document.getElementById('fade');
+function fadeOut(then) { fadeEl.style.opacity = 1; setTimeout(() => { then && then(); fadeEl.style.opacity = 0; }, 900); }
+
+let quest = 'village';
+const questText = document.getElementById('quest-text');
+function setQuest(t) { questText.textContent = t; }
+let hasKey = false, masterFreed = false, ended = false;
+
+function distXZ(ax, az, bx, bz) { return Math.hypot(ax - bx, az - bz); }
+function inShadow() { return shadows.some(s => Math.abs(player.position.x - s.x) < s.w && Math.abs(player.position.z - s.z) < s.d); }
+
+let actTarget = null;
+function updateActTarget() {
+  actTarget = null;
+  const p = player.position;
+  if (quest === 'village' && distXZ(p.x, p.z, 2, -10) < 2.6) actTarget = 'well';
+  if (quest === 'infiltrate' && !hasKey && distXZ(p.x, p.z, 3.55, -44) < 2.2) actTarget = 'key';
+  if (quest === 'infiltrate' && hasKey && distXZ(p.x, p.z, 0, -72) < 2.6) actTarget = 'bars';
+  if (quest === 'free' && distXZ(p.x, p.z, master.position.x, master.position.z) < 2.4) actTarget = 'master';
+  if (quest === 'escort' && distXZ(p.x, p.z, 0, -84) < 2.4) actTarget = 'portal';
+  actBtn.style.display = (isTouch && (actTarget || dlg.style.display === 'block')) ? 'flex' : 'none';
+  actBtn.textContent = dlg.style.display === 'block' ? '…' : 'agir';
+}
+function tryAct() {
+  if (!actTarget) return;
+  if (actTarget === 'well') {
+    dialog([
+      ['une présence au puits', 'tu le cherches, n’est-ce pas. le maître aux cent cinquante-sept ans.'],
+      ['une présence au puits', 'ils l’ont rendu aveugle — une balle à travers les oreilles. il n’est pas mort. il ne meurt pas.'],
+      ['une présence au puits', 'la prison est sous la porte de pierre, au nord. deux geôliers le harcèlent au bâton, jour et nuit.'],
+      ['toi', 'je l’ai déjà vu libre, dans d’autres rêves. je viens accomplir la vision.'],
+    ], () => { quest = 'infiltrate'; setQuest('descendre dans la prison — rester dans l’ombre, prendre la clé'); say('la porte de pierre, au nord', 2600); });
+  }
+  if (actTarget === 'key') {
+    hasKey = true; keyGroup.visible = false; keyLight.intensity = 0;
+    say('la clé de la cellule — froide comme une vieille promesse', 2800);
+    setQuest('ouvrir la cellule du maître, au fond du couloir');
+  }
+  if (actTarget === 'bars') {
+    bars.visible = false;
+    quest = 'free'; setQuest('aller vers lui');
+    say('la grille cède sans bruit', 2200);
+  }
+  if (actTarget === 'master') {
+    dialog([
+      ['le maître aveugle', 'je t’entendais venir depuis trois nuits. tes pas sonnent comme les miens, avant.'],
+      ['toi', 'je viens te sortir d’ici. je t’ai vu libre — la vision était claire.'],
+      ['le maître aveugle', 'je sais. c’est moi qui te l’ai envoyée.'],
+      ['le maître aveugle', 'je n’ai plus d’yeux. tu seras mon regard. marche — je te suivrai au son.'],
+    ], () => {
+      masterFreed = true; quest = 'escort';
+      setQuest('guider le maître vers la lumière');
+      portal.material.opacity = 0.9; portalLight.intensity = 1.6;
+      guards.forEach(g => { g.speed = 0; g.g.children[3].intensity = 0.2; });
+      say('au fond de la cellule, un passage s’ouvre — le rêve le permet', 3400);
+    });
+  }
+  if (actTarget === 'portal' && masterFreed && !ended) {
+    ended = true;
+    fadeOut(() => {
+      player.position.set(0, 0, -91); master.position.set(-1.4, 0, -90);
+      courtLight.intensity = 2.2; scene.fog.density = 0.016;
+      dialog([
+        ['les huit silhouettes', '…'],
+        ['le maître aveugle', 'ils sont tous venus. je les entends respirer.'],
+        ['le maître aveugle', 'tu vois — la vision ne mentait pas. elle n’attendait que tes pas.'],
+      ], () => {
+        setTimeout(() => {
+          document.getElementById('end-text').textContent = '« j’ai déjà eu des visions de lui sorti de prison — le grand maître de tous. » cette nuit-là, dans le rêve, quelqu’un est venu. c’était toi.';
+          document.getElementById('end-screen').style.display = 'flex';
+        }, 1800);
+      });
+    });
+  }
+  updateActTarget();
+}
+
+function caught() {
+  fadeOut(() => {
+    player.position.set(0, 0, -30);
+    say('l’ombre te reprend — respire. le rêve recommence où la peur t’a vu.', 3600);
+  });
+}
+
+let last = performance.now();
+function tick(now) {
+  const dt = Math.min(0.05, (now - last) / 1000); last = now;
+  let mx = 0, mz = 0;
+  if (keys['w'] || keys['arrowup']) mz -= 1;
+  if (keys['s'] || keys['arrowdown']) mz += 1;
+  if (keys['a'] || keys['arrowleft']) mx -= 1;
+  if (keys['d'] || keys['arrowright']) mx += 1;
+  mx += joyVec.x; mz += joyVec.y;
+  const mag = Math.hypot(mx, mz);
+  if (mag > 0.1 && dlg.style.display !== 'block' && !ended) {
+    const speed = 4.6 * dt;
+    const dirX = (Math.sin(camYaw) * mz + Math.cos(camYaw) * mx) / Math.max(1, mag);
+    const dirZ = (Math.cos(camYaw) * mz - Math.sin(camYaw) * mx) / Math.max(1, mag);
+    const nx = player.position.x + dirX * speed;
+    const nz = player.position.z + dirZ * speed;
+    const insideCorridor = nz < -27 && nz > -72;
+    const insideCell = nz <= -72 && nz > -84;
+    let bound = 13;
+    if (insideCorridor) bound = 3.4; else if (insideCell) bound = 4.4;
+    player.position.x = Math.max(-bound, Math.min(bound, nx));
+    if (!(nz > 7) && !(nz < -97)) player.position.z = nz;
+    player.rotation.y = Math.atan2(dirX, dirZ);
+    scarfTail.rotation.x = Math.sin(now / 90) * 0.3;
+  }
+  guards.forEach(g => {
+    if (g.speed > 0) {
+      g.t += dt * g.speed * g.dir;
+      if (g.t > 1) { g.t = 1; g.dir = -1; } if (g.t < 0) { g.t = 0; g.dir = 1; }
+      const gx = g.ax + (g.bx - g.ax) * g.t, gz = g.az + (g.bz - g.az) * g.t;
+      const fx = gx - g.g.position.x, fz = gz - g.g.position.z;
+      g.g.position.set(gx, 0, gz);
+      if (Math.hypot(fx, fz) > 0.001) g.g.rotation.y = Math.atan2(fx, fz);
+      if (!ended && quest !== 'escort' && dlg.style.display !== 'block') {
+        const dx = player.position.x - gx, dz = player.position.z - gz;
+        const d = Math.hypot(dx, dz);
+        if (d < 5.2 && !inShadow()) {
+          const ang = Math.atan2(dx, dz);
+          let diff = Math.abs(ang - g.g.rotation.y); diff = Math.min(diff, Math.PI * 2 - diff);
+          if (diff < 0.8 || d < 1.4) caught();
+        }
+      }
+    }
+  });
+  if (masterFreed && !ended) {
+    const d = distXZ(master.position.x, master.position.z, player.position.x, player.position.z);
+    if (d > 2.2) {
+      master.position.x += (player.position.x - master.position.x) * dt * 1.6;
+      master.position.z += (player.position.z - master.position.z) * dt * 1.6;
+      master.lookAt(player.position.x, 0, player.position.z);
+    }
+  }
+  keyGroup.rotation.y += dt * 2;
+  portal.rotation.z += dt * 0.6;
+  const px = player.position.x, pz = player.position.z;
+  camera.position.set(
+    px + Math.sin(camYaw) * Math.cos(camPitch) * camDist,
+    1.6 + Math.sin(camPitch) * camDist,
+    pz + Math.cos(camYaw) * Math.cos(camPitch) * camDist
+  );
+  camera.lookAt(px, 1.4, pz);
+  updateActTarget();
+  if (!isTouch && actTarget && dlg.style.display !== 'block') { msgEl.textContent = '[ E ] ' + ({ well: 'écouter la présence', key: 'prendre la clé', bars: 'ouvrir la grille', master: 'parler au maître', portal: 'traverser vers la lumière' })[actTarget]; msgEl.style.opacity = 1; }
+  else if (!msgTimer || msgEl.textContent.startsWith('[ E ]')) { if (msgEl.textContent.startsWith('[ E ]')) msgEl.style.opacity = 0; }
+  renderer.render(scene, camera);
+  requestAnimationFrame(tick);
+}
+document.getElementById('start-btn').addEventListener('click', () => {
+  const ts = document.getElementById('title-screen');
+  ts.style.opacity = 0; setTimeout(() => ts.style.display = 'none', 1200);
+  say('le village dort sous la pleine lune. quelqu’un veille, près du puits.', 4200);
+  setQuest('trouver la présence qui veille, près du puits');
+});
+requestAnimationFrame(tick);
+</script>
+</body>
+</html>

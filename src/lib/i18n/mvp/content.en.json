@@ -1,0 +1,441 @@
+{
+  "guides": {
+    "raconter": {
+      "name": "Tell it in full",
+      "phrase": "Simple questions to find the details that went missing.",
+      "duration": "~5 min",
+      "intro": "We'll go back through your dream together, slowly. A few questions to find its pieces again.",
+      "steps": {
+        "film": {
+          "q": "Tell me this dream, like a film. Take your time.",
+          "placeholder": "i was in a house i didn't know…"
+        },
+        "details": {
+          "q": "Which details come back sharp? A colour, a sound, a smell?",
+          "placeholder": "the light was orange…"
+        },
+        "corps": {
+          "q": "Close your eyes a moment. What does this dream do in your body?",
+          "hint": "no need to name it — just the feeling",
+          "placeholder": "a weight in my chest…"
+        },
+        "reel": {
+          "q": "Could it be real? This place, these people — do you know them?",
+          "placeholder": "the house looks like…"
+        },
+        "rappelle": {
+          "q": "Does it remind you of something? Another dream, a recent moment?",
+          "placeholder": "yesterday, at work…"
+        },
+        "garde": {
+          "q": "Out of all that, what do you want to keep for today?",
+          "placeholder": "the urge to…"
+        }
+      }
+    },
+    "retour": {
+      "name": "Go back into the dream",
+      "phrase": "Close your eyes and revisit your dream, awake, to see what comes next.",
+      "duration": "~6 min",
+      "intro": "Eyes closed, you'll go back into your dream — just to see what happens there if you stay a while.",
+      "steps": {
+        "installe": {
+          "q": "Settle in. Close your eyes, breathe a few times. Let the day go."
+        },
+        "revois": {
+          "q": "See the strongest image of the dream again. Only that one. Let it come back."
+        },
+        "entre": {
+          "q": "Step into the image, eyes closed. Look around. Let what follows come, without forcing."
+        },
+        "depose": {
+          "q": "When it stops on its own, come back gently. Write what came — even three words.",
+          "placeholder": "what i saw, what i felt…"
+        }
+      }
+    },
+    "geste": {
+      "name": "One small real action",
+      "phrase": "Carry your dream into a small real action: draw it, write it, put it somewhere.",
+      "duration": "~3 min",
+      "intro": "This dream stayed with you. We'll give it a follow-up in real life — one small thing, doable today.",
+      "steps": {
+        "envie": {
+          "q": "This dream — what does it make you want to do, right now, for real?",
+          "placeholder": "write to someone, draw, walk…"
+        },
+        "choix": {
+          "q": "Choose one small action, doable today. The simplest one.",
+          "hint": "draw, write a note, call someone, put an object somewhere",
+          "placeholder": "i'm going to…"
+        },
+        "quand": {
+          "q": "When will you do it? Write it down — that makes it real.",
+          "placeholder": "tonight, after dinner…"
+        }
+      }
+    },
+    "intention": {
+      "name": "An intention for the night",
+      "phrase": "Before sleep: ask your night a question.",
+      "duration": "~5 min",
+      "intro": "Before you fall asleep, we'll get the night ready. You'll hand a question to your sleep.",
+      "steps": {
+        "journee": {
+          "q": "Your day in one sentence? Quick — no need to say it well.",
+          "placeholder": "long, gentle, strange…"
+        },
+        "question": {
+          "q": "A question you'd like to ask your night?",
+          "placeholder": "what do i need to know about…"
+        },
+        "image": {
+          "q": "An image that could go with you as you fall asleep?",
+          "hint": "a door, a face, a light — whatever comes",
+          "placeholder": "a blue door…"
+        },
+        "confie": {
+          "q": "Say your question quietly, one last time. Then let it go."
+        }
+      }
+    },
+    "rendormir": {
+      "name": "Fall back asleep gently",
+      "phrase": "After a bad dream or a rough waking: come back to calm.",
+      "duration": "~5 min",
+      "intro": "You woke up shaken. That's ok. We'll come back to calm, slowly, together.",
+      "steps": {
+        "ici": {
+          "q": "Feel the bed under you, the blanket, the air on your skin. You're here, safe."
+        },
+        "respire": {
+          "q": "Breathe slowly. In… hold a moment… out, longer. Twice more."
+        },
+        "main": {
+          "q": "The bad dream isn't here anymore. Put a hand on your chest if that helps."
+        },
+        "lieu": {
+          "q": "Think of a place where you feel good. Picture it around you, in detail.",
+          "placeholder": "a beach, a childhood room… (or keep it to yourself)"
+        },
+        "laisse": {
+          "q": "Let your eyes close. Nothing more to do. Sleep comes back on its own."
+        }
+      }
+    },
+    "relire": {
+      "name": "Go back over your day",
+      "phrase": "5 minutes in the evening to replay the day.",
+      "duration": "~5 min",
+      "intro": "We'll replay the film of your day, quietly, before the night.",
+      "steps": {
+        "passe": {
+          "q": "What happened today? Someone you met, a moment, a question?",
+          "placeholder": "this morning…"
+        },
+        "corps": {
+          "q": "How does your body carry this day? Where is it tight, where is it calm?",
+          "placeholder": "my shoulders are tight…"
+        },
+        "echo": {
+          "q": "Does a moment from today echo a recent dream?",
+          "placeholder": "that person i passed…"
+        },
+        "coinc": {
+          "q": "Was there an odd coincidence today?",
+          "placeholder": "i thought about… and then…"
+        },
+        "endors": {
+          "q": "What would you like to fall asleep with tonight? An image, a word?",
+          "placeholder": "the calm, a colour…"
+        }
+      }
+    },
+    "ecouter-corps": {
+      "name": "Listen to your body",
+      "phrase": "Where it settles in your body, and what it's asking for.",
+      "duration": "~6 min",
+      "intro": "We'll listen to your body for a moment. It often knows things before the head does.",
+      "steps": {
+        "ou": {
+          "q": "This dream, or this moment — where do you feel it in your body?",
+          "hint": "throat, belly, chest, shoulders…",
+          "placeholder": "in my belly…"
+        },
+        "quoi": {
+          "q": "This feeling — what is it? Warm, cold, tight, light, heavy?",
+          "placeholder": "tight and warm…"
+        },
+        "mot": {
+          "q": "If you had to put one single word on it, which one?",
+          "placeholder": "tense, soft, humming…"
+        },
+        "demande": {
+          "q": "Stay with it a moment. What would this feeling want?",
+          "hint": "wait a few seconds in silence, then write what comes",
+          "placeholder": "to be left alone, to be listened to…"
+        }
+      }
+    },
+    "parler-image": {
+      "name": "Talk to an image",
+      "phrase": "Choose one image from the dream and let it answer.",
+      "duration": "~6 min",
+      "intro": "We'll pick one image from your dream and let it talk to you. Yes, it works better than you'd think.",
+      "steps": {
+        "choix": {
+          "q": "Choose an image from your dream. The first one that comes. Which one?",
+          "placeholder": "the door, the dog, the river…"
+        },
+        "decris": {
+          "q": "Describe it, as if I couldn't see it. Colours, shape, details.",
+          "placeholder": "it's big, dark, it moves a little…"
+        },
+        "dit": {
+          "q": "Look at it a moment. If it could speak, what would it say to you?",
+          "hint": "let it come, even if it feels made up",
+          "placeholder": "it would tell me…"
+        },
+        "reponds": {
+          "q": "And you — what do you want to answer it?",
+          "placeholder": "i'd tell it…"
+        }
+      }
+    },
+    "coincidence": {
+      "name": "Tell the coincidence",
+      "phrase": "Lay out what happened, in order — that often clears it up on its own.",
+      "duration": "~5 min",
+      "intro": "We'll lay out this coincidence, start to finish. Often, telling it is enough to light it up.",
+      "steps": {
+        "ordre": {
+          "q": "Tell me what happened. In order, from start to finish.",
+          "placeholder": "first… then…"
+        },
+        "avant": {
+          "q": "What were you doing, or thinking, just before?",
+          "placeholder": "i was thinking about…"
+        },
+        "touche": {
+          "q": "What did it touch in you, in the moment?",
+          "placeholder": "a shiver, something obvious…"
+        },
+        "histoire": {
+          "q": "If you tell all of that as one single story, how does it go?",
+          "placeholder": "in one sentence…"
+        }
+      }
+    },
+    "intuition": {
+      "name": "Catch an intuition",
+      "phrase": "Write down what just went through you, before it flies off.",
+      "duration": "~3 min",
+      "intro": "Something just went through you. Let's catch it quickly, before it's gone.",
+      "steps": {
+        "note": {
+          "q": "Write down fast what just went through you. Don't look for the right words.",
+          "placeholder": "…"
+        },
+        "contexte": {
+          "q": "Where were you, what were you doing when it came?",
+          "placeholder": "in the shower, walking…"
+        },
+        "ressemble": {
+          "q": "What did it feel like? An image, a sentence, a sensation?",
+          "placeholder": "like a small voice that…"
+        }
+      }
+    }
+  },
+  "info": {
+    "groups": {
+      "words": { "title": "Dream's words" },
+      "how": { "title": "How it works" },
+      "guides": { "title": "The guides" }
+    },
+    "sheets": {
+      "kairos": {
+        "term": "Kairos",
+        "bubble": "A kairos is a moment that counts — not just any instant, the one that marks you.",
+        "body": [
+          "In the app we say « moment ». But its real name is kairos.",
+          "A kairos isn’t what time it is. It’s an instant with weight: a strong dream, an unsettling coincidence, a shiver, an intuition that lands all at once.",
+          "We keep the word for a simple reason. Most of our instants slip past unnoticed. A few don’t. Those are worth stopping for.",
+          "Every time you write something into Dream, you catch a kairos before it fades. Over time, they draw a map of what actually touches you."
+        ],
+        "source": "Where it comes from: the ancient Greeks had two words for time. Chronos, the time that passes, minute after minute. And kairos, the right moment — the one you shouldn’t let slip."
+      },
+      "intuition": {
+        "term": "Intuition",
+        "bubble": "An intuition is an idea or an image that arrives on its own, without you looking for it.",
+        "body": [
+          "An intuition is an idea or an image that arrives on its own. You weren’t looking for it: it’s there.",
+          "In the shower, walking, driving. Often it brings an answer — sometimes a question.",
+          "Artists and scientists say their best ideas arrive like that, when they aren’t forcing.",
+          "Dream simply offers to write them down. Looking back, you’ll see which ones were right."
+        ],
+        "source": "Where it comes from: dreamers in every era have noticed that the mind keeps working when you aren’t watching it. (For the curious: Gaston Bachelard wrote beautiful pages on reverie.)"
+      },
+      "signe": {
+        "term": "Sign",
+        "bubble": "A sign is something ordinary that suddenly takes on a particular meaning — for you.",
+        "body": [
+          "A bird that lands, a word that comes back three times in a day, a song at the right moment.",
+          "Nothing magic in itself. What counts is that it speaks to you, now.",
+          "Dream will never tell you « this means that ». A sign has no fixed meaning: it has the meaning you give it, at the moment you notice it.",
+          "Writing it down keeps a trace of those instants when the world seemed to wink at you. Reading them back later, you’ll sometimes see a thread you missed at the time."
+        ],
+        "source": "Where it comes from: in almost every culture, people have paid attention to signs. That isn’t believing anything at all — it’s staying awake to what touches us."
+      },
+      "coincidence": {
+        "term": "Coincidence",
+        "bubble": "A coincidence is two things happening together that, side by side, seem to mean something.",
+        "body": [
+          "You think of someone, they call. You dream of a place, you walk past it the next day.",
+          "Most of the time it’s chance. But some coincidences stay with us, because they land exactly when we were asking a question.",
+          "Dream doesn’t claim a coincidence is a message. It simply offers to tell it in the order it happened — often, that alone lights up what it stirred in you."
+        ],
+        "source": "Where it comes from: a Swiss psychiatrist, Carl Jung, gave a name to coincidences that seem to carry meaning: « synchronicity ». He didn’t say they were magic, only that they were worth looking at."
+      },
+      "frisson": {
+        "term": "Shiver",
+        "bubble": "A shiver is what the body does when something lands exactly right.",
+        "body": [
+          "Goosebumps at a piece of music, a memory that tightens your throat, a sentence that goes straight through you.",
+          "The body often reacts before the words. The shiver is its way of saying « yes, this one matters ».",
+          "Many people describe that shiver at the moment something rings true for them.",
+          "Dream offers to note when it happens, and in front of what. Over time, you spot what moves you — what actually counts for you."
+        ],
+        "source": "Where it comes from: it has long been observed that the body knows things before the head does. Listening to your shivers is listening to that part."
+      },
+      "sieste": {
+        "term": "Nap",
+        "bubble": "A nap isn’t only rest: it’s a good moment to catch images as they pass.",
+        "body": [
+          "Just before you fall asleep, or just as you wake, the mind makes strange free images, between the day and the dream.",
+          "Those images go fast. A short nap is a fine chance to pick them.",
+          "The painter Salvador Dalí took very short naps to catch these in-between images, before dropping into deep sleep.",
+          "If you write a moment down just after a nap, tell Dream: those images are often among the most surprising."
+        ],
+        "source": "Where it comes from: this in-between state, between waking and sleep, has a name: hypnagogia. Many creators have used it on purpose to find new ideas."
+      },
+      "how-interpret": {
+        "term": "How Dream reads a dream",
+        "bubble": "The more you say what you see, the more Dream learns YOUR language — and the more its readings sound like you.",
+        "body": [
+          "Dream always starts with you. Before offering anything, it asks what you see in your dream.",
+          "Your reading counts most. That’s the one Dream keeps first.",
+          "Then, and only then, it offers its own: what stands out, a possible link with your life, a question to close. Never a verdict. Always « here’s a track », never « here’s what it means ».",
+          "Dream doesn’t read from a dream dictionary. Water, for you, doesn’t mean what it means for someone else. It’s YOUR meaning being built here, dream after dream."
+        ],
+        "source": "Where it comes from: many people who work with dreams share the same rule — the one who dreamt stays the only owner of the meaning. The other’s job is to help search, not to decide."
+      },
+      "wall-anon": {
+        "term": "The Wall and anonymity",
+        "bubble": "On the Wall, nobody knows it’s you. Not even your groups. You can take your dream back whenever you want.",
+        "body": [
+          "The Wall is where dreams are shared without names. You can share one, and read the others.",
+          "When you share on the Wall, what you write becomes anonymous. Your name doesn’t appear. Your groups don’t know it’s you. Nobody can trace it back to your account.",
+          "You stay in control: at any moment, in Settings, you can take one of your dreams off the Wall. It disappears.",
+          "The Wall renews itself at its own pace, each time you open it. Nothing to refresh, nothing to keep running."
+        ],
+        "source": "Where it comes from: sharing a dream without saying who you are is an old idea. It lets you be true without feeling exposed."
+      },
+      "credits": {
+        "term": "Credits",
+        "bubble": "Creating images or worlds costs real computing power. Credits pay for that — nothing else.",
+        "body": [
+          "Writing your dreams, understanding them, keeping them: that’s the heart of Dream, and it costs no credits.",
+          "Credits are only used when you ask the Forge to create something heavy: an image, a world, a piece of work made from your dream.",
+          "Those creations run on large computers that use a lot of energy. Credits cover that real cost. It isn’t play money.",
+          "No traps: no countdown, no « offer expiring soon ». You top up when you want, and you always see what you’re paying for and why."
+        ],
+        "source": "Where it comes from: we’d rather tell you plainly what your money pays for than hide it inside a vague subscription."
+      },
+      "data": {
+        "term": "Your data",
+        "bubble": "Your dreams stay yours: nothing is erased except by you, and you can take everything with you whenever you want.",
+        "body": [
+          "What you write in Dream belongs to you: your dreams, your moments, your notes.",
+          "Nothing erases itself. Nothing goes to a group or to the Wall unless you decide it.",
+          "You can get it all back. « Export everything » gives you a file with everything you’ve written, to keep wherever you want.",
+          "And you can leave for good. « Delete my account » erases your data. As a safety net, we wait seven days before the final erasure, in case you change your mind — you can cancel during that time."
+        ],
+        "source": "Where it comes from: we think a dream is an intimate thing. You should be able to keep it, take it with you or erase it without asking permission."
+      },
+      "guide-image": {
+        "term": "Talk to an image",
+        "bubble": "You choose one image from your dream, and let it answer you, as if it could speak.",
+        "body": [
+          "In a dream, one image often comes back: a door, an animal, a person, an object.",
+          "This guide invites you to speak to it. Not as a game — to see what comes when you let it « answer ».",
+          "You ask a simple question: who are you? what do you want? Then you listen to what rises, without forcing.",
+          "Often the image says something you already knew, without the words. It surprises, and it clears things up."
+        ],
+        "source": "Where it comes from: people who work with dreams invite us to treat images as alive, rather than as symbols to decode. It’s sometimes called « letting the dream go on »."
+      },
+      "guide-corps": {
+        "term": "Listen to your body",
+        "bubble": "You look at where the dream settles in your body, and what that place seems to be asking for.",
+        "body": [
+          "A dream often leaves a physical trace: a tight throat, a knotted belly, a warmth, a weight on the chest.",
+          "This guide invites you to put your attention there, gently, without trying to change anything.",
+          "You name what you feel, and you wait. Sometimes the feeling moves on its own once it’s really looked at.",
+          "This is not care and not treatment. It’s a way of listening to yourself, and it’s often enough to see more clearly."
+        ],
+        "source": "Where it comes from: an American psychologist, Eugene Gendlin, noticed that paying attention to what you feel in the body often helps you understand what’s working on you. He called it « focusing »."
+      },
+      "guide-intuition": {
+        "term": "Catch an intuition",
+        "bubble": "You write down what just went through you — an idea, an image — before it flies off.",
+        "body": [
+          "Intuitions don’t announce themselves and they don’t stay. A few seconds, and it’s already blurred.",
+          "This guide is very short: it helps you put down what comes right away, without judging it, without sorting it.",
+          "You say what you saw or thought, even if it makes no sense in the moment.",
+          "Later, reading back, you’ll see which ones were right. That’s how you learn to trust your intuitions."
+        ],
+        "source": "Where it comes from: that state where ideas arrive freely, between waking and sleep or in full reverie, has interested creators forever. It’s been called reverie, or hypnagogia."
+      },
+      "guide-reentry": {
+        "term": "Go back into the dream",
+        "bubble": "You close your eyes, awake, and go back into your dream to see what happens next.",
+        "body": [
+          "A dream often stops at the wrong moment: just before the end, on a closed door, a question left hanging.",
+          "This guide offers to pick it up again, awake, eyes closed. You put yourself back in the scene and let what follows come.",
+          "Nothing has to happen. Sometimes the scene moves, sometimes not. Both are fine.",
+          "It’s a gentle way to stay a while with a dream that marked you, instead of letting it slip away."
+        ],
+        "source": "Where it comes from: picking a dream back up while awake, to let it go further, is an old practice, used in several traditions to listen better to what the dream had to say."
+      },
+      "guide-intention": {
+        "term": "An intention for the night",
+        "bubble": "Before sleep, you put a question or an intention to your night.",
+        "body": [
+          "You can go into sleep with a small question in mind: about a choice, an emotion, a dream that keeps coming back.",
+          "This guide helps you put it simply, in one sentence, just before you fall asleep.",
+          "It doesn’t command dreams — nobody can do that. But it points your attention, and sometimes the night answers in its own way.",
+          "In the morning, you write down what came, even a fragment. Over time, you’ll see whether your night likes being spoken to."
+        ],
+        "source": "Where it comes from: asking something of your night before sleeping is a very old practice, found in many cultures. It’s sometimes called dream « incubation »."
+      },
+      "signal-soin": {
+        "term": "What insists",
+        "bubble": "Dream predicts nothing. It notices when your dream presses on the same thing several times.",
+        "body": [
+          "Sometimes a dream insists. The same argument coming back, something breaking, a body that can’t go on, something left behind — scene after scene.",
+          "When it’s clear, Dream tells you. Once. Without drama.",
+          "This is not a prediction. Your dream is not announcing an accident, a breakup or an illness, and Dream won’t either. It makes no diagnosis: it is not a medical tool.",
+          "What it does: name what comes back in the dream. Nothing more. What that touches in your life — you’re the one who knows, or nobody does.",
+          "You can wave the card away. It won’t come looking for you: at most one a week, never more.",
+          "And if what you write speaks of real distress — dark thoughts, violence, danger — Dream stops commenting. It gives you numbers where someone picks up."
+        ],
+        "source": "Where it comes from: many dreamers notice that a dream can press on what they avoid in the daytime. That doesn’t tell the future. It tells what weighs now."
+      }
+    }
+  },
+  "appointments": {
+    "title": "Dream",
+    "morning": "☾ Sleep well? Tell your dream before it goes.",
+    "evening": "☀ An intention for the night? 30 seconds."
+  }
+}

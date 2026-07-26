@@ -1,0 +1,80 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dream — B · L'encre vivante (ANIMA home, SVG live)</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#c9a84b;--gold-lit:#e8c878;--cream:#ede0c4;--ink:#0f0c07;--ease:cubic-bezier(0.382,0,0.618,1)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#060504;display:flex;justify-content:center;align-items:flex-start;min-height:100vh;padding:34px 18px 60px;font-family:Inter,sans-serif}
+.phone{width:392px;height:792px;border-radius:44px;position:relative;overflow:hidden;background:radial-gradient(115% 70% at 50% 42%,#17130c 0%,#100d08 56%,#0a0805 100%);box-shadow:0 0 0 10px #14130f,0 0 0 12px #2a261c,0 44px 100px -28px #000}
+.grain{position:absolute;inset:0;pointer-events:none;opacity:.055;mix-blend-mode:overlay;z-index:8;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>")}
+.status{position:absolute;top:0;left:0;right:0;height:42px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;font:500 12px Inter;color:#9a8a6a;z-index:7}
+.corner{position:absolute;width:54px;height:54px;z-index:6;opacity:.55}.corner svg{width:100%;height:100%}.corner path{fill:none;stroke:var(--gold);stroke-width:1}
+.c1{top:48px;left:22px}.c2{top:48px;right:22px;transform:scaleX(-1)}
+.eyebrow{position:absolute;top:56px;left:0;right:0;text-align:center;font:500 11px Cinzel,serif;letter-spacing:.5em;color:var(--gold);z-index:6}
+.stage{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:5;padding:0 30px 150px}
+.mandala{width:248px;height:248px;filter:drop-shadow(0 0 26px rgba(201,168,75,.28))}
+.mandala circle,.mandala path{fill:none;stroke:var(--gold);stroke-linecap:round;stroke-linejoin:round}
+.mandala .draw{stroke-dasharray:var(--len);stroke-dashoffset:var(--len);animation:draw 3200ms var(--ease) forwards,breath 6765ms var(--ease) infinite 3400ms}
+.mandala .core{fill:var(--gold-lit);stroke:none;filter:blur(.4px);animation:beat 4181ms var(--ease) infinite}
+.q{font:italic 400 32px/1.12 "EB Garamond",serif;color:var(--cream);text-align:center;margin-top:44px}
+.sub{font:300 13px/1.5 Inter;color:#9a8a6a;text-align:center;margin-top:11px}
+.cta{position:absolute;left:30px;right:30px;bottom:96px;display:flex;align-items:center;justify-content:center;gap:9px;padding:15px;border-radius:999px;cursor:pointer;z-index:6;background:linear-gradient(180deg,rgba(201,168,75,.13),rgba(18,14,9,.5));border:1px solid rgba(201,168,75,.5);box-shadow:inset 0 1px 0 rgba(232,200,120,.22),0 10px 28px -16px #000;transition:all 233ms var(--ease)}
+.cta:hover{border-color:rgba(232,200,120,.85);transform:translateY(-1px)}
+.cta svg{width:17px;height:17px;stroke:var(--gold);fill:none;stroke-width:1.6}
+.cta span{font:500 14.5px Inter;color:var(--cream)}
+.alt{position:absolute;left:0;right:0;bottom:62px;text-align:center;font:400 12.5px Inter;color:#85765a;z-index:6}
+.alt a{color:var(--gold);text-decoration:none}.alt .d{margin:0 7px;opacity:.5}
+.rail{position:absolute;left:0;right:0;bottom:0;height:72px;display:flex;justify-content:center;gap:54px;align-items:center;padding-bottom:16px;z-index:7}
+.rail a{display:flex;flex-direction:column;align-items:center;gap:5px;text-decoration:none;cursor:pointer}
+.rail svg{width:21px;height:21px;stroke:rgba(201,168,75,.5);fill:none;stroke-width:1.3}
+.rail b{font:500 9.5px Inter;color:rgba(201,168,75,.5)}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes breath{0%,100%{opacity:.65}50%{opacity:1}}
+@keyframes beat{0%,100%{opacity:.55;r:5px}50%{opacity:1;r:7px}}
+@media(prefers-reduced-motion:reduce){.draw{animation:none;stroke-dashoffset:0}.core{animation:none}}
+.cap{max-width:392px;margin-top:16px;font:400 12px/1.6 Inter;color:#6b6256;text-align:center}.cap b{color:#c9a84b}
+</style></head>
+<body>
+<div style="display:flex;flex-direction:column;align-items:center">
+<div class="phone">
+  <div class="grain"></div>
+  <div class="status"><span>9:41</span><span>●●● 84%</span></div>
+  <div class="corner c1"><svg viewBox="0 0 54 54"><path d="M52 2 Q12 2 7 24 Q4 38 20 42 Q30 44 27 32 M7 24 Q2 30 4 40"/></svg></div>
+  <div class="corner c2"><svg viewBox="0 0 54 54"><path d="M52 2 Q12 2 7 24 Q4 38 20 42 Q30 44 27 32 M7 24 Q2 30 4 40"/></svg></div>
+  <div class="eyebrow">DREAM</div>
+  <div class="stage">
+    <svg class="mandala" viewBox="0 0 200 200">
+      <circle class="draw" style="--len:534" cx="100" cy="100" r="85" stroke-width="1"/>
+      <circle class="draw" style="--len:471" cx="100" cy="100" r="75" stroke-width=".7" opacity=".5"/>
+      <!-- Seed of Life (7 circles) -->
+      <g stroke-width=".9">
+        <circle class="draw" style="--len:283" cx="100" cy="100" r="45"/>
+        <circle class="draw" style="--len:283" cx="100" cy="55" r="45"/>
+        <circle class="draw" style="--len:283" cx="100" cy="145" r="45"/>
+        <circle class="draw" style="--len:283" cx="61" cy="77.5" r="45"/>
+        <circle class="draw" style="--len:283" cx="139" cy="77.5" r="45"/>
+        <circle class="draw" style="--len:283" cx="61" cy="122.5" r="45"/>
+        <circle class="draw" style="--len:283" cx="139" cy="122.5" r="45"/>
+      </g>
+      <!-- botanical petals (vesica leaves) outward -->
+      <g stroke-width="1">
+        <path class="draw" style="--len:150" d="M100 100 Q116 70 100 30 Q84 70 100 100"/>
+        <path class="draw" style="--len:150" d="M100 100 Q116 130 100 170 Q84 130 100 100"/>
+        <path class="draw" style="--len:150" d="M100 100 Q139 84 174 100 Q139 116 100 100"/>
+        <path class="draw" style="--len:150" d="M100 100 Q61 84 26 100 Q61 116 100 100"/>
+      </g>
+      <circle class="core" cx="100" cy="100" r="6"/>
+    </svg>
+    <div class="q">qu'as-tu rêvé&nbsp;?</div>
+    <div class="sub">tu seras le premier à le comprendre</div>
+  </div>
+  <div class="cta"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3" fill="#c9a84b" stroke="none"/><path d="M6 11a6 6 0 0 0 12 0M12 17v3" stroke-linecap="round"/></svg><span>maintenir pour raconter</span></div>
+  <div class="alt">ou <a>écrire mon rêve</a><span class="d">·</span><a>noter le jour →</a></div>
+  <div class="rail">
+    <a><svg viewBox="0 0 24 24"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15.5H6.5A1.5 1.5 0 0 0 5 20V4.5z" stroke-linejoin="round"/><path d="M8.5 8h7M8.5 11.5h7" stroke-linecap="round"/></svg><b>Atlas</b></a>
+    <a><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.4"/><circle cx="5" cy="6" r="1" fill="rgba(201,168,75,.5)" stroke="none"/><circle cx="19" cy="7" r="1" fill="rgba(201,168,75,.5)" stroke="none"/><circle cx="6" cy="18" r="1" fill="rgba(201,168,75,.5)" stroke="none"/><path d="M6.6 6.9 10 10.6M14.2 10.4 17.8 7.6M9.8 13.8 6.7 17" stroke-width="1.1" opacity=".5"/></svg><b>Univers</b></a>
+  </div>
+</div>
+<p class="cap"><b>B live-UI</b> — orbe = mandala d'or <b>SVG net qui se dessine</b> (Seed-of-Life + pétales vesica), cœur qui bat, filets Art Nouveau · φ · grain · reduced-motion. La version code (crisp, scalable) du rendu Higgsfield.</p>
+</div>
+</body></html>

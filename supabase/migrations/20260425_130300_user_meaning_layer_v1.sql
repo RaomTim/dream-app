@@ -1,0 +1,18 @@
+-- =============================================================================
+-- MIGRATION : Couche apprentissage personnelle
+-- File: 20260425_130300_user_meaning_layer_v1.sql
+-- Author: Yeshua — Chantier 7
+-- Applied via MCP 2026-04-25
+-- =============================================================================
+
+-- 6 tables :
+-- - user_meaning_layer (symbol_concept → user_meaning, weight)
+-- - user_validations (aha/maybe/no/skip + proposition_voix)
+-- - kairos_user_annotations
+-- - circle_meaning_layer (consensus cercle)
+-- - global_meaning_clusters (k-anon 100+)
+-- - user_skips (pondère edges weight × 0.8 si skip recurrent)
+--
+-- + RLS user_owns + circle_meaning member_read + global public read
+--
+-- Voir migration appliquée via MCP pour le code complet.
