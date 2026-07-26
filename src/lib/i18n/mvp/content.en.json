@@ -249,9 +249,15 @@
   },
   "info": {
     "groups": {
-      "words": { "title": "Dream's words" },
-      "how": { "title": "How it works" },
-      "guides": { "title": "The guides" }
+      "words": {
+        "title": "Dream's words"
+      },
+      "how": {
+        "title": "How it works"
+      },
+      "guides": {
+        "title": "The guides"
+      }
     },
     "sheets": {
       "kairos": {
@@ -437,5 +443,136 @@
     "title": "Dream",
     "morning": "☾ Sleep well? Tell your dream before it goes.",
     "evening": "☀ An intention for the night? 30 seconds."
+  },
+  "scope": {
+    "dream": {
+      "trailAria": "what you can put down here",
+      "bubbleLead": "Under “dream” there’s more than dreams. All of this belongs here:",
+      "hints": {
+        "reve": "whole or in pieces",
+        "signe": "what the world hands you",
+        "reverie": "eyes open, elsewhere",
+        "hypnagogie": "right before sleep",
+        "frisson": "the body answers first",
+        "synchronicite": "two things that rhyme",
+        "note_jour": "the rest of your day"
+      },
+      "more": "read more",
+      "pageTitle": "What goes here",
+      "pageIntro": [
+        "Under the word “dream” there’s more than dreams. There’s everything that reaches you without being asked for — at night, and in daylight too.",
+        "You don’t have to sort anything in the moment. You put it down; the app asks afterwards."
+      ],
+      "sections": {
+        "reve": [
+          "Whole or in pieces. Three blurry images are worth as much as a full story — and they’re the usual case.",
+          "No dream is too small, or too silly. A door that won’t shut counts as much as a dream where you fly.",
+          "The best moment is on waking, before coffee. After that, it leaves."
+        ],
+        "signe": [
+          "A crow that lands. A word that comes back three times in a day. A sentence overheard on the bus, right on the thing you’ve been chewing over all week.",
+          "Nothing magic in itself. What matters is that it caught you, on that particular day.",
+          "Dream will never tell you what it means — a sign has no fixed meaning. But note enough of them and yours start to form a language only you speak."
+        ],
+        "reverie": [
+          "Eyes open. On the train, in the shower, looking out of a window — and you’re somewhere else.",
+          "We take it for a failed dream, or for wasted time. It’s another thing altogether: a waking mode, where the images arrive without being fetched.",
+          "Write it down the way it came. The image, not the explanation."
+        ],
+        "hypnagogie": [
+          "Just before you drop off, or just after you surface. A face. A sentence heard very clearly. Shapes that move.",
+          "It lasts a few seconds and it nearly always dissolves.",
+          "If you catch one, write fast: two words will do."
+        ],
+        "frisson": [
+          "Goosebumps on a piece of music. The throat tightening. The thing that goes through you when someone says something true.",
+          "Often the body has answered before you’ve worked out what to.",
+          "You can note only that: when it happened, and in front of what. That’s already a deposit."
+        ],
+        "synchronicite": [
+          "You think of someone, they call. You dream of a place, you walk past it the next day.",
+          "Most of the time it’s chance, and Dream will never claim otherwise. But some land exactly when you were asking the question — those ones you still remember ten years on.",
+          "It announces nothing. Tell it in the order it happened: that’s usually where it clears up on its own."
+        ],
+        "note_jour": [
+          "Whatever fits no box. A sentence from the day. Something that gripped you. A joy.",
+          "It’s the way out of all the others: when it looks like none of the above, put it here."
+        ]
+      },
+      "afterTitle": "And then?",
+      "after": [
+        "Nothing is required. A deposit that stays a deposit is all we ask of you.",
+        "But if you want to go further with one of them, Dream has small crossings: a few questions, one at a time, five minutes. There’s one for listening to your body, one for going back into an interrupted dream, one for telling a coincidence."
+      ],
+      "guidesLink": "see the guides",
+      "source": "Where this comes from: kairos is a Greek word — the right moment, the one you don’t want to let slip. Robert Moss made an everyday practice of it: reading the signs of the day the way you’d read a dream. The word synchronicity comes from Carl Jung, who didn’t say those coincidences were magic, only that they were worth looking at. Gaston Bachelard wrote a whole book defending reverie, which people took for wasted time. And the researcher Harry Hunt showed there isn’t one kind of dream but several — which is why there’s more than one box here."
+    },
+    "heart": {
+      "trailAria": "what you can say here",
+      "bubbleLead": "The word, the song, the cry, the murmur. Whatever your heart has to say, right now:",
+      "rows": [
+        "a joy",
+        "a fear",
+        "an anger, a cry",
+        "a doubt, a decision that weighs",
+        "a gratitude",
+        "a pain",
+        "or nothing in particular — just how it’s going"
+      ],
+      "more": "read more",
+      "pageTitle": "What the heart is allowed to say",
+      "pageIntro": [
+        "There’s no right answer to “how are you feeling”. There’s yours, today, however it comes out.",
+        "You record it for yourself first. Nothing goes anywhere until you decide it does."
+      ],
+      "sections": {
+        "joie": {
+          "title": "a joy",
+          "body": [
+            "It deserves saying as much as the rest. We note what’s stuck and forget to keep what’s going well — six months later, none of it is left."
+          ]
+        },
+        "peur": {
+          "title": "a fear, a doubt",
+          "body": [
+            "The thing keeping you awake. The decision you’ve been putting off for three weeks.",
+            "Saying it out loud doesn’t settle it. It gives it its real size."
+          ]
+        },
+        "colere": {
+          "title": "an anger, a cry",
+          "body": [
+            "The rage that found nowhere to go. The unfairness you swallowed without saying anything.",
+            "It’s allowed to exist here, with nobody asking you to calm it down first."
+          ]
+        },
+        "douleur": {
+          "title": "a pain",
+          "body": [
+            "What hurts. Nobody here will tell you it’s nothing, or that it’ll pass.",
+            "You put it down, and it’s kept."
+          ]
+        },
+        "gratitude": {
+          "title": "a gratitude",
+          "body": [
+            "Thank you to whom, thank you for what. It comes out clumsily — here, it’s allowed to come out clumsily."
+          ]
+        },
+        "rien": {
+          "title": "or nothing in particular",
+          "body": [
+            "Some days there’s no news. “I’m fine, it’s flat” is a valid deposit.",
+            "Read back in three months, it will say something."
+          ]
+        }
+      },
+      "afterTitle": "And then?",
+      "after": [
+        "After a deposit, Dream offers to talk with you about what you’ve just said. You can also do nothing: having said it is already something.",
+        "And if you want a guided crossing, there are evening ones — going back over your day, setting an intention before sleep, falling back asleep when the night has broken."
+      ],
+      "guidesLink": "see the guides"
+    }
   }
 }

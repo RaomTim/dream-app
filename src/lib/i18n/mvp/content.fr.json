@@ -249,9 +249,15 @@
   },
   "info": {
     "groups": {
-      "words": { "title": "Les mots de Dream" },
-      "how": { "title": "Comment ça marche" },
-      "guides": { "title": "Les guides" }
+      "words": {
+        "title": "Les mots de Dream"
+      },
+      "how": {
+        "title": "Comment ça marche"
+      },
+      "guides": {
+        "title": "Les guides"
+      }
     },
     "sheets": {
       "kairos": {
@@ -437,5 +443,136 @@
     "title": "Dream",
     "morning": "☾ Bien dormi ? Raconte ton rêve avant qu'il file.",
     "evening": "☀ Une intention pour la nuit ? 30 secondes."
+  },
+  "scope": {
+    "dream": {
+      "trailAria": "ce qu’on peut déposer ici",
+      "bubbleLead": "Sous « rêve », il n’y a pas que les rêves. Tout ça se dépose ici :",
+      "hints": {
+        "reve": "entier ou en miettes",
+        "signe": "ce que le monde te tend",
+        "reverie": "les yeux ouverts, ailleurs",
+        "hypnagogie": "juste avant de dormir",
+        "frisson": "le corps répond avant toi",
+        "synchronicite": "deux choses qui riment",
+        "note_jour": "le reste de ta journée"
+      },
+      "more": "lire +",
+      "pageTitle": "Ce qu’on dépose ici",
+      "pageIntro": [
+        "Sous le mot « rêve », il n’y a pas que les rêves. Il y a tout ce qui t’arrive sans que tu l’aies demandé — la nuit, et le jour aussi.",
+        "Tu n’as rien à classer sur le moment. Tu déposes ; l’app demande après."
+      ],
+      "sections": {
+        "reve": [
+          "Entier ou en miettes. Trois images floues valent un récit complet — c’est même le cas le plus courant.",
+          "Il n’y a pas de rêve trop petit, ni trop bête. Une porte qui ferme mal compte autant qu’un rêve où tu voles.",
+          "Le meilleur moment, c’est au réveil, avant le café. Après, il s’en va."
+        ],
+        "signe": [
+          "Un corbeau qui se pose. Un mot qui revient trois fois dans la journée. Une phrase entendue dans le bus, pile sur ce que tu rumines depuis une semaine.",
+          "Rien de magique en soi. Ce qui compte, c’est que ça t’ait attrapé, toi, ce jour-là.",
+          "Dream ne te dira jamais ce que ça veut dire — un signe n’a pas de sens fixe. Mais à force d’en noter, les tiens finissent par former une langue que tu es seul à parler."
+        ],
+        "reverie": [
+          "Les yeux ouverts. Dans le train, sous la douche, en regardant par la fenêtre — et te voilà ailleurs.",
+          "On la prend pour un rêve raté, ou pour du temps perdu. C’est autre chose : un mode éveillé, où les images viennent sans qu’on aille les chercher.",
+          "Note-la comme elle est venue. L’image, pas l’explication."
+        ],
+        "hypnagogie": [
+          "Juste avant de tomber de sommeil, ou juste après avoir remonté. Un visage. Une phrase entendue très clairement. Des formes qui se déplacent.",
+          "Ça dure quelques secondes et ça s’efface presque toujours.",
+          "Si tu en attrapes une, écris vite : deux mots suffisent."
+        ],
+        "frisson": [
+          "La chair de poule sur un morceau de musique. La gorge qui se serre. Le truc qui te traverse quand quelqu’un dit vrai.",
+          "Souvent, le corps a répondu avant que tu aies compris quoi.",
+          "Tu peux ne noter que ça : quand c’est arrivé, et devant quoi. C’est déjà un dépôt."
+        ],
+        "synchronicite": [
+          "Tu penses à quelqu’un, il appelle. Tu rêves d’un lieu, tu le croises le lendemain.",
+          "Le plus souvent c’est le hasard, et Dream ne prétendra jamais l’inverse. Mais certaines tombent pile au moment où tu te posais la question — celles-là, on s’en souvient dix ans après.",
+          "Ça n’annonce rien. Raconte-la dans l’ordre où c’est arrivé : c’est souvent là qu’elle s’éclaire toute seule."
+        ],
+        "note_jour": [
+          "Ce qui n’entre dans aucune case. Une phrase de la journée. Un truc qui t’a serré. Une joie.",
+          "C’est la porte de sortie de toutes les autres : quand ça ne ressemble à rien de ce qui précède, dépose-le là."
+        ]
+      },
+      "afterTitle": "Et après ?",
+      "after": [
+        "Rien n’est obligatoire. Un dépôt qui reste un dépôt, c’est déjà tout ce qu’on te demande.",
+        "Mais si tu veux aller plus loin avec l’un d’eux, Dream a des petites traversées : quelques questions, une à la fois, cinq minutes. Il y en a une pour écouter son corps, une pour retourner dans un rêve interrompu, une pour raconter une coïncidence."
+      ],
+      "guidesLink": "voir les guides",
+      "source": "D’où ça vient : kaïros est un mot grec — le moment juste, celui qu’on ne veut pas laisser filer. Robert Moss en a fait une pratique de tous les jours : lire les signes du jour comme on lit un rêve. Le mot synchronicité vient de Carl Jung, qui ne disait pas que ces coïncidences étaient magiques, mais qu’elles méritaient qu’on les regarde. Gaston Bachelard a écrit un livre entier pour défendre la rêverie, qu’on prenait pour du temps perdu. Et le chercheur Harry Hunt a montré qu’il n’y a pas une seule sorte de rêve, mais plusieurs — c’est pour ça qu’il y a plusieurs cases ici."
+    },
+    "heart": {
+      "trailAria": "ce qu’on peut dire ici",
+      "bubbleLead": "La parole, le chant, le cri, le murmure. Ce que ton cœur a à dire, là, maintenant :",
+      "rows": [
+        "une joie",
+        "une peur",
+        "une colère, un cri",
+        "un doute, une décision qui pèse",
+        "une gratitude",
+        "une douleur",
+        "ou rien de précis — juste comment ça va"
+      ],
+      "more": "lire +",
+      "pageTitle": "Ce que le cœur a le droit de dire",
+      "pageIntro": [
+        "Il n’y a pas de bonne réponse à « comment tu te sens ». Il y a la tienne, aujourd’hui, telle qu’elle sort.",
+        "Tu enregistres pour toi d’abord. Rien ne part nulle part tant que tu ne l’as pas décidé."
+      ],
+      "sections": {
+        "joie": {
+          "title": "une joie",
+          "body": [
+            "Elle mérite d’être dite autant que le reste. On note ce qui coince et on oublie de garder ce qui va bien — six mois plus tard, il n’en reste rien."
+          ]
+        },
+        "peur": {
+          "title": "une peur, un doute",
+          "body": [
+            "Ce qui t’empêche de dormir. La décision que tu remets à demain depuis trois semaines.",
+            "Le dire à voix haute ne la règle pas. Ça lui donne sa vraie taille."
+          ]
+        },
+        "colere": {
+          "title": "une colère, un cri",
+          "body": [
+            "La rage qui n’a pas trouvé où aller. L’injustice que tu as encaissée sans rien dire.",
+            "Elle a le droit d’exister ici, sans qu’on te demande de la calmer d’abord."
+          ]
+        },
+        "douleur": {
+          "title": "une douleur",
+          "body": [
+            "Ce qui fait mal. On ne te dira pas que ce n’est rien, ni que ça passera.",
+            "Tu déposes, et c’est gardé."
+          ]
+        },
+        "gratitude": {
+          "title": "une gratitude",
+          "body": [
+            "Merci à qui, merci de quoi. Ça se dit mal sur le moment — ici, ça peut se dire mal."
+          ]
+        },
+        "rien": {
+          "title": "ou rien de précis",
+          "body": [
+            "Certains jours, il n’y a pas de nouvelle. « Ça va, c’est plat » est un dépôt valable.",
+            "Relu dans trois mois, il dira quelque chose."
+          ]
+        }
+      },
+      "afterTitle": "Et après ?",
+      "after": [
+        "Après un dépôt, Dream propose de parler avec toi de ce que tu viens de dire. Tu peux aussi ne rien faire : l’avoir dit, c’est déjà quelque chose.",
+        "Et si tu veux une traversée guidée, il y en a pour le soir — relire sa journée, poser une intention avant de dormir, se rendormir quand la nuit s’est cassée."
+      ],
+      "guidesLink": "voir les guides"
+    }
   }
 }
