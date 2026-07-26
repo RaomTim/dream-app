@@ -190,21 +190,32 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
     } catch { /* embedding indisponible → pas de moments de jour, non bloquant */ }
 
     // ── 3) écho ancien (prophétique) ──
-    // Cinq verrous désormais réellement appliqués côté RPC : seuil D4 de Tim
-    // (0.75, jamais appliqué jusqu'au 26/07), z par source, correction de
-    // hubness, maturation ECHO_RIPENING (récurrence ≥ 3 ET charge somatique ≥ 2,
-    // 2_DESIGN:247) et plafond d'exposition sur 30 jours.
-    // Sur le corpus actuel de Tim, cela ne laisse passer AUCUN écho ancien —
-    // le score maximal atteignable y est 0.7368, sous le seuil qu'il a lui-même
-    // arbitré. C'est le comportement voulu : la phrase « un rêve ancien semble
-    // avoir préparé celui-ci » est la seule de l'app qui affirme une causalité.
+    // Cinq verrous désormais réellement appliqués côté RPC : seuil de proximité,
+    // z par source, correction de hubness, maturation ECHO_RIPENING (récurrence
+    // ≥ 3 ET charge somatique ≥ 2, 2_DESIGN:247) et plafond d'exposition sur
+    // 30 jours.
+    //
+    // Le seuil : arbitré à 0.75 par Tim le 25/04 (D4) mais JAMAIS appliqué
+    // jusqu'au 26/07 — `p_min_combined` était passé à la RPC et lu par aucune.
+    // Une fois appliqué pour de vrai, il s'est révélé inatteignable : le score
+    // maximum du corpus de Tim est 0.7159, soit 0.034 SOUS son propre seuil.
+    // Ce n'était donc pas un filtre, c'était une extinction — invisible tant
+    // que la feature affichait quand même.
+    //
+    // Ramené à 0.65 le 26/07 (arbitrage Tim, sur mesure) : 9 échos sur tout le
+    // corpus, exposition maximale d'un même rêve = 3. Le « tout en bas » testé
+    // en donnait 22 avec une exposition de 7 — un rêve sur trois, ce qui n'est
+    // plus un événement. La phrase « un rêve ancien semble avoir préparé
+    // celui-ci » est la seule de l'app qui affirme une causalité : elle se
+    // mérite, mais elle ne doit pas être impossible.
+    const PROPHETIC_MIN_COMBINED = 0.65
     const propheticRows: { id: string; days_diff: number }[] = []
     try {
       const { data: proph } = await supabase.rpc('find_kairos_prophetic', {
         p_user_id: userId,
         p_kairos_id: params.id,
         p_min_days_back: 30,
-        p_min_combined: 0.75,
+        p_min_combined: PROPHETIC_MIN_COMBINED,
         p_min_numinosity_past: 0.4,
         p_limit: 3,
       })
