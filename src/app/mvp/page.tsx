@@ -31,6 +31,9 @@ import { GuidesSheet, GuidesLibrary } from '@/components/GuidesPanel'
 import { type Guide, GUIDES_BY_ID } from '@/lib/guides'
 import SettingsScreen from '@/components/SettingsScreen'
 import { InfoDot } from '@/components/InfoSystem'
+// C1 2026-07-26 — la traîne du mot devient la porte du périmètre (bulle → page → guides).
+import { ScopeTrail } from '@/components/DepositScope'
+import { KGLYPH } from '@/lib/kairos-glyphs'
 import { AMBIANCES, previewAmbiance, startAlarm, startVibration, type AmbianceId, type AlarmHandle } from '@/lib/alarm-sounds'
 /* Offline-first : file d'attente des dépôts (IndexedDB) + auto-flush au retour réseau. */
 import { enqueueDeposit } from '@/lib/offline-queue'
@@ -636,6 +639,13 @@ function MvpAppInner() {
     setGuidesSheet(null); setReadId(kairosId); setGuideRun({ guide: g, kairosId, dreamText }); setScreen('guide')
   }
   const exitGuide = () => { const kid = guideRun?.kairosId; setGuideRun(null); setGuidesSheet(null); setScreen(kid ? 'read' : 'journal') }
+  /* C1 2026-07-26 — la bibliothèque des guides est désormais atteignable depuis la
+     page « ce qu'on dépose ici », c'est-à-dire depuis l'accueil et depuis le Cœur.
+     Sans mémoire d'origine, `onBack` renvoyait au Journal — on serait entré par la
+     porte du Rêve pour ressortir ailleurs. Une seule variable règle ça, et le
+     comportement historique (retour fiche / journal) reste le défaut. */
+  const [guidesBack, setGuidesBack] = useState<Screen | null>(null)
+  const openGuideLibrary = (from: Screen) => { setGuidesBack(from); setScreen('guides') }
   const [crisis, setCrisis] = useState(false)
   const [cross, setCross] = useState<null | 'day' | 'night'>(null)
   // onboarding O1-O4 — 'checking' seulement pour un compte encore non-onboarde (pas de flash home)
@@ -682,9 +692,9 @@ function MvpAppInner() {
   return (
     <Shell day={screen === 'animus'}>
       {crisis && <CrisisCard onClose={() => setCrisis(false)} />}
-      {screen === 'home' && <HomeScreen session={session} onCaptured={(text, meta) => { checkCrisis(text); setDraft({ text, kairosId: null, markers: meta?.markers, durationSec: meta?.durationSec, localId: meta?.localId ?? null }); setScreen('postdepot') }} goAnimus={() => crossTo('animus')} goScan={() => { setScanFrom('home'); setScreen('scan') }} openDream={(id: string) => { setReadId(id); setReadFrom('home'); setScreen('read') }} onSettings={() => { setSettingsFrom('home'); setScreen('settings') }} />}
+      {screen === 'home' && <HomeScreen session={session} onCaptured={(text, meta) => { checkCrisis(text); setDraft({ text, kairosId: null, markers: meta?.markers, durationSec: meta?.durationSec, localId: meta?.localId ?? null }); setScreen('postdepot') }} goAnimus={() => crossTo('animus')} goScan={() => { setScanFrom('home'); setScreen('scan') }} openDream={(id: string) => { setReadId(id); setReadFrom('home'); setScreen('read') }} onSettings={() => { setSettingsFrom('home'); setScreen('settings') }} onGuides={() => openGuideLibrary('home')} />}
       {screen === 'animus' && <AnimusScreen session={session} goAnima={() => crossTo('home')} onCaptured={(text, type) => { checkCrisis(text); setDraft({ text, kairosId: null, kairosType: type, dayDeposit: true }); setScreen('postdepot') }} openDream={id => { setReadId(id); setReadFrom('animus'); setScreen('read') }}
-        onGreatConsult={() => { setGreatFrom('animus'); setGreatView('consult'); setScreen('greatdreams') }} />}
+        onGreatConsult={() => { setGreatFrom('animus'); setGreatView('consult'); setScreen('greatdreams') }} onGuides={() => openGuideLibrary('animus')} />}
       {screen === 'scan' && <ScanScreen session={session} onBack={() => setScreen(scanFrom === 'import' ? 'import' : 'home')} onDone={(text, meta) => {
         checkCrisis(text)
         setDraft(d => {
@@ -720,7 +730,7 @@ function MvpAppInner() {
       )}
       {screen === 'read' && readId && <ReadScreen session={session} kairosId={readId} onBack={() => setScreen(readFrom)} onInterpret={(id, text, type, present) => { setDraft({ text, kairosId: id, kairosType: type, presentContext: !!present }); setInterpretFrom('read'); setScreen('interpret') }} onGuides={(id, text, type, radiant) => openGuides(id, text, type, radiant)} onResumeGuide={resumeGuide} onRedoGuide={redoGuide} onCreate={(id, title, text) => { try { sessionStorage.setItem('forge_kairos', JSON.stringify({ id, title, text: (text || '').slice(0, 120) })) } catch {}; setScreen('forge') }} onOpenDream={(id: string) => setReadId(id)} onDeleted={() => setScreen(readFrom)} />}
       {screen === 'guide' && guideRun && <GuideSession session={session} guide={guideRun.guide} kairosId={guideRun.kairosId} dreamText={guideRun.dreamText} resume={guideRun.resume} onExit={exitGuide} />}
-      {screen === 'guides' && <GuidesLibrary onPick={(g) => { const ctx = guidesSheet; launchGuide(g, ctx?.kairosId ?? null, ctx?.dreamText ?? '') }} onBack={() => { const kid = guidesSheet?.kairosId; setGuidesSheet(null); setScreen(kid ? 'read' : 'journal') }} />}
+      {screen === 'guides' && <GuidesLibrary onPick={(g) => { const ctx = guidesSheet; setGuidesBack(null); launchGuide(g, ctx?.kairosId ?? null, ctx?.dreamText ?? '') }} onBack={() => { const kid = guidesSheet?.kairosId; setGuidesSheet(null); if (guidesBack) { const b = guidesBack; setGuidesBack(null); setScreen(b) } else setScreen(kid ? 'read' : 'journal') }} />}
       {screen === 'import' && <ImportScreen session={session} onDone={() => setScreen('journal')} onScan={() => { setScanFrom('import'); setScreen('scan') }} />}
       {screen === 'forge' && <ForgeScreen session={session} onBack={() => setScreen('journal')} />}
       {screen === 'circles' && <CirclesScreen session={session} />}
@@ -1032,7 +1042,7 @@ function EchoOfTheDayCard({ session, onOpen }: { session: Session; onOpen: (id: 
    même discrétion (rien à l'écran quand la file est vide) mais devient une porte :
    réécouter la voix · réessayer · l'écrire soi-même en écoutant · supprimer. */
 
-function HomeScreen({ session, onCaptured, goAnimus, goScan, openDream, onSettings }: { session: Session; onCaptured: (text: string, meta?: { markers?: number[]; durationSec?: number; localId?: string | null }) => void; goAnimus: () => void; goScan: () => void; openDream: (id: string) => void; onSettings: () => void }) {
+function HomeScreen({ session, onCaptured, goAnimus, goScan, openDream, onSettings, onGuides }: { session: Session; onCaptured: (text: string, meta?: { markers?: number[]; durationSec?: number; localId?: string | null }) => void; goAnimus: () => void; goScan: () => void; openDream: (id: string) => void; onSettings: () => void; onGuides: () => void }) {
   const { t, locale } = useT()
   const rec = useRecorder()
   const [recent, setRecent] = useState<any[]>([])
@@ -1181,9 +1191,19 @@ function HomeScreen({ session, onCaptured, goAnimus, goScan, openDream, onSettin
                   périmètre de 1_BIBLE §1.5 (« ce que la vie nous chante ») devient
                   lisible en une respiration, sans liste et sans chips.
                   Elle se retire pendant la capture : sous « je t'écoute », nommer
-                  le périmètre n'a plus de sens — c'est déjà déposé. */}
+                  le périmètre n'a plus de sens — c'est déjà déposé.
+
+                  ── C1, 26/07 : LES TROIS POINTS DEVIENNENT UNE PORTE ──
+                  Tim : « la solution comme d'hab est cette petite bulle qui permet
+                  d'avoir + d'info → présente les kaïros direct, et "lire +" emmène
+                  sur une vraie page en profondeur ».
+                  La traîne ne change ni de mot, ni de taille, ni de place : elle
+                  devient TAPABLE, et gagne un ⓘ terminal. Les « … » promettaient
+                  déjà une suite ; ils la tiennent enfin. Budget §15.1 inchangé —
+                  toujours l'emplacement n°3, toujours 9/9 sur les deux faces.
+                  La copie reste `core.home.also` : une clé, un mot de Tim. */}
               {!busy && !recording && (
-                <div style={{ marginTop: 5, fontFamily: T.serif, fontSize: SCALE.body, fontStyle: 'italic', color: T.dim, lineHeight: 1.25, animation: `dream-fade-in ${MOTION.fade}ms ${MOTION.ease}` }}>{t('core.home.also')}</div>
+                <ScopeTrail face="dream" onGuides={onGuides} />
               )}
               {/* §14 — UNE micro-ligne, et une seule. Le scan (📷) est un troisième
                   chemin de dépôt : il vit SUR cette ligne, en glyphe terminal, au
@@ -1268,7 +1288,7 @@ function HomeScreen({ session, onCaptured, goAnimus, goScan, openDream, onSettin
 /* ═════════ LE CŒUR (Écran 2 — la voix consciente, palette papier chaud) ═════════ */
 /* §12ter.H (GO Tim) — bascule Orbe/Cœur : les kaïros vivent désormais sur l'Orbe.
    Ici, dépôt LIBRE de la vérité du moment ; même épure §14 que l'Orbe. */
-function AnimusScreen({ session, goAnima, onCaptured, openDream, onGreatConsult }: { session: Session; goAnima: () => void; onCaptured: (text: string, kairosType?: string) => void; openDream: (id: string) => void; onGreatConsult: () => void }) {
+function AnimusScreen({ session, goAnima, onCaptured, openDream, onGreatConsult, onGuides }: { session: Session; goAnima: () => void; onCaptured: (text: string, kairosType?: string) => void; openDream: (id: string) => void; onGreatConsult: () => void; onGuides: () => void }) {
   const { t, locale } = useT()
   const rec = useRecorder()
   const recording = rec.state === 'held' || rec.state === 'locked'
@@ -1401,8 +1421,13 @@ function AnimusScreen({ session, goAnima, onCaptured, openDream, onGreatConsult 
                     ferait au prix de la lisibilité) mais par la typo et l'échelle :
                     serif italique 17 pour la traîne, sans 13 pour le geste.
                     Côté nuit `T.dim` passe (5,27:1) et reste. */}
+                {/* C1, 26/07 — « Idem dans Cœur, même principe » (Tim). Même geste,
+                    même coquille, en lumière de jour : la bulle et la page prennent le
+                    parchemin, pas le panneau de nuit. Poser la peau nocturne ici aurait
+                    refait à l'identique le défaut de la nav corrigé ce matin (§3.1 B5).
+                    Le contraste AA de la traîne est tenu par `ScopeTrail` lui-même. */}
                 {!busy && !recording && (
-                  <div style={{ marginTop: 5, fontFamily: T.serif, fontSize: SCALE.body, fontStyle: 'italic', color: DT.inkSoft, lineHeight: 1.25, animation: `dream-fade-in ${MOTION.fade}ms ${MOTION.ease}` }}>{t('core.animus.also')}</div>
+                  <ScopeTrail face="heart" day onGuides={onGuides} />
                 )}
                 <div style={{ marginTop: 13, fontSize: SCALE.meta, color: DT.inkSoft, lineHeight: 1.4 }}>{busy ? t('core.common.oneMoment') : rec.state === 'locked' ? t('core.animus.lockedHint', { t: fmt(rec.seconds) }) : recording ? t('core.capture.listeningTimer', { t: fmt(rec.seconds) }) : t('core.animus.micro')}</div>
                 {err && <div style={{ marginTop: 13, fontSize: 13, color: T.emberLive }}>{err}</div>}
@@ -2352,15 +2377,19 @@ function JournalScreen({ session, view, setView, onOpen, onImport, onSettings, o
 }
 
 /* ═════════ L'ATLAS — le journal qui nourrit ═════════ */
+/* C1 2026-07-26 — les tracés sont sortis d'ici (`src/lib/kairos-glyphs.tsx`).
+   Raison : la bulle « ce qu'on dépose ici » doit montrer EXACTEMENT ces signes-là.
+   Les recopier dans le composant aurait garanti la dérive au premier ajustement de
+   trait ; ici, une seule source, deux lecteurs. Les libellés n'ont pas bougé. */
 const KTYPES: Record<string, { labelKey: string; glyph: (c: string) => JSX.Element }> = {
-  reve: { labelKey: 'core.ktypes.reve', glyph: (c) => I.moon(c, 14) },
-  signe: { labelKey: 'core.ktypes.signe', glyph: (c) => <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 5c4.5 0 8 4.2 9 7-1 2.8-4.5 7-9 7s-8-4.2-9-7c1-2.8 4.5-7 9-7z" stroke={c} strokeWidth="1.5" /><circle cx="12" cy="12" r="2.6" fill={c} /></svg> },
-  reverie: { labelKey: 'core.ktypes.reverie', glyph: (c) => <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 16a4 4 0 0 1 .5-7.97A5.5 5.5 0 0 1 17 9a3.5 3.5 0 0 1 1 6.9H6z" stroke={c} strokeWidth="1.5" strokeLinejoin="round" /></svg> },
-  hypnagogie: { labelKey: 'core.ktypes.hypnagogie', glyph: (c) => <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M4 15a8 8 0 0 1 16 0" stroke={c} strokeWidth="1.5" /><path d="M2 18h20" stroke={c} strokeWidth="1.5" strokeLinecap="round" opacity="0.6" /></svg> },
-  frisson: { labelKey: 'core.ktypes.frisson', glyph: (c) => <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M3 12c2-3 4-3 6 0s4 3 6 0 4-3 6 0" stroke={c} strokeWidth="1.5" strokeLinecap="round" /></svg> },
-  synchronicite: { labelKey: 'core.ktypes.synchronicite', glyph: (c) => <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 3l1.8 5.4L19 10l-5.2 1.6L12 17l-1.8-5.4L5 10l5.2-1.6z" stroke={c} strokeWidth="1.3" strokeLinejoin="round" /><circle cx="18.5" cy="17.5" r="2" stroke={c} strokeWidth="1.2" /></svg> },
-  intuition: { labelKey: 'core.ktypes.intuition', glyph: (c) => <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 4v5M12 15v5M4 12h5M15 12h5" stroke={c} strokeWidth="1.4" strokeLinecap="round" /><circle cx="12" cy="12" r="2" fill={c} /></svg> },
-  note_jour: { labelKey: 'core.ktypes.note_jour', glyph: (c) => I.sun(c, 14) },
+  reve: { labelKey: 'core.ktypes.reve', glyph: (c) => KGLYPH.reve(c, 14) },
+  signe: { labelKey: 'core.ktypes.signe', glyph: (c) => KGLYPH.signe(c, 14) },
+  reverie: { labelKey: 'core.ktypes.reverie', glyph: (c) => KGLYPH.reverie(c, 14) },
+  hypnagogie: { labelKey: 'core.ktypes.hypnagogie', glyph: (c) => KGLYPH.hypnagogie(c, 14) },
+  frisson: { labelKey: 'core.ktypes.frisson', glyph: (c) => KGLYPH.frisson(c, 14) },
+  synchronicite: { labelKey: 'core.ktypes.synchronicite', glyph: (c) => KGLYPH.synchronicite(c, 14) },
+  intuition: { labelKey: 'core.ktypes.intuition', glyph: (c) => KGLYPH.intuition(c, 14) },
+  note_jour: { labelKey: 'core.ktypes.note_jour', glyph: (c) => KGLYPH.note_jour(c, 14) },
 }
 const emoHalo = (v: number | null | undefined) => {
   if (typeof v !== 'number' || v === 0) return 'transparent'
