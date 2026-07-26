@@ -398,8 +398,8 @@ function TypeChips({ value, onChange }: { value: ImportType; onChange: (t: Impor
             style={{
               padding: '8px 15px', borderRadius: 999, cursor: 'pointer',
               fontFamily: T.sans, fontSize: 13, fontWeight: on ? 600 : 500,
-              background: on ? 'rgba(201,168,106,0.14)' : 'rgba(201,168,106,0.04)',
-              border: on ? `1px solid ${T.gold}77` : '0.5px solid rgba(201,168,106,0.16)',
+              background: on ? 'rgba(255,255,255,0.14)' : 'rgba(255,255,255,0.04)',
+              border: on ? `1px solid ${T.gold}77` : '0.5px solid rgba(255,255,255,0.16)',
               color: on ? T.cream : T.dim, transition: 'all .2s ease',
             }}
           >{t(`screens.import.type.${kt}`)}</button>
@@ -428,7 +428,7 @@ function QueueRow({ i }: { i: QueueItem }) {
   })()
 
   return (
-    <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10, padding: '11px 0', borderBottom: '0.5px solid rgba(242,232,213,0.08)' }}>
+    <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10, padding: '11px 0', borderBottom: '0.5px solid rgba(202,191,206,0.08)' }}>
       <span style={{ marginTop: 2, flexShrink: 0, opacity: live ? 1 : 0.55, animation: live ? 'lBlink 1.6s ease-in-out infinite' : undefined }}>
         <Spark c={i.status === 'error' ? RED : T.goldLit} />
       </span>
@@ -451,7 +451,7 @@ function QueuePanel() {
   const currentName = current ? (current.kind === 'paste' ? t('screens.import.pastedName') : current.name) : ''
 
   return (
-    <div style={{ margin: '26px 18px 0', padding: '4px 18px 16px', borderRadius: 22, background: 'rgba(201,168,106,0.04)', border: T.cardBorder }}>
+    <div style={{ margin: '26px 18px 0', padding: '4px 18px 16px', borderRadius: 22, background: 'rgba(255,255,255,0.04)', border: T.cardBorder }}>
       <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', paddingTop: 14 }}>
         <div style={{ fontFamily: T.serif, fontSize: 17, fontStyle: 'italic', color: T.cream }}>
           {working ? t('screens.import.working') : t('screens.import.workingDone')}
@@ -523,8 +523,8 @@ function AudioDoor({ session, onBack }: { session: Session; onBack: () => void }
           onDrop={e => { e.preventDefault(); setOver(false); if (e.dataTransfer.files.length) addFiles(e.dataTransfer.files) }}
           style={{
             padding: '26px 20px', borderRadius: 22, cursor: 'pointer', textAlign: 'center',
-            background: over ? 'rgba(201,168,106,0.10)' : T.card,
-            border: over ? `1px dashed ${T.gold}88` : '0.5px dashed rgba(201,168,106,0.28)',
+            background: over ? 'rgba(255,255,255,0.1)' : T.card,
+            border: over ? `1px dashed ${T.gold}88` : '0.5px dashed rgba(255,255,255,0.28)',
             transition: 'all .25s ease',
           }}
         >
@@ -556,7 +556,7 @@ function AudioDoor({ session, onBack }: { session: Session; onBack: () => void }
             )}
             <div style={{ marginTop: 8, maxHeight: 190, overflowY: 'auto' }}>
               {files.map((f, idx) => (
-                <div key={`${f.name}-${idx}`} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 0', borderBottom: '0.5px solid rgba(242,232,213,0.08)' }}>
+                <div key={`${f.name}-${idx}`} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 0', borderBottom: '0.5px solid rgba(202,191,206,0.08)' }}>
                   <span style={{ flex: 1, minWidth: 0, fontFamily: T.sans, fontSize: 13, color: T.ink, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{f.name}</span>
                   <span style={{ flexShrink: 0, fontFamily: T.sans, fontSize: 11.5, color: T.faint }}>
                     {f.size > 1024 * 1024
@@ -592,7 +592,7 @@ function AudioDoor({ session, onBack }: { session: Session; onBack: () => void }
             <button onClick={go} disabled={!ready}
               style={{
                 marginTop: 18, width: '100%', padding: 15, borderRadius: 999, border: 'none', cursor: ready ? 'pointer' : 'default',
-                background: ready ? 'linear-gradient(180deg, #fbeeda, #ecd4b4)' : 'rgba(242,232,213,0.08)',
+                background: ready ? 'linear-gradient(180deg, #fbeeda, #ecd4b4)' : 'rgba(202,191,206,0.08)',
                 color: ready ? '#2a160e' : T.faint, fontFamily: T.sans, fontSize: 15, fontWeight: 600, transition: 'all .25s ease',
               }}>
               {t('screens.import.cta')}
@@ -642,7 +642,7 @@ function HarvestDoor({ onBack, onGoPaste }: { onBack: () => void; onGoPaste: () 
               <div style={{ fontFamily: T.serif, fontSize: 17, fontStyle: 'italic', color: T.cream, lineHeight: 1.3 }}>{p.title}</div>
               <button onClick={() => copy(p.prompt, idx)}
                 style={{ flexShrink: 0, display: 'inline-flex', alignItems: 'center', gap: 6, padding: '7px 12px', borderRadius: 999, cursor: 'pointer',
-                  background: copied === idx ? 'rgba(201,168,106,0.18)' : 'rgba(201,168,106,0.08)', border: `1px solid ${T.gold}55`,
+                  background: copied === idx ? 'rgba(255,255,255,0.18)' : 'rgba(255,255,255,0.08)', border: `1px solid ${T.gold}55`,
                   color: copied === idx ? T.cream : T.gold, fontFamily: T.sans, fontSize: 12.5, fontWeight: 600 }}>
                 {copied === idx ? t('screens.import.harvest.copied') : <><IconCopy /> {t('screens.import.harvest.copy')}</>}
               </button>
@@ -657,7 +657,7 @@ function HarvestDoor({ onBack, onGoPaste }: { onBack: () => void; onGoPaste: () 
       </div>
       <div style={{ margin: '14px 18px 0' }}>
         <button onClick={onGoPaste}
-          style={{ width: '100%', padding: 14, borderRadius: 999, cursor: 'pointer', background: 'rgba(201,168,106,0.10)', border: `1px solid ${T.gold}55`, color: T.cream, fontFamily: T.sans, fontSize: 14.5, fontWeight: 600 }}>
+          style={{ width: '100%', padding: 14, borderRadius: 999, cursor: 'pointer', background: 'rgba(255,255,255,0.1)', border: `1px solid ${T.gold}55`, color: T.cream, fontFamily: T.sans, fontSize: 14.5, fontWeight: 600 }}>
           {t('screens.import.harvest.goPaste')}
         </button>
       </div>
@@ -687,7 +687,7 @@ function DoorCard({ icon, title, sub, onClick }: { icon: React.ReactNode; title:
   return (
     <button onClick={onClick}
       style={{ width: '100%', display: 'flex', alignItems: 'center', gap: 14, padding: '17px 18px', borderRadius: 20, background: T.card, border: T.cardBorder, cursor: 'pointer', textAlign: 'left', transition: 'all .2s ease' }}>
-      <span style={{ flexShrink: 0, width: 44, height: 44, borderRadius: 13, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(201,168,106,0.08)', border: `0.5px solid ${T.gold}33` }}>{icon}</span>
+      <span style={{ flexShrink: 0, width: 44, height: 44, borderRadius: 13, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(255,255,255,0.08)', border: `0.5px solid ${T.gold}33` }}>{icon}</span>
       <span style={{ flex: 1, minWidth: 0 }}>
         <span style={{ display: 'block', fontFamily: T.serif, fontSize: 19, fontStyle: 'italic', color: T.cream, lineHeight: 1.25 }}>{title}</span>
         <span style={{ display: 'block', marginTop: 3, fontFamily: T.sans, fontSize: 12.5, color: T.dim, lineHeight: 1.4 }}>{sub}</span>
@@ -767,7 +767,7 @@ export default function ImportHub({ session }: { session: Session }) {
           style={{
             marginTop: 12, width: '100%', padding: 15, borderRadius: 999, border: 'none',
             cursor: ready ? 'pointer' : 'default',
-            background: ready ? 'linear-gradient(180deg, #fbeeda, #ecd4b4)' : 'rgba(242,232,213,0.08)',
+            background: ready ? 'linear-gradient(180deg, #fbeeda, #ecd4b4)' : 'rgba(202,191,206,0.08)',
             color: ready ? '#2a160e' : T.faint,
             fontFamily: T.sans, fontSize: 15, fontWeight: 600,
             transition: 'all .25s ease',

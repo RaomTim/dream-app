@@ -133,7 +133,7 @@ export default function ExportSheet({
     <button
       onClick={onClick}
       disabled={disabled || busy}
-      style={{ display: 'flex', flexDirection: 'column', gap: 3, padding: '15px 16px', borderRadius: 16, background: 'rgba(242,232,213,0.03)', border: '1px solid rgba(242,232,213,0.10)', cursor: disabled ? 'default' : 'pointer', textAlign: 'left', width: '100%', opacity: disabled ? 0.4 : 1 }}
+      style={{ display: 'flex', flexDirection: 'column', gap: 3, padding: '15px 16px', borderRadius: 16, background: 'rgba(202,191,206,0.03)', border: '1px solid rgba(202,191,206,0.1)', cursor: disabled ? 'default' : 'pointer', textAlign: 'left', width: '100%', opacity: disabled ? 0.4 : 1 }}
     >
       <span style={{ fontFamily: S.sans, fontSize: 15.5, fontWeight: 600, color: S.cream }}>{label}</span>
       <span style={{ fontFamily: S.sans, fontSize: 12.5, color: S.faint }}>{sub}</span>
@@ -150,9 +150,9 @@ export default function ExportSheet({
     >
       <div
         onClick={e => e.stopPropagation()}
-        style={{ width: '100%', maxWidth: 480, maxHeight: '82dvh', overflowY: 'auto', background: '#1a1310', borderTopLeftRadius: 26, borderTopRightRadius: 26, border: '0.5px solid rgba(201,168,106,0.22)', borderBottom: 'none', padding: '22px 20px calc(22px + env(safe-area-inset-bottom))', animation: 'exportSheetUp .28s cubic-bezier(0.32,0.04,0.25,1)' }}
+        style={{ width: '100%', maxWidth: 480, maxHeight: '82dvh', overflowY: 'auto', background: '#221d29', borderTopLeftRadius: 26, borderTopRightRadius: 26, border: '0.5px solid rgba(255,255,255,0.22)', borderBottom: 'none', padding: '22px 20px calc(22px + env(safe-area-inset-bottom))', animation: 'exportSheetUp .28s cubic-bezier(0.32,0.04,0.25,1)' }}
       >
-        <div style={{ width: 36, height: 4, borderRadius: 2, background: 'rgba(242,232,213,0.2)', margin: '0 auto 18px' }} />
+        <div style={{ width: 36, height: 4, borderRadius: 2, background: 'rgba(202,191,206,0.2)', margin: '0 auto 18px' }} />
 
         {toast ? (
           <div style={{ padding: '30px 10px', textAlign: 'center', fontFamily: S.serif, fontStyle: 'italic', fontSize: 19, color: S.cream }}>{toast}</div>
@@ -164,7 +164,7 @@ export default function ExportSheet({
               {audioUrl && <Option onClick={doAudio} label={t('core.export.optAudio')} sub={t('core.export.optAudioSub')} />}
               <Option onClick={doFull} disabled={!interpBody} label={t('core.export.optFull')} sub={interpBody ? t('core.export.optFullSub') : t('core.export.optFullNone')} />
             </div>
-            <button onClick={onClose} style={{ marginTop: 20, width: '100%', padding: 14, borderRadius: 999, cursor: 'pointer', background: 'transparent', border: '1px solid rgba(242,232,213,0.18)', color: S.dim, fontSize: 14, fontWeight: 500, fontFamily: S.sans }}>{t('screens.common.cancelCap')}</button>
+            <button onClick={onClose} style={{ marginTop: 20, width: '100%', padding: 14, borderRadius: 999, cursor: 'pointer', background: 'transparent', border: '1px solid rgba(202,191,206,0.18)', color: S.dim, fontSize: 14, fontWeight: 500, fontFamily: S.sans }}>{t('screens.common.cancelCap')}</button>
           </>
         )}
       </div>

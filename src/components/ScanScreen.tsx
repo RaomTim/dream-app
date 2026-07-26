@@ -33,7 +33,7 @@ const CameraIcon = ({ c = T.gold, s = 26 }: { c?: string; s?: number }) => (
     <circle cx="12" cy="13" r="3.4" stroke={c} strokeWidth="1.5" />
   </svg>
 )
-const BackIcon = ({ c = 'rgba(242,232,213,0.6)', s = 20 }: { c?: string; s?: number }) => (
+const BackIcon = ({ c = '#ddd4de', s = 20 }: { c?: string; s?: number }) => (
   <svg width={s} height={s} viewBox="0 0 24 24" fill="none"><path d="M15 5l-7 7 7 7" stroke={c} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
 )
 
@@ -157,7 +157,7 @@ export default function ScanScreen({
           <div style={{ marginTop: 8, fontSize: 14, color: T.dim, lineHeight: 1.5 }}>{t('screens.scan.failedSub')}</div>
           <div style={{ marginTop: 26, width: '100%', maxWidth: 300, display: 'flex', flexDirection: 'column', gap: 10 }}>
             <button onClick={openCamera} style={{ padding: 14, borderRadius: 999, border: 'none', cursor: 'pointer', background: 'linear-gradient(180deg, #f2e6c6, #d8c39a)', color: '#241a09', fontSize: 14.5, fontWeight: 600, fontFamily: T.sans }}>{t('screens.common.retry')}</button>
-            <button onClick={() => setStep('manual')} style={{ padding: 14, borderRadius: 999, background: 'rgba(201,168,106,0.10)', border: `1px solid ${T.gold}44`, color: T.cream, fontSize: 14.5, fontWeight: 500, cursor: 'pointer', fontFamily: T.sans }}>{t('screens.scan.typeIt')}</button>
+            <button onClick={() => setStep('manual')} style={{ padding: 14, borderRadius: 999, background: 'rgba(255,255,255,0.1)', border: `1px solid ${T.gold}44`, color: T.cream, fontSize: 14.5, fontWeight: 500, cursor: 'pointer', fontFamily: T.sans }}>{t('screens.scan.typeIt')}</button>
           </div>
         </div>
       )}
@@ -173,7 +173,7 @@ export default function ScanScreen({
             style={{ marginTop: 20, width: '100%', minHeight: 240, padding: 20, borderRadius: 22, background: T.card, border: T.cardBorder, color: T.cream, fontSize: 16.5, lineHeight: 1.55, fontFamily: T.serif, fontStyle: 'italic', resize: 'vertical' }}
           />
           <div style={{ marginTop: 14, display: 'flex', gap: 10 }}>
-            <button onClick={() => setStep('guide')} style={{ flex: 1, padding: 14, borderRadius: 999, cursor: 'pointer', background: 'transparent', border: '1px solid rgba(242,232,213,0.18)', color: T.dim, fontSize: 14, fontWeight: 500, fontFamily: T.sans }}>{t('screens.scan.backToPhoto')}</button>
+            <button onClick={() => setStep('guide')} style={{ flex: 1, padding: 14, borderRadius: 999, cursor: 'pointer', background: 'transparent', border: '1px solid rgba(202,191,206,0.18)', color: T.dim, fontSize: 14, fontWeight: 500, fontFamily: T.sans }}>{t('screens.scan.backToPhoto')}</button>
             <button onClick={submitManual} disabled={manualText.trim().length < 3} style={{ flex: 1, padding: 14, borderRadius: 999, cursor: 'pointer', border: 'none', background: 'linear-gradient(180deg, #f2e6c6, #d8c39a)', color: '#241a09', fontSize: 14.5, fontWeight: 600, fontFamily: T.sans, opacity: manualText.trim().length < 3 ? 0.45 : 1 }}>{t('screens.common.ok')}</button>
           </div>
         </div>

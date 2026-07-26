@@ -137,12 +137,12 @@ export default function GuideSession({
         onBack={phase === 'steps' ? pause : onExit}
         title={guide.name}
         right={phase === 'steps' ? (
-          <button onClick={pause} style={{ background: 'none', border: '1px solid rgba(242,232,213,0.18)', borderRadius: 999, padding: '6px 14px', color: GT.dim, fontSize: 12.5, fontWeight: 500, fontFamily: GT.sans, cursor: 'pointer' }}>{t('screens.guide.pause')}</button>
+          <button onClick={pause} style={{ background: 'none', border: '1px solid rgba(202,191,206,0.18)', borderRadius: 999, padding: '6px 14px', color: GT.dim, fontSize: 12.5, fontWeight: 500, fontFamily: GT.sans, cursor: 'pointer' }}>{t('screens.guide.pause')}</button>
         ) : undefined}
       />
 
       {dreamText && phase !== 'done' && (
-        <div style={{ margin: '16px 24px 0', fontFamily: GT.serif, fontSize: 14.5, fontStyle: 'italic', color: 'rgba(242,232,213,0.5)', maxHeight: 66, overflow: 'hidden', maskImage: 'linear-gradient(180deg, black 55%, transparent)' }}>
+        <div style={{ margin: '16px 24px 0', fontFamily: GT.serif, fontSize: 14.5, fontStyle: 'italic', color: '#b9b0bd', maxHeight: 66, overflow: 'hidden', maskImage: 'linear-gradient(180deg, black 55%, transparent)' }}>
           “{dreamText.slice(0, 170)}{dreamText.length > 170 ? '…' : ''}”
         </div>
       )}
@@ -194,7 +194,7 @@ export default function GuideSession({
         <div style={{ margin: '40px 22px 0', textAlign: 'center', animation: 'lFadeUp .4s ease' }}>
           <div style={{ fontFamily: GT.serif, fontSize: 24, fontStyle: 'italic', color: GT.cream, lineHeight: 1.35 }}>{t('screens.guide.feltTitle')}</div>
           <div style={{ marginTop: 24, display: 'flex', flexDirection: 'column', gap: 10 }}>
-            <button onClick={() => finish('bouge')} disabled={busy} style={{ padding: '15px 18px', borderRadius: 18, background: 'rgba(201,168,106,0.12)', border: `1px solid ${GT.gold}55`, color: GT.cream, fontFamily: GT.sans, fontSize: 15.5, fontWeight: 600, cursor: 'pointer' }}>{t('screens.guide.feltMoved')}</button>
+            <button onClick={() => finish('bouge')} disabled={busy} style={{ padding: '15px 18px', borderRadius: 18, background: 'rgba(255,255,255,0.12)', border: `1px solid ${GT.gold}55`, color: GT.cream, fontFamily: GT.sans, fontSize: 15.5, fontWeight: 600, cursor: 'pointer' }}>{t('screens.guide.feltMoved')}</button>
             <button onClick={() => finish('pareil')} disabled={busy} style={{ padding: '15px 18px', borderRadius: 18, background: GT.card, border: GT.cardBorder, color: GT.cream, fontFamily: GT.sans, fontSize: 15.5, fontWeight: 500, cursor: 'pointer' }}>{t('screens.guide.feltSame')}</button>
             <button onClick={() => finish('saispas')} disabled={busy} style={{ padding: '15px 18px', borderRadius: 18, background: GT.card, border: GT.cardBorder, color: GT.cream, fontFamily: GT.sans, fontSize: 15.5, fontWeight: 500, cursor: 'pointer' }}>{t('screens.guide.feltDunno')}</button>
           </div>

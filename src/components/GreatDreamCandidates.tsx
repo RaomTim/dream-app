@@ -161,7 +161,7 @@ export default function GreatDreamCandidates({
   /* ── Les propositions ───────────────────────────────────────────────────── */
   return (
     <div style={{ marginTop: 34, animation: `dream-fade-in ${MOTION.fade}ms ${MOTION.ease}` }}>
-      <div style={{ fontFamily: T.mono, fontSize: 10, letterSpacing: '0.18em', textTransform: 'uppercase', color: T.faint, marginBottom: 13 }}>
+      <div style={{ fontFamily: T.sans, fontSize: SCALE.kicker, fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', color: T.faint, marginBottom: 13 }}>
         {cands.length > 1 ? t('screens.great.candKickerMany') : t('screens.great.candKickerOne')}
       </div>
 
@@ -204,7 +204,7 @@ export default function GreatDreamCandidates({
                 disabled={busyId === c.id}
                 style={{
                   flex: 1, minHeight: SCALE.touch, padding: '10px 16px', borderRadius: SCALE.radiusPill,
-                  cursor: 'pointer', background: 'rgba(201,168,106,0.12)', border: `1px solid ${T.gold}66`,
+                  cursor: 'pointer', background: 'rgba(255,255,255,0.12)', border: `1px solid ${T.gold}66`,
                   color: T.cream, fontFamily: T.sans, fontSize: SCALE.small, fontWeight: 600,
                 }}
               >

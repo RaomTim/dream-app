@@ -53,9 +53,9 @@ function Sun({ c, s = 15 }: { c: string; s?: number }) {
 function Separator({ label }: { label: string }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 12, justifyContent: 'center', margin: '26px 0 16px' }}>
-      <div style={{ height: 1, width: 34, background: 'linear-gradient(90deg, transparent, rgba(201,168,106,0.34))' }} />
+      <div style={{ height: 1, width: 34, background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.34))' }} />
       <span style={{ fontFamily: T.sans, fontSize: 11.5, letterSpacing: '0.06em', color: T.faint }}>{label}</span>
-      <div style={{ height: 1, width: 34, background: 'linear-gradient(270deg, transparent, rgba(201,168,106,0.34))' }} />
+      <div style={{ height: 1, width: 34, background: 'linear-gradient(270deg, transparent, rgba(255,255,255,0.34))' }} />
     </div>
   )
 }
@@ -155,7 +155,7 @@ export default function WallScreen({ session }: { session: Session | null }) {
 
       {/* onglets ☾ Rêves / ☀ Cœur */}
       <div style={{ position: 'absolute', top: 'max(58px, calc(env(safe-area-inset-top) + 2px))', right: 18, zIndex: 5 }}>
-        <InfoDot id="wall-anon" size={16} color="rgba(242,232,213,0.4)" />
+        <InfoDot id="wall-anon" size={16} color="#a49aad" />
       </div>
       <div style={{ paddingTop: 'max(56px, env(safe-area-inset-top))', display: 'flex', justifyContent: 'center', gap: 8 }}>
         {([
@@ -169,7 +169,7 @@ export default function WallScreen({ session }: { session: Session | null }) {
             <button
               key={it.k}
               onClick={() => setTab(it.k)}
-              style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '9px 18px', borderRadius: 999, cursor: 'pointer', background: on ? 'rgba(201,168,106,0.10)' : 'transparent', border: on ? `1px solid ${T.gold}44` : '1px solid transparent', color: c, fontFamily: T.sans, fontSize: 14, fontWeight: on ? 600 : 500, transition: 'all .3s ease' }}
+              style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '9px 18px', borderRadius: 999, cursor: 'pointer', background: on ? 'rgba(255,255,255,0.1)' : 'transparent', border: on ? `1px solid ${T.gold}44` : '1px solid transparent', color: c, fontFamily: T.sans, fontSize: 14, fontWeight: on ? 600 : 500, transition: 'all .3s ease' }}
             >
               <G c={c} />
               {it.label}
@@ -189,7 +189,7 @@ export default function WallScreen({ session }: { session: Session | null }) {
         {status === 'error' && (
           <div style={{ paddingTop: 80, textAlign: 'center' }}>
             <div style={{ fontFamily: T.serif, fontSize: 17, fontStyle: 'italic', color: T.dim, marginBottom: 16 }}>{t('screens.wall.error')}</div>
-            <button onClick={() => load(tab, null)} style={{ padding: '11px 22px', borderRadius: 999, cursor: 'pointer', background: 'rgba(201,168,106,0.10)', border: `1px solid ${T.gold}44`, color: T.cream, fontFamily: T.sans, fontSize: 14, fontWeight: 500 }}>{t('screens.common.retry')}</button>
+            <button onClick={() => load(tab, null)} style={{ padding: '11px 22px', borderRadius: 999, cursor: 'pointer', background: 'rgba(255,255,255,0.1)', border: `1px solid ${T.gold}44`, color: T.cream, fontFamily: T.sans, fontSize: 14, fontWeight: 500 }}>{t('screens.common.retry')}</button>
           </div>
         )}
 

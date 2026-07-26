@@ -25,7 +25,7 @@
  *   · `BubbleFrame` / `SheetFrame` — la géométrie exacte (rayons, scrim, boutons)
  * `InfoDot` et `InfoSheet` les CONSOMMENT désormais : si la coquille bouge, tout bouge.
  *
- * 🔴 Le jour n'est pas un détail cosmétique. Poser la coquille nuit (panneau #1a1310)
+ * 🔴 Le jour n'est pas un détail cosmétique. Poser la coquille nuit (panneau #221d29)
  * sur la face Cœur — du parchemin — refait exactement le défaut corrigé le 26/07 sur
  * la nav (RAPPORT-B5 §3.1) : un bloc peint dans la lumière de l'autre face.
  */
@@ -47,24 +47,24 @@ export type InfoSkin = {
 
 const NIGHT_SKIN: InfoSkin = {
   panel: T.bgFlat, scrim: 'rgba(20,14,10,0.82)', scrimSoft: 'rgba(20,14,10,0.5)',
-  border: `${T.gold}3a`, borderTop: `${T.gold}33`, grabber: 'rgba(242,232,213,0.2)',
-  rule: 'rgba(242,232,213,0.12)',
+  border: `${T.gold}3a`, borderTop: `${T.gold}33`, grabber: 'rgba(202,191,206,0.2)',
+  rule: 'rgba(202,191,206,0.12)',
   kicker: T.gold, cream: T.cream, ink: T.ink, dim: T.dim, gold: T.gold,
-  glyph: 'rgba(242,232,213,0.5)', ghostBorder: 'rgba(242,232,213,0.16)',
-  moreBg: 'rgba(201,168,106,0.12)', moreBorder: `${T.gold}55`,
+  glyph: '#b9b0bd', ghostBorder: 'rgba(202,191,206,0.16)',
+  moreBg: 'rgba(255,255,255,0.12)', moreBorder: `${T.gold}55`,
   serif: T.serif, sans: T.sans, display: T.display,
   card: T.card, cardBorder: T.cardBorder,
 }
 
 /* ⚠️ Deux valeurs de cette peau sont des DÉCISIONS, pas des équivalents :
- *  · `scrim` prend le premier stop de `T.bg` (rgba(36,26,18,…)) et non un noir neutre —
+ *  · `scrim` prend le premier stop de `T.bg` (rgba(25,21,33,…)) et non un noir neutre —
  *    c'est le sol du monde nocturne, la même matière que le liseré de seuil (§3.2 B5).
  *  · `dim` vaut `DT.inkSoft` et NON `DT.dim` : mesuré, `DT.dim` sur le parchemin donne
  *    3,79:1, sous la barre AA de 4,5:1 (§3.3 B5). Sur le jour, la hiérarchie se fait par
  *    la typo et l'échelle, jamais par le contraste. Même raison pour `kicker` : `DT.gold`
  *    sur `#f4ead1` mesure 3,79:1 — inutilisable pour un libellé de 11 px. */
 const DAY_SKIN: InfoSkin = {
-  panel: DT.paperFlat, scrim: 'rgba(36,26,18,0.55)', scrimSoft: 'rgba(36,26,18,0.34)',
+  panel: DT.paperFlat, scrim: 'rgba(25,21,33,0.55)', scrimSoft: 'rgba(25,21,33,0.34)',
   border: 'rgba(143,113,52,0.34)', borderTop: 'rgba(143,113,52,0.24)', grabber: 'rgba(43,33,21,0.20)',
   rule: 'rgba(43,33,21,0.14)',
   kicker: DT.inkSoft, cream: DT.ink, ink: DT.inkSoft, dim: DT.inkSoft, gold: DT.gold,
@@ -233,7 +233,7 @@ export function InfoDot({ id, size = 16, color, style }: { id: string; size?: nu
           WebkitTapHighlightColor: 'transparent', flexShrink: 0, ...style,
         }}
       >
-        <InfoGlyph c={color || 'rgba(242,232,213,0.5)'} s={size} />
+        <InfoGlyph c={color || '#b9b0bd'} s={size} />
       </button>
 
       {mode === 'bubble' && (
@@ -263,7 +263,7 @@ export function HowDreamWorks({ onClose }: { onClose: () => void }) {
       <InfoStyle />
       <div style={{ paddingTop: 60, paddingLeft: 20, paddingRight: 20, display: 'flex', alignItems: 'center', gap: 12 }}>
         <button onClick={onClose} aria-label={t('screens.common.back')} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 4 }}>
-          <svg width={20} height={20} viewBox="0 0 24 24" fill="none"><path d="M15 5l-7 7 7 7" stroke="rgba(242,232,213,0.6)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
+          <svg width={20} height={20} viewBox="0 0 24 24" fill="none"><path d="M15 5l-7 7 7 7" stroke="#ddd4de" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
         </button>
         <div style={{ fontFamily: C.serif, fontSize: 19, fontStyle: 'italic', color: C.cream }}>{t('screens.info.howTitle')}</div>
       </div>

@@ -84,7 +84,7 @@ export default function CareCard({
   // sont en France et renvoie au service local du lecteur.
   if (signal.needs_human_care === true) {
     return (
-      <div style={{ marginTop: 28, padding: '18px 18px 16px', borderRadius: 18, background: 'rgba(201,168,106,0.07)', border: `0.5px solid ${C.gold}3d` }}>
+      <div style={{ marginTop: 28, padding: '18px 18px 16px', borderRadius: 18, background: 'rgba(255,255,255,0.07)', border: `0.5px solid ${C.gold}3d` }}>
         <div style={{ fontFamily: C.serif, fontSize: 19, fontStyle: 'italic', color: C.cream, lineHeight: 1.35 }}>
           {t('screens.care.humanTitle')}
         </div>
@@ -93,8 +93,8 @@ export default function CareCard({
         </div>
         {/* mêmes lignes que <CrisisCard> (src/app/mvp/page.tsx) — le circuit crise reste le maître. */}
         <div style={{ marginTop: 14, display: 'flex', flexDirection: 'column', gap: 9 }}>
-          <a href="tel:3114" style={{ padding: '12px 15px', borderRadius: 14, background: 'rgba(201,168,106,0.12)', border: `1px solid ${C.gold}55`, color: C.cream, textDecoration: 'none', fontFamily: C.sans, fontSize: 14, fontWeight: 600 }}>{t('screens.care.line3114')}</a>
-          <a href="tel:0972394050" style={{ padding: '12px 15px', borderRadius: 14, background: 'rgba(201,168,106,0.05)', border: '0.5px solid rgba(201,168,106,0.16)', color: C.ink, textDecoration: 'none', fontFamily: C.sans, fontSize: 13.5 }}>{t('screens.care.lineSos')}</a>
+          <a href="tel:3114" style={{ padding: '12px 15px', borderRadius: 14, background: 'rgba(255,255,255,0.12)', border: `1px solid ${C.gold}55`, color: C.cream, textDecoration: 'none', fontFamily: C.sans, fontSize: 14, fontWeight: 600 }}>{t('screens.care.line3114')}</a>
+          <a href="tel:0972394050" style={{ padding: '12px 15px', borderRadius: 14, background: 'rgba(255,255,255,0.05)', border: '0.5px solid rgba(255,255,255,0.16)', color: C.ink, textDecoration: 'none', fontFamily: C.sans, fontSize: 13.5 }}>{t('screens.care.lineSos')}</a>
         </div>
         <div style={{ marginTop: 12, fontFamily: C.sans, fontSize: 12, lineHeight: 1.5, color: C.faint }}>
           {t('screens.care.elsewhere')}
@@ -121,7 +121,7 @@ export default function CareCard({
       </div>
 
       {line && (
-        <div style={{ marginTop: 12, paddingLeft: 12, borderLeft: `1px solid ${C.amber}55`, fontFamily: C.serif, fontSize: 15, lineHeight: 1.55, color: 'rgba(242,232,213,0.78)' }}>
+        <div style={{ marginTop: 12, paddingLeft: 12, borderLeft: `1px solid ${C.amber}55`, fontFamily: C.serif, fontSize: 15, lineHeight: 1.55, color: '#ddd4de' }}>
           {line}
         </div>
       )}
@@ -131,10 +131,10 @@ export default function CareCard({
       </div>
 
       <div style={{ marginTop: 14, display: 'flex', justifyContent: 'flex-end', gap: 8 }}>
-        <button onClick={() => close('resonates')} style={{ padding: '6px 13px', borderRadius: 999, background: 'rgba(184,154,106,0.10)', border: `0.5px solid ${C.amber}55`, color: 'rgba(242,232,213,0.85)', fontFamily: C.sans, fontSize: 12, fontWeight: 500, cursor: 'pointer' }}>
+        <button onClick={() => close('resonates')} style={{ padding: '6px 13px', borderRadius: 999, background: 'rgba(184,154,106,0.10)', border: `0.5px solid ${C.amber}55`, color: '#f1e8d7', fontFamily: C.sans, fontSize: 12, fontWeight: 500, cursor: 'pointer' }}>
           {t('screens.care.resonates')}
         </button>
-        <button onClick={() => close('notForMe')} style={{ padding: '6px 13px', borderRadius: 999, background: 'transparent', border: '0.5px solid rgba(242,232,213,0.16)', color: C.dim, fontFamily: C.sans, fontSize: 12, fontWeight: 500, cursor: 'pointer' }}>
+        <button onClick={() => close('notForMe')} style={{ padding: '6px 13px', borderRadius: 999, background: 'transparent', border: '0.5px solid rgba(202,191,206,0.16)', color: C.dim, fontFamily: C.sans, fontSize: 12, fontWeight: 500, cursor: 'pointer' }}>
           {t('screens.care.notForMe')}
         </button>
       </div>

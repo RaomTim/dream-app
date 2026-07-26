@@ -24,7 +24,7 @@ import { T } from '@/lib/dream-design'
 
 /* ── icônes (trait, zéro emoji) ── */
 const Ic = {
-  back: (c = 'rgba(242,232,213,0.6)', s = 20) => (
+  back: (c = '#ddd4de', s = 20) => (
     <svg width={s} height={s} viewBox="0 0 24 24" fill="none"><path d="M15 5l-7 7 7 7" stroke={c} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
   ),
   mic: (c: string, s = 20) => (
@@ -306,7 +306,7 @@ export default function GroupScreen({ circle, session, onBack }: Props) {
                   <span style={{ fontSize: 12.5, color: T.ink, fontWeight: 600 }}>{s.author_name || memberName(s.user_id)}<span style={{ color: T.faint, fontWeight: 400 }}> · {t(shareLabelKey(s.share_type))}</span></span>
                   <span style={{ fontSize: 11, color: T.faint, flexShrink: 0 }}>{fmtDate(s.created_at, locale)}</span>
                 </div>
-                <div style={{ fontFamily: T.serif, fontSize: 15, fontStyle: 'italic', color: 'rgba(242,232,213,0.86)', lineHeight: 1.5, display: '-webkit-box', WebkitLineClamp: 4, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                <div style={{ fontFamily: T.serif, fontSize: 15, fontStyle: 'italic', color: '#f1e8d7', lineHeight: 1.5, display: '-webkit-box', WebkitLineClamp: 4, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
                   {(s.content || s.dream_text || s.text || t('screens.group.aSharedDream')).slice(0, 400)}
                 </div>
               </button>
@@ -343,7 +343,7 @@ export default function GroupScreen({ circle, session, onBack }: Props) {
           onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendText() } }}
           placeholder={t('screens.group.composerPlaceholder')}
           rows={1}
-          style={{ flex: 1, resize: 'none', maxHeight: 120, padding: '10px 14px', borderRadius: 20, background: 'rgba(201,168,106,0.06)', border: T.cardBorder, color: T.cream, fontSize: 15, fontFamily: T.sans, lineHeight: 1.4, outline: 'none' }}
+          style={{ flex: 1, resize: 'none', maxHeight: 120, padding: '10px 14px', borderRadius: 20, background: 'rgba(255,255,255,0.06)', border: T.cardBorder, color: T.cream, fontSize: 15, fontFamily: T.sans, lineHeight: 1.4, outline: 'none' }}
         />
         {draft.trim() ? (
           <button onClick={sendText} disabled={sending} aria-label={t('screens.group.ariaSend')} style={{ width: 40, height: 40, borderRadius: '50%', display: 'grid', placeItems: 'center', background: 'linear-gradient(180deg, #fbeeda, #ecd4b4)', border: 'none', cursor: 'pointer', flexShrink: 0, opacity: sending ? 0.5 : 1 }}>{Ic.send('#2a160e')}</button>
@@ -370,7 +370,7 @@ function AskDreamButton({ cid, token, restitutions, onAsked }: { cid: string; to
     setBusy(false)
   }
   return (
-    <button onClick={ask} disabled={busy || askedToday} style={{ marginTop: 8, padding: '7px 14px', borderRadius: 999, background: askedToday ? 'transparent' : 'rgba(201,168,106,0.10)', border: `1px solid ${T.gold}44`, color: askedToday ? T.faint : T.cream, fontSize: 12.5, cursor: askedToday ? 'default' : 'pointer', fontFamily: T.sans, opacity: busy ? 0.6 : 1 }}>
+    <button onClick={ask} disabled={busy || askedToday} style={{ marginTop: 8, padding: '7px 14px', borderRadius: 999, background: askedToday ? 'transparent' : 'rgba(255,255,255,0.1)', border: `1px solid ${T.gold}44`, color: askedToday ? T.faint : T.cream, fontSize: 12.5, cursor: askedToday ? 'default' : 'pointer', fontFamily: T.sans, opacity: busy ? 0.6 : 1 }}>
       {busy ? t('screens.group.askDreamBusy') : askedToday ? t('screens.group.askDreamDone') : t('screens.group.askDream')}
     </button>
   )
@@ -402,16 +402,16 @@ function RestitutionCard({ r, cid, token }: { r: any; cid: string; token?: strin
     ['question', t('screens.group.reactQuestion')],
   ]
   return (
-    <div style={{ marginBottom: 10, padding: '15px 17px', borderRadius: 18, background: 'rgba(201,168,106,0.09)', border: `0.5px solid ${T.gold}3a` }}>
+    <div style={{ marginBottom: 10, padding: '15px 17px', borderRadius: 18, background: 'rgba(255,255,255,0.09)', border: `0.5px solid ${T.gold}3a` }}>
       <div style={{ fontSize: 11.5, letterSpacing: '0.05em', textTransform: 'uppercase', color: T.gold, marginBottom: 7 }}>{t('screens.group.seenTitle')}</div>
       {r.status === 'pending' ? (
         <div style={{ fontSize: 13.5, color: T.dim, fontStyle: 'italic', fontFamily: T.serif }}>{t('screens.group.seenPending')}</div>
       ) : (
         <>
-          <div style={{ fontFamily: T.serif, fontSize: 15, color: 'rgba(242,232,213,0.9)', lineHeight: 1.55, whiteSpace: 'pre-wrap' }}>{r.narrative_text}</div>
+          <div style={{ fontFamily: T.serif, fontSize: 15, color: '#f1e8d7', lineHeight: 1.55, whiteSpace: 'pre-wrap' }}>{r.narrative_text}</div>
           <div style={{ display: 'flex', gap: 7, marginTop: 12, flexWrap: 'wrap' }}>
             {labels.map(([k, lab]) => (
-              <button key={k} onClick={() => toggle(k)} style={{ padding: '5px 11px', borderRadius: 999, fontSize: 12, cursor: 'pointer', fontFamily: T.sans, background: mine[k] ? 'rgba(201,168,106,0.18)' : 'transparent', border: `1px solid ${mine[k] ? T.gold + '77' : 'rgba(242,232,213,0.16)'}`, color: mine[k] ? T.cream : T.dim }}>
+              <button key={k} onClick={() => toggle(k)} style={{ padding: '5px 11px', borderRadius: 999, fontSize: 12, cursor: 'pointer', fontFamily: T.sans, background: mine[k] ? 'rgba(255,255,255,0.18)' : 'transparent', border: `1px solid ${mine[k] ? T.gold + '77' : 'rgba(202,191,206,0.16)'}`, color: mine[k] ? T.cream : T.dim }}>
                 {lab}{counts[k] ? ` · ${counts[k]}` : ''}
               </button>
             ))}
@@ -459,14 +459,14 @@ function NewChallenge({ cid, token, onDone, onCancel }: { cid: string; token?: s
   }
   return (
     <div style={{ margin: '8px 14px 0', padding: 14, borderRadius: 16, background: T.card, border: T.cardBorder }}>
-      <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder={t('screens.group.challengePlaceholder')} style={{ width: '100%', padding: '11px 14px', borderRadius: 12, background: 'rgba(201,168,106,0.06)', border: T.cardBorder, color: T.cream, fontSize: 14.5, fontFamily: T.sans, outline: 'none', boxSizing: 'border-box' }} />
+      <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder={t('screens.group.challengePlaceholder')} style={{ width: '100%', padding: '11px 14px', borderRadius: 12, background: 'rgba(255,255,255,0.06)', border: T.cardBorder, color: T.cream, fontSize: 14.5, fontFamily: T.sans, outline: 'none', boxSizing: 'border-box' }} />
       <div style={{ display: 'flex', gap: 7, flexWrap: 'wrap', marginTop: 9 }}>
         {suggestions.map((s) => (
-          <button key={s} onClick={() => setTitle(s)} style={{ padding: '5px 11px', borderRadius: 999, background: 'transparent', border: '1px solid rgba(242,232,213,0.16)', color: T.dim, fontSize: 12, cursor: 'pointer', fontFamily: T.sans }}>{s}</button>
+          <button key={s} onClick={() => setTitle(s)} style={{ padding: '5px 11px', borderRadius: 999, background: 'transparent', border: '1px solid rgba(202,191,206,0.16)', color: T.dim, fontSize: 12, cursor: 'pointer', fontFamily: T.sans }}>{s}</button>
         ))}
       </div>
       <div style={{ display: 'flex', gap: 9, marginTop: 12 }}>
-        <button onClick={onCancel} style={{ flex: 1, padding: 11, borderRadius: 999, background: 'transparent', border: '1px solid rgba(242,232,213,0.18)', color: T.dim, fontSize: 13.5, cursor: 'pointer', fontFamily: T.sans }}>{t('screens.common.cancelCap')}</button>
+        <button onClick={onCancel} style={{ flex: 1, padding: 11, borderRadius: 999, background: 'transparent', border: '1px solid rgba(202,191,206,0.18)', color: T.dim, fontSize: 13.5, cursor: 'pointer', fontFamily: T.sans }}>{t('screens.common.cancelCap')}</button>
         <button onClick={create} disabled={busy || title.trim().length < 3} style={{ flex: 1, padding: 11, borderRadius: 999, background: 'linear-gradient(180deg, #fbeeda, #ecd4b4)', border: 'none', color: '#2a160e', fontSize: 13.5, fontWeight: 600, cursor: 'pointer', fontFamily: T.sans, opacity: busy || title.trim().length < 3 ? 0.5 : 1 }}>{busy ? t('screens.common.working') : t('screens.group.challengeLaunch')}</button>
       </div>
     </div>
@@ -478,11 +478,11 @@ function MessageBubble({ m }: { m: any }) {
   const { t, locale } = useT()
   const me = m.is_me
   const align = me ? 'flex-end' : 'flex-start'
-  const bg = me ? 'rgba(201,168,106,0.14)' : 'rgba(242,232,213,0.05)'
+  const bg = me ? 'rgba(255,255,255,0.14)' : 'rgba(202,191,206,0.05)'
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: align, maxWidth: '100%' }}>
       {!me && <div style={{ fontSize: 11, color: T.faint, margin: '0 0 2px 12px' }}>{m.author_name || t('screens.common.aDreamer')}</div>}
-      <div style={{ maxWidth: '80%', padding: m.kind === 'photo' ? 5 : '9px 13px', borderRadius: 16, background: bg, border: '0.5px solid rgba(201,168,106,0.12)' }}>
+      <div style={{ maxWidth: '80%', padding: m.kind === 'photo' ? 5 : '9px 13px', borderRadius: 16, background: bg, border: '0.5px solid rgba(255,255,255,0.12)' }}>
         {m.kind === 'text' && <div style={{ fontSize: 14.5, color: T.cream, lineHeight: 1.45, whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>{m.body}</div>}
         {m.kind === 'audio' && (m.media_url
           ? <audio controls src={m.media_url} style={{ height: 34, maxWidth: 220 }} />
@@ -536,19 +536,19 @@ function ShareReader({ s, authorName, isMe, onClose }: { s: any; authorName: str
   const { t, locale } = useT()
   return (
     <div onClick={onClose} style={{ position: 'fixed', inset: 0, zIndex: 40, background: 'rgba(20,14,10,0.9)', display: 'flex', flexDirection: 'column' }}>
-      <div onClick={(e) => e.stopPropagation()} style={{ marginTop: 'auto', maxHeight: '86dvh', overflowY: 'auto', background: 'radial-gradient(120% 60% at 50% 0%, #1a1310, #1a1310)', borderRadius: '26px 26px 0 0', border: '0.5px solid rgba(201,168,106,0.16)', padding: '20px 22px calc(24px + env(safe-area-inset-bottom))' }}>
-        <div style={{ width: 40, height: 4, borderRadius: 2, background: 'rgba(242,232,213,0.2)', margin: '0 auto 18px' }} />
+      <div onClick={(e) => e.stopPropagation()} style={{ marginTop: 'auto', maxHeight: '86dvh', overflowY: 'auto', background: 'radial-gradient(120% 60% at 50% 0%, #221d29, #221d29)', borderRadius: '26px 26px 0 0', border: '0.5px solid rgba(255,255,255,0.16)', padding: '20px 22px calc(24px + env(safe-area-inset-bottom))' }}>
+        <div style={{ width: 40, height: 4, borderRadius: 2, background: 'rgba(202,191,206,0.2)', margin: '0 auto 18px' }} />
         <div style={{ display: 'flex', justifyContent: 'space-between', gap: 8, marginBottom: 12 }}>
           <span style={{ fontSize: 13, color: T.ink, fontWeight: 600 }}>{authorName}{isMe ? ` · ${t('screens.common.me')}` : ''}<span style={{ color: T.faint, fontWeight: 400 }}> · {t(shareLabelKey(s.share_type))}</span></span>
           <span style={{ fontSize: 12, color: T.faint }}>{fmtDate(s.created_at, locale)}</span>
         </div>
-        <div style={{ fontFamily: T.serif, fontSize: 17, fontStyle: 'italic', color: 'rgba(242,232,213,0.92)', lineHeight: 1.6, whiteSpace: 'pre-wrap' }}>
+        <div style={{ fontFamily: T.serif, fontSize: 17, fontStyle: 'italic', color: '#f1e8d7', lineHeight: 1.6, whiteSpace: 'pre-wrap' }}>
           {s.content || s.dream_text || s.text || t('screens.group.aSharedDream')}
         </div>
         <div style={{ marginTop: 18, fontSize: 11.5, color: T.faint, lineHeight: 1.5 }}>
           {t('screens.group.readerOwnership')}
         </div>
-        <button onClick={onClose} style={{ marginTop: 18, width: '100%', padding: 12, borderRadius: 999, background: 'transparent', border: '1px solid rgba(242,232,213,0.18)', color: T.dim, fontSize: 13.5, cursor: 'pointer', fontFamily: T.sans }}>{t('screens.common.closeCap')}</button>
+        <button onClick={onClose} style={{ marginTop: 18, width: '100%', padding: 12, borderRadius: 999, background: 'transparent', border: '1px solid rgba(202,191,206,0.18)', color: T.dim, fontSize: 13.5, cursor: 'pointer', fontFamily: T.sans }}>{t('screens.common.closeCap')}</button>
       </div>
     </div>
   )
@@ -587,7 +587,7 @@ function GroupSettings({ c, members, session, onBack, onLeft, onChanged }: { c: 
   }
 
   const label: any = { fontSize: 12, color: T.faint, marginBottom: 6, letterSpacing: '0.03em' }
-  const field: any = { width: '100%', padding: '11px 14px', borderRadius: 12, background: 'rgba(201,168,106,0.06)', border: T.cardBorder, color: T.cream, fontSize: 14.5, fontFamily: T.sans, outline: 'none', boxSizing: 'border-box' }
+  const field: any = { width: '100%', padding: '11px 14px', borderRadius: 12, background: 'rgba(255,255,255,0.06)', border: T.cardBorder, color: T.cream, fontSize: 14.5, fontFamily: T.sans, outline: 'none', boxSizing: 'border-box' }
 
   return (
     <div style={{ minHeight: '100dvh', paddingBottom: 60, fontFamily: T.sans }}>
@@ -675,4 +675,4 @@ function GroupSettings({ c, members, session, onBack, onLeft, onChanged }: { c: 
 }
 
 const saveBtn: any = { marginTop: 8, padding: '7px 15px', borderRadius: 999, background: 'linear-gradient(180deg, #fbeeda, #ecd4b4)', border: 'none', color: '#2a160e', fontSize: 12.5, fontWeight: 600, cursor: 'pointer', fontFamily: T.sans }
-const ghostBtn: any = { marginTop: 8, padding: '7px 13px', borderRadius: 999, background: 'transparent', border: '1px solid rgba(242,232,213,0.18)', color: T.dim, fontSize: 12.5, cursor: 'pointer', fontFamily: T.sans }
+const ghostBtn: any = { marginTop: 8, padding: '7px 13px', borderRadius: 999, background: 'transparent', border: '1px solid rgba(202,191,206,0.18)', color: T.dim, fontSize: 12.5, cursor: 'pointer', fontFamily: T.sans }
