@@ -182,6 +182,14 @@ Tu as écrit « je valide toutes tes reco ». Voici le tri honnête entre ce qui
 - 🔴 **`ReservedToast` — quatrième composant peint en nuit en dur**, trouvé en cherchant les trois premiers. Il est monté sur les **deux** faces et ne prenait aucune prop `day` : il posait une gélule noire sur le parchemin. Corrigé. **La règle qui en sort : si ça peut s'afficher sur les deux faces, ça prend `day`. Sans exception.**
 - `CrisisCard` : **examiné, laissé en nuit délibérément.** Il couvre l'écran entier à 92 % d'opacité — il ne déborde sur rien, c'est une rupture voulue. Ce n'est pas un oubli.
 
+### Deux migrations à moitié faites, finies après coup
+
+Le codemod a touché deux fichiers **hors des 13 écrans** et les a laissés *incohérents* plutôt que faux — ce qui est pire, parce que ça ne se voit pas :
+
+- `api/mvp/forge/generate` — le prompt système décrivait « near-black chaud (#221d29 → #191521) ». Les hex étaient les nouveaux, la phrase décrivait les anciens : **chaque monde généré aurait reçu une consigne qui se contredit elle-même.** Réécrit en entier (nuit bleue-violette, or #e0c087, Cormorant).
+- `/oeuvre/[slug]` — le dégradé avait ses deux extrémités en bleu-violet et ses deux stops du milieu restés bruns. Un dégradé qui part du prune, passe par le brun et revient au prune. Les quatre stops sont alignés.
+- **Reste sur cette page publique des accents chauds hérités** (`#e8a865`, `#fbeeda`, `#ecd4b4`). Hors périmètre de cette passe — c'est une surface publique, pas un des 13 écrans — mais à traiter si elle vit encore.
+
 ### Non faites — hors périmètre, à faire ailleurs
 
 Backend / données / produit, listées pour que rien ne se perde :
@@ -230,7 +238,7 @@ Je ne l'ai pas commité moi-même : un `package-lock.json` régénéré dans un 
 | `tsc --noEmit` sur le **vrai** code | ✅ **0 erreur** |
 | harnais vérifié | `~/tscheck/src` → symlink vers `mnt/timote/Dev/dream-app/src` (le fix de C1 tient), `tsconfig.c1.json` (exclut `src_new/`) |
 | **canari** | une erreur volontaire injectée dans `dream-design.ts` → `error TS2322` bien remontée, puis retirée. **Le typecheck regarde bien mon code**, et pas un cache. |
-| `next build` | voir §7bis |
+| **`next build` complet** | ✅ **`✓ Compiled successfully`**, sortie `MY_NEXT_EXIT=0` — mon propre marqueur, ma propre exécution, sur mon propre code (`greatHead` présent dans la source compilée). Les avertissements « Dynamic server usage » sur `/api/great-dreams`, `/api/journal/sections` et `/api/lucid/export-obsidian` sont normaux : ce sont des routes authentifiées, elles *doivent* être dynamiques. |
 | rendu regardé dans Chrome | ✅ — et ça a servi (§8) |
 
 > ⚠️ **Piège de tooling, à écrire pour le prochain.** Les processus lancés en arrière-plan avec `nohup ... &` **ne survivent pas à la fin d'un appel bash** dans ce bac à sable, et `/tmp` est effacé entre les appels. J'ai lu pendant vingt minutes un `~/nextbuild.log` **laissé par un agent précédent** en croyant que c'était le mien — il disait `BUILD_EXIT=0` là où mon script écrit `NEXT_EXIT=`. C'est ce détail qui m'a sauvé. **Ne jamais faire confiance à un log dont on n'a pas vérifié qu'il vient de sa propre exécution.** La parade qui marche : `setsid bash -c '…' < /dev/null &` + `disown`, dans `$HOME`, jamais dans `/tmp`.
@@ -239,7 +247,15 @@ Je ne l'ai pas commité moi-même : un `package-lock.json` régénéré dans un 
 
 ## 8 · Ce que seul le rendu a montré
 
-*(section renseignée après la passe Chrome — voir §8 ci-dessous dans la version finale du fichier)*
+Trois écrans rendus dans Chrome aux vraies polices, puis regardés — pas relus.
+
+1. **🔴 Les trois liens du rang 2 étaient mal espacés, et c'était invisible dans le code.** Ils étaient en `flex: 1` : chacun occupait un tiers exact et centrait son texte dedans. Résultat, les points de séparation tombaient mécaniquement à 33 % et 66 % de la largeur — pendant que « Aller plus loin » (14 caractères) et « Créer » (5) produisaient des blancs complètement différents de part et d'autre. À l'écran : **le premier point collé au premier lien, le second flottant seul au milieu de rien.** Le code, lui, avait l'air parfaitement symétrique. Corrigé en `flex: none` + un `gap` unique : les liens se dimensionnent sur leur texte, tous les intervalles deviennent égaux.
+
+2. **La cible du scanner était à 27 px.** L'icône appareil-photo posée en fin de micro-ligne avait 17 px de glyphe et 5 px de padding. La loi tolère 34 pour une puce secondaire, jamais 27. Passée à 34 × 34, glyphe à 21.
+
+3. **Ce que le rendu a confirmé et qui n'était pas garanti :** la lune de 89 px **tient**. C'était le pari le plus risqué de la passe (on divise par deux l'élément central de l'écran principal), et sur l'écran réel elle lit comme une présence dans du vide, pas comme une lune rétrécie — parce que le halo de 233 px garde toute la place que le disque a lâchée. Et « rêve » en Cormorant 300 romain, à côté de sa traîne en Newsreader italique, donne bien **un appui et une suite** au lieu des deux souffles identiques d'avant.
+
+*(Correction du 4ᵉ défaut — `ReservedToast` peint en nuit sur le parchemin — est venue de la lecture, pas du rendu : je le cherchais parce que trois composants du même genre étaient tombés dans la journée.)*
 
 ---
 
