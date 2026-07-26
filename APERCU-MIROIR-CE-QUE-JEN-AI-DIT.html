@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Miroir — « ce que j’en ai dit »</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&family=Hanken+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ── TOKENS — copie fidèle de src/lib/dream-design.ts (nuit bleue, D1) ── */
+  :root{
+    --bg:linear-gradient(168deg,#2b2534 0%,#221d29 55%,#191521 100%);
+    --bgTop:#2b2534; --gold:#e0c087; --onGold:#241f18;
+    --cream:#f1e8d7; --ink:#ddd4de; --dim:#b9b0bd; --faint:#a49aad;
+    --card:rgba(255,255,255,.045); --cardBorder:rgba(255,255,255,.08);
+    --line:rgba(255,255,255,.08); --moon:#e9dcbc;
+    --serif:"Newsreader","EB Garamond",Georgia,serif;
+    --display:"Cormorant Garamond","EB Garamond",Georgia,serif;
+    --sans:"Hanken Grotesk","Inter",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);background-attachment:fixed;min-height:100vh;
+       font-family:var(--sans);color:var(--ink);
+       -webkit-font-smoothing:antialiased;padding:0 0 144px}
+  /* grain — 2%, immobile (les écrans de lecture ne bougent pas) */
+  body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.02;
+    mix-blend-mode:overlay;background-repeat:repeat;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='144' height='144'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+  /* ── l'en-tête de l'aperçu (pas l'app : le cadre de présentation) ── */
+  header{max-width:987px;margin:0 auto;padding:89px 34px 0;position:relative;z-index:2}
+  h1{font-family:var(--serif);font-style:italic;font-weight:400;font-size:45px;
+     color:var(--cream);line-height:1.272;margin:0}
+  .sub{margin-top:21px;font-size:17px;line-height:1.618;color:var(--dim);max-width:610px}
+  .facts{margin-top:34px;display:grid;grid-template-columns:repeat(4,1fr);gap:21px;
+         padding-top:21px;border-top:1px solid var(--line);max-width:754px}
+  @media (max-width:700px){.facts{grid-template-columns:repeat(2,1fr)}}
+  .facts div{font-size:13px;color:var(--faint);line-height:1.618}
+  .facts b{display:block;font-family:var(--display);font-size:28px;color:var(--cream);font-weight:400}
+
+  /* ── la galerie de cadres ── */
+  .gallery{max-width:987px;margin:0 auto;padding:0 34px;position:relative;z-index:2}
+  .frame-wrap{margin-top:144px}
+  .frame-label{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+               color:var(--faint);margin-bottom:21px}
+  .frame-note{display:block;text-transform:none;letter-spacing:.02em;font-weight:400;
+              font-size:13px;color:var(--faint);margin-top:8px;max-width:610px;line-height:1.618}
+  .frame{width:390px;max-width:100%;border:1px solid var(--cardBorder);border-radius:21px;
+         padding:34px 21px 55px;background:rgba(255,255,255,.012)}
+
+  /* ── LE MONTAGE ── */
+  .thread{}
+  .anchor-word{margin:0;font-family:var(--display);font-style:italic;font-weight:400;
+               font-size:40px;color:var(--cream);line-height:1.272}
+  .factwhen{margin-top:5px;font-size:13px;color:var(--faint);line-height:1.618}
+  .fact{margin-top:8px;font-size:14px;color:var(--faint);line-height:1.618}
+  .stack{margin-top:34px;position:relative}
+  .rail{position:absolute;left:3px;top:13px;bottom:13px;width:1px;
+        background:linear-gradient(180deg,transparent,rgba(255,255,255,.13) 8%,rgba(255,255,255,.13) 92%,transparent)}
+  .line .cards{padding-left:34px}
+  .slot{position:relative;margin-top:34px}
+  .slot.first{margin-top:0}
+  .gap{position:absolute;left:-21px;top:-26px;width:233px;font-size:13px;color:var(--faint);letter-spacing:.04em}
+  .dot{position:absolute;left:-34px;top:26px;margin-left:-1px;width:8px;height:8px;
+       border-radius:50%;background:var(--moon);opacity:.61}
+  .dot.hollow{background:transparent;border:1px solid var(--moon)}
+
+  .card{background:var(--card);border:1px solid var(--cardBorder);border-radius:13px;padding:21px}
+  .date{font-family:var(--display);font-size:28px;font-weight:400;color:var(--cream);line-height:1.272;letter-spacing:.01em}
+  .date.dimmed{color:var(--dim)}
+  .undated{font-family:var(--display);font-style:italic;font-size:22px;color:var(--faint);line-height:1.272}
+  .why{margin-top:5px;font-size:13px;color:var(--faint);line-height:1.618}
+  .dream{margin-top:8px;font-size:13px;color:var(--faint);letter-spacing:.02em}
+  .quote{margin:13px 0 0;font-family:var(--serif);font-size:19px;line-height:1.618;color:var(--ink)}
+  .anchor{font-style:normal;color:var(--cream);border-bottom:1px solid rgba(224,192,135,.4);padding-bottom:1px}
+
+  .card.today{background:transparent;border:1px dashed rgba(255,255,255,.11)}
+  .field{margin-top:13px;min-height:89px;font-family:var(--serif);font-size:19px;
+         line-height:1.618;color:var(--faint);opacity:.61}
+
+  .held{margin-top:21px;font-size:13px;color:var(--faint);line-height:1.618}
+  .line .held,.line .appline{padding-left:34px}
+  .appline{margin-top:34px;font-family:var(--serif);font-style:italic;font-size:17px;
+           color:var(--faint);line-height:1.618}
+
+  /* ── le refus ── */
+  .refusal h2{margin:0;font-family:var(--serif);font-style:italic;font-weight:400;
+              font-size:34px;color:var(--cream);line-height:1.272}
+  .refusal .l1{margin-top:89px;font-family:var(--serif);font-style:italic;font-size:21px;
+               color:var(--dim);line-height:1.618}
+  .refusal .l2{margin-top:21px;font-size:17px;color:var(--faint);line-height:1.618}
+
+  /* ── l'invitation, dans le journal ── */
+  .invite{border-top:1px solid var(--line);padding:21px 3px;margin-top:34px}
+  .invite .a{font-family:var(--serif);font-style:italic;font-size:17px;color:var(--dim);line-height:1.618}
+  .invite .b{margin-top:4px;font-size:13px;color:var(--faint)}
+  .ghost{font-family:var(--serif);font-size:17px;color:var(--faint);line-height:1.618;opacity:.61}
+
+  footer{max-width:987px;margin:144px auto 0;padding:34px;position:relative;z-index:2;
+         border-top:1px solid var(--line);font-size:13px;color:var(--faint);line-height:1.618}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>« ce que j’en ai dit »</h1>
+  <p class="sub">
+    Le mode le plus honnête du miroir : l’app ne dit rien d’elle-même. Elle pose tes lectures
+    côte à côte, elle les date, et elle se tait. <strong style="color:var(--ink);font-weight:400">
+    Toutes les phrases entre guillemets ci-dessous sont les tiennes</strong>, sorties de la base
+    par le moteur, sans retouche. Rien n’a été écrit à la main pour cet aperçu.
+  </p>
+  <div class="facts">
+    <div><b>171</b>passages « lecture »<br>posés par B4</div>
+    <div><b>60</b>rêves après<br>dédoublonnage (64 en base)</div>
+    <div><b>39</b>sans date fiable<br>— d’où le pêle-mêle</div>
+    <div><b>6</b>fils tenus<br>par le moteur ce soir</div>
+  </div>
+</header>
+
+<div class="gallery">
+
+<div class="frame-wrap">
+    <div class="frame-label">Montage 1 — la ligne<span class="frame-note">Le fil le plus profond du corpus : le mot « rêve » dans tes propres lectures. Quatre cartes choisies mécaniquement (la plus ancienne, la plus récente, et les deux qui écartent le plus la ligne), jamais « les meilleures ». La date est en grand ; l’écart entre deux cartes est écrit en toutes lettres. C’est le temps qui fait le travail.</span></div>
+    <div class="frame"><section class="thread line">
+    <h2 class="anchor-word">rêve</h2>
+    <div class="fact">4 lectures, entre mars 2024 et juillet 2026.</div>
+    
+    <div class="stack">
+      <span class="rail" aria-hidden="true"></span>
+      <div class="cards">
+        <div class="slot first">
+      
+      <span class="dot" aria-hidden="true"></span>
+      <article class="card">
+      <div class="date">mars 2024</div>
+      <div class="dream">Jade prédit l'effondrement crypto</div>
+      <p class="quote">«&#8239;Voilà en gros, va falloir que je m'améliore sur la lecture des <em class="anchor">rêves</em>, je m'en vais un peu tard.&#8239;»</p>
+    </article>
+    </div>
+<div class="slot">
+      <div class="gap">6 mois plus tard</div>
+      <span class="dot" aria-hidden="true"></span>
+      <article class="card">
+      <div class="date">septembre 2024</div>
+      <div class="dream">L'accessibilité avant tout</div>
+      <p class="quote">«&#8239;Je me réveille d'un <em class="anchor">rêve</em>, de rêve ou je ne sais pas pourquoi, mais je me réveille en mode « I can't be closer anymore ». Je me sens vraiment prêt à stop playing around. Je me sens vraiment prêt à passer à l'action, je me sens vraiment prêt quoi, c'est un truc de ouf. Stop the bullshit.&#8239;»</p>
+    </article>
+    </div>
+<div class="slot">
+      <div class="gap">3 mois plus tard</div>
+      <span class="dot" aria-hidden="true"></span>
+      <article class="card">
+      <div class="date">décembre 2024</div>
+      <div class="dream">Chute libre aux ailes de papillon</div>
+      <p class="quote">«&#8239;je sais pas si je devrais m'autoriser en <em class="anchor">rêve</em>&#8239;»</p>
+    </article>
+    </div>
+<div class="slot">
+      <div class="gap">un an et 7 mois plus tard</div>
+      <span class="dot" aria-hidden="true"></span>
+      <article class="card">
+      <div class="date">juillet 2026</div>
+      <div class="dream">Les ailes du maître dans les pierres</div>
+      <p class="quote">«&#8239;Je disais que c'était le <em class="anchor">rêve</em> de l'année dernière, je vais la faire beaucoup plus court.&#8239;»</p>
+    </article>
+    </div>
+        <div class="slot">
+          <span class="dot hollow" aria-hidden="true"></span>
+          <div class="card today">
+            <div class="date dimmed">aujourd’hui</div>
+            <div class="field">si tu veux en dire quelque chose maintenant.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="held">16 autres lectures portent ce mot. Elles n’ont pas de date, elles ne peuvent pas entrer dans cette ligne.</div>
+    <div class="appline">Ce sont tes phrases. Je ne les commente pas.</div>
+  </section></div>
+  </div>
+
+<div class="frame-wrap">
+    <div class="frame-label">Montage 2 — la ligne courte<span class="frame-note">Trois cartes, vingt-deux mois. La doctrine dit que deux qui se répondent valent mieux que huit qui s’accumulent : c’est ce format-là. La dernière est de ce matin.</span></div>
+    <div class="frame"><section class="thread line">
+    <h2 class="anchor-word">je me demande</h2>
+    <div class="fact">3 lectures, entre septembre 2024 et juillet 2026.</div>
+    
+    <div class="stack">
+      <span class="rail" aria-hidden="true"></span>
+      <div class="cards">
+        <div class="slot first">
+      
+      <span class="dot" aria-hidden="true"></span>
+      <article class="card">
+      <div class="date">septembre 2024</div>
+      <div class="dream">La cité médiévale et le démon des falaises</div>
+      <p class="quote">«&#8239;<em class="anchor">je me demande</em> si j'étais en voyage en famille&#8239;»</p>
+    </article>
+    </div>
+<div class="slot">
+      <div class="gap">le même mois</div>
+      <span class="dot" aria-hidden="true"></span>
+      <article class="card">
+      <div class="date">septembre 2024</div>
+      <div class="dream">Libérer le cheval et la chapelle</div>
+      <p class="quote">«&#8239;Donc, il y a le symbole de l'arbre, de l'église et du cheval. De venir libérer ce lieu sacré. Et d'être invité à aller preacher. Alors qu'à la base, j'étais en quête. Je faisais beaucoup de sport aussi. Alors qu'à la base, j'étais en quête de cet endroit. Comment rencontrer des gens. <em class="anchor">Je me demande</em> si c'est lié. Si c'est une réponse à ça. Quand je fais ce que je dois faire. Quand je vais prendre soin des lieux sacrés. Et quand je preache. C'est comme ça que je suis censé rencontrer des gens. Je ne sais pas.&#8239;»</p>
+    </article>
+    </div>
+<div class="slot">
+      <div class="gap">un an et 10 mois plus tard</div>
+      <span class="dot" aria-hidden="true"></span>
+      <article class="card">
+      <div class="date">juillet 2026</div>
+      <div class="dream">La course contre le temps suspendue</div>
+      <p class="quote">«&#8239;Déjà, <em class="anchor">je me demande</em> si ce n'est pas un rêve lié à tout le monde, à un endroit où je galère à travailler en équipe, de façon générale, coopérer, travailler en mode de famille.&#8239;»</p>
+    </article>
+    </div>
+        <div class="slot">
+          <span class="dot hollow" aria-hidden="true"></span>
+          <div class="card today">
+            <div class="date dimmed">aujourd’hui</div>
+            <div class="field">si tu veux en dire quelque chose maintenant.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="held">1 autre lecture porte ce mot. Elle n’a pas de date, elle ne peut pas entrer dans cette ligne.</div>
+    <div class="appline">Ce sont tes phrases. Je ne les commente pas.</div>
+  </section></div>
+  </div>
+
+<div class="frame-wrap">
+    <div class="frame-label">Montage 3 — le pêle-mêle<span class="frame-note">Dès qu’une seule lecture n’a pas de date fiable, le filet disparaît, les cartes se posent à plat, et l’écran dit pourquoi. Trente-neuf de tes soixante rêves sont dans ce cas. Un montage temporel qui ment serait pire que pas de montage.</span></div>
+    <div class="frame"><section class="thread scatter">
+    <h2 class="anchor-word">confiance</h2>
+    <div class="fact">Ces lectures ne peuvent pas être mises dans l’ordre — toutes n’ont pas de date.</div>
+    <div class="factwhen">Leurs rêves ont été déposés les 19 et 20 avril 2026 ; la date du rêve, elle, n’a jamais été posée.</div>
+    <div class="stack">
+      
+      <div class="cards">
+        <div class="slot first">
+      
+      
+      <article class="card" style="transform:rotate(-0.382deg)">
+      <div class="undated">date inconnue</div>
+      <div class="dream">Le chant sacré des maîtres du feu</div>
+      <p class="quote">«&#8239;la puissance de l'attachement, de faire <em class="anchor">confiance</em> en sa puissance, plutôt que de la faire protéger, faire confiance en son indépendance.&#8239;»</p>
+    </article>
+    </div>
+<div class="slot">
+      
+      
+      <article class="card" style="transform:rotate(0.382deg)">
+      <div class="undated">date inconnue</div>
+      <div class="dream">Les Vérités du Ring</div>
+      <p class="quote">«&#8239;Et qui voit ma profondeur, et qui a <em class="anchor">confiance</em> dans la présence de mes visions.&#8239;»</p>
+    </article>
+    </div>
+<div class="slot">
+      
+      
+      <article class="card" style="transform:rotate(-0.382deg)">
+      <div class="undated">date inconnue</div>
+      <div class="dream">Les secrets chuchotés sous le lit</div>
+      <p class="quote">«&#8239;Maintenant j'ai vraiment <em class="anchor">confiance</em> en moi.&#8239;»</p>
+    </article>
+    </div>
+<div class="slot">
+      
+      
+      <article class="card" style="transform:rotate(0.382deg)">
+      <div class="undated">date inconnue</div>
+      <div class="dream">Le plongeon héroïque et la célébrité soudaine</div>
+      <p class="quote">«&#8239;C'est pas des petits levelups, donc j'avais énormément de <em class="anchor">confiance</em> en moi.&#8239;»</p>
+    </article>
+    </div>
+        <div class="slot">
+          
+          <div class="card today">
+            <div class="date dimmed">aujourd’hui</div>
+            <div class="field">si tu veux en dire quelque chose maintenant.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="appline">Ce sont tes phrases. Je ne les commente pas.</div>
+  </section></div>
+  </div>
+
+<div class="frame-wrap">
+    <div class="frame-label">Montage 4 — deux fois le contraire<span class="frame-note">Le moteur ne sait pas qu’il y a une contradiction là-dedans, et il n’a pas le droit de la nommer. Il pose le mot et les cartes. Lis la troisième et la quatrième l’une après l’autre. <em>Ce fil existe, mais l’écran ne l’a pas retenu ce soir : ses rêves étaient déjà pris par un fil précédent.</em></span></div>
+    <div class="frame"><section class="thread scatter">
+    <h2 class="anchor-word">puissant</h2>
+    <div class="fact">Ces lectures ne peuvent pas être mises dans l’ordre — toutes n’ont pas de date.</div>
+    <div class="factwhen">Leurs rêves ont été déposés le 19 avril 2026 ; la date du rêve, elle, n’a jamais été posée.</div>
+    <div class="stack">
+      
+      <div class="cards">
+        <div class="slot first">
+      
+      
+      <article class="card" style="transform:rotate(-0.382deg)">
+      <div class="undated">date inconnue</div>
+      <div class="dream">Le chant sacré des maîtres du feu</div>
+      <p class="quote">«&#8239;la <em class="anchor">puissance</em> de l'attachement, de faire confiance en sa puissance, plutôt que de la faire protéger, faire confiance en son indépendance.&#8239;»</p>
+    </article>
+    </div>
+<div class="slot">
+      
+      
+      <article class="card" style="transform:rotate(0.382deg)">
+      <div class="undated">date inconnue</div>
+      <div class="dream">Les Cicatrices du Feu Sacré</div>
+      <p class="quote">«&#8239;Clairement ce n'était pas juste une enfant, c'était une sorte de créature, une déesse, magique, ultra <em class="anchor">puissante</em>.&#8239;»</p>
+    </article>
+    </div>
+<div class="slot">
+      
+      
+      <article class="card" style="transform:rotate(-0.382deg)">
+      <div class="undated">date inconnue</div>
+      <div class="dream">Les fantômes du parking et les retrouvailles perdues</div>
+      <p class="quote">«&#8239;C'était très guerrier. Autant guerrier spirituel que guerrier physique dans la matière en me faisant un corps <em class="anchor">puissant</em>. Voilà ce que je peux en dire. Il y a beaucoup d'autres choses mais j'ai un peu de mal.&#8239;»</p>
+    </article>
+    </div>
+<div class="slot">
+      
+      
+      <article class="card" style="transform:rotate(0.382deg)">
+      <div class="undated">date inconnue</div>
+      <div class="dream">Les masques tombent à Hellfest</div>
+      <p class="quote">«&#8239;Ça m'arrive assez souvent en rêve. Faire des grands speechs du cœur, bien <em class="anchor">puissants</em>. Voilà, après il y avait d'autres trucs.&#8239;»</p>
+    </article>
+    </div>
+        <div class="slot">
+          
+          <div class="card today">
+            <div class="date dimmed">aujourd’hui</div>
+            <div class="field">si tu veux en dire quelque chose maintenant.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="appline">Ce sont tes phrases. Je ne les commente pas.</div>
+  </section></div>
+  </div>
+
+<div class="frame-wrap">
+    <div class="frame-label">Montage 5 — le couple<span class="frame-note">Le format minimal : deux lectures, deux rêves. Rien d’autre. <em>Fil réel, non retenu ce soir par la règle de dispersion.</em></span></div>
+    <div class="frame"><section class="thread scatter">
+    <h2 class="anchor-word">intégrité</h2>
+    <div class="fact">Ces lectures ne peuvent pas être mises dans l’ordre — toutes n’ont pas de date.</div>
+    <div class="factwhen">Leurs rêves ont été déposés le 19 avril 2026 ; la date du rêve, elle, n’a jamais été posée.</div>
+    <div class="stack">
+      
+      <div class="cards">
+        <div class="slot first">
+      
+      
+      <article class="card" style="transform:rotate(-0.382deg)">
+      <div class="undated">date inconnue</div>
+      <div class="dream">Le Singe gardien et l'ami qui s'enfuit</div>
+      <p class="quote">«&#8239;je me suis rendu compte de mon <em class="anchor">intégrité</em>, que c'est comme ça que je me rendais compte que j'avais envie d'énergie sexuelle avec des jeunes filles c'est pas du tout satisfaisant, je sentais que j'étais sorti de mon intégrité ici pour lui faire plaisir, il fallait surtout pas le faire, jamais, quelque soit la raison&#8239;»</p>
+    </article>
+    </div>
+<div class="slot">
+      
+      
+      <article class="card" style="transform:rotate(0.382deg)">
+      <div class="undated">date inconnue</div>
+      <div class="dream">Manuela gardienne de ma vérité solitaire</div>
+      <p class="quote">«&#8239;Je dis maintenant à tout ce qui est recruté de moi, que je donnerai mon <em class="anchor">intégrité</em> à ma propre vérité.&#8239;»</p>
+    </article>
+    </div>
+        <div class="slot">
+          
+          <div class="card today">
+            <div class="date dimmed">aujourd’hui</div>
+            <div class="field">si tu veux en dire quelque chose maintenant.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="appline">Ce sont tes phrases. Je ne les commente pas.</div>
+  </section></div>
+  </div>
+
+<div class="frame-wrap">
+    <div class="frame-label">Le refus<span class="frame-note">L’écran sur lequel tu jugeras le plus dur, parce que l’app ne donne rien et doit quand même valoir la peine d’être ouverte. Il est motivé, il ne s’excuse pas, il ne promet rien pour demain. Le silence est une sortie normale, pas une panne.</span></div>
+    <div class="frame"><section class="refusal">
+    <h2>ce que j’en ai dit</h2>
+    <div class="l1">Rien à poser côte à côte.</div>
+    <div class="l2">Aucun mot n’est encore revenu dans deux de tes lectures. Reviens quand une phrase en aura rejoint une autre.</div>
+  </section></div>
+  </div>
+
+<div class="frame-wrap">
+    <div class="frame-label">L’entrée<span class="frame-note">Pas un onglet — une mention basse et grise en bas du journal des grands rêves, après les rêves. Une invitation, jamais une entrée : l’app laisse une trace, elle ne délivre pas.</span></div>
+    <div class="frame"><div class="ghost">…</div>
+  <div class="invite">
+    <div class="a">ce que j’en ai dit</div>
+    <div class="b">tes lectures, côte à côte</div>
+  </div></div>
+  </div>
+
+</div>
+
+<footer>
+  Aperçu généré le 26/07/2026 23:36:56 par
+  <code>scripts/mirror-said-render.mjs</code>, depuis le moteur réel
+  (<code>src/lib/mirror/what-i-said.ts</code>) et le corpus réel.
+  Tokens : <code>src/lib/dream-design.ts</code>. Loi : <code>DOCTRINE-MIROIR.md</code>.
+  Zéro phrase générée par un modèle sur cet écran — et il ne doit jamais y en avoir.
+</footer>
+
+</body>
+</html>

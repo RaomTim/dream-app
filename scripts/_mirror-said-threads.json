@@ -1,0 +1,590 @@
+{
+  "generatedAt": "2026-07-26T21:36:56.347Z",
+  "dreamsTotal": 64,
+  "dreamsAfterDedup": 60,
+  "readingsTotal": 171,
+  "readingsUsable": 164,
+  "undatedDreams": 39,
+  "threads": [
+    {
+      "anchor": "rêve",
+      "anchorSlug": "rêve",
+      "grammar": "ligne",
+      "readings": [
+        {
+          "id": "d48e8723-346a-42bb-8337-eba3e1be18e9",
+          "kairosId": "3d702f82-ae38-4a95-b48f-0867593fa5b4",
+          "dreamTitle": "Jade prédit l'effondrement crypto",
+          "quote": "Voilà en gros, va falloir que je m'améliore sur la lecture des rêves, je m'en vais un peu tard.",
+          "occurredAt": "2024-03-31T00:00:00+00:00",
+          "dated": true,
+          "depositedAt": "2024-03-31T00:00:00+00:00",
+          "source": "dictee",
+          "match": {
+            "start": 63,
+            "end": 68
+          }
+        },
+        {
+          "id": "d153aa49-98a7-4e35-b109-284906679cf8",
+          "kairosId": "77f0ec85-390c-4e5a-9854-ce035ae013f3",
+          "dreamTitle": "L'accessibilité avant tout",
+          "quote": "Je me réveille d'un rêve, de rêve ou je ne sais pas pourquoi, mais je me réveille en mode « I can't be closer anymore ». Je me sens vraiment prêt à stop playing around. Je me sens vraiment prêt à passer à l'action, je me sens vraiment prêt quoi, c'est un truc de ouf. Stop the bullshit.",
+          "occurredAt": "2024-09-23T00:00:00+00:00",
+          "dated": true,
+          "depositedAt": "2024-09-23T00:00:00+00:00",
+          "source": "dictee",
+          "match": {
+            "start": 20,
+            "end": 24
+          }
+        },
+        {
+          "id": "5bec18ba-cdbd-4313-b09f-45d97453b8ae",
+          "kairosId": "7b84ba7c-f31b-41de-97b1-02864eda053b",
+          "dreamTitle": "Chute libre aux ailes de papillon",
+          "quote": "je sais pas si je devrais m'autoriser en rêve",
+          "occurredAt": "2024-12-30T00:00:00+00:00",
+          "dated": true,
+          "depositedAt": "2024-12-30T00:00:00+00:00",
+          "source": "dictee",
+          "match": {
+            "start": 41,
+            "end": 45
+          }
+        },
+        {
+          "id": "cbeec4eb-f1a4-49d9-bd4d-94f6e37ec6f9",
+          "kairosId": "a6b05338-79bd-440f-bf8b-c5d909140f55",
+          "dreamTitle": "Les ailes du maître dans les pierres",
+          "quote": "Je disais que c'était le rêve de l'année dernière, je vais la faire beaucoup plus court.",
+          "occurredAt": "2026-07-26T06:29:07.48756+00:00",
+          "dated": true,
+          "depositedAt": "2026-07-26T06:29:07.48756+00:00",
+          "source": "dictee",
+          "match": {
+            "start": 25,
+            "end": 29
+          }
+        }
+      ],
+      "span": {
+        "from": "2024-03-31T00:00:00+00:00",
+        "to": "2026-07-26T06:29:07.48756+00:00",
+        "months": 28
+      },
+      "totalReadings": 23,
+      "dreamCount": 4,
+      "undatedHeld": 16
+    },
+    {
+      "anchor": "je me demande",
+      "anchorSlug": "je me demande",
+      "grammar": "ligne",
+      "readings": [
+        {
+          "id": "1929a62c-383a-4a04-b2d3-d084347c114c",
+          "kairosId": "6c6df078-a628-47b5-88ec-910ed8e9ded7",
+          "dreamTitle": "La cité médiévale et le démon des falaises",
+          "quote": "je me demande si j'étais en voyage en famille",
+          "occurredAt": "2024-09-14T00:00:00+00:00",
+          "dated": true,
+          "depositedAt": "2024-09-14T00:00:00+00:00",
+          "source": "dictee",
+          "match": {
+            "start": 0,
+            "end": 13
+          }
+        },
+        {
+          "id": "51053370-c9f2-4279-96e2-38b8bfe2f28e",
+          "kairosId": "ffe5d10e-e264-4ed2-84e3-24c98eb1bb41",
+          "dreamTitle": "Libérer le cheval et la chapelle",
+          "quote": "Donc, il y a le symbole de l'arbre, de l'église et du cheval. De venir libérer ce lieu sacré. Et d'être invité à aller preacher. Alors qu'à la base, j'étais en quête. Je faisais beaucoup de sport aussi. Alors qu'à la base, j'étais en quête de cet endroit. Comment rencontrer des gens. Je me demande si c'est lié. Si c'est une réponse à ça. Quand je fais ce que je dois faire. Quand je vais prendre soin des lieux sacrés. Et quand je preache. C'est comme ça que je suis censé rencontrer des gens. Je ne sais pas.",
+          "occurredAt": "2024-09-18T00:00:00+00:00",
+          "dated": true,
+          "depositedAt": "2024-09-18T00:00:00+00:00",
+          "source": "dictee",
+          "match": {
+            "start": 285,
+            "end": 298
+          }
+        },
+        {
+          "id": "e4861e59-617c-473f-b452-bbfe7b7051ab",
+          "kairosId": "88cf38b4-076a-49ac-b84b-7505d17a6d36",
+          "dreamTitle": "La course contre le temps suspendue",
+          "quote": "Déjà, je me demande si ce n'est pas un rêve lié à tout le monde, à un endroit où je galère à travailler en équipe, de façon générale, coopérer, travailler en mode de famille.",
+          "occurredAt": "2026-07-26T06:18:12.652+00:00",
+          "dated": true,
+          "depositedAt": "2026-07-26T06:18:12.652+00:00",
+          "source": "dictee",
+          "match": {
+            "start": 6,
+            "end": 19
+          }
+        }
+      ],
+      "span": {
+        "from": "2024-09-14T00:00:00+00:00",
+        "to": "2026-07-26T06:18:12.652+00:00",
+        "months": 22
+      },
+      "totalReadings": 4,
+      "dreamCount": 3,
+      "undatedHeld": 1
+    },
+    {
+      "anchor": "temple",
+      "anchorSlug": "temple",
+      "grammar": "ligne",
+      "readings": [
+        {
+          "id": "756e6c78-e694-477e-b404-70233e62c342",
+          "kairosId": "7fe7098c-48a1-4b28-81ca-ee8444662208",
+          "dreamTitle": "L'enfant alien et l'âme dispersée",
+          "quote": "Je sens la force du toucher, je sens la forme de réalité de comment on peut se retrouver hors de son corps, dispersé, désincarné, vidé, à cause de croyances qui nous infectent et qui permettent à d'autres formes de vivre, d'habiter dans le corps, le temple. Ça peut être des attaques. Voilà.",
+          "occurredAt": "2024-07-09T00:00:00+00:00",
+          "dated": true,
+          "depositedAt": "2024-07-09T00:00:00+00:00",
+          "source": "dictee",
+          "match": {
+            "start": 250,
+            "end": 256
+          }
+        },
+        {
+          "id": "6945dc44-eae8-48c2-a7e1-0388368ef4d8",
+          "kairosId": "c639d1ff-ef9d-4e28-abd8-3a3b5767ebd3",
+          "dreamTitle": "Jalousie d'Olga et royaumes numériques",
+          "quote": "Je l'ai retrouvée dans son temple, dans son théâtre",
+          "occurredAt": "2024-12-17T00:00:00+00:00",
+          "dated": true,
+          "depositedAt": "2024-12-17T00:00:00+00:00",
+          "source": "dictee",
+          "match": {
+            "start": 27,
+            "end": 33
+          }
+        }
+      ],
+      "span": {
+        "from": "2024-07-09T00:00:00+00:00",
+        "to": "2024-12-17T00:00:00+00:00",
+        "months": 5
+      },
+      "totalReadings": 2,
+      "dreamCount": 2,
+      "undatedHeld": 0
+    },
+    {
+      "anchor": "incarner",
+      "anchorSlug": "incarner",
+      "grammar": "ligne",
+      "readings": [
+        {
+          "id": "756e6c78-e694-477e-b404-70233e62c342",
+          "kairosId": "7fe7098c-48a1-4b28-81ca-ee8444662208",
+          "dreamTitle": "L'enfant alien et l'âme dispersée",
+          "quote": "Je sens la force du toucher, je sens la forme de réalité de comment on peut se retrouver hors de son corps, dispersé, désincarné, vidé, à cause de croyances qui nous infectent et qui permettent à d'autres formes de vivre, d'habiter dans le corps, le temple. Ça peut être des attaques. Voilà.",
+          "occurredAt": "2024-07-09T00:00:00+00:00",
+          "dated": true,
+          "depositedAt": "2024-07-09T00:00:00+00:00",
+          "source": "dictee",
+          "match": {
+            "start": 118,
+            "end": 128
+          }
+        },
+        {
+          "id": "a2f810c9-7751-4e8c-8056-a2bae7fa98e7",
+          "kairosId": "36257e6f-2219-440c-854c-4aeb7184b2af",
+          "dreamTitle": "L'école des dieux et la royauté incarnée",
+          "quote": "Et voilà ce que ça voulait dire d'incarner cette réalisation, d'incarner que je suis elle, ce que je suis.",
+          "occurredAt": "2024-10-27T00:00:00+00:00",
+          "dated": true,
+          "depositedAt": "2024-10-27T00:00:00+00:00",
+          "source": "dictee",
+          "match": {
+            "start": 34,
+            "end": 42
+          }
+        },
+        {
+          "id": "eea2f898-8915-4bd3-b4e6-244306fc8b85",
+          "kairosId": "36257e6f-2219-440c-854c-4aeb7184b2af",
+          "dreamTitle": "L'école des dieux et la royauté incarnée",
+          "quote": "Et la morale elle était dans le fait d'oser incarner pleinement sa royauté et d'aller le trouver dans un appel qui vient de mes tripes.",
+          "occurredAt": "2024-10-27T00:00:00+00:00",
+          "dated": true,
+          "depositedAt": "2024-10-27T00:00:00+00:00",
+          "source": "dictee",
+          "match": {
+            "start": 44,
+            "end": 52
+          }
+        },
+        {
+          "id": "cb0e61d6-4afa-4c07-9dcb-e4e7a17a0b60",
+          "kairosId": "36257e6f-2219-440c-854c-4aeb7184b2af",
+          "dreamTitle": "L'école des dieux et la royauté incarnée",
+          "quote": "Je sens ce qu'il se passe dans le monde. La quête d'incarnation totale est la plus importante.",
+          "occurredAt": "2024-10-27T00:00:00+00:00",
+          "dated": true,
+          "depositedAt": "2024-10-27T00:00:00+00:00",
+          "source": "dictee",
+          "match": {
+            "start": 52,
+            "end": 63
+          }
+        }
+      ],
+      "span": {
+        "from": "2024-07-09T00:00:00+00:00",
+        "to": "2024-10-27T00:00:00+00:00",
+        "months": 4
+      },
+      "totalReadings": 4,
+      "dreamCount": 2,
+      "undatedHeld": 0
+    },
+    {
+      "anchor": "confiance",
+      "anchorSlug": "confiance",
+      "grammar": "pele-mele",
+      "readings": [
+        {
+          "id": "b669315f-8adf-4999-9e41-d089762f3899",
+          "kairosId": "fd2d766a-ea8c-45bc-b680-9cadcc6b299f",
+          "dreamTitle": "Le chant sacré des maîtres du feu",
+          "quote": "la puissance de l'attachement, de faire confiance en sa puissance, plutôt que de la faire protéger, faire confiance en son indépendance.",
+          "occurredAt": "2026-04-19T00:00:00+00:00",
+          "dated": false,
+          "depositedAt": "2026-04-19T00:00:00+00:00",
+          "source": "dictee",
+          "match": {
+            "start": 40,
+            "end": 49
+          }
+        },
+        {
+          "id": "d402a698-df23-4654-b3c5-fb3e483f25df",
+          "kairosId": "db5a6125-0a8c-4c60-8e2e-c1d46ad50174",
+          "dreamTitle": "Les Vérités du Ring",
+          "quote": "Et qui voit ma profondeur, et qui a confiance dans la présence de mes visions.",
+          "occurredAt": "2026-04-19T00:00:00+00:00",
+          "dated": false,
+          "depositedAt": "2026-04-19T00:00:00+00:00",
+          "source": "dictee",
+          "match": {
+            "start": 36,
+            "end": 45
+          }
+        },
+        {
+          "id": "f3ca26bc-3e31-4421-a09b-7d4b7b504b10",
+          "kairosId": "58356651-6177-4fe6-89bb-b05231b50e18",
+          "dreamTitle": "Les secrets chuchotés sous le lit",
+          "quote": "Maintenant j'ai vraiment confiance en moi.",
+          "occurredAt": "2026-04-19T00:00:00+00:00",
+          "dated": false,
+          "depositedAt": "2026-04-19T00:00:00+00:00",
+          "source": "dictee",
+          "match": {
+            "start": 25,
+            "end": 34
+          }
+        },
+        {
+          "id": "e318dc34-a257-45b1-880b-7cfb37c10cfc",
+          "kairosId": "f6c50fc8-3e76-4e1b-a4f9-343f927d5730",
+          "dreamTitle": "Le plongeon héroïque et la célébrité soudaine",
+          "quote": "C'est pas des petits levelups, donc j'avais énormément de confiance en moi.",
+          "occurredAt": "2026-04-20T00:00:00+00:00",
+          "dated": false,
+          "depositedAt": "2026-04-20T00:00:00+00:00",
+          "source": "dictee",
+          "match": {
+            "start": 58,
+            "end": 67
+          }
+        }
+      ],
+      "span": null,
+      "totalReadings": 4,
+      "dreamCount": 4,
+      "undatedHeld": 0
+    },
+    {
+      "anchor": "magiques",
+      "anchorSlug": "magique",
+      "grammar": "pele-mele",
+      "readings": [
+        {
+          "id": "59934ceb-d077-4106-95d0-def1483968f3",
+          "kairosId": "c0fb84b1-2dab-4ae8-935d-5cc8a1f13e85",
+          "dreamTitle": "Les entités qui me poursuivaient et le tube de fuite",
+          "quote": "quand je me suis réveillé j'ai ressenti que ça c'était question de synchronicité et de pas avoir peur d'exposer des faits même s'ils nous paraissent anodins ou pas très intéressants à partir du moment où c'est des faits qui naissent de synchronicité, parce que si ça vient de la synchronicité c'est que ça va parler à des gens autour parce que c'est des faits magiques",
+          "occurredAt": "2024-11-22T00:00:00+00:00",
+          "dated": true,
+          "depositedAt": "2024-11-22T00:00:00+00:00",
+          "source": "dictee",
+          "match": {
+            "start": 360,
+            "end": 368
+          }
+        },
+        {
+          "id": "d0764ac1-99ea-4515-be1f-c7532aba59de",
+          "kairosId": "58356651-6177-4fe6-89bb-b05231b50e18",
+          "dreamTitle": "Les secrets chuchotés sous le lit",
+          "quote": "Je me dis que je pensais que j'utilisais déjà la technologie alors qu'en fait j'utilisais mes propres pouvoirs magiques. Je me dis que c'est une blague.",
+          "occurredAt": "2026-04-19T00:00:00+00:00",
+          "dated": false,
+          "depositedAt": "2026-04-19T00:00:00+00:00",
+          "source": "dictee",
+          "match": {
+            "start": 111,
+            "end": 119
+          }
+        },
+        {
+          "id": "86d8af81-dcd7-45d0-8f94-edb011686836",
+          "kairosId": "5b32b168-a6de-4310-9b1e-e516e0774318",
+          "dreamTitle": "Les fantômes du parking et les retrouvailles perdues",
+          "quote": "Quand je me suis réveillé, je me suis dit que ça voulait dire que... Il fallait que je travaille ma connexion, mon pouvoir d'invocateur. Que je recommence à me connecter à mon travail de chamane. Mon travail de chamane géobiologue qui connaît mes capacités spirituelles. Qui connaît mes alliés spirituels. Qui connaît les sorts que je peux lancer, les attaques que je peux faire. Qui a une conscience de ses capacités magiques et d'invocation. Un truc comme ça.",
+          "occurredAt": "2026-04-19T00:00:00+00:00",
+          "dated": false,
+          "depositedAt": "2026-04-19T00:00:00+00:00",
+          "source": "dictee",
+          "match": {
+            "start": 418,
+            "end": 426
+          }
+        },
+        {
+          "id": "99efdfa1-f5de-4fc8-8dc3-ded63bc22d79",
+          "kairosId": "b2513707-3161-4e97-963c-e02e3edb69c2",
+          "dreamTitle": "Les Cicatrices du Feu Sacré",
+          "quote": "Clairement ce n'était pas juste une enfant, c'était une sorte de créature, une déesse, magique, ultra puissante.",
+          "occurredAt": "2026-04-19T00:00:00+00:00",
+          "dated": false,
+          "depositedAt": "2026-04-19T00:00:00+00:00",
+          "source": "dictee",
+          "match": {
+            "start": 87,
+            "end": 94
+          }
+        }
+      ],
+      "span": null,
+      "totalReadings": 4,
+      "dreamCount": 4,
+      "undatedHeld": 0
+    }
+  ],
+  "alternates": [
+    {
+      "anchor": "puissant",
+      "anchorSlug": "puissance",
+      "grammar": "pele-mele",
+      "readings": [
+        {
+          "id": "b669315f-8adf-4999-9e41-d089762f3899",
+          "kairosId": "fd2d766a-ea8c-45bc-b680-9cadcc6b299f",
+          "dreamTitle": "Le chant sacré des maîtres du feu",
+          "quote": "la puissance de l'attachement, de faire confiance en sa puissance, plutôt que de la faire protéger, faire confiance en son indépendance.",
+          "occurredAt": "2026-04-19T00:00:00+00:00",
+          "dated": false,
+          "depositedAt": "2026-04-19T00:00:00+00:00",
+          "source": "dictee",
+          "match": {
+            "start": 3,
+            "end": 12
+          }
+        },
+        {
+          "id": "99efdfa1-f5de-4fc8-8dc3-ded63bc22d79",
+          "kairosId": "b2513707-3161-4e97-963c-e02e3edb69c2",
+          "dreamTitle": "Les Cicatrices du Feu Sacré",
+          "quote": "Clairement ce n'était pas juste une enfant, c'était une sorte de créature, une déesse, magique, ultra puissante.",
+          "occurredAt": "2026-04-19T00:00:00+00:00",
+          "dated": false,
+          "depositedAt": "2026-04-19T00:00:00+00:00",
+          "source": "dictee",
+          "match": {
+            "start": 102,
+            "end": 111
+          }
+        },
+        {
+          "id": "cf16afaf-5afd-4a2d-a28a-aaa7ee292ffe",
+          "kairosId": "5b32b168-a6de-4310-9b1e-e516e0774318",
+          "dreamTitle": "Les fantômes du parking et les retrouvailles perdues",
+          "quote": "C'était très guerrier. Autant guerrier spirituel que guerrier physique dans la matière en me faisant un corps puissant. Voilà ce que je peux en dire. Il y a beaucoup d'autres choses mais j'ai un peu de mal.",
+          "occurredAt": "2026-04-19T00:00:00+00:00",
+          "dated": false,
+          "depositedAt": "2026-04-19T00:00:00+00:00",
+          "source": "dictee",
+          "match": {
+            "start": 110,
+            "end": 118
+          }
+        },
+        {
+          "id": "7102ada7-5a8b-41d9-b0db-9acf8054c8c1",
+          "kairosId": "60b53989-6ffb-4dfc-940a-ecc2997412c9",
+          "dreamTitle": "Les masques tombent à Hellfest",
+          "quote": "Ça m'arrive assez souvent en rêve. Faire des grands speechs du cœur, bien puissants. Voilà, après il y avait d'autres trucs.",
+          "occurredAt": "2026-04-19T00:00:00+00:00",
+          "dated": false,
+          "depositedAt": "2026-04-19T00:00:00+00:00",
+          "source": "dictee",
+          "match": {
+            "start": 74,
+            "end": 83
+          }
+        }
+      ],
+      "span": null,
+      "totalReadings": 5,
+      "dreamCount": 4,
+      "undatedHeld": 0
+    },
+    {
+      "anchor": "intégrité",
+      "anchorSlug": "intégrité",
+      "grammar": "pele-mele",
+      "readings": [
+        {
+          "id": "87fc7f66-fbdc-49bd-9533-5d7a07ca559f",
+          "kairosId": "f1607a83-ce8f-4b91-8c4b-057a8b89e0e4",
+          "dreamTitle": "Le Singe gardien et l'ami qui s'enfuit",
+          "quote": "je me suis rendu compte de mon intégrité, que c'est comme ça que je me rendais compte que j'avais envie d'énergie sexuelle avec des jeunes filles c'est pas du tout satisfaisant, je sentais que j'étais sorti de mon intégrité ici pour lui faire plaisir, il fallait surtout pas le faire, jamais, quelque soit la raison",
+          "occurredAt": "2026-04-19T00:00:00+00:00",
+          "dated": false,
+          "depositedAt": "2026-04-19T00:00:00+00:00",
+          "source": "dictee",
+          "match": {
+            "start": 31,
+            "end": 40
+          }
+        },
+        {
+          "id": "7d17ce32-bb74-48b7-bbd6-499678ad57f6",
+          "kairosId": "2dfd6862-04f7-4b9e-81c8-c97ba0f7d52c",
+          "dreamTitle": "Manuela gardienne de ma vérité solitaire",
+          "quote": "Je dis maintenant à tout ce qui est recruté de moi, que je donnerai mon intégrité à ma propre vérité.",
+          "occurredAt": "2026-04-19T00:00:00+00:00",
+          "dated": false,
+          "depositedAt": "2026-04-19T00:00:00+00:00",
+          "source": "dictee",
+          "match": {
+            "start": 72,
+            "end": 81
+          }
+        }
+      ],
+      "span": null,
+      "totalReadings": 2,
+      "dreamCount": 2,
+      "undatedHeld": 0
+    },
+    {
+      "anchor": "peur",
+      "anchorSlug": "peur",
+      "grammar": "ligne",
+      "readings": [
+        {
+          "id": "9d5d8c08-6a8b-4b72-8f31-1f39efb7d6ca",
+          "kairosId": "77f0ec85-390c-4e5a-9854-ce035ae013f3",
+          "dreamTitle": "L'accessibilité avant tout",
+          "quote": "J'ai l'impression que j'ai passé tellement de temps playing around, tellement de temps à m'échapper, m'échapper, m'échapper, tellement de résistance, tellement de peur, tellement d'échappage.",
+          "occurredAt": "2024-09-23T00:00:00+00:00",
+          "dated": true,
+          "depositedAt": "2024-09-23T00:00:00+00:00",
+          "source": "dictee",
+          "match": {
+            "start": 163,
+            "end": 167
+          }
+        },
+        {
+          "id": "0fd6cab4-5dca-4832-9b37-2bbcbd7fdddf",
+          "kairosId": "77f0ec85-390c-4e5a-9854-ce035ae013f3",
+          "dreamTitle": "L'accessibilité avant tout",
+          "quote": "Parce que ça, c'est du self-sabotage de haut niveau. Et c'est quoi ? C'est la peur de l'échec. C'est la peur du jugement. Pourquoi ?",
+          "occurredAt": "2024-09-23T00:00:00+00:00",
+          "dated": true,
+          "depositedAt": "2024-09-23T00:00:00+00:00",
+          "source": "dictee",
+          "match": {
+            "start": 78,
+            "end": 82
+          }
+        },
+        {
+          "id": "59934ceb-d077-4106-95d0-def1483968f3",
+          "kairosId": "c0fb84b1-2dab-4ae8-935d-5cc8a1f13e85",
+          "dreamTitle": "Les entités qui me poursuivaient et le tube de fuite",
+          "quote": "quand je me suis réveillé j'ai ressenti que ça c'était question de synchronicité et de pas avoir peur d'exposer des faits même s'ils nous paraissent anodins ou pas très intéressants à partir du moment où c'est des faits qui naissent de synchronicité, parce que si ça vient de la synchronicité c'est que ça va parler à des gens autour parce que c'est des faits magiques",
+          "occurredAt": "2024-11-22T00:00:00+00:00",
+          "dated": true,
+          "depositedAt": "2024-11-22T00:00:00+00:00",
+          "source": "dictee",
+          "match": {
+            "start": 97,
+            "end": 101
+          }
+        }
+      ],
+      "span": {
+        "from": "2024-09-23T00:00:00+00:00",
+        "to": "2024-11-22T00:00:00+00:00",
+        "months": 2
+      },
+      "totalReadings": 4,
+      "dreamCount": 2,
+      "undatedHeld": 1
+    },
+    {
+      "anchor": "école",
+      "anchorSlug": "école",
+      "grammar": "pele-mele",
+      "readings": [
+        {
+          "id": "c57960fe-6f73-4fec-a521-5f7207d227ca",
+          "kairosId": "952cbe43-2e6a-4ffc-a86e-6f1686d6141c",
+          "dreamTitle": "L'École des Cœurs en Compétition",
+          "quote": "En tout cas, du coup, ce que ça montre, c'est des jeux, des aventures, école, course.",
+          "occurredAt": "2026-04-19T00:00:00+00:00",
+          "dated": false,
+          "depositedAt": "2026-04-19T00:00:00+00:00",
+          "source": "dictee",
+          "match": {
+            "start": 71,
+            "end": 76
+          }
+        },
+        {
+          "id": "420b693e-5211-4fe3-bf71-71f0ff160e56",
+          "kairosId": "60b53989-6ffb-4dfc-940a-ecc2997412c9",
+          "dreamTitle": "Les masques tombent à Hellfest",
+          "quote": "Je sens vraiment que c'était une vraie école. Qui sait ?",
+          "occurredAt": "2026-04-19T00:00:00+00:00",
+          "dated": false,
+          "depositedAt": "2026-04-19T00:00:00+00:00",
+          "source": "dictee",
+          "match": {
+            "start": 39,
+            "end": 44
+          }
+        }
+      ],
+      "span": null,
+      "totalReadings": 2,
+      "dreamCount": 2,
+      "undatedHeld": 0
+    }
+  ]
+}

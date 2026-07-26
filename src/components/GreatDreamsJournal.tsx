@@ -31,6 +31,7 @@ import type { Session } from '@supabase/supabase-js'
 import { useT } from '@/lib/i18n'
 import { T, SCALE, MOTION } from '@/lib/dream-design'
 import GreatDreamCandidates from '@/components/GreatDreamCandidates'
+import MirrorWhatISaid from '@/components/MirrorWhatISaid'
 
 type GreatDream = {
   id: string
@@ -156,6 +157,12 @@ export default function GreatDreamsJournal({
 }) {
   const { t, locale } = useT()
   const [view, setView] = useState<'journal' | 'consult'>(initialView)
+  /* Le miroir « ce que j'en ai dit ». PAS un troisième onglet : DOCTRINE-MIROIR
+     §6.2b veut « une mention basse et grise […] une invitation, jamais une
+     entrée ». Un onglet est une entrée — il met le miroir au même rang que le
+     journal et le fait exister même quand il n'a rien à dire. Le lien vit en
+     bas de page, après les rêves, et n'apparaît que s'il y a déjà de la matière. */
+  const [mirror, setMirror] = useState(false)
   const [dreams, setDreams] = useState<GreatDream[] | null>(null)
   const [kept, setKept] = useState<KeptInterp[]>([])
   const mounted = useRef(true)
@@ -186,6 +193,8 @@ export default function GreatDreamsJournal({
 
   const lead = dreams?.find(d => d.id === leadId) || null
   const rest = (dreams || []).filter(d => d.id !== leadId)
+
+  if (mirror) return <MirrorWhatISaid session={session} onBack={() => setMirror(false)} />
 
   return (
     <div style={{ minHeight: '100dvh', paddingBottom: 144 }}>
@@ -285,6 +294,27 @@ export default function GreatDreamsJournal({
                 ))}
               </div>
             )}
+
+            {/* ── L'INVITATION AU MIROIR — basse, grise, jamais une bannière.
+                   Même grammaire que « ce rêve rayonne » (§3.13.3) : l'app
+                   laisse une trace, elle ne délivre pas. Aucun compteur, aucune
+                   promesse de ce qu'il va y trouver — c'est le miroir qui dira
+                   s'il a quelque chose, et il a le droit de se taire. ── */}
+            <button
+              onClick={() => setMirror(true)}
+              style={{
+                display: 'block', width: '100%', textAlign: 'left', cursor: 'pointer',
+                background: 'transparent', border: 'none', borderTop: `1px solid ${T.line}`,
+                marginTop: 89, padding: '21px 3px', minHeight: SCALE.touch,
+              }}
+            >
+              <div style={{ fontFamily: T.serif, fontSize: SCALE.body, fontStyle: 'italic', color: T.dim, lineHeight: 1.618 }}>
+                {t('screens.mirror.entry')}
+              </div>
+              <div style={{ marginTop: 4, fontFamily: T.sans, fontSize: SCALE.meta, color: T.faint }}>
+                {t('screens.mirror.entryHint')}
+              </div>
+            </button>
           </div>
         )}
       </div>
