@@ -16,7 +16,7 @@ export default async function OeuvrePage({ params }: { params: { slug: string } 
     .maybeSingle()
 
   const S = {
-    page: { minHeight: '100dvh', background: 'linear-gradient(180deg, #1a1310 0%, #241712 38%, #2c1810 68%, #160d0a 100%)', fontFamily: '"Inter", system-ui, sans-serif', color: '#f3e6d4', display: 'flex', flexDirection: 'column' as const, alignItems: 'center', padding: '48px 20px 60px' },
+    page: { minHeight: '100dvh', background: 'linear-gradient(180deg, #2b2534 0%, #221d29 38%, #1e1926 68%, #191521 100%)', fontFamily: '"Hanken Grotesk", "Inter", system-ui, sans-serif', color: '#ece3d4', display: 'flex', flexDirection: 'column' as const, alignItems: 'center', padding: '48px 20px 60px' },
     serif: { fontFamily: '"Fraunces", Georgia, serif', fontStyle: 'italic' as const },
   }
 
@@ -44,7 +44,7 @@ export default async function OeuvrePage({ params }: { params: { slug: string } 
       )}
       {w.kind === 'game' && w.asset_url && (
         <>
-          <iframe src={w.asset_url} title={w.vision_title || 'monde jouable'} style={{ width: '100%', maxWidth: 420, height: 620, border: '1px solid rgba(232,168,101,0.35)', borderRadius: 22, background: '#160d0a' }} sandbox="allow-scripts" />
+          <iframe src={w.asset_url} title={w.vision_title || 'monde jouable'} style={{ width: '100%', maxWidth: 420, height: 620, border: '1px solid rgba(232,168,101,0.35)', borderRadius: 22, background: '#191521' }} sandbox="allow-scripts" />
           <a href={w.asset_url} target="_blank" rel="noreferrer" style={{ marginTop: 14, color: '#e8a865', fontSize: 13 }}>ouvrir en plein écran →</a>
         </>
       )}

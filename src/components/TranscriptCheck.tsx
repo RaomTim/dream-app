@@ -133,12 +133,12 @@ export default function TranscriptCheck({
 
   // ── styles locaux (tokens dream-design, aucun hex) ─────────────────────────────
   const wrap: React.CSSProperties = { marginTop: 22 }
-  const kicker: React.CSSProperties = { fontFamily: T.mono, fontSize: 10, fontWeight: 400, letterSpacing: '0.18em', textTransform: 'uppercase', color: T.faint, marginBottom: 12 }
+  const kicker: React.CSSProperties = { fontFamily: T.sans, fontSize: SCALE.kicker, fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', color: T.faint, marginBottom: 12 }
   const cardStyle: React.CSSProperties = { padding: '17px 18px', borderRadius: SCALE.radius, background: T.card, border: T.cardBorder }
   const quoteChip: React.CSSProperties = { fontFamily: T.serif, fontStyle: 'italic', fontSize: SCALE.body, color: T.cream, lineHeight: 1.5 }
-  const primaryBtn: React.CSSProperties = { flex: 1, minHeight: SCALE.touch, padding: '13px 17px', borderRadius: SCALE.radiusPill, background: 'rgba(201,168,106,0.14)', border: `1px solid ${T.gold}66`, cursor: 'pointer', fontFamily: T.sans, fontSize: SCALE.body, fontWeight: 600, color: T.cream }
+  const primaryBtn: React.CSSProperties = { flex: 1, minHeight: SCALE.touch, padding: '13px 17px', borderRadius: SCALE.radiusPill, background: 'rgba(255,255,255,0.14)', border: `1px solid ${T.gold}66`, cursor: 'pointer', fontFamily: T.sans, fontSize: SCALE.body, fontWeight: 600, color: T.cream }
   const ghostBtn: React.CSSProperties = { flex: 1, minHeight: SCALE.touch, padding: '13px 17px', borderRadius: SCALE.radiusPill, background: 'transparent', border: `1px solid ${T.line}`, cursor: 'pointer', fontFamily: T.sans, fontSize: SCALE.body, fontWeight: 500, color: T.dim }
-  const inputStyle: React.CSSProperties = { width: '100%', boxSizing: 'border-box', marginTop: 13, padding: '11px 13px', borderRadius: SCALE.radius, background: 'rgba(242,232,213,0.04)', border: `1px solid ${T.line}`, color: T.ink, fontFamily: T.sans, fontSize: SCALE.body, lineHeight: 1.5, resize: 'vertical', outline: 'none' }
+  const inputStyle: React.CSSProperties = { width: '100%', boxSizing: 'border-box', marginTop: 13, padding: '11px 13px', borderRadius: SCALE.radius, background: 'rgba(202,191,206,0.04)', border: `1px solid ${T.line}`, color: T.ink, fontFamily: T.sans, fontSize: SCALE.body, lineHeight: 1.5, resize: 'vertical', outline: 'none' }
 
   // ── IDLE : la ligne discrète ───────────────────────────────────────────────────
   if (phase === 'idle') {
@@ -197,7 +197,7 @@ export default function TranscriptCheck({
     return (
       <div style={wrap}>
         <div style={cardStyle}>
-          <div style={{ fontFamily: T.mono, fontSize: 10, letterSpacing: '0.18em', color: T.faint, marginBottom: 12 }}>{t('core.transcriptCheck.progress', { n: idx + 1, total: issues.length })}</div>
+          <div style={{ fontFamily: T.sans, fontSize: SCALE.kicker, fontWeight: 600, letterSpacing: '0.2em', color: T.faint, marginBottom: 12 }}>{t('core.transcriptCheck.progress', { n: idx + 1, total: issues.length })}</div>
           <div style={quoteChip}>{cur.question}</div>
           <textarea
             value={draft}

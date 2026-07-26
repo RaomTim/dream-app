@@ -48,7 +48,7 @@ const primaryBtn: React.CSSProperties = {
 }
 const ghostBtn: React.CSSProperties = {
   width: '100%', padding: 14, borderRadius: 999, cursor: 'pointer', background: 'transparent',
-  border: '1px solid rgba(242,232,213,0.18)', color: T.dim, fontSize: 14, fontWeight: 500, fontFamily: T.sans,
+  border: '1px solid rgba(202,191,206,0.18)', color: T.dim, fontSize: 14, fontWeight: 500, fontFamily: T.sans,
 }
 
 /* ═════════════════════════════════════════════════════════════════════
@@ -61,19 +61,19 @@ function NotifPreview({ body, sub }: { body: string; sub?: boolean }) {
     <div style={{
       display: 'flex', gap: 11, alignItems: 'center',
       padding: '11px 13px', borderRadius: 15,
-      background: sub ? 'rgba(242,232,213,0.04)' : 'rgba(20,16,10,0.55)',
-      border: '0.5px solid rgba(242,232,213,0.10)',
+      background: sub ? 'rgba(202,191,206,0.04)' : 'rgba(20,16,10,0.55)',
+      border: '0.5px solid rgba(202,191,206,0.1)',
     }}>
       <div style={{
         width: 34, height: 34, borderRadius: 9, flexShrink: 0,
-        background: 'radial-gradient(120% 120% at 40% 30%, #241a12, #1a1310)',
+        background: 'radial-gradient(120% 120% at 40% 30%, #2b2534, #221d29)',
         border: `0.5px solid ${T.gold}44`, display: 'flex', alignItems: 'center', justifyContent: 'center',
       }}>
         <Moon c={T.goldLit} s={17} />
       </div>
       <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 8 }}>
-          <span style={{ fontFamily: T.sans, fontSize: 11.5, fontWeight: 600, letterSpacing: '0.02em', color: 'rgba(242,232,213,0.75)' }}>Dream</span>
+          <span style={{ fontFamily: T.sans, fontSize: 11.5, fontWeight: 600, letterSpacing: '0.02em', color: '#ddd4de' }}>Dream</span>
           <span style={{ fontSize: 10.5, color: T.faint }}>{t('screens.onboarding.notifNow')}</span>
         </div>
         <div style={{ marginTop: 2, fontFamily: T.sans, fontSize: 13, color: T.cream, lineHeight: 1.32 }}>{body}</div>
@@ -88,14 +88,14 @@ function OptionCard({ active, onClick, label, children }: { active: boolean; onC
     <button onClick={onClick} style={{
       width: '100%', textAlign: 'left', cursor: 'pointer',
       padding: 14, borderRadius: 20,
-      background: active ? 'rgba(201,168,106,0.10)' : 'rgba(201,168,106,0.03)',
-      border: active ? `1px solid ${T.gold}66` : '0.5px solid rgba(201,168,106,0.14)',
+      background: active ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.03)',
+      border: active ? `1px solid ${T.gold}66` : '0.5px solid rgba(255,255,255,0.14)',
       transition: 'all .25s ease',
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 9, marginBottom: 10 }}>
         <span style={{
           width: 18, height: 18, borderRadius: '50%', flexShrink: 0,
-          border: active ? `5px solid ${T.gold}` : '1.5px solid rgba(242,232,213,0.3)',
+          border: active ? `5px solid ${T.gold}` : '1.5px solid #a49aad',
           background: active ? T.goldLit : 'transparent', transition: 'all .2s ease',
         }} />
         <span style={{ fontFamily: T.sans, fontSize: 14.5, fontWeight: 600, color: active ? T.cream : T.dim }}>{label}</span>
@@ -179,7 +179,7 @@ export default function Onboarding({ onFinish, onStartCapture, onImport }: {
   const done = () => { markOnboardingDone() }
 
   const Dot = ({ i }: { i: number }) => (
-    <span style={{ width: 6, height: 6, borderRadius: '50%', background: i === step ? T.gold : 'rgba(242,232,213,0.2)', transition: 'background .3s ease' }} />
+    <span style={{ width: 6, height: 6, borderRadius: '50%', background: i === step ? T.gold : 'rgba(202,191,206,0.2)', transition: 'background .3s ease' }} />
   )
 
   const promises = [
@@ -267,8 +267,8 @@ export function ApptChooserSheet({ onClose, onSaved, title }: { onClose: () => v
   const { t } = useT()
   return (
     <div onClick={onClose} style={{ position: 'fixed', inset: 0, zIndex: 80, background: 'rgba(20,14,10,0.72)', display: 'flex', alignItems: 'flex-end', justifyContent: 'center' }}>
-      <div onClick={e => e.stopPropagation()} style={{ width: '100%', maxWidth: 560, background: 'linear-gradient(180deg, #241a12, #1a1310)', borderTop: `0.5px solid ${T.gold}33`, borderRadius: '26px 26px 0 0', padding: '20px 22px max(26px, env(safe-area-inset-bottom))', maxHeight: '88dvh', overflowY: 'auto', animation: 'lFadeUp .3s ease' }}>
-        <div style={{ width: 38, height: 4, borderRadius: 2, background: 'rgba(242,232,213,0.2)', margin: '0 auto 16px' }} />
+      <div onClick={e => e.stopPropagation()} style={{ width: '100%', maxWidth: 560, background: 'linear-gradient(180deg, #2b2534, #221d29)', borderTop: `0.5px solid ${T.gold}33`, borderRadius: '26px 26px 0 0', padding: '20px 22px max(26px, env(safe-area-inset-bottom))', maxHeight: '88dvh', overflowY: 'auto', animation: 'lFadeUp .3s ease' }}>
+        <div style={{ width: 38, height: 4, borderRadius: 2, background: 'rgba(202,191,206,0.2)', margin: '0 auto 16px' }} />
         <div style={{ fontFamily: T.display, fontSize: 11, letterSpacing: '0.3em', color: T.gold, textAlign: 'center', textTransform: 'uppercase' }}>{title ?? t('screens.onboarding.sheet.title')}</div>
         <div style={{ marginTop: 4, marginBottom: 18, fontSize: 12.5, color: T.dim, textAlign: 'center' }}>{t('screens.onboarding.o3.sub')}</div>
         <AppointmentChooser confirmLabel={t('screens.onboarding.chooser.validate')} onConfirm={() => { onSaved?.(); onClose() }} />
@@ -295,10 +295,10 @@ export function ReproposeLine({ fetchTotal }: { fetchTotal: () => Promise<number
   if (!show) return null
   return (
     <>
-      <div style={{ margin: '14px 20px 0', padding: '12px 14px', borderRadius: 16, background: 'rgba(201,168,106,0.05)', border: '0.5px solid rgba(201,168,106,0.14)', display: 'flex', alignItems: 'center', gap: 10, animation: 'lFadeUp .4s ease' }}>
+      <div style={{ margin: '14px 20px 0', padding: '12px 14px', borderRadius: 16, background: 'rgba(255,255,255,0.05)', border: '0.5px solid rgba(255,255,255,0.14)', display: 'flex', alignItems: 'center', gap: 10, animation: 'lFadeUp .4s ease' }}>
         <span style={{ flexShrink: 0 }}><Moon c={T.goldLit} s={15} /></span>
         <span style={{ flex: 1, fontFamily: T.sans, fontSize: 13, color: T.dim, lineHeight: 1.4 }}>{t('screens.onboarding.repropose.line')}</span>
-        <button onClick={() => setSheet(true)} style={{ flexShrink: 0, padding: '7px 13px', borderRadius: 999, background: 'rgba(201,168,106,0.12)', border: `1px solid ${T.gold}55`, color: T.cream, fontSize: 12.5, fontWeight: 600, cursor: 'pointer', fontFamily: T.sans }}>{t('screens.onboarding.repropose.choose')}</button>
+        <button onClick={() => setSheet(true)} style={{ flexShrink: 0, padding: '7px 13px', borderRadius: 999, background: 'rgba(255,255,255,0.12)', border: `1px solid ${T.gold}55`, color: T.cream, fontSize: 12.5, fontWeight: 600, cursor: 'pointer', fontFamily: T.sans }}>{t('screens.onboarding.repropose.choose')}</button>
         <button onClick={() => { dismissRepropose(); setShow(false) }} aria-label={t('screens.onboarding.repropose.dismiss')} style={{ flexShrink: 0, background: 'none', border: 'none', color: T.faint, fontSize: 19, cursor: 'pointer', padding: '2px 3px', lineHeight: 1 }}>×</button>
       </div>
       {sheet && <ApptChooserSheet onClose={() => setSheet(false)} onSaved={() => { if (hasActiveAppointment()) setShow(false) }} />}
@@ -330,7 +330,7 @@ export function FirstWeekCard({ count, fetchSymbol }: { count: number; fetchSymb
 
   return (
     <>
-      <div style={{ margin: '0 18px 22px', padding: 20, borderRadius: 22, background: 'rgba(201,168,106,0.06)', border: `0.5px solid ${T.gold}3a`, animation: 'lFadeUp .5s ease' }}>
+      <div style={{ margin: '0 18px 22px', padding: 20, borderRadius: 22, background: 'rgba(255,255,255,0.06)', border: `0.5px solid ${T.gold}3a`, animation: 'lFadeUp .5s ease' }}>
         <div style={{ fontFamily: T.display, fontSize: 10.5, fontWeight: 500, letterSpacing: '0.28em', textTransform: 'uppercase', color: T.gold }}>{t('screens.onboarding.firstWeek.kicker')}</div>
         <div style={{ marginTop: 10, fontFamily: T.serif, fontSize: 20, fontStyle: 'italic', color: T.cream, lineHeight: 1.35 }}>
           {t('screens.onboarding.firstWeek.title')}
@@ -343,15 +343,15 @@ export function FirstWeekCard({ count, fetchSymbol }: { count: number; fetchSymb
             : t('screens.onboarding.firstWeek.nothing')}
         </div>
         {symbol && (
-          <div style={{ marginTop: 14, display: 'inline-flex', alignItems: 'center', gap: 8, padding: '7px 13px', borderRadius: 999, background: 'rgba(201,168,106,0.08)', border: `0.5px solid ${T.gold}33` }}>
+          <div style={{ marginTop: 14, display: 'inline-flex', alignItems: 'center', gap: 8, padding: '7px 13px', borderRadius: 999, background: 'rgba(255,255,255,0.08)', border: `0.5px solid ${T.gold}33` }}>
             <Moon c={T.goldLit} s={14} />
             <span style={{ fontSize: 13, fontFamily: T.sans, color: T.cream, fontWeight: 500 }}>{t('screens.onboarding.firstWeek.symbol', { symbol })}</span>
           </div>
         )}
         {!hasActiveAppointment() && (
-          <div style={{ marginTop: 16, paddingTop: 14, borderTop: '0.5px solid rgba(242,232,213,0.1)' }}>
+          <div style={{ marginTop: 16, paddingTop: 14, borderTop: '0.5px solid rgba(202,191,206,0.1)' }}>
             <div style={{ fontSize: 13, color: T.dim, lineHeight: 1.45 }}>{t('screens.onboarding.repropose.line')}</div>
-            <button onClick={() => setSheet(true)} style={{ marginTop: 10, padding: '9px 15px', borderRadius: 999, background: 'rgba(201,168,106,0.12)', border: `1px solid ${T.gold}55`, color: T.cream, fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily: T.sans }}>{t('screens.onboarding.firstWeek.chooseAppts')}</button>
+            <button onClick={() => setSheet(true)} style={{ marginTop: 10, padding: '9px 15px', borderRadius: 999, background: 'rgba(255,255,255,0.12)', border: `1px solid ${T.gold}55`, color: T.cream, fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily: T.sans }}>{t('screens.onboarding.firstWeek.chooseAppts')}</button>
           </div>
         )}
       </div>

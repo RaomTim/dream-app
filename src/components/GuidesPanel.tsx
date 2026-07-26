@@ -61,9 +61,9 @@ export function GuidesSheet({
     <div onClick={onClose} style={{ position: 'fixed', inset: 0, zIndex: 60, background: 'rgba(20,14,10,0.62)', display: 'flex', alignItems: 'flex-end', justifyContent: 'center', animation: 'lFadeUp .25s ease' }}>
       <div
         onClick={(e) => e.stopPropagation()}
-        style={{ width: '100%', maxWidth: 560, background: 'linear-gradient(180deg, #241a12, #1a1310)', borderTopLeftRadius: 28, borderTopRightRadius: 28, borderTop: '0.5px solid rgba(201,168,106,0.18)', padding: '22px 18px calc(30px + env(safe-area-inset-bottom))', animation: 'lFadeUp .3s ease' }}
+        style={{ width: '100%', maxWidth: 560, background: 'linear-gradient(180deg, #2b2534, #221d29)', borderTopLeftRadius: 28, borderTopRightRadius: 28, borderTop: '0.5px solid rgba(255,255,255,0.18)', padding: '22px 18px calc(30px + env(safe-area-inset-bottom))', animation: 'lFadeUp .3s ease' }}
       >
-        <div style={{ width: 40, height: 4, borderRadius: 2, background: 'rgba(242,232,213,0.16)', margin: '0 auto 18px' }} />
+        <div style={{ width: 40, height: 4, borderRadius: 2, background: 'rgba(202,191,206,0.16)', margin: '0 auto 18px' }} />
         <div style={{ fontFamily: GT.serif, fontSize: 20, fontStyle: 'italic', color: GT.cream, marginBottom: 16, paddingLeft: 4 }}>{t('screens.guide.sheetTitle')}</div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
           {proposed.map((g) => <GuideCard key={g.id} guide={g} onPick={onPick} />)}

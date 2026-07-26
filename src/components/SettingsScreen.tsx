@@ -78,9 +78,9 @@ function Toggle({ on, onClick }: { on: boolean; onClick: () => void }) {
       onClick={e => { e.stopPropagation(); onClick() }}
       role="switch"
       aria-checked={on}
-      style={{ width: 44, height: 26, borderRadius: 999, background: on ? 'rgba(201,168,106,0.55)' : 'rgba(242,232,213,0.12)', border: `1px solid ${on ? T.gold : 'rgba(242,232,213,0.2)'}`, position: 'relative', flexShrink: 0, cursor: 'pointer', transition: 'background .2s ease' }}
+      style={{ width: 44, height: 26, borderRadius: 999, background: on ? 'rgba(224,192,135,0.55)' : 'rgba(202,191,206,0.12)', border: `1px solid ${on ? T.gold : 'rgba(202,191,206,0.2)'}`, position: 'relative', flexShrink: 0, cursor: 'pointer', transition: 'background .2s ease' }}
     >
-      <span style={{ position: 'absolute', top: 2, left: on ? 20 : 2, width: 20, height: 20, borderRadius: '50%', background: on ? '#f6ecd6' : 'rgba(242,232,213,0.6)', transition: 'left .2s ease' }} />
+      <span style={{ position: 'absolute', top: 2, left: on ? 20 : 2, width: 20, height: 20, borderRadius: '50%', background: on ? '#f6ecd6' : '#ddd4de', transition: 'left .2s ease' }} />
     </span>
   )
 }
@@ -104,7 +104,7 @@ export default function SettingsScreen({
     <div style={{ minHeight: '100dvh', paddingBottom: 80 }}>
       <div style={{ paddingTop: 60, paddingLeft: 20, paddingRight: 20, display: 'flex', alignItems: 'center', gap: 12 }}>
         <button onClick={onBack} aria-label={t('screens.common.back')} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 4 }}>
-          <svg width={20} height={20} viewBox="0 0 24 24" fill="none"><path d="M15 5l-7 7 7 7" stroke="rgba(242,232,213,0.6)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
+          <svg width={20} height={20} viewBox="0 0 24 24" fill="none"><path d="M15 5l-7 7 7 7" stroke="#ddd4de" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
         </button>
         <div style={{ fontFamily: T.serif, fontSize: 24, fontStyle: 'italic', color: T.cream }}>{t('screens.settings.title')}</div>
       </div>
@@ -140,11 +140,11 @@ export default function SettingsScreen({
 }
 
 function Chevron() {
-  return <svg width={18} height={18} viewBox="0 0 24 24" fill="none"><path d="M9 5l7 7-7 7" stroke="rgba(242,232,213,0.35)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+  return <svg width={18} height={18} viewBox="0 0 24 24" fill="none"><path d="M9 5l7 7-7 7" stroke="#a49aad" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
 }
 
 function Check() {
-  return <svg width={18} height={18} viewBox="0 0 24 24" fill="none"><path d="M4 12.5 9.5 18 20 6" stroke="#c9a86a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+  return <svg width={18} height={18} viewBox="0 0 24 24" fill="none"><path d="M4 12.5 9.5 18 20 6" stroke="#e0c087" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
 }
 
 /* ───────── Compte ───────── */
@@ -180,7 +180,7 @@ function AccountSection({ session, onChangePassword, onSignOut }: { session: Ses
         <div style={{ padding: '15px 16px', borderRadius: 16, background: T.card, border: T.cardBorder }}>
           <input type="password" autoComplete="new-password" placeholder={t('screens.settings.account.newPassword')} value={pw} onChange={e => setPw(e.target.value)} onKeyDown={e => e.key === 'Enter' && save()} style={{ width: '100%', padding: '13px 15px', borderRadius: 12, background: 'rgba(0,0,0,0.2)', border: T.cardBorder, color: T.cream, fontSize: 16, fontFamily: T.sans }} />
           <div style={{ marginTop: 10, display: 'flex', gap: 8 }}>
-            <button onClick={() => { setPwOpen(false); setPw(''); setErr('') }} style={{ flex: 1, padding: 11, borderRadius: 999, background: 'transparent', border: '1px solid rgba(242,232,213,0.18)', color: T.dim, fontSize: 13, cursor: 'pointer', fontFamily: T.sans }}>{t('screens.common.cancel')}</button>
+            <button onClick={() => { setPwOpen(false); setPw(''); setErr('') }} style={{ flex: 1, padding: 11, borderRadius: 999, background: 'transparent', border: '1px solid rgba(202,191,206,0.18)', color: T.dim, fontSize: 13, cursor: 'pointer', fontFamily: T.sans }}>{t('screens.common.cancel')}</button>
             <button onClick={save} disabled={busy} style={{ flex: 1.4, padding: 11, borderRadius: 999, background: 'linear-gradient(180deg, #f2e6c6, #d8c39a)', border: 'none', color: '#241a09', fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily: T.sans }}>{busy ? t('screens.common.working') : t('screens.common.save')}</button>
           </div>
         </div>
@@ -284,8 +284,8 @@ function AppointmentsSection() {
 }
 
 const timeInput: React.CSSProperties = {
-  padding: '9px 14px', borderRadius: 12, background: 'rgba(0,0,0,0.2)', border: '0.5px solid rgba(201,168,106,0.16)',
-  color: '#c9a86a', fontSize: 17, fontFamily: 'ui-monospace, monospace',
+  padding: '9px 14px', borderRadius: 12, background: 'rgba(0,0,0,0.2)', border: '0.5px solid rgba(255,255,255,0.16)',
+  color: '#e0c087', fontSize: 17, fontFamily: 'ui-monospace, monospace',
 }
 
 /* ───────── Le Mur ───────── */
@@ -320,7 +320,7 @@ function WallSection({ session }: { session: Session }) {
         <div style={{ flex: 1, fontFamily: T.sans, fontSize: 12.5, color: T.dim, lineHeight: 1.5 }}>
           {t('screens.settings.wall.intro')}
         </div>
-        <InfoDot id="wall-anon" color="rgba(201,168,106,0.7)" />
+        <InfoDot id="wall-anon" color="rgba(224,192,135,0.7)" />
       </div>
 
       {posts === null ? (
@@ -453,7 +453,7 @@ function DataSection({ session }: { session: Session }) {
               : t('screens.settings.data.deleteScheduledSoon')}
           </div>
           <div style={{ marginTop: 4, fontSize: 12.5, color: T.dim, lineHeight: 1.5 }}>{t('screens.settings.data.deletePending')}</div>
-          <button onClick={cancelDelete} disabled={delBusy} style={{ marginTop: 12, padding: '10px 16px', borderRadius: 999, background: 'rgba(201,168,106,0.12)', border: `1px solid ${T.gold}55`, color: T.cream, fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily: T.sans }}>{delBusy ? t('screens.common.working') : t('screens.settings.data.cancelDelete')}</button>
+          <button onClick={cancelDelete} disabled={delBusy} style={{ marginTop: 12, padding: '10px 16px', borderRadius: 999, background: 'rgba(255,255,255,0.12)', border: `1px solid ${T.gold}55`, color: T.cream, fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily: T.sans }}>{delBusy ? t('screens.common.working') : t('screens.settings.data.cancelDelete')}</button>
         </div>
       ) : delStep === 0 ? (
         <Row label={t('screens.settings.data.delete')} danger onClick={() => { setDelStep(1); setDelErr(''); setDelMsg('') }} />
@@ -462,7 +462,7 @@ function DataSection({ session }: { session: Session }) {
           <div style={{ fontFamily: T.serif, fontSize: 17, color: T.cream, lineHeight: 1.4 }}>{t('screens.settings.data.confirm1Title')}</div>
           <div style={{ marginTop: 6, fontSize: 13, color: T.dim, lineHeight: 1.5 }}>{t('screens.settings.data.confirm1Body')}</div>
           <div style={{ marginTop: 14, display: 'flex', gap: 8 }}>
-            <button onClick={() => setDelStep(0)} style={{ flex: 1, padding: 12, borderRadius: 999, background: 'transparent', border: '1px solid rgba(242,232,213,0.18)', color: T.dim, fontSize: 13.5, cursor: 'pointer', fontFamily: T.sans }}>{t('screens.common.cancel')}</button>
+            <button onClick={() => setDelStep(0)} style={{ flex: 1, padding: 12, borderRadius: 999, background: 'transparent', border: '1px solid rgba(202,191,206,0.18)', color: T.dim, fontSize: 13.5, cursor: 'pointer', fontFamily: T.sans }}>{t('screens.common.cancel')}</button>
             <button onClick={() => setDelStep(2)} style={{ flex: 1, padding: 12, borderRadius: 999, background: 'transparent', border: '1px solid rgba(199,115,75,0.5)', color: T.emberLive, fontSize: 13.5, fontWeight: 600, cursor: 'pointer', fontFamily: T.sans }}>{t('screens.common.continue')}</button>
           </div>
         </div>
@@ -471,7 +471,7 @@ function DataSection({ session }: { session: Session }) {
           <div style={{ fontFamily: T.serif, fontSize: 17, color: T.cream, lineHeight: 1.4 }}>{t('screens.settings.data.confirm2Title')}</div>
           <div style={{ marginTop: 6, fontSize: 13, color: T.dim, lineHeight: 1.5 }}>{t('screens.settings.data.confirm2Body')}</div>
           <div style={{ marginTop: 14, display: 'flex', gap: 8 }}>
-            <button onClick={() => setDelStep(0)} style={{ flex: 1, padding: 12, borderRadius: 999, background: 'transparent', border: '1px solid rgba(242,232,213,0.18)', color: T.dim, fontSize: 13.5, cursor: 'pointer', fontFamily: T.sans }}>{t('screens.settings.data.keepAccount')}</button>
+            <button onClick={() => setDelStep(0)} style={{ flex: 1, padding: 12, borderRadius: 999, background: 'transparent', border: '1px solid rgba(202,191,206,0.18)', color: T.dim, fontSize: 13.5, cursor: 'pointer', fontFamily: T.sans }}>{t('screens.settings.data.keepAccount')}</button>
             <button onClick={requestDelete} disabled={delBusy} style={{ flex: 1, padding: 12, borderRadius: 999, background: 'rgba(199,115,75,0.16)', border: '1px solid rgba(199,115,75,0.6)', color: T.emberLive, fontSize: 13.5, fontWeight: 600, cursor: 'pointer', fontFamily: T.sans }}>{delBusy ? t('screens.common.working') : t('screens.settings.data.yesDelete')}</button>
           </div>
         </div>

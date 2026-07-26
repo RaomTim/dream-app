@@ -158,9 +158,9 @@ export default function ShareSheet({
     >
       <div
         onClick={e => e.stopPropagation()}
-        style={{ width: '100%', maxWidth: 480, maxHeight: '82dvh', overflowY: 'auto', background: '#1a1310', borderTopLeftRadius: 26, borderTopRightRadius: 26, border: '0.5px solid rgba(201,168,106,0.22)', borderBottom: 'none', padding: '22px 20px calc(22px + env(safe-area-inset-bottom))', animation: 'shareSheetUp .28s cubic-bezier(0.32,0.04,0.25,1)' }}
+        style={{ width: '100%', maxWidth: 480, maxHeight: '82dvh', overflowY: 'auto', background: '#221d29', borderTopLeftRadius: 26, borderTopRightRadius: 26, border: '0.5px solid rgba(255,255,255,0.22)', borderBottom: 'none', padding: '22px 20px calc(22px + env(safe-area-inset-bottom))', animation: 'shareSheetUp .28s cubic-bezier(0.32,0.04,0.25,1)' }}
       >
-        <div style={{ width: 36, height: 4, borderRadius: 2, background: 'rgba(242,232,213,0.2)', margin: '0 auto 18px' }} />
+        <div style={{ width: 36, height: 4, borderRadius: 2, background: 'rgba(202,191,206,0.2)', margin: '0 auto 18px' }} />
 
         {toast ? (
           <div style={{ padding: '30px 10px', textAlign: 'center', fontFamily: S.serif, fontStyle: 'italic', fontSize: 19, color: S.cream }}>{toast}</div>
@@ -183,10 +183,10 @@ export default function ShareSheet({
                       key={c.id}
                       onClick={() => toggleCircle(c.id)}
                       disabled={shared}
-                      style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '13px 14px', borderRadius: 14, background: checked ? 'rgba(201,168,106,0.10)' : 'rgba(242,232,213,0.03)', border: checked ? `1px solid ${S.gold}55` : '1px solid rgba(242,232,213,0.10)', cursor: shared ? 'default' : 'pointer', textAlign: 'left', width: '100%', opacity: shared ? 0.7 : 1 }}
+                      style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '13px 14px', borderRadius: 14, background: checked ? 'rgba(255,255,255,0.1)' : 'rgba(202,191,206,0.03)', border: checked ? `1px solid ${S.gold}55` : '1px solid rgba(202,191,206,0.1)', cursor: shared ? 'default' : 'pointer', textAlign: 'left', width: '100%', opacity: shared ? 0.7 : 1 }}
                     >
-                      <span style={{ width: 19, height: 19, borderRadius: 6, border: `1.4px solid ${checked ? S.gold : 'rgba(242,232,213,0.35)'}`, background: checked ? S.gold : 'transparent', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        {checked && <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M4 12.5 9.5 18 20 6" stroke="#1a1310" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" /></svg>}
+                      <span style={{ width: 19, height: 19, borderRadius: 6, border: `1.4px solid ${checked ? S.gold : '#a49aad'}`, background: checked ? S.gold : 'transparent', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        {checked && <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M4 12.5 9.5 18 20 6" stroke="#221d29" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" /></svg>}
                       </span>
                       <span style={{ flex: 1, fontFamily: S.sans, fontSize: 15, fontWeight: 500, color: S.cream }}>{c.name}</span>
                       {shared && <span style={{ fontSize: 11.5, color: S.faint }}>{t('screens.share.alreadyShared')}</span>}
@@ -196,7 +196,7 @@ export default function ShareSheet({
               </div>
             )}
 
-            <div style={{ height: 1, background: 'rgba(242,232,213,0.08)', margin: '14px 0' }} />
+            <div style={{ height: 1, background: 'rgba(202,191,206,0.08)', margin: '14px 0' }} />
 
             {wallShowConfirm ? (
               <div style={{ padding: 16, borderRadius: 16, background: S.card, border: S.cardBorder, marginBottom: 6 }}>
@@ -204,7 +204,7 @@ export default function ShareSheet({
                   {t('screens.share.wallConsent')}
                 </div>
                 <div style={{ marginTop: 14, display: 'flex', gap: 10 }}>
-                  <button onClick={() => setWallShowConfirm(false)} style={{ flex: 1, padding: 12, borderRadius: 999, background: 'transparent', border: '1px solid rgba(242,232,213,0.18)', color: S.dim, fontSize: 13.5, fontFamily: S.sans, cursor: 'pointer' }}>{t('screens.common.cancelCap')}</button>
+                  <button onClick={() => setWallShowConfirm(false)} style={{ flex: 1, padding: 12, borderRadius: 999, background: 'transparent', border: '1px solid rgba(202,191,206,0.18)', color: S.dim, fontSize: 13.5, fontFamily: S.sans, cursor: 'pointer' }}>{t('screens.common.cancelCap')}</button>
                   <button onClick={confirmWallConsent} style={{ flex: 1, padding: 12, borderRadius: 999, border: 'none', background: 'linear-gradient(180deg, #fbeeda, #ecd4b4)', color: '#2a160e', fontSize: 13.5, fontWeight: 600, fontFamily: S.sans, cursor: 'pointer' }}>{t('screens.share.wallConsentOk')}</button>
                 </div>
               </div>
@@ -213,20 +213,20 @@ export default function ShareSheet({
                 <button
                   onClick={tapWall}
                   disabled={wallSoon}
-                  style={{ flex: 1, display: 'flex', alignItems: 'center', gap: 12, padding: '13px 14px', borderRadius: 14, background: wallChecked ? 'rgba(201,168,106,0.10)' : 'rgba(242,232,213,0.03)', border: wallChecked ? `1px solid ${S.gold}55` : '1px solid rgba(242,232,213,0.10)', cursor: wallSoon ? 'default' : 'pointer', textAlign: 'left', opacity: wallSoon ? 0.55 : 1 }}
+                  style={{ flex: 1, display: 'flex', alignItems: 'center', gap: 12, padding: '13px 14px', borderRadius: 14, background: wallChecked ? 'rgba(255,255,255,0.1)' : 'rgba(202,191,206,0.03)', border: wallChecked ? `1px solid ${S.gold}55` : '1px solid rgba(202,191,206,0.1)', cursor: wallSoon ? 'default' : 'pointer', textAlign: 'left', opacity: wallSoon ? 0.55 : 1 }}
                 >
-                  <span style={{ width: 19, height: 19, borderRadius: 6, border: `1.4px solid ${wallChecked ? S.gold : 'rgba(242,232,213,0.35)'}`, background: wallChecked ? S.gold : 'transparent', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    {wallChecked && <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M4 12.5 9.5 18 20 6" stroke="#1a1310" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" /></svg>}
+                  <span style={{ width: 19, height: 19, borderRadius: 6, border: `1.4px solid ${wallChecked ? S.gold : '#a49aad'}`, background: wallChecked ? S.gold : 'transparent', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    {wallChecked && <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M4 12.5 9.5 18 20 6" stroke="#221d29" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" /></svg>}
                   </span>
                   <span style={{ flex: 1, fontFamily: S.sans, fontSize: 15, fontWeight: 500, color: S.cream }}>{t('screens.share.wallOption')}</span>
                   {wallSoon && <span style={{ fontSize: 11.5, color: S.faint }}>{t('screens.share.soon')}</span>}
                 </button>
-                <InfoDot id="wall-anon" size={16} color="rgba(201,168,106,0.7)" />
+                <InfoDot id="wall-anon" size={16} color="rgba(224,192,135,0.7)" />
               </div>
             )}
 
             <div style={{ marginTop: 22, display: 'flex', gap: 10 }}>
-              <button onClick={onClose} style={{ flex: 1, padding: 14, borderRadius: 999, cursor: 'pointer', background: 'transparent', border: '1px solid rgba(242,232,213,0.18)', color: S.dim, fontSize: 14, fontWeight: 500, fontFamily: S.sans }}>{t('screens.common.cancelCap')}</button>
+              <button onClick={onClose} style={{ flex: 1, padding: 14, borderRadius: 999, cursor: 'pointer', background: 'transparent', border: '1px solid rgba(202,191,206,0.18)', color: S.dim, fontSize: 14, fontWeight: 500, fontFamily: S.sans }}>{t('screens.common.cancelCap')}</button>
               <button
                 onClick={submit}
                 disabled={busy}

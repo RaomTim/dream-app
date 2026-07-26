@@ -501,5 +501,5 @@ const btnSeverity: React.CSSProperties = {
 
 const btnSeverityActive: React.CSSProperties = {
   border: `1px solid ${T.gold}`,
-  background: 'rgba(201,168,106,0.10)',
+  background: 'rgba(255,255,255,0.1)',
 }

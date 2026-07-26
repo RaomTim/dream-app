@@ -146,12 +146,12 @@ export default function ResonanceSection({
                 <div key={l.id} className="gReveal" style={{ animationDelay: `${i * 70}ms`, padding: '12px 14px', borderRadius: 14, background: C.card, border: `0.5px solid ${(l.kind === 'day' ? C.amber : C.gold)}33` }}>
                   <button onClick={() => onOpenDream(l.id)} style={{ display: 'flex', alignItems: 'center', gap: 11, background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', width: '100%', padding: 0 }}>
                     <span style={{ width: 22, height: 1, background: `linear-gradient(90deg, ${l.kind === 'day' ? C.amber : C.gold}, transparent)`, flexShrink: 0 }} />
-                    <span style={{ flex: 1, fontFamily: C.sans, fontSize: 15.5, fontWeight: 500, color: 'rgba(242,232,213,0.92)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{l.label}</span>
+                    <span style={{ flex: 1, fontFamily: C.sans, fontSize: 15.5, fontWeight: 500, color: '#f1e8d7', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{l.label}</span>
                     <span style={{ fontSize: 10, fontFamily: C.mono, letterSpacing: '0.08em', color: l.kind === 'day' ? C.amber : C.gold, opacity: 0.85, flexShrink: 0 }}>{l.kind === 'day' ? t('screens.resonance.tagDay') : t('screens.resonance.tagDream')}</span>
                     <span style={{ fontSize: 11, color: C.faint, whiteSpace: 'nowrap', flexShrink: 0 }}>{shortDate(l.created_at, locale)}</span>
                   </button>
                   <div style={{ marginTop: 8, marginLeft: 33, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10 }}>
-                    <span style={{ fontFamily: C.serif, fontSize: 13.5, fontStyle: 'italic', color: 'rgba(242,232,213,0.6)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{l.reason}</span>
+                    <span style={{ fontFamily: C.serif, fontSize: 13.5, fontStyle: 'italic', color: '#ddd4de', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{l.reason}</span>
                     {verdicts[l.id] === 'resonates'
                       ? <span style={{ fontSize: 11.5, color: C.gold, fontFamily: C.sans, fontWeight: 500, flexShrink: 0 }}>{t('screens.resonance.noted')}</span>
                       : <OneClick onYes={() => feedback(l.id, l.kind, 'resonates', l)} onNo={() => feedback(l.id, l.kind, 'dismissed', l)} />}
@@ -171,9 +171,9 @@ export default function ResonanceSection({
                   return (
                     <div key={p.id} className="gReveal" style={{ animationDelay: `${i * 80}ms`, padding: '13px 15px', borderRadius: 16, background: 'rgba(184,154,106,0.07)', border: '0.5px solid rgba(184,154,106,0.28)' }}>
                       <button onClick={() => setOpenProph(m => ({ ...m, [p.id]: !m[p.id] }))} style={{ background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', width: '100%', padding: 0 }}>
-                        <div style={{ fontFamily: C.serif, fontSize: 16, fontStyle: 'italic', color: 'rgba(242,232,213,0.88)', lineHeight: 1.5 }}>{p.excerpt.slice(0, 130)}{p.excerpt.length > 130 ? '…' : ''}</div>
+                        <div style={{ fontFamily: C.serif, fontSize: 16, fontStyle: 'italic', color: '#f1e8d7', lineHeight: 1.5 }}>{p.excerpt.slice(0, 130)}{p.excerpt.length > 130 ? '…' : ''}</div>
                         <div style={{ marginTop: 7, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                          <span style={{ fontSize: 11.5, color: 'rgba(242,232,213,0.4)' }}>
+                          <span style={{ fontSize: 11.5, color: '#a49aad' }}>
                             {t('screens.resonance.dreamtOn', { date: longDate(p.created_at, locale) })}
                             {p.days_diff > 0 ? tp('screens.resonance.daysBefore', p.days_diff) : ''}
                           </span>
@@ -186,14 +186,14 @@ export default function ResonanceSection({
                           <SideText tint={C.gold} label={t('screens.resonance.thisDream', { date: data.source.created_at ? longDate(data.source.created_at, locale) : t('screens.resonance.today') })} text={data.source.excerpt} />
                           <div style={{ width: 1, height: 16, margin: '4px 0 4px 11px', background: `linear-gradient(180deg, ${C.amber}, transparent)` }} />
                           <SideText tint={C.amber} label={t('screens.resonance.oldDream', { date: longDate(p.created_at, locale) })} text={p.excerpt} />
-                          <div style={{ marginTop: 10, fontSize: 12, fontFamily: C.sans, color: C.dim }}>{t('screens.resonance.whatLinks')} <span style={{ fontStyle: 'italic', fontFamily: C.serif, color: 'rgba(242,232,213,0.7)' }}>{p.reason}</span></div>
+                          <div style={{ marginTop: 10, fontSize: 12, fontFamily: C.sans, color: C.dim }}>{t('screens.resonance.whatLinks')} <span style={{ fontStyle: 'italic', fontFamily: C.serif, color: '#ddd4de' }}>{p.reason}</span></div>
                           <div style={{ marginTop: 12, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10 }}>
                             <button onClick={() => onOpenDream(p.id)} style={{ background: 'none', border: 'none', color: C.amber, fontSize: 12.5, fontWeight: 500, cursor: 'pointer', fontFamily: C.sans, padding: 0 }}>{t('screens.resonance.openDream')}</button>
                             {verdicts[p.id] === 'resonates'
                               ? <span style={{ fontSize: 11.5, color: C.gold, fontFamily: C.sans, fontWeight: 500 }}>{t('screens.resonance.noted')}</span>
                               : <OneClick onYes={() => feedback(p.id, 'prophetic', 'resonates', p)} onNo={() => feedback(p.id, 'prophetic', 'dismissed', p)} />}
                           </div>
-                          <div style={{ marginTop: 12, fontSize: 11.5, fontStyle: 'italic', color: 'rgba(242,232,213,0.38)', lineHeight: 1.45 }}>{t('screens.resonance.disclaimer')}</div>
+                          <div style={{ marginTop: 12, fontSize: 11.5, fontStyle: 'italic', color: '#a49aad', lineHeight: 1.45 }}>{t('screens.resonance.disclaimer')}</div>
                         </div>
                       )}
                     </div>
@@ -213,8 +213,8 @@ function OneClick({ onYes, onNo }: { onYes: () => void; onNo: () => void }) {
   const { t } = useT()
   return (
     <span style={{ display: 'inline-flex', gap: 6, flexShrink: 0 }}>
-      <button onClick={onYes} style={{ padding: '5px 11px', borderRadius: 999, border: `0.5px solid ${C.gold}55`, background: 'rgba(201,168,106,0.10)', color: 'rgba(242,232,213,0.85)', fontSize: 11.5, fontWeight: 500, cursor: 'pointer', fontFamily: C.sans, whiteSpace: 'nowrap' }}>{t('screens.resonance.yes')}</button>
-      <button onClick={onNo} style={{ padding: '5px 11px', borderRadius: 999, border: '0.5px solid rgba(242,232,213,0.16)', background: 'transparent', color: C.faint, fontSize: 11.5, fontWeight: 500, cursor: 'pointer', fontFamily: C.sans, whiteSpace: 'nowrap' }}>{t('screens.resonance.no')}</button>
+      <button onClick={onYes} style={{ padding: '5px 11px', borderRadius: 999, border: `0.5px solid ${C.gold}55`, background: 'rgba(255,255,255,0.1)', color: '#f1e8d7', fontSize: 11.5, fontWeight: 500, cursor: 'pointer', fontFamily: C.sans, whiteSpace: 'nowrap' }}>{t('screens.resonance.yes')}</button>
+      <button onClick={onNo} style={{ padding: '5px 11px', borderRadius: 999, border: '0.5px solid rgba(202,191,206,0.16)', background: 'transparent', color: C.faint, fontSize: 11.5, fontWeight: 500, cursor: 'pointer', fontFamily: C.sans, whiteSpace: 'nowrap' }}>{t('screens.resonance.no')}</button>
     </span>
   )
 }
@@ -223,7 +223,7 @@ function SideText({ tint, label, text }: { tint: string; label: string; text: st
   return (
     <div style={{ paddingLeft: 12, borderLeft: `1px solid ${tint}55` }}>
       <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase', color: C.faint, marginBottom: 6 }}>{label}</div>
-      <div style={{ fontFamily: C.serif, fontSize: 14.5, lineHeight: 1.55, color: 'rgba(242,232,213,0.82)', whiteSpace: 'pre-wrap' }}>{text}{text && text.length >= 420 ? '…' : ''}</div>
+      <div style={{ fontFamily: C.serif, fontSize: 14.5, lineHeight: 1.55, color: '#ddd4de', whiteSpace: 'pre-wrap' }}>{text}{text && text.length >= 420 ? '…' : ''}</div>
     </div>
   )
 }

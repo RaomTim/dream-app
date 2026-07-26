@@ -309,7 +309,8 @@
     "removeWallAria": "retirer du Mur",
     "layersLegend": "ce que tu en dis toi-même — c’est à toi, l’app ne l’a pas écrit",
     "layersConfirm": "c’est juste",
-    "layersReset": "tout est le rêve"
+    "layersReset": "tout est le rêve",
+    "more": "et aussi"
   },
   "transcriptCheck": {
     "line": "Vérifier la transcription",

@@ -81,7 +81,7 @@ async function apiPost(path: string, body: any, session: Session) {
 
 function Kicker({ children }: { children: React.ReactNode }) {
   return (
-    <div style={{ fontFamily: T.mono, fontSize: 10, letterSpacing: '0.18em', textTransform: 'uppercase', color: T.faint, marginBottom: 13 }}>
+    <div style={{ fontFamily: T.sans, fontSize: SCALE.kicker, fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', color: T.faint, marginBottom: 13 }}>
       {children}
     </div>
   )
@@ -112,7 +112,7 @@ function DreamEntry({ d, onOpen, locale, t, lead }: { d: GreatDream; onOpen: (id
       onClick={() => onOpen(d.id)}
       style={{
         display: 'block', width: '100%', textAlign: 'left', cursor: 'pointer',
-        background: lead ? 'rgba(201,168,106,0.05)' : 'transparent',
+        background: lead ? 'rgba(255,255,255,0.05)' : 'transparent',
         border: 'none', borderTop: lead ? 'none' : `0.5px solid ${T.line}`,
         borderRadius: lead ? SCALE.radiusLg : 0,
         padding: lead ? '34px 21px' : '34px 3px 21px',
@@ -133,7 +133,7 @@ function DreamEntry({ d, onOpen, locale, t, lead }: { d: GreatDream; onOpen: (id
           {d.note}
         </div>
       )}
-      <div style={{ marginTop: 13, fontFamily: T.serif, fontSize: SCALE.body, color: 'rgba(242,232,213,0.62)', lineHeight: 1.618 }}>
+      <div style={{ marginTop: 13, fontFamily: T.serif, fontSize: SCALE.body, color: '#ddd4de', lineHeight: 1.618 }}>
         {d.excerpt}…
       </div>
       <FacetTags facets={d.facets} />
@@ -193,7 +193,7 @@ export default function GreatDreamsJournal({
       <div style={{ paddingTop: 55, paddingLeft: 21, paddingRight: 21, display: 'flex', alignItems: 'center', gap: 13 }}>
         {onBack && (
           <button onClick={onBack} aria-label={t('screens.common.back')} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 4 }}>
-            <svg width="21" height="21" viewBox="0 0 24 24" fill="none"><path d="M15 5l-7 7 7 7" stroke="rgba(242,232,213,0.6)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none"><path d="M15 5l-7 7 7 7" stroke="#ddd4de" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
           </button>
         )}
         <div style={{ flex: 1 }} />
@@ -205,7 +205,7 @@ export default function GreatDreamsJournal({
         </h1>
 
         {/* bascule journal / consultation — deux mots, pas un menu */}
-        <div style={{ marginTop: 21, display: 'flex', gap: 4, padding: 4, borderRadius: SCALE.radius, background: 'rgba(201,168,106,0.06)', border: T.cardBorder, width: 'fit-content' }}>
+        <div style={{ marginTop: 21, display: 'flex', gap: 4, padding: 4, borderRadius: SCALE.radius, background: 'rgba(255,255,255,0.06)', border: T.cardBorder, width: 'fit-content' }}>
           {(['journal', 'consult'] as const).map(k => (
             <button
               key={k}
@@ -213,7 +213,7 @@ export default function GreatDreamsJournal({
               style={{
                 padding: '9px 21px', borderRadius: 8, cursor: 'pointer',
                 fontFamily: T.sans, fontSize: SCALE.body, fontWeight: 600,
-                background: view === k ? 'rgba(201,168,106,0.16)' : 'transparent',
+                background: view === k ? 'rgba(255,255,255,0.16)' : 'transparent',
                 border: view === k ? `1px solid ${T.gold}55` : '1px solid transparent',
                 color: view === k ? T.cream : T.dim,
               }}
@@ -366,7 +366,7 @@ function Consultation({ session, onOpenDream }: { session: Session; onOpenDream:
         style={{
           marginTop: 13, width: '100%', padding: '13px 21px', minHeight: SCALE.touch,
           borderRadius: SCALE.radiusPill, cursor: text.trim().length < 10 || busy ? 'default' : 'pointer',
-          background: 'rgba(201,168,106,0.10)', border: `1px solid ${T.gold}55`,
+          background: 'rgba(255,255,255,0.1)', border: `1px solid ${T.gold}55`,
           fontFamily: T.sans, fontSize: SCALE.body, fontWeight: 600, color: T.cream,
           opacity: text.trim().length < 10 || busy ? 0.45 : 1,
           transition: `opacity ${MOTION.fade}ms ${MOTION.ease}`,

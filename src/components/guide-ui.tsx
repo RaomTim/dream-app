@@ -51,7 +51,7 @@ export function GuideBackHeader({ onBack, title, right }: { onBack: () => void; 
   return (
     <div style={{ paddingTop: 60, paddingLeft: 20, paddingRight: 20, display: 'flex', alignItems: 'center', gap: 12 }}>
       <button onClick={onBack} aria-label={t('screens.common.back')} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 4 }}>
-        <svg width={20} height={20} viewBox="0 0 24 24" fill="none"><path d="M15 5l-7 7 7 7" stroke="rgba(242,232,213,0.6)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
+        <svg width={20} height={20} viewBox="0 0 24 24" fill="none"><path d="M15 5l-7 7 7 7" stroke="#ddd4de" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
       </button>
       <div style={{ flex: 1, fontFamily: GT.serif, fontSize: 19, fontStyle: 'italic', color: GT.cream }}>{title}</div>
       {right}
@@ -61,13 +61,13 @@ export function GuideBackHeader({ onBack, title, right }: { onBack: () => void; 
 
 export function GuidePill({ onClick, children, primary, disabled, flex }: any) {
   return (
-    <button onClick={onClick} disabled={disabled} style={{ flex: flex ?? 1, padding: 14, borderRadius: 999, cursor: disabled ? 'default' : 'pointer', fontFamily: GT.sans, fontSize: 14.5, fontWeight: primary ? 600 : 500, opacity: disabled ? 0.45 : 1, transition: 'all .25s ease', ...(primary ? { border: 'none', background: 'linear-gradient(180deg, #fbeeda, #ecd4b4)', color: '#2a160e' } : { background: 'rgba(201,168,106,0.10)', border: `1px solid ${GT.gold}44`, color: GT.cream }) }}>{children}</button>
+    <button onClick={onClick} disabled={disabled} style={{ flex: flex ?? 1, padding: 14, borderRadius: 999, cursor: disabled ? 'default' : 'pointer', fontFamily: GT.sans, fontSize: 14.5, fontWeight: primary ? 600 : 500, opacity: disabled ? 0.45 : 1, transition: 'all .25s ease', ...(primary ? { border: 'none', background: 'linear-gradient(180deg, #fbeeda, #ecd4b4)', color: '#2a160e' } : { background: 'rgba(255,255,255,0.1)', border: `1px solid ${GT.gold}44`, color: GT.cream }) }}>{children}</button>
   )
 }
 
 export function GuideGhost({ onClick, children }: any) {
   return (
-    <button onClick={onClick} style={{ flex: 1, padding: 14, borderRadius: 999, cursor: 'pointer', background: 'transparent', border: '1px solid rgba(242,232,213,0.18)', color: GT.dim, fontSize: 14, fontWeight: 500, fontFamily: GT.sans }}>{children}</button>
+    <button onClick={onClick} style={{ flex: 1, padding: 14, borderRadius: 999, cursor: 'pointer', background: 'transparent', border: '1px solid rgba(202,191,206,0.18)', color: GT.dim, fontSize: 14, fontWeight: 500, fontFamily: GT.sans }}>{children}</button>
   )
 }
 
@@ -86,7 +86,7 @@ export function GuideProgress({ ratio }: { ratio: number }) {
   return (
     <div style={{ display: 'flex', gap: 6, justifyContent: 'center' }}>
       {[0, 1, 2].map((i) => (
-        <div key={i} style={{ width: 22, height: 2, borderRadius: 2, background: i < filled ? GT.gold : 'rgba(242,232,213,0.15)', transition: 'background .3s ease' }} />
+        <div key={i} style={{ width: 22, height: 2, borderRadius: 2, background: i < filled ? GT.gold : 'rgba(202,191,206,0.15)', transition: 'background .3s ease' }} />
       ))}
     </div>
   )

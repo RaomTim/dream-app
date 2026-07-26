@@ -31,6 +31,9 @@ import { GuidesSheet, GuidesLibrary } from '@/components/GuidesPanel'
 import { type Guide, GUIDES_BY_ID } from '@/lib/guides'
 import SettingsScreen from '@/components/SettingsScreen'
 import { InfoDot } from '@/components/InfoSystem'
+// C1 2026-07-26 — la traîne du mot devient la porte du périmètre (bulle → page → guides).
+import { ScopeTrail } from '@/components/DepositScope'
+import { KGLYPH } from '@/lib/kairos-glyphs'
 import { AMBIANCES, previewAmbiance, startAlarm, startVibration, type AmbianceId, type AlarmHandle } from '@/lib/alarm-sounds'
 /* Offline-first : file d'attente des dépôts (IndexedDB) + auto-flush au retour réseau. */
 import { enqueueDeposit } from '@/lib/offline-queue'
@@ -49,7 +52,7 @@ import PendingDeposits from '@/components/PendingDeposits'
 /* ───────── DESIGN « NUIT ULTRA SIMPLE » — source de vérité unique (src/lib/dream-design.ts) ─────────
    T (nuit) · DT (jour) · SCALE (échelle) · MOTION (mouvement) · grainOverlay · moonStyle · keyframes.
    Les clés reprennent l'ancienne API T/DT — l'import remplace les objets locaux, zéro valeur recréée ici. */
-import { T, DT, SCALE, MOTION, grainOverlay, moonStyle, DREAM_KEYFRAMES } from '@/lib/dream-design'
+import { T, DT, SCALE, MOTION, grainOverlay, moonStyle, haloStyle, DREAM_KEYFRAMES, GRAIN_HOME } from '@/lib/dream-design'
 
 /* tempi nommés (V1.2 §D) — hérités, conservés pour référence de voix (« instrument »), non structurants */
 const TEMPO = { instant: '100ms', tisse: '380ms', ceremoniel: '920ms', souffle: '6000ms', braise: '3500ms', derive: '12000ms' }
@@ -170,17 +173,17 @@ function ThresholdEdge({ side, day = false }: { side: 'left' | 'right'; day?: bo
   //
   // 🔴 CORRECTION B5 (26/07, vue au rendu et pas au code) — le côté JOUR restait
   // invisible, et pour exactement la raison qu'on venait de corriger de l'autre
-  // côté : il portait de la crème (#f2e8d5 à 0,92) sur du parchemin (#f4ead1).
+  // côté : il portait de la crème (#f1e8d7 à 0,92) sur du parchemin (#f4ead1).
   // Deux clairs quasi identiques : aucun bord ne se détache, donc la face jour
   // n'annonçait rien du tout. On avait réparé une moitié du seuil et laissé
   // l'autre cassée.
   // La crème venait d'une bonne intention — « la lune est crème » — mais ce
   // qu'on devine par le bord, ce n'est pas l'astre de l'autre face, c'est son
   // MONDE. Côté nuit on devine l'ambre du jour ; côté jour on doit deviner
-  // l'obscur de la nuit. On y met donc le sol même du fond nocturne (#241a12,
+  // l'obscur de la nuit. On y met donc le sol même du fond nocturne (#2b2534,
   // le premier stop de T.bg), qui tranche sur le papier — et redit au passage
   // que le fond de nuit et ce liseré sont la même matière.
-  const light = day ? 'rgba(36,26,18,0.55)' : 'rgba(233,170,64,0.85)'
+  const light = day ? 'rgba(25,21,33,0.55)' : 'rgba(233,170,64,0.85)'
   return (
     <div
       aria-hidden
@@ -207,11 +210,18 @@ function relDay(iso: string, locale: string): string {
   } catch { return new Date(iso).toLocaleDateString(locale, { day: 'numeric', month: 'short' }) }
 }
 
-function ReservedToast() {
+/* 🔴 2026-07-26 — QUATRIÈME COMPOSANT PEINT EN NUIT EN DUR, TROUVÉ EN CHERCHANT
+   LES TROIS PREMIERS. `ReservedToast` est monté sur les DEUX faces (l.~1162 côté
+   Rêve, l.~1388 côté Cœur) et ne prenait aucune prop `day` : il posait une gélule
+   noire sur du parchemin. Même cause que la nav et que le liseré de seuil — un
+   composant écrit en pensant à une seule face, monté sur les deux.
+   La règle qui en sort, et elle vaut pour tout ce qui suit : SI ÇA PEUT S'AFFICHER
+   SUR LES DEUX FACES, ÇA PREND `day`. Sans exception. */
+function ReservedToast({ day }: { day?: boolean }) {
   const { t } = useT()
   return (
     <div style={{ position: 'fixed', bottom: 132, left: 0, right: 0, display: 'flex', justifyContent: 'center', zIndex: 30, pointerEvents: 'none', animation: 'lFadeUp .3s ease' }}>
-      <div style={{ padding: '9px 18px', borderRadius: 999, background: 'rgba(20,14,11,0.86)', border: '0.5px solid rgba(242,232,213,0.12)', fontFamily: T.sans, fontWeight: 500, fontSize: 13.5, color: 'rgba(242,232,213,0.5)' }}>{t('core.common.reserved')}</div>
+      <div style={{ padding: '9px 18px', borderRadius: 999, background: day ? 'rgba(244,234,209,0.92)' : 'rgba(25,21,33,0.86)', border: day ? DT.cardBorder : '0.5px solid rgba(202,191,206,0.12)', fontFamily: T.sans, fontWeight: 500, fontSize: SCALE.small, color: day ? DT.inkSoft : T.dim, transition: `background ${MOTION.swap}ms ${MOTION.ease}` }}>{t('core.common.reserved')}</div>
     </div>
   )
 }
@@ -293,19 +303,19 @@ function CrisisCard({ onClose }: { onClose: () => void }) {
   const { t } = useT()
   const h2 = t('core.crisis.line2Href')
   return (
-    <div style={{ position: 'fixed', inset: 0, zIndex: 60, background: 'rgba(10,6,4,0.92)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
-      <div style={{ maxWidth: 360, padding: 26, borderRadius: 24, background: '#1a140c', border: T.cardBorder, fontFamily: T.sans, color: T.ink }}>
+    <div style={{ position: 'fixed', inset: 0, zIndex: 60, background: 'rgba(20,17,26,0.92)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
+      <div style={{ maxWidth: 360, padding: 26, borderRadius: 24, background: '#2b2534', border: T.cardBorder, fontFamily: T.sans, color: T.ink }}>
         <div style={{ fontFamily: T.serif, fontSize: 21, fontStyle: 'italic', color: T.cream, lineHeight: 1.3 }}>{t('core.crisis.title')}</div>
         <div style={{ marginTop: 14, fontSize: 17, lineHeight: 1.5, color: T.dim }}>{t('core.crisis.body')}</div>
         <div style={{ marginTop: 16, display: 'flex', flexDirection: 'column', gap: 10 }}>
-          <a href={t('core.crisis.line1Href')} style={{ padding: '13px 16px', borderRadius: 14, background: 'rgba(201,168,106,0.12)', border: `1px solid ${T.gold}55`, color: T.cream, textDecoration: 'none', fontSize: 17, fontWeight: 600 }}>{t('core.crisis.line1Label')}</a>
+          <a href={t('core.crisis.line1Href')} style={{ padding: '13px 16px', borderRadius: 14, background: 'rgba(255,255,255,0.12)', border: `1px solid ${T.gold}55`, color: T.cream, textDecoration: 'none', fontSize: 17, fontWeight: 600 }}>{t('core.crisis.line1Label')}</a>
           <a href={h2} {...(h2.startsWith('http') ? { target: '_blank', rel: 'noreferrer' } : {})} style={{ padding: '13px 16px', borderRadius: 14, background: T.card, border: T.cardBorder, color: T.ink, textDecoration: 'none', fontSize: 17 }}>{t('core.crisis.line2Label')}</a>
         </div>
         {/* ⚠️ SÉCURITÉ RÉELLE — ces lignes sont FRANÇAISES. On ne suppose JAMAIS le pays
             du rêveur : pas de numéro étranger inventé, on dit d'où viennent ces lignes et
             on renvoie vers un annuaire international réel. Ne "localise" pas ça à la légère. */}
         <div style={{ marginTop: 12, fontSize: 12.5, lineHeight: 1.45, color: T.faint, textAlign: 'center' }}>{t('core.crisis.elsewhere')}</div>
-        <button onClick={onClose} style={{ marginTop: 18, width: '100%', padding: 12, borderRadius: 999, background: 'transparent', border: '1px solid rgba(242,232,213,0.18)', color: T.dim, fontSize: 13.5, cursor: 'pointer', fontFamily: T.sans }}>{t('core.crisis.close')}</button>
+        <button onClick={onClose} style={{ marginTop: 18, width: '100%', padding: 12, borderRadius: 999, background: 'transparent', border: '1px solid rgba(202,191,206,0.18)', color: T.dim, fontSize: 13.5, cursor: 'pointer', fontFamily: T.sans }}>{t('core.crisis.close')}</button>
       </div>
     </div>
   )
@@ -332,27 +342,37 @@ function CrisisCard({ onClose }: { onClose: () => void }) {
  *    (l'or monte, la crème recule) — « la nuit d'un feu qui s'éteint » qu'on
  *    ranime en parlant.
  */
-function Orb({ rec, size = 196, day = false, holding = false }: { rec: boolean; size?: number; day?: boolean; holding?: boolean }) {
+/* 2026-07-26 (mégapasse CD) — LE FOYER RÉTRÉCIT DE MOITIÉ.
+ * L'étalum « nuit bleue vivante » pose une lune de 96 px avec un halo de 236,
+ * là où on en était à 196 px de disque nu. Le rapport 89/233 = φ², c'est
+ * exactement la proportion de l'étalon exprimée en Fibonacci.
+ * Ce que ça change, et c'est le point : une lune qui occupe la moitié de la
+ * largeur EST l'écran ; une lune de 89 px est une PRÉSENCE dans du vide. Le
+ * halo, lui, tient les 233 px — donc la lumière garde toute sa place, seule
+ * la matière recule. C'est ça, « rien ne crie ».
+ * La zone tapable, elle, ne rétrécit pas : elle reste à 144 px (l'ancienne
+ * auréole), très au-dessus des 44 px de la loi. On perd du disque, pas le geste. */
+function Orb({ rec, size = SCALE.moon, day = false, holding = false }: { rec: boolean; size?: number; day?: boolean; holding?: boolean }) {
   const base = moonStyle(size, day)
   const recHalo = day
     ? `0 0 ${size * 0.618}px ${size * 0.18}px ${DT.sunGlow}, 0 0 ${size * 1.272}px ${size * 0.34}px rgba(230,166,54,0.20)`
-    : `0 0 ${size * 0.618}px ${size * 0.2}px rgba(242,232,213,0.30), 0 0 ${size * 1.272}px ${size * 0.36}px rgba(201,168,106,0.21)`
+    : `0 0 ${size * 0.618}px ${size * 0.2}px rgba(240,224,182,0.55), 0 0 ${size * 1.272}px ${size * 0.36}px rgba(255,255,255,0.21)`
   // l'anneau de maintien : périmètre exact → le tracé se referme pile à 180 ms.
   const r = size / 2 + 13
   const circ = 2 * Math.PI * r
   const ringColor = day ? DT.gold : T.gold
   return (
     <div style={{ position: 'relative', width: size, height: size, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      {/* auréole externe — le second souffle, incommensurable avec le premier */}
+      {/* LE HALO — φ² au-dessus du disque (89 → 233), et il respire en OPACITÉ,
+          pas en échelle : le disque grossit de 1,5 %, la lumière va de 46 % à
+          60 %. Deux souffles de même durée mais de nature différente — c'est ce
+          décalage qui fait « vivante » plutôt que « qui pulse ». */}
       <div
         aria-hidden
         className="oAura"
         style={{
-          position: 'absolute', width: size * 1.618, height: size * 1.618, borderRadius: '50%',
-          background: day
-            ? 'radial-gradient(circle, rgba(230,166,54,0.13), transparent 62%)'
-            : 'radial-gradient(circle, rgba(201,168,106,0.13), transparent 62%)',
-          pointerEvents: 'none',
+          ...haloStyle(SCALE.moonHalo, day),
+          position: 'absolute', top: '50%', left: '50%',
         }}
       />
       {/* anneau de maintien — se referme sur les 180 ms du seuil, puis s'efface */}
@@ -414,10 +434,10 @@ function QuietNav({ active, face = 'night', go }: { active: string; face?: 'nigh
     { k: 'journal', icon: I.journal, l: t('core.nav.journal') },
   ]
   return (
-    <div style={{ position: 'fixed', left: 0, right: 0, bottom: 0, height: 89, display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 26, paddingBottom: 'max(21px, env(safe-area-inset-bottom))', background: day ? 'linear-gradient(180deg, transparent, rgba(244,234,209,0.94) 55%)' : 'linear-gradient(180deg, transparent, rgba(22,13,10,0.9) 55%)', transition: `background ${MOTION.swap}ms ${MOTION.ease}`, zIndex: 20 }}>
+    <div style={{ position: 'fixed', left: 0, right: 0, bottom: 0, height: 89, display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 26, paddingBottom: 'max(21px, env(safe-area-inset-bottom))', background: day ? 'linear-gradient(180deg, transparent, rgba(244,234,209,0.94) 55%)' : 'linear-gradient(180deg, transparent, rgba(25,21,33,0.9) 55%)', transition: `background ${MOTION.swap}ms ${MOTION.ease}`, zIndex: 20 }}>
       {items.map(it => {
         const on = it.k === active
-        const c = on ? (day ? DT.ink : T.cream) : (day ? 'rgba(43,33,21,0.34)' : 'rgba(242,232,213,0.32)')
+        const c = on ? (day ? DT.ink : T.cream) : (day ? 'rgba(43,33,21,0.34)' : '#a49aad')
         return (
           <button key={it.k} onClick={() => go(it.k)} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 5, background: 'none', border: 'none', cursor: 'pointer', padding: 6 }}>
             {it.icon(c, 21)}
@@ -545,10 +565,10 @@ type Screen = 'home' | 'animus' | 'journal' | 'universe' | 'circles' | 'forge' |
 function ThresholdVeil({ to }: { to: 'day' | 'night' }) {
   return (
     <div className="gVeil" style={{ position: 'fixed', inset: 0, zIndex: 50, pointerEvents: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <div style={{ position: 'absolute', inset: 0, background: to === 'day' ? 'radial-gradient(circle at 50% 45%, rgba(216,184,94,0.12), transparent 62%)' : 'radial-gradient(circle at 50% 45%, rgba(201,168,106,0.09), transparent 62%)', animation: 'gGlow 780ms ease-out' }} />
+      <div style={{ position: 'absolute', inset: 0, background: to === 'day' ? 'radial-gradient(circle at 50% 45%, rgba(216,184,94,0.12), transparent 62%)' : 'radial-gradient(circle at 50% 45%, rgba(255,255,255,0.09), transparent 62%)', animation: 'gGlow 780ms ease-out' }} />
       <svg width="220" height="220" viewBox="0 0 200 200" style={{ animation: 'gThreshold 780ms cubic-bezier(.22,.61,.36,1) forwards' }}>
-        <circle cx="100" cy="100" r="60" fill="none" stroke="#c9a86a" strokeWidth="1" />
-        <circle cx="100" cy="100" r="42" fill="none" stroke="#c9a86a" strokeWidth="0.6" opacity="0.55" />
+        <circle cx="100" cy="100" r="60" fill="none" stroke="#e0c087" strokeWidth="1" />
+        <circle cx="100" cy="100" r="42" fill="none" stroke="#e0c087" strokeWidth="0.6" opacity="0.55" />
       </svg>
     </div>
   )
@@ -636,6 +656,13 @@ function MvpAppInner() {
     setGuidesSheet(null); setReadId(kairosId); setGuideRun({ guide: g, kairosId, dreamText }); setScreen('guide')
   }
   const exitGuide = () => { const kid = guideRun?.kairosId; setGuideRun(null); setGuidesSheet(null); setScreen(kid ? 'read' : 'journal') }
+  /* C1 2026-07-26 — la bibliothèque des guides est désormais atteignable depuis la
+     page « ce qu'on dépose ici », c'est-à-dire depuis l'accueil et depuis le Cœur.
+     Sans mémoire d'origine, `onBack` renvoyait au Journal — on serait entré par la
+     porte du Rêve pour ressortir ailleurs. Une seule variable règle ça, et le
+     comportement historique (retour fiche / journal) reste le défaut. */
+  const [guidesBack, setGuidesBack] = useState<Screen | null>(null)
+  const openGuideLibrary = (from: Screen) => { setGuidesBack(from); setScreen('guides') }
   const [crisis, setCrisis] = useState(false)
   const [cross, setCross] = useState<null | 'day' | 'night'>(null)
   // onboarding O1-O4 — 'checking' seulement pour un compte encore non-onboarde (pas de flash home)
@@ -680,11 +707,11 @@ function MvpAppInner() {
   if (onboard === 'show') return <Shell><Onboarding onFinish={() => setOnboard('hide')} onStartCapture={() => { setScreen('home'); setOnboard('hide') }} onImport={() => { setScreen('import'); setOnboard('hide') }} /></Shell>
 
   return (
-    <Shell day={screen === 'animus'}>
+    <Shell day={screen === 'animus'} alive={screen === 'home' || screen === 'animus'}>
       {crisis && <CrisisCard onClose={() => setCrisis(false)} />}
-      {screen === 'home' && <HomeScreen session={session} onCaptured={(text, meta) => { checkCrisis(text); setDraft({ text, kairosId: null, markers: meta?.markers, durationSec: meta?.durationSec, localId: meta?.localId ?? null }); setScreen('postdepot') }} goAnimus={() => crossTo('animus')} goScan={() => { setScanFrom('home'); setScreen('scan') }} openDream={(id: string) => { setReadId(id); setReadFrom('home'); setScreen('read') }} onSettings={() => { setSettingsFrom('home'); setScreen('settings') }} />}
+      {screen === 'home' && <HomeScreen session={session} onCaptured={(text, meta) => { checkCrisis(text); setDraft({ text, kairosId: null, markers: meta?.markers, durationSec: meta?.durationSec, localId: meta?.localId ?? null }); setScreen('postdepot') }} goAnimus={() => crossTo('animus')} goScan={() => { setScanFrom('home'); setScreen('scan') }} openDream={(id: string) => { setReadId(id); setReadFrom('home'); setScreen('read') }} onSettings={() => { setSettingsFrom('home'); setScreen('settings') }} onGuides={() => openGuideLibrary('home')} />}
       {screen === 'animus' && <AnimusScreen session={session} goAnima={() => crossTo('home')} onCaptured={(text, type) => { checkCrisis(text); setDraft({ text, kairosId: null, kairosType: type, dayDeposit: true }); setScreen('postdepot') }} openDream={id => { setReadId(id); setReadFrom('animus'); setScreen('read') }}
-        onGreatConsult={() => { setGreatFrom('animus'); setGreatView('consult'); setScreen('greatdreams') }} />}
+        onGreatConsult={() => { setGreatFrom('animus'); setGreatView('consult'); setScreen('greatdreams') }} onGuides={() => openGuideLibrary('animus')} />}
       {screen === 'scan' && <ScanScreen session={session} onBack={() => setScreen(scanFrom === 'import' ? 'import' : 'home')} onDone={(text, meta) => {
         checkCrisis(text)
         setDraft(d => {
@@ -720,7 +747,7 @@ function MvpAppInner() {
       )}
       {screen === 'read' && readId && <ReadScreen session={session} kairosId={readId} onBack={() => setScreen(readFrom)} onInterpret={(id, text, type, present) => { setDraft({ text, kairosId: id, kairosType: type, presentContext: !!present }); setInterpretFrom('read'); setScreen('interpret') }} onGuides={(id, text, type, radiant) => openGuides(id, text, type, radiant)} onResumeGuide={resumeGuide} onRedoGuide={redoGuide} onCreate={(id, title, text) => { try { sessionStorage.setItem('forge_kairos', JSON.stringify({ id, title, text: (text || '').slice(0, 120) })) } catch {}; setScreen('forge') }} onOpenDream={(id: string) => setReadId(id)} onDeleted={() => setScreen(readFrom)} />}
       {screen === 'guide' && guideRun && <GuideSession session={session} guide={guideRun.guide} kairosId={guideRun.kairosId} dreamText={guideRun.dreamText} resume={guideRun.resume} onExit={exitGuide} />}
-      {screen === 'guides' && <GuidesLibrary onPick={(g) => { const ctx = guidesSheet; launchGuide(g, ctx?.kairosId ?? null, ctx?.dreamText ?? '') }} onBack={() => { const kid = guidesSheet?.kairosId; setGuidesSheet(null); setScreen(kid ? 'read' : 'journal') }} />}
+      {screen === 'guides' && <GuidesLibrary onPick={(g) => { const ctx = guidesSheet; setGuidesBack(null); launchGuide(g, ctx?.kairosId ?? null, ctx?.dreamText ?? '') }} onBack={() => { const kid = guidesSheet?.kairosId; setGuidesSheet(null); if (guidesBack) { const b = guidesBack; setGuidesBack(null); setScreen(b) } else setScreen(kid ? 'read' : 'journal') }} />}
       {screen === 'import' && <ImportScreen session={session} onDone={() => setScreen('journal')} onScan={() => { setScanFrom('import'); setScreen('scan') }} />}
       {screen === 'forge' && <ForgeScreen session={session} onBack={() => setScreen('journal')} />}
       {screen === 'circles' && <CirclesScreen session={session} />}
@@ -738,7 +765,7 @@ function MvpAppInner() {
       {guidesSheet && screen !== 'guides' && screen !== 'guide' && <GuidesSheet open type={guidesSheet.type} text={guidesSheet.dreamText} radiant={guidesSheet.radiant} onPick={(g) => launchGuide(g, guidesSheet.kairosId, guidesSheet.dreamText)} onAll={() => setScreen('guides')} onClose={() => setGuidesSheet(null)} />}
       {toast && (
         <div style={{ position: 'fixed', bottom: 132, left: 0, right: 0, display: 'flex', justifyContent: 'center', zIndex: 60, pointerEvents: 'none', animation: 'lFadeUp .3s ease' }}>
-          <div style={{ padding: '10px 20px', borderRadius: 999, background: 'rgba(20,14,11,0.9)', border: '0.5px solid rgba(242,232,213,0.16)', fontFamily: T.sans, fontWeight: 500, fontSize: 17, color: T.cream }}>{toast}</div>
+          <div style={{ padding: '10px 20px', borderRadius: 999, background: 'rgba(25,21,33,0.9)', border: '0.5px solid rgba(202,191,206,0.16)', fontFamily: T.sans, fontWeight: 500, fontSize: 17, color: T.cream }}>{toast}</div>
         </div>
       )}
       {cross && <ThresholdVeil to={cross} />}
@@ -746,11 +773,16 @@ function MvpAppInner() {
   )
 }
 
-function Shell({ children, day }: { children: React.ReactNode; day?: boolean }) {
+function Shell({ children, day, alive }: { children: React.ReactNode; day?: boolean; alive?: boolean }) {
   return (
     <div style={{ minHeight: '100dvh', background: day ? DT.paper : T.bg, fontFamily: T.sans, color: day ? DT.ink : T.ink, position: 'relative', overflow: 'hidden', maxWidth: 560, margin: '0 auto', transition: `background ${MOTION.swap}ms ${MOTION.ease}` }}>
-      {/* grain global — la matière, une seule fois pour toute l'app (§3) */}
-      <div style={grainOverlay(0.025)} />
+      {/* grain global — la matière, une seule fois pour toute l'app (§3).
+          2026-07-26 : l'étalon fait DEUX grains, et la différence est le sujet.
+          2,5 % QUI DÉRIVE (89 s) sur les deux faces d'accueil — c'est le seul
+          endroit de l'app où quelque chose vit tout seul, sans qu'on ait rien
+          demandé. 2 % IMMOBILE partout ailleurs : sur un écran de lecture, une
+          matière qui bouge sous le texte, c'est du bruit. */}
+      <div data-dream-grain style={grainOverlay(alive ? GRAIN_HOME : undefined, alive)} />
       <style>{DREAM_KEYFRAMES}</style>
       <style>{`
         @keyframes dream-breathe-rec { 0%,100% { transform: scale(1); } 50% { transform: scale(1.03); } }
@@ -805,7 +837,7 @@ function Shell({ children, day }: { children: React.ReactNode; day?: boolean }) 
         textarea:focus, input:focus { outline: none; border-color: ${T.gold}66 !important; }
         button:focus-visible, a:focus-visible { outline: 2px solid ${T.gold}; outline-offset: 3px; border-radius: 5px; }
         * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
-        body { margin: 0; background: #140e0a; }
+        body { margin: 0; background: #191521; }
       `}</style>
       {children}
     </div>
@@ -816,15 +848,28 @@ const Centered = ({ children }: { children: React.ReactNode }) => (
 )
 const BackHeader = ({ onBack, title }: { onBack: () => void; title: string }) => (
   <div style={{ paddingTop: 60, paddingLeft: 20, paddingRight: 20, display: 'flex', alignItems: 'center', gap: 12 }}>
-    <button onClick={onBack} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 4 }}>{I.back('rgba(242,232,213,0.6)')}</button>
+    <button onClick={onBack} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 4 }}>{I.back('#ddd4de')}</button>
     <div style={{ fontFamily: T.serif, fontSize: 19, fontStyle: 'italic', color: T.cream }}>{title}</div>
   </div>
 )
+/* ═══ 2026-07-26 — LES BOUTONS SORTENT DE LA PILULE ═══
+   L'étalon « nuit bleue vivante » n'a pas une seule pilule. Il a deux boutons,
+   et deux seulement :
+     · le plein — aplat d'OR #e0c087, texte #241f18 (9,39:1), coins 13
+     · le fantôme — blanc à 5,5 %, liseré blanc à 11 %, texte #ece3d4
+   Ce que ça règle, au-delà du goût : l'ancien bouton principal était un
+   DÉGRADÉ DE CRÈME (#fbeeda → #ecd4b4). Sur la nuit brune il passait pour de
+   la lumière ; sur la nuit bleue, un aplat crème à côté d'une lune crème, ce
+   sont deux astres qui se disputent l'écran. L'or, lui, n'est jamais un foyer :
+   c'est l'accent. Le rôle redevient lisible — la lune est la seule lumière,
+   l'or est le seul geste.
+   `transition: all .25s` est repassé en 233 ms (Fibonacci), et sur les seules
+   propriétés qui bougent : `all` faisait aussi traîner la couleur du texte. */
 const PillBtn = ({ onClick, children, primary, disabled, flex }: any) => (
-  <button onClick={onClick} disabled={disabled} style={{ flex: flex ?? 1, padding: 14, borderRadius: 999, cursor: 'pointer', fontFamily: T.sans, fontSize: 17, fontWeight: primary ? 600 : 500, opacity: disabled ? 0.45 : 1, transition: 'all .25s ease', ...(primary ? { border: 'none', background: 'linear-gradient(180deg, #fbeeda, #ecd4b4)', color: '#2a160e' } : { background: 'rgba(201,168,106,0.10)', border: `1px solid ${T.gold}44`, color: T.cream }) }}>{children}</button>
+  <button onClick={onClick} disabled={disabled} style={{ flex: flex ?? 1, minHeight: 55, padding: '15px 18px', borderRadius: SCALE.radius, cursor: 'pointer', fontFamily: T.sans, fontSize: SCALE.body, fontWeight: 600, lineHeight: 1.2, opacity: disabled ? 0.45 : 1, transition: `background 233ms ${MOTION.ease}, opacity 233ms ${MOTION.ease}`, ...(primary ? { border: 'none', background: T.gold, color: T.onGold } : { background: 'rgba(255,255,255,0.055)', border: T.cardBorderLit, color: T.text }) }}>{children}</button>
 )
 const GhostBtn = ({ onClick, children }: any) => (
-  <button onClick={onClick} style={{ flex: 1, padding: 14, borderRadius: 999, cursor: 'pointer', background: 'transparent', border: '1px solid rgba(242,232,213,0.18)', color: T.dim, fontSize: 17, fontWeight: 500, fontFamily: T.sans }}>{children}</button>
+  <button onClick={onClick} style={{ flex: 1, minHeight: 55, padding: '15px 18px', borderRadius: SCALE.radius, cursor: 'pointer', background: 'rgba(255,255,255,0.055)', border: T.cardBorderLit, color: T.text, fontSize: SCALE.body, fontWeight: 600, lineHeight: 1.2, fontFamily: T.sans, transition: `background 233ms ${MOTION.ease}` }}>{children}</button>
 )
 
 /* ═════════ AUTH — mot de passe (défaut) · code email en secours ═════════ */
@@ -921,7 +966,7 @@ function PasswordNudge({ session }: { session: Session }) {
     if (error) setErr(error.message); else setDone(true)
   }
   return (
-    <div style={{ margin: '14px 20px 0', padding: 16, borderRadius: 20, background: 'rgba(201,168,106,0.07)', border: `0.5px solid ${T.gold}3a`, animation: 'lFadeUp .4s ease' }}>
+    <div style={{ margin: '14px 20px 0', padding: 16, borderRadius: 20, background: 'rgba(255,255,255,0.07)', border: `0.5px solid ${T.gold}3a`, animation: 'lFadeUp .4s ease' }}>
       {done ? (
         <div style={{ fontFamily: T.sans, fontWeight: 500, fontSize: 17, color: T.cream, textAlign: 'center' }}>{t('core.passwordNudge.done')}</div>
       ) : !open ? (
@@ -930,14 +975,14 @@ function PasswordNudge({ session }: { session: Session }) {
             <div style={{ fontFamily: T.sans, fontWeight: 600, fontSize: 17, color: T.cream }}>{t('core.passwordNudge.title')}</div>
             <div style={{ marginTop: 3, fontSize: 12.5, color: T.dim }}>{t('core.passwordNudge.sub')}</div>
           </div>
-          <button onClick={() => setOpen(true)} style={{ padding: '9px 15px', borderRadius: 999, background: 'rgba(201,168,106,0.14)', border: `1px solid ${T.gold}66`, color: T.cream, fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily: T.sans, whiteSpace: 'nowrap' }}>{t('core.passwordNudge.set')}</button>
+          <button onClick={() => setOpen(true)} style={{ padding: '9px 15px', borderRadius: 999, background: 'rgba(255,255,255,0.14)', border: `1px solid ${T.gold}66`, color: T.cream, fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily: T.sans, whiteSpace: 'nowrap' }}>{t('core.passwordNudge.set')}</button>
           <button onClick={() => dismiss()} aria-label={t('core.passwordNudge.later')} style={{ background: 'none', border: 'none', color: T.faint, fontSize: 20, cursor: 'pointer', padding: '2px 4px', lineHeight: 1 }}>×</button>
         </div>
       ) : (
         <div>
           <input type="password" autoComplete="new-password" placeholder={t('core.passwordNudge.placeholder')} value={pw} onChange={e => setPw(e.target.value)} onKeyDown={e => e.key === 'Enter' && save()} style={{ width: '100%', padding: '13px 16px', borderRadius: 14, background: T.card, border: T.cardBorder, color: T.cream, fontSize: 17, fontFamily: T.sans, textAlign: 'center' }} />
           <div style={{ marginTop: 10, display: 'flex', gap: 8 }}>
-            <button onClick={() => { setOpen(false); setPw(''); setErr('') }} style={{ flex: 1, padding: 11, borderRadius: 999, background: 'transparent', border: '1px solid rgba(242,232,213,0.18)', color: T.dim, fontSize: 13, cursor: 'pointer', fontFamily: T.sans }}>{t('core.common.cancel')}</button>
+            <button onClick={() => { setOpen(false); setPw(''); setErr('') }} style={{ flex: 1, padding: 11, borderRadius: 999, background: 'transparent', border: '1px solid rgba(202,191,206,0.18)', color: T.dim, fontSize: 13, cursor: 'pointer', fontFamily: T.sans }}>{t('core.common.cancel')}</button>
             <button onClick={save} disabled={busy} style={{ flex: 1.4, padding: 11, borderRadius: 999, background: 'linear-gradient(180deg, #f2e6c6, #d8c39a)', border: 'none', color: '#241a09', fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily: T.sans }}>{busy ? t('core.passwordNudge.saving') : t('core.passwordNudge.save')}</button>
           </div>
           {err && <div style={{ marginTop: 8, fontSize: 12.5, color: T.emberLive, textAlign: 'center' }}>{err}</div>}
@@ -1017,12 +1062,12 @@ function EchoOfTheDayCard({ session, onOpen }: { session: Session; onOpen: (id: 
     } catch {}
   }
   return (
-    <div style={{ margin: '14px 20px 0', display: 'flex', alignItems: 'center', gap: 10, padding: '12px 12px 12px 15px', borderRadius: 16, background: 'rgba(201,168,106,0.07)', border: '0.5px solid rgba(201,168,106,0.22)', animation: 'lFadeUp .5s ease' }}>
+    <div style={{ margin: '14px 20px 0', display: 'flex', alignItems: 'center', gap: 10, padding: '12px 12px 12px 15px', borderRadius: 16, background: 'rgba(255,255,255,0.07)', border: '0.5px solid rgba(255,255,255,0.22)', animation: 'lFadeUp .5s ease' }}>
       <button onClick={() => onOpen(echo.kairos_id)} style={{ flex: 1, display: 'flex', alignItems: 'center', gap: 9, background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', padding: 0 }}>
         <span style={{ color: T.gold, fontSize: 17, flexShrink: 0 }}>✶</span>
-        <span style={{ fontFamily: T.serif, fontSize: 17, fontStyle: 'italic', color: 'rgba(242,232,213,0.9)', lineHeight: 1.4 }}>{echo.message}</span>
+        <span style={{ fontFamily: T.serif, fontSize: 17, fontStyle: 'italic', color: '#f1e8d7', lineHeight: 1.4 }}>{echo.message}</span>
       </button>
-      <button onClick={dismiss} aria-label={t('core.common.hide')} style={{ width: 24, height: 24, borderRadius: '50%', border: 'none', background: 'rgba(242,232,213,0.08)', color: T.dim, fontSize: 17, lineHeight: 1, cursor: 'pointer', flexShrink: 0 }}>×</button>
+      <button onClick={dismiss} aria-label={t('core.common.hide')} style={{ width: 24, height: 24, borderRadius: '50%', border: 'none', background: 'rgba(202,191,206,0.08)', color: T.dim, fontSize: 17, lineHeight: 1, cursor: 'pointer', flexShrink: 0 }}>×</button>
     </div>
   )
 }
@@ -1032,7 +1077,7 @@ function EchoOfTheDayCard({ session, onOpen }: { session: Session; onOpen: (id: 
    même discrétion (rien à l'écran quand la file est vide) mais devient une porte :
    réécouter la voix · réessayer · l'écrire soi-même en écoutant · supprimer. */
 
-function HomeScreen({ session, onCaptured, goAnimus, goScan, openDream, onSettings }: { session: Session; onCaptured: (text: string, meta?: { markers?: number[]; durationSec?: number; localId?: string | null }) => void; goAnimus: () => void; goScan: () => void; openDream: (id: string) => void; onSettings: () => void }) {
+function HomeScreen({ session, onCaptured, goAnimus, goScan, openDream, onSettings, onGuides }: { session: Session; onCaptured: (text: string, meta?: { markers?: number[]; durationSec?: number; localId?: string | null }) => void; goAnimus: () => void; goScan: () => void; openDream: (id: string) => void; onSettings: () => void; onGuides: () => void }) {
   const { t, locale } = useT()
   const rec = useRecorder()
   const [recent, setRecent] = useState<any[]>([])
@@ -1145,7 +1190,15 @@ function HomeScreen({ session, onCaptured, goAnimus, goScan, openDream, onSettin
     <div style={{ minHeight: '100dvh', position: 'relative', paddingBottom: 89, background: T.bg, transition: `background ${MOTION.swap}ms ${MOTION.ease}` }} {...swipe}>
       {/* LA LUEUR — ancrée sur la ligne φ, au point EXACT où se pose le foyer :
           la lumière sort de la matière, elle n'est plus posée derrière. */}
-      <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(70% 50% at 50% 38.2%, rgba(201,168,106,0.12), transparent 70%)' }} />
+      {/* 2026-07-26 — LA LUEUR D'ÉCRAN EST RETIRÉE (face Rêve).
+          Elle datait du fond RADIAL brun : une nappe de 70 % × 50 % posée sur la
+          ligne φ pour que « la lumière sorte de la matière ». Le fond est
+          maintenant un dégradé LINÉAIRE bleu-violet, et l'étalon ne pose plus
+          qu'une seule source : le halo de 233 px autour de la lune. Garder la
+          nappe revenait à éclaircir tout le haut de l'écran — le dégradé
+          disparaissait, et la lune cessait d'être la seule chose qui rayonne.
+          Elle reste sur le CŒUR (l.~1400), où le foyer est une braise dans du
+          papier et a besoin d'être creusé par son ambiance. */}
       {/* LE SEUIL — l'ambre du jour transparaît au bord droit : la seconde face
           se devine avant de se lire. (réponse à « et le double écran cœur ? ») */}
       {!recording && !busy && mode === 'voice' && <ThresholdEdge side="right" />}
@@ -1153,18 +1206,26 @@ function HomeScreen({ session, onCaptured, goAnimus, goScan, openDream, onSettin
       {/* §14.1-2 — méta unique (date discrète) · 1 seule icône header (👤 → Réglages). Le réveil vit dans Réglages. */}
       <div style={{ paddingTop: 55, paddingLeft: 26, paddingRight: 21, display: 'flex', justifyContent: 'space-between', alignItems: 'center', minHeight: 34 }}>
         <div style={{ fontFamily: T.sans, fontSize: 12.5, color: T.faint, letterSpacing: '0.01em' }}>{dateStr}</div>
-        <button onClick={onSettings} aria-label={t('core.common.settingsAria')} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 6 }}>{I.account('rgba(242,232,213,0.45)')}</button>
+        <button onClick={onSettings} aria-label={t('core.common.settingsAria')} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 6 }}>{I.account('#b9b0bd')}</button>
       </div>
       {mode === 'voice' ? (
         <>
           {/* ═══ LE FOYER — posé sur la ligne φ (38,2 %), jamais au centre mort ═══ */}
-          <div style={{ marginTop: phiFocusTop(196, 89), display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <div onPointerDown={onOrbDown} onPointerUp={onOrbUp} onPointerLeave={onOrbLeave} onClick={onOrbClick} style={{ width: 196, cursor: 'pointer', touchAction: 'none', userSelect: 'none' }}>
+          <div style={{ marginTop: phiFocusTop(SCALE.moon, 89), display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            {/* La zone tapable (144) est plus large que le disque (89) : le geste
+                ne rétrécit pas avec la lune. */}
+            <div onPointerDown={onOrbDown} onPointerUp={onOrbUp} onPointerLeave={onOrbLeave} onClick={onOrbClick} style={{ width: 144, height: 144, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', touchAction: 'none', userSelect: 'none' }}>
               <Orb rec={recording} holding={holding} />
             </div>
             <div style={{ marginTop: 34, padding: '0 34px', textAlign: 'center' }}>
-              {/* §14 — le mot (serif, display) */}
-              <div style={{ fontFamily: T.serif, fontSize: SCALE.display, fontStyle: 'italic', color: T.cream, lineHeight: 1.05, transition: `opacity ${MOTION.fade}ms ${MOTION.ease}` }}>{busy ? t('core.capture.writing') : recording ? t('core.capture.listening') : t('core.home.word')}</div>
+              {/* §14 — le mot. 2026-07-26 : l'étalon le pose en Cormorant Garamond
+                  300 ROMAIN, pas en italique. L'italique disait « je te murmure
+                  quelque chose » ; le romain léger dit « voici le lieu ». Sur le
+                  seul mot que porte l'écran, c'est la deuxième chose qui est vraie.
+                  L'italique reste, plus bas, pour la traîne — donc la phrase se
+                  lit encore d'un trait, mais elle a maintenant un appui et une
+                  suite au lieu de deux souffles identiques. */}
+              <div style={{ fontFamily: T.display, fontSize: SCALE.display, fontWeight: 300, color: T.cream, lineHeight: 1.05, transition: `opacity ${MOTION.fade}ms ${MOTION.ease}` }}>{busy ? t('core.capture.writing') : recording ? t('core.capture.listening') : t('core.home.word')}</div>
               {/* ═══ LA TRAÎNE DU MOT — le périmètre, sans un élément de plus ═══
                   Tim, 26/07 : « le nouveau double écran c'est Rêve et Cœur, mais
                   Rêve c'est donc aussi Kaïros etc… faut que ce soit clair. Sans
@@ -1181,9 +1242,19 @@ function HomeScreen({ session, onCaptured, goAnimus, goScan, openDream, onSettin
                   périmètre de 1_BIBLE §1.5 (« ce que la vie nous chante ») devient
                   lisible en une respiration, sans liste et sans chips.
                   Elle se retire pendant la capture : sous « je t'écoute », nommer
-                  le périmètre n'a plus de sens — c'est déjà déposé. */}
+                  le périmètre n'a plus de sens — c'est déjà déposé.
+
+                  ── C1, 26/07 : LES TROIS POINTS DEVIENNENT UNE PORTE ──
+                  Tim : « la solution comme d'hab est cette petite bulle qui permet
+                  d'avoir + d'info → présente les kaïros direct, et "lire +" emmène
+                  sur une vraie page en profondeur ».
+                  La traîne ne change ni de mot, ni de taille, ni de place : elle
+                  devient TAPABLE, et gagne un ⓘ terminal. Les « … » promettaient
+                  déjà une suite ; ils la tiennent enfin. Budget §15.1 inchangé —
+                  toujours l'emplacement n°3, toujours 9/9 sur les deux faces.
+                  La copie reste `core.home.also` : une clé, un mot de Tim. */}
               {!busy && !recording && (
-                <div style={{ marginTop: 5, fontFamily: T.serif, fontSize: SCALE.body, fontStyle: 'italic', color: T.dim, lineHeight: 1.25, animation: `dream-fade-in ${MOTION.fade}ms ${MOTION.ease}` }}>{t('core.home.also')}</div>
+                <ScopeTrail face="dream" onGuides={onGuides} />
               )}
               {/* §14 — UNE micro-ligne, et une seule. Le scan (📷) est un troisième
                   chemin de dépôt : il vit SUR cette ligne, en glyphe terminal, au
@@ -1191,15 +1262,17 @@ function HomeScreen({ session, onCaptured, goAnimus, goScan, openDream, onSettin
                   moins à l'écran, une façon de déposer de plus au même endroit. */}
               <div style={{ marginTop: 13, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8, fontSize: SCALE.meta, color: T.dim, lineHeight: 1.4 }}>
                 <span>{busy ? t('core.common.oneMoment') : rec.state === 'locked' ? t('core.home.lockedHint', { t: fmt(rec.seconds) }) : recording ? t('core.capture.listeningTimer', { t: fmt(rec.seconds) }) : t('core.home.micro')}</span>
+                {/* cible tactile : 34 px, le minimum que la loi tolère pour une
+                    puce secondaire. Elle était à 27 (17 px d'icône + 5 de padding). */}
                 {!recording && !busy && (
-                  <button onClick={goScan} aria-label={t('core.home.scanAria')} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 5, display: 'inline-flex', opacity: 0.62, lineHeight: 0 }}>{I.camera('rgba(242,232,213,0.55)', 17)}</button>
+                  <button onClick={goScan} aria-label={t('core.home.scanAria')} style={{ background: 'none', border: 'none', cursor: 'pointer', minWidth: 34, minHeight: 34, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', opacity: 0.62, lineHeight: 0 }}>{I.camera(T.dim, 21)}</button>
                 )}
               </div>
               {err && <div style={{ marginTop: 13, fontSize: 13, color: T.emberLive }}>{err}</div>}
               {savedOffline && <div style={{ marginTop: 13, fontSize: 13, color: T.gold, lineHeight: 1.4 }}>{t('core.capture.savedOffline')}</div>}
               {/* §12bis.D — « rêve suivant » : pose un marqueur pendant l'enregistrement, sans l'arrêter. */}
               {recording && (
-                <button onClick={rec.mark} aria-label={t('core.home.markerAria')} style={{ marginTop: 21, minHeight: 44, padding: '11px 21px', borderRadius: 999, background: 'rgba(201,168,106,0.09)', border: '0.5px solid rgba(201,168,106,0.30)', color: 'rgba(242,232,213,0.78)', fontSize: 13.5, fontWeight: 500, fontFamily: T.sans, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
+                <button onClick={rec.mark} aria-label={t('core.home.markerAria')} style={{ marginTop: 21, minHeight: 44, padding: '11px 21px', borderRadius: 999, background: 'rgba(255,255,255,0.09)', border: '0.5px solid rgba(255,255,255,0.3)', color: '#ddd4de', fontSize: 13.5, fontWeight: 500, fontFamily: T.sans, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
                   <span style={{ fontSize: 17, color: T.gold, lineHeight: 1 }}>⁂</span>
                   {rec.markers.length > 0 ? t('core.home.nextDreamN', { n: rec.markers.length }) : t('core.home.nextDream')}
                 </button>
@@ -1268,7 +1341,7 @@ function HomeScreen({ session, onCaptured, goAnimus, goScan, openDream, onSettin
 /* ═════════ LE CŒUR (Écran 2 — la voix consciente, palette papier chaud) ═════════ */
 /* §12ter.H (GO Tim) — bascule Orbe/Cœur : les kaïros vivent désormais sur l'Orbe.
    Ici, dépôt LIBRE de la vérité du moment ; même épure §14 que l'Orbe. */
-function AnimusScreen({ session, goAnima, onCaptured, openDream, onGreatConsult }: { session: Session; goAnima: () => void; onCaptured: (text: string, kairosType?: string) => void; openDream: (id: string) => void; onGreatConsult: () => void }) {
+function AnimusScreen({ session, goAnima, onCaptured, openDream, onGreatConsult, onGuides }: { session: Session; goAnima: () => void; onCaptured: (text: string, kairosType?: string) => void; openDream: (id: string) => void; onGreatConsult: () => void; onGuides: () => void }) {
   const { t, locale } = useT()
   const rec = useRecorder()
   const recording = rec.state === 'held' || rec.state === 'locked'
@@ -1365,7 +1438,7 @@ function AnimusScreen({ session, goAnima, onCaptured, openDream, onGreatConsult 
         {/* LE SEUIL, en miroir — la crème de la nuit transparaît au bord GAUCHE.
             Les deux faces se signalent l'une l'autre, chacune par son bord. */}
         {!recording && !busy && mode === 'voice' && <ThresholdEdge side="left" day />}
-        {reserved && <ReservedToast />}
+        {reserved && <ReservedToast day />}
         {/* §14.1 — méta unique : date discrète. Pas d'icône header (Réglages vivent côté Orbe). */}
         <div style={{ paddingTop: 55, paddingLeft: 26, paddingRight: 21, minHeight: 34, display: 'flex', alignItems: 'center' }}>
           <div style={{ fontFamily: T.sans, fontSize: 12.5, color: DT.faint, letterSpacing: '0.01em' }}>{dateStr}</div>
@@ -1401,8 +1474,13 @@ function AnimusScreen({ session, goAnima, onCaptured, openDream, onGreatConsult 
                     ferait au prix de la lisibilité) mais par la typo et l'échelle :
                     serif italique 17 pour la traîne, sans 13 pour le geste.
                     Côté nuit `T.dim` passe (5,27:1) et reste. */}
+                {/* C1, 26/07 — « Idem dans Cœur, même principe » (Tim). Même geste,
+                    même coquille, en lumière de jour : la bulle et la page prennent le
+                    parchemin, pas le panneau de nuit. Poser la peau nocturne ici aurait
+                    refait à l'identique le défaut de la nav corrigé ce matin (§3.1 B5).
+                    Le contraste AA de la traîne est tenu par `ScopeTrail` lui-même. */}
                 {!busy && !recording && (
-                  <div style={{ marginTop: 5, fontFamily: T.serif, fontSize: SCALE.body, fontStyle: 'italic', color: DT.inkSoft, lineHeight: 1.25, animation: `dream-fade-in ${MOTION.fade}ms ${MOTION.ease}` }}>{t('core.animus.also')}</div>
+                  <ScopeTrail face="heart" day onGuides={onGuides} />
                 )}
                 <div style={{ marginTop: 13, fontSize: SCALE.meta, color: DT.inkSoft, lineHeight: 1.4 }}>{busy ? t('core.common.oneMoment') : rec.state === 'locked' ? t('core.animus.lockedHint', { t: fmt(rec.seconds) }) : recording ? t('core.capture.listeningTimer', { t: fmt(rec.seconds) }) : t('core.animus.micro')}</div>
                 {err && <div style={{ marginTop: 13, fontSize: 13, color: T.emberLive }}>{err}</div>}
@@ -1499,8 +1577,8 @@ function PostDepotScreen({ session, draft, setDraft, onInterpret, onCreate, onKe
     display: 'inline-flex', alignItems: 'center', gap: 5,
     minHeight: 34, padding: '8px 13px', borderRadius: 999,
     fontSize: SCALE.meta, fontFamily: T.sans, cursor: 'pointer',
-    background: on ? 'rgba(201,168,106,0.16)' : 'transparent',
-    border: on ? `1px solid ${T.gold}66` : '1px solid rgba(242,232,213,0.14)',
+    background: on ? 'rgba(255,255,255,0.16)' : 'transparent',
+    border: on ? `1px solid ${T.gold}66` : '1px solid rgba(202,191,206,0.14)',
     color: on ? T.cream : T.dim,
   })
 
@@ -1700,20 +1778,20 @@ function PostDepotScreen({ session, draft, setDraft, onInterpret, onCreate, onKe
         {nightDreams.map((d, i) => (
           <div key={i} style={{ position: 'relative', padding: '16px 16px 14px', borderRadius: 20, background: T.card, border: T.cardBorder, animation: 'lFadeUp .3s ease' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
-              <span style={{ fontFamily: T.mono, fontSize: 10.5, fontWeight: 400, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'rgba(201,168,106,0.7)' }}>{t('core.postDepot.dreamN', { n: i + 1 })}</span>
+              <span style={{ fontFamily: T.sans, fontSize: SCALE.kicker, fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(224,192,135,0.7)' }}>{t('core.postDepot.dreamN', { n: i + 1 })}</span>
               <span style={{ flex: 1 }} />
               {i > 0 && (
-                <button onClick={() => mergeUp(i)} aria-label={t('core.postDepot.mergeUpAria')} style={{ display: 'inline-flex', alignItems: 'center', gap: 5, minHeight: 32, padding: '5px 12px', borderRadius: 999, background: 'transparent', border: '1px solid rgba(242,232,213,0.18)', color: T.dim, fontSize: 12, fontFamily: T.sans, cursor: 'pointer' }}>{t('core.postDepot.mergeUp')}</button>
+                <button onClick={() => mergeUp(i)} aria-label={t('core.postDepot.mergeUpAria')} style={{ display: 'inline-flex', alignItems: 'center', gap: 5, minHeight: 32, padding: '5px 12px', borderRadius: 999, background: 'transparent', border: '1px solid rgba(202,191,206,0.18)', color: T.dim, fontSize: 12, fontFamily: T.sans, cursor: 'pointer' }}>{t('core.postDepot.mergeUp')}</button>
               )}
             </div>
-            <textarea value={d} onChange={e => editNightCard(i, e.target.value)} style={{ width: '100%', minHeight: 92, background: 'transparent', border: 'none', color: 'rgba(242,232,213,0.92)', fontFamily: T.serif, fontSize: 17, fontStyle: 'italic', lineHeight: 1.5, resize: 'vertical' }} />
+            <textarea value={d} onChange={e => editNightCard(i, e.target.value)} style={{ width: '100%', minHeight: 92, background: 'transparent', border: 'none', color: '#f1e8d7', fontFamily: T.serif, fontSize: 17, fontStyle: 'italic', lineHeight: 1.5, resize: 'vertical' }} />
           </div>
         ))}
       </div>
       {nightErr && <div style={{ margin: '14px 18px 0', textAlign: 'center', fontSize: 13, color: T.emberLive, lineHeight: 1.4 }}>{nightErr}</div>}
       <div style={{ margin: '22px 18px 0', display: 'flex', flexDirection: 'column', gap: 10 }}>
-        <button onClick={separateNight} disabled={nightBusy} style={{ minHeight: 44, padding: '16px 20px', borderRadius: 20, background: 'rgba(201,168,106,0.12)', border: `1px solid ${T.gold}66`, cursor: 'pointer', color: T.cream, fontFamily: T.sans, fontSize: 17, fontWeight: 600, opacity: nightBusy ? 0.6 : 1 }}>{nightBusy ? t('core.postDepot.keepingThem') : t('core.postDepot.separate')}</button>
-        <button onClick={keepTogether} disabled={nightBusy} style={{ minHeight: 44, padding: '16px 20px', borderRadius: 20, background: 'transparent', border: '1px solid rgba(242,232,213,0.16)', cursor: 'pointer', color: T.dim, fontFamily: T.sans, fontSize: 17, fontWeight: 600 }}>{t('core.postDepot.keepTogetherCap')}</button>
+        <button onClick={separateNight} disabled={nightBusy} style={{ minHeight: 44, padding: '16px 20px', borderRadius: 20, background: 'rgba(255,255,255,0.12)', border: `1px solid ${T.gold}66`, cursor: 'pointer', color: T.cream, fontFamily: T.sans, fontSize: 17, fontWeight: 600, opacity: nightBusy ? 0.6 : 1 }}>{nightBusy ? t('core.postDepot.keepingThem') : t('core.postDepot.separate')}</button>
+        <button onClick={keepTogether} disabled={nightBusy} style={{ minHeight: 44, padding: '16px 20px', borderRadius: 20, background: 'transparent', border: '1px solid rgba(202,191,206,0.16)', cursor: 'pointer', color: T.dim, fontFamily: T.sans, fontSize: 17, fontWeight: 600 }}>{t('core.postDepot.keepTogetherCap')}</button>
       </div>
       <div style={{ margin: '14px 30px 0', textAlign: 'center', fontSize: 11.5, color: T.faint, lineHeight: 1.5 }}>{t('core.postDepot.nightFoot')}</div>
     </div>
@@ -1725,9 +1803,9 @@ function PostDepotScreen({ session, draft, setDraft, onInterpret, onCreate, onKe
       <div style={{ margin: '20px 18px 0', padding: 22, borderRadius: 24, background: T.card, border: T.cardBorder, animation: 'lFadeUp .4s ease' }}>
         <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase', color: T.gold, opacity: 0.8, marginBottom: 12 }}>{`${new Date().toLocaleDateString(locale, { day: 'numeric', month: 'long' })} · ${new Date().toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' })}${draft.durationSec ? ` · ${Math.floor(draft.durationSec / 60)}:${String(Math.round(draft.durationSec % 60)).padStart(2, '0')}` : ''}`}</div>
         {editing ? (
-          <textarea value={text} onChange={e => setText(e.target.value)} onBlur={() => { setEditing(false); setDraft({ ...draft, text }) }} autoFocus style={{ width: '100%', minHeight: 180, background: 'transparent', border: 'none', color: 'rgba(242,232,213,0.92)', fontFamily: T.serif, fontSize: SCALE.bodyLg, fontStyle: 'italic', lineHeight: 1.55, resize: 'vertical' }} />
+          <textarea value={text} onChange={e => setText(e.target.value)} onBlur={() => { setEditing(false); setDraft({ ...draft, text }) }} autoFocus style={{ width: '100%', minHeight: 180, background: 'transparent', border: 'none', color: '#f1e8d7', fontFamily: T.serif, fontSize: SCALE.bodyLg, fontStyle: 'italic', lineHeight: 1.55, resize: 'vertical' }} />
         ) : (
-          <div onClick={() => phase === 'review' && setEditing(true)} style={{ fontFamily: T.serif, fontSize: SCALE.bodyLg, fontStyle: 'italic', lineHeight: 1.55, color: 'rgba(242,232,213,0.9)', whiteSpace: 'pre-wrap', cursor: phase === 'review' ? 'text' : 'default', maxHeight: phase === 'ways' ? 140 : undefined, overflow: phase === 'ways' ? 'hidden' : undefined, maskImage: phase === 'ways' ? 'linear-gradient(180deg, black 60%, transparent)' : undefined }}>{text}</div>
+          <div onClick={() => phase === 'review' && setEditing(true)} style={{ fontFamily: T.serif, fontSize: SCALE.bodyLg, fontStyle: 'italic', lineHeight: 1.55, color: '#f1e8d7', whiteSpace: 'pre-wrap', cursor: phase === 'review' ? 'text' : 'default', maxHeight: phase === 'ways' ? 140 : undefined, overflow: phase === 'ways' ? 'hidden' : undefined, maskImage: phase === 'ways' ? 'linear-gradient(180deg, black 60%, transparent)' : undefined }}>{text}</div>
         )}
         {phase === 'review' && <div style={{ marginTop: 12, fontSize: 11.5, color: T.faint }}>{t(editing ? 'core.postDepot.editingHint' : 'core.postDepot.editHint')}</div>}
       </div>
@@ -1735,7 +1813,7 @@ function PostDepotScreen({ session, draft, setDraft, onInterpret, onCreate, onKe
       {/* §12bis.D — détection de fond (texte long, sans marqueur ni séparateur) : proposition
           DOUCE, jamais un écran qui s'impose. Ignorer = flux normal, zéro friction. */}
       {proposal && phase === 'review' && (
-        <div style={{ margin: '14px 18px 0', padding: '15px 16px', borderRadius: 18, background: 'rgba(201,168,106,0.08)', border: `0.5px solid ${T.gold}44`, animation: 'lFadeUp .3s ease' }}>
+        <div style={{ margin: '14px 18px 0', padding: '15px 16px', borderRadius: 18, background: 'rgba(255,255,255,0.08)', border: `0.5px solid ${T.gold}44`, animation: 'lFadeUp .3s ease' }}>
           <div style={{ fontFamily: T.serif, fontSize: 17, fontStyle: 'italic', color: T.cream, lineHeight: 1.35 }}>{tp('core.postDepot.proposalHeard', proposal.length)}</div>
           <div style={{ marginTop: 11, display: 'flex', gap: 10 }}>
             <PillBtn onClick={() => { setNightDreams(proposal); setProposal(null); setNightPhase('ask') }}>{t('core.postDepot.separateThem')}</PillBtn>
@@ -1754,7 +1832,7 @@ function PostDepotScreen({ session, draft, setDraft, onInterpret, onCreate, onKe
             <div style={{ display: 'flex', gap: 6, justifyContent: 'center', flexWrap: 'wrap' }}>
               {([['today', 'core.postDepot.scanToday'], ['pick', 'core.postDepot.scanPick'], ['unknown', 'core.postDepot.scanUnknown']] as const).map(([k, l]) => (
                 <button key={k} onClick={() => { setDateChoice(k); if (k !== 'pick') setDraft((d: any) => ({ ...d, scanDate: null })) }}
-                  style={{ padding: '7px 13px', borderRadius: 999, fontSize: 12.5, fontFamily: T.sans, cursor: 'pointer', background: dateChoice === k ? 'rgba(201,168,106,0.16)' : 'transparent', border: dateChoice === k ? `1px solid ${T.gold}66` : '1px solid rgba(242,232,213,0.14)', color: dateChoice === k ? T.cream : T.dim }}>
+                  style={{ padding: '7px 13px', borderRadius: 999, fontSize: 12.5, fontFamily: T.sans, cursor: 'pointer', background: dateChoice === k ? 'rgba(255,255,255,0.16)' : 'transparent', border: dateChoice === k ? `1px solid ${T.gold}66` : '1px solid rgba(202,191,206,0.14)', color: dateChoice === k ? T.cream : T.dim }}>
                   {t(l)}
                 </button>
               ))}
@@ -1839,13 +1917,13 @@ function PostDepotScreen({ session, draft, setDraft, onInterpret, onCreate, onKe
               · le défilement horizontal saute : tout se voit, rien ne se cache. */}
           <div style={{ textAlign: 'center', marginBottom: 13, display: 'inline-flex', width: '100%', justifyContent: 'center', alignItems: 'center', gap: 8 }}>
             <span style={{ fontFamily: T.serif, fontSize: SCALE.body, fontStyle: 'italic', color: T.dim }}>{t('core.postDepot.waysKicker')}</span>
-            <InfoDot id="kairos" size={14} color="rgba(242,232,213,0.4)" />
+            <InfoDot id="kairos" size={14} color="#a49aad" />
           </div>
           <div style={{ display: 'flex', gap: 8, paddingBottom: 5, justifyContent: 'center', flexWrap: 'wrap' }}>
             {Object.entries(KTYPES).filter(([k]) => !['intuition'].includes(k)).map(([k, v]) => (
               <button key={k} onClick={() => { setKtype(k); api(`/api/kairos/${savedId}`, { method: 'PATCH', body: JSON.stringify({ kairos_type: k }) }, session).catch(() => {}) }}
                 style={chip(ktype === k)}>
-                {v.glyph(ktype === k ? T.gold : 'rgba(242,232,213,0.4)')}{t(v.labelKey)}
+                {v.glyph(ktype === k ? T.gold : '#a49aad')}{t(v.labelKey)}
               </button>
             ))}
           </div>
@@ -1860,7 +1938,7 @@ function PostDepotScreen({ session, draft, setDraft, onInterpret, onCreate, onKe
                 · Garder pour moi → la sortie silencieuse (un lien, pas une dalle)
               Le carrefour reste un carrefour ; il cesse d'être un mur. */}
           <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <button onClick={() => onInterpret(savedId, ktype)} style={{ minHeight: 44, padding: '21px 21px', borderRadius: '21px 34px 21px 34px', background: 'rgba(201,168,106,0.10)', border: `1px solid ${T.gold}55`, cursor: 'pointer', textAlign: 'left' }}>
+            <button onClick={() => onInterpret(savedId, ktype)} style={{ minHeight: 44, padding: '21px 21px', borderRadius: '21px 34px 21px 34px', background: 'rgba(255,255,255,0.1)', border: `1px solid ${T.gold}55`, cursor: 'pointer', textAlign: 'left' }}>
               <div style={{ fontFamily: T.sans, fontSize: 19, fontWeight: 600, color: T.cream }}>{t(isDay ? 'core.postDepot.talkWithDream' : 'core.postDepot.understand')}</div>
               <div style={{ marginTop: 5, fontSize: 13, color: T.dim, fontFamily: T.sans, lineHeight: 1.45 }}>{t(isDay ? 'core.postDepot.talkWithDreamSub' : 'core.postDepot.understandSub')}</div>
             </button>
@@ -1936,7 +2014,7 @@ function InterpretScreen({ session, kairosId, dreamText, kairosType, presentCont
   const chunksRef = useRef<Blob[]>([])
   const resonanceAudio = useRef<{ b64: string; mime: string } | null>(null)
   const currentBody = revisedText || dreamReading
-  const continueBtnStyle: React.CSSProperties = { marginTop: 2, padding: '10px 18px', borderRadius: 999, background: 'rgba(201,168,106,0.14)', border: `1px solid ${T.gold}66`, color: T.cream, fontSize: 13.5, fontWeight: 600, cursor: 'pointer', fontFamily: T.sans }
+  const continueBtnStyle: React.CSSProperties = { marginTop: 2, padding: '10px 18px', borderRadius: 999, background: 'rgba(255,255,255,0.14)', border: `1px solid ${T.gold}66`, color: T.cream, fontSize: 13.5, fontWeight: 600, cursor: 'pointer', fontFamily: T.sans }
 
   const startRec = async (which: 'resonance' | 'correct') => {
     if (recording) return
@@ -2130,7 +2208,7 @@ function InterpretScreen({ session, kairosId, dreamText, kairosType, presentCont
     <div style={{ minHeight: '100dvh', paddingBottom: 40 }}>
       <BackHeader onBack={onClose} title={t(isDay ? 'core.interpret.titleDay' : 'core.interpret.titleNight')} />
       <div style={{ margin: '20px 24px 0' }}>
-        <div style={{ fontFamily: T.serif, fontSize: 17, fontStyle: 'italic', lineHeight: 1.5, color: 'rgba(242,232,213,0.6)', whiteSpace: 'pre-wrap', ...(showFullDream ? {} : { display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }) }}>“{dreamText}”</div>
+        <div style={{ fontFamily: T.serif, fontSize: 17, fontStyle: 'italic', lineHeight: 1.5, color: '#ddd4de', whiteSpace: 'pre-wrap', ...(showFullDream ? {} : { display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }) }}>“{dreamText}”</div>
         {dreamText.length > 120 && (
           <button onClick={() => setShowFullDream(v => !v)} style={{ marginTop: 6, background: 'none', border: 'none', padding: 0, color: T.gold, fontSize: 12.5, fontFamily: T.sans, cursor: 'pointer' }}>{t(showFullDream ? 'core.interpret.seeLess' : 'core.interpret.seeAll')}</button>
         )}
@@ -2138,7 +2216,7 @@ function InterpretScreen({ session, kairosId, dreamText, kairosType, presentCont
 
       {/* §12bis.B — bannière « à la lumière du présent » : relecture d'un rêve avec ce qu'on vit maintenant */}
       {present && (
-        <div style={{ margin: '16px 24px 0', padding: '11px 15px', borderRadius: 14, background: 'rgba(201,168,106,0.08)', border: `0.5px solid ${T.gold}33` }}>
+        <div style={{ margin: '16px 24px 0', padding: '11px 15px', borderRadius: 14, background: 'rgba(255,255,255,0.08)', border: `0.5px solid ${T.gold}33` }}>
           <div style={{ fontFamily: T.serif, fontSize: 17, fontStyle: 'italic', color: T.cream, lineHeight: 1.45 }}>{t('core.interpret.presentTitle')}</div>
           <div style={{ marginTop: 4, fontSize: 12.5, color: T.dim, fontFamily: T.sans, lineHeight: 1.4 }}>{t('core.interpret.presentSub')}</div>
         </div>
@@ -2147,7 +2225,7 @@ function InterpretScreen({ session, kairosId, dreamText, kairosType, presentCont
       {phase === 'yours' && (
         <div style={{ margin: '28px 18px 0', animation: 'lFadeUp .4s ease' }}>
           <div style={{ paddingLeft: 14, borderLeft: `1px solid ${T.gold}55` }}>
-            <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'rgba(242,232,213,0.42)', marginBottom: 7 }}>{t('core.interpret.yoursKicker')}</div>
+            <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#a49aad', marginBottom: 7 }}>{t('core.interpret.yoursKicker')}</div>
             <div style={{ fontFamily: T.serif, fontSize: 18, fontStyle: 'italic', color: T.cream, lineHeight: 1.4 }}>{t(present ? 'core.interpret.yoursQPresent' : 'core.interpret.yoursQ')}</div>
           </div>
           <textarea value={userReading} onChange={e => setUserReading(e.target.value)} placeholder={t('core.interpret.yoursPlaceholder')} style={{ marginTop: 18, width: '100%', minHeight: 130, padding: 18, borderRadius: 20, background: T.card, border: T.cardBorder, color: T.cream, fontFamily: T.serif, fontSize: 17, fontStyle: 'italic', lineHeight: 1.5, resize: 'vertical' }} />
@@ -2162,8 +2240,8 @@ function InterpretScreen({ session, kairosId, dreamText, kairosType, presentCont
         <div style={{ margin: '8px 24px 0' }}>
           {userReading.trim() && (
             <div style={{ marginTop: 18, paddingLeft: 14, borderLeft: `1px solid ${T.gold}55` }}>
-              <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'rgba(242,232,213,0.42)', marginBottom: 7 }}>{t('core.interpret.yoursKicker')}</div>
-              <div style={{ fontFamily: T.serif, fontSize: 17, lineHeight: 1.5, color: 'rgba(242,232,213,0.82)' }}>{userReading}</div>
+              <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#a49aad', marginBottom: 7 }}>{t('core.interpret.yoursKicker')}</div>
+              <div style={{ fontFamily: T.serif, fontSize: 17, lineHeight: 1.5, color: '#ddd4de' }}>{userReading}</div>
             </div>
           )}
           <RingDivider />
@@ -2181,7 +2259,7 @@ function InterpretScreen({ session, kairosId, dreamText, kairosType, presentCont
           {err && <div style={{ marginTop: 10, fontSize: 13, color: T.emberLive }}>{err}</div>}
 
           {revisedText && (
-            <div style={{ marginTop: 18, paddingTop: 14, borderTop: '0.5px solid rgba(201,168,106,0.12)', animation: 'lFadeUp .4s ease' }}>
+            <div style={{ marginTop: 18, paddingTop: 14, borderTop: '0.5px solid rgba(255,255,255,0.12)', animation: 'lFadeUp .4s ease' }}>
               <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase', color: T.gold, opacity: 0.8, marginBottom: 10 }}>{t('core.interpret.revisedKicker')}</div>
               <div style={{ fontFamily: T.serif, fontSize: 17, lineHeight: 1.55, color: T.cream, whiteSpace: 'pre-wrap' }}>{revisedText}</div>
               {!correctionBusy && revisedTruncated && (
@@ -2196,7 +2274,7 @@ function InterpretScreen({ session, kairosId, dreamText, kairosType, presentCont
           {!streaming && dreamReading && (
             <>
               {deepAsked && (
-                <div style={{ marginTop: 18, paddingTop: 14, borderTop: '0.5px solid rgba(201,168,106,0.08)' }}>
+                <div style={{ marginTop: 18, paddingTop: 14, borderTop: '0.5px solid rgba(255,255,255,0.08)' }}>
                   <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#b89a6a', marginBottom: 10 }}>{t('core.interpret.deeperKicker')}</div>
                   <div style={{ fontFamily: T.serif, fontSize: 17, lineHeight: 1.55, color: T.cream, whiteSpace: 'pre-wrap', minHeight: 30 }}>
                     {deeperReading}
@@ -2219,10 +2297,10 @@ function InterpretScreen({ session, kairosId, dreamText, kairosType, presentCont
                 </button>
               )}
               {tale && !tale.none && (
-                <div style={{ marginTop: 18, padding: 18, borderRadius: 20, background: 'rgba(201,168,106,0.07)', border: `0.5px solid ${T.gold}3a`, animation: 'lFadeUp .4s ease' }}>
+                <div style={{ marginTop: 18, padding: 18, borderRadius: 20, background: 'rgba(255,255,255,0.07)', border: `0.5px solid ${T.gold}3a`, animation: 'lFadeUp .4s ease' }}>
                   <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase', color: T.gold, marginBottom: 8 }}>{tale.tradition ? t('core.interpret.taleKickerWith', { tradition: tale.tradition }) : t('core.interpret.taleKicker')}</div>
                   <div style={{ fontFamily: T.serif, fontSize: 18, fontStyle: 'italic', color: T.cream }}>{tale.title}</div>
-                  <div style={{ marginTop: 8, fontFamily: T.serif, fontSize: 17, lineHeight: 1.55, color: 'rgba(242,232,213,0.78)' }}>{(tale.text || tale.summary || '').slice(0, 600)}</div>
+                  <div style={{ marginTop: 8, fontFamily: T.serif, fontSize: 17, lineHeight: 1.55, color: '#ddd4de' }}>{(tale.text || tale.summary || '').slice(0, 600)}</div>
                 </div>
               )}
               {tale && tale.none && <div style={{ marginTop: 14, fontSize: 13, color: T.faint, fontFamily: T.sans, fontWeight: 500 }}>{t('core.interpret.taleNone')}</div>}
@@ -2230,14 +2308,14 @@ function InterpretScreen({ session, kairosId, dreamText, kairosType, presentCont
               <button onClick={() => onGuides(kairosId, dreamText, kairosType)} style={{ marginTop: 18, padding: '11px 18px', borderRadius: 999, background: 'transparent', border: `1px solid ${T.gold}44`, color: T.gold, fontSize: 13, fontWeight: 500, cursor: 'pointer', fontFamily: T.sans }}>{t('core.interpret.guidesBtn')}</button>
 
               {!feedbackSent && loopStage === 'buttons' && (
-                <div style={{ marginTop: 26, paddingTop: 18, borderTop: '0.5px solid rgba(201,168,106,0.10)', animation: 'lFadeUp .4s ease' }}>
-                  <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'rgba(242,232,213,0.42)', marginBottom: 6 }}>{t('core.interpret.feltKicker')}</div>
+                <div style={{ marginTop: 26, paddingTop: 18, borderTop: '0.5px solid rgba(255,255,255,0.1)', animation: 'lFadeUp .4s ease' }}>
+                  <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#a49aad', marginBottom: 6 }}>{t('core.interpret.feltKicker')}</div>
                   <div style={{ fontFamily: T.serif, fontSize: 19, fontStyle: 'italic', color: T.cream, marginBottom: 14 }}>{t('core.interpret.feltQ')}</div>
                   <input value={feltLoc} onChange={e => setFeltLoc(e.target.value)} placeholder={t('core.interpret.feltPlaceholder')} style={{ width: '100%', padding: '12px 16px', borderRadius: 14, background: T.card, border: T.cardBorder, color: T.cream, fontSize: 17, fontFamily: T.sans, marginBottom: 12 }} />
                   <div style={{ display: 'flex', gap: 8 }}>
-                    <button onClick={() => onOneClick('resonates')} style={{ flex: 1.2, padding: '12px 8px', borderRadius: 999, border: `1px solid ${T.gold}66`, background: 'rgba(201,168,106,0.14)', color: T.cream, fontSize: 12.5, fontWeight: 600, cursor: 'pointer', fontFamily: T.sans }}>{t('core.interpret.fbResonates')}</button>
-                    <button onClick={() => onOneClick('partial')} style={{ flex: 1, padding: '12px 8px', borderRadius: 999, border: '1px solid rgba(242,232,213,0.2)', background: 'transparent', color: T.dim, fontSize: 12.5, fontWeight: 500, cursor: 'pointer', fontFamily: T.sans }}>{t('core.interpret.fbPartial')}</button>
-                    <button onClick={() => onOneClick('rejected')} style={{ flex: 1, padding: '12px 8px', borderRadius: 999, border: '1px solid rgba(242,232,213,0.2)', background: 'transparent', color: T.dim, fontSize: 12.5, fontWeight: 500, cursor: 'pointer', fontFamily: T.sans }}>{t('core.interpret.fbRejected')}</button>
+                    <button onClick={() => onOneClick('resonates')} style={{ flex: 1.2, padding: '12px 8px', borderRadius: 999, border: `1px solid ${T.gold}66`, background: 'rgba(255,255,255,0.14)', color: T.cream, fontSize: 12.5, fontWeight: 600, cursor: 'pointer', fontFamily: T.sans }}>{t('core.interpret.fbResonates')}</button>
+                    <button onClick={() => onOneClick('partial')} style={{ flex: 1, padding: '12px 8px', borderRadius: 999, border: '1px solid rgba(202,191,206,0.2)', background: 'transparent', color: T.dim, fontSize: 12.5, fontWeight: 500, cursor: 'pointer', fontFamily: T.sans }}>{t('core.interpret.fbPartial')}</button>
+                    <button onClick={() => onOneClick('rejected')} style={{ flex: 1, padding: '12px 8px', borderRadius: 999, border: '1px solid rgba(202,191,206,0.2)', background: 'transparent', color: T.dim, fontSize: 12.5, fontWeight: 500, cursor: 'pointer', fontFamily: T.sans }}>{t('core.interpret.fbRejected')}</button>
                   </div>
                   <div style={{ marginTop: 10, fontSize: 11.5, color: T.faint, textAlign: 'center', lineHeight: 1.4 }}>{t('core.interpret.fbHint')}</div>
                   <div style={{ marginTop: 12, textAlign: 'center' }}>
@@ -2247,32 +2325,32 @@ function InterpretScreen({ session, kairosId, dreamText, kairosType, presentCont
               )}
 
               {!feedbackSent && loopStage === 'resonance' && (
-                <div style={{ marginTop: 26, paddingTop: 18, borderTop: '0.5px solid rgba(201,168,106,0.10)', animation: 'lFadeUp .4s ease' }}>
+                <div style={{ marginTop: 26, paddingTop: 18, borderTop: '0.5px solid rgba(255,255,255,0.1)', animation: 'lFadeUp .4s ease' }}>
                   <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase', color: T.gold, opacity: 0.85, marginBottom: 6 }}>{t('core.interpret.resonanceKicker')}</div>
                   <div style={{ fontFamily: T.serif, fontSize: 18, fontStyle: 'italic', color: T.cream, lineHeight: 1.4, marginBottom: 14 }}>{t('core.interpret.resonanceQ')}</div>
                   <textarea value={resonanceText} onChange={e => setResonanceText(e.target.value)} placeholder={t('core.interpret.resonancePlaceholder')} style={{ width: '100%', minHeight: 90, padding: 14, borderRadius: 16, background: T.card, border: T.cardBorder, color: T.cream, fontFamily: T.serif, fontSize: 17, fontStyle: 'italic', lineHeight: 1.5, resize: 'vertical' }} />
                   <div style={{ marginTop: 10, display: 'flex', gap: 8, alignItems: 'center' }}>
-                    <button onMouseDown={() => startRec('resonance')} onMouseUp={stopRec} onMouseLeave={() => recording === 'resonance' && stopRec()} onTouchStart={() => startRec('resonance')} onTouchEnd={stopRec} style={{ padding: '10px 14px', borderRadius: 999, border: recording === 'resonance' ? `1px solid ${T.gold}` : '0.5px solid rgba(242,232,213,0.2)', background: recording === 'resonance' ? 'rgba(201,168,106,0.18)' : 'transparent', color: recording === 'resonance' ? T.cream : T.dim, fontSize: 12.5, fontWeight: 500, cursor: 'pointer', fontFamily: T.sans }}>{recording === 'resonance' ? t('core.interpret.recListening') : (recBusy ? t('core.interpret.recTranscribing') : t('core.interpret.recHold'))}</button>
+                    <button onMouseDown={() => startRec('resonance')} onMouseUp={stopRec} onMouseLeave={() => recording === 'resonance' && stopRec()} onTouchStart={() => startRec('resonance')} onTouchEnd={stopRec} style={{ padding: '10px 14px', borderRadius: 999, border: recording === 'resonance' ? `1px solid ${T.gold}` : '0.5px solid rgba(202,191,206,0.2)', background: recording === 'resonance' ? 'rgba(255,255,255,0.18)' : 'transparent', color: recording === 'resonance' ? T.cream : T.dim, fontSize: 12.5, fontWeight: 500, cursor: 'pointer', fontFamily: T.sans }}>{recording === 'resonance' ? t('core.interpret.recListening') : (recBusy ? t('core.interpret.recTranscribing') : t('core.interpret.recHold'))}</button>
                     {resonanceAudio.current && <span style={{ fontSize: 11.5, color: T.faint }}>{t('core.interpret.voiceKept')}</span>}
                   </div>
                   <div style={{ marginTop: 14, display: 'flex', gap: 8 }}>
-                    <button onClick={submitResonance} disabled={resonanceBusy} style={{ flex: 1, padding: '12px 8px', borderRadius: 999, border: `1px solid ${T.gold}66`, background: 'rgba(201,168,106,0.14)', color: T.cream, fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily: T.sans }}>{resonanceBusy ? t('core.common.dots') : t('core.interpret.keepThis')}</button>
-                    <button onClick={proceedToName} style={{ flex: 1, padding: '12px 8px', borderRadius: 999, border: '1px solid rgba(242,232,213,0.2)', background: 'transparent', color: T.dim, fontSize: 13, fontWeight: 500, cursor: 'pointer', fontFamily: T.sans }}>{t('core.common.skip')}</button>
+                    <button onClick={submitResonance} disabled={resonanceBusy} style={{ flex: 1, padding: '12px 8px', borderRadius: 999, border: `1px solid ${T.gold}66`, background: 'rgba(255,255,255,0.14)', color: T.cream, fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily: T.sans }}>{resonanceBusy ? t('core.common.dots') : t('core.interpret.keepThis')}</button>
+                    <button onClick={proceedToName} style={{ flex: 1, padding: '12px 8px', borderRadius: 999, border: '1px solid rgba(202,191,206,0.2)', background: 'transparent', color: T.dim, fontSize: 13, fontWeight: 500, cursor: 'pointer', fontFamily: T.sans }}>{t('core.common.skip')}</button>
                   </div>
                 </div>
               )}
 
               {!feedbackSent && loopStage === 'correct' && (
-                <div style={{ marginTop: 26, paddingTop: 18, borderTop: '0.5px solid rgba(201,168,106,0.10)', animation: 'lFadeUp .4s ease' }}>
+                <div style={{ marginTop: 26, paddingTop: 18, borderTop: '0.5px solid rgba(255,255,255,0.1)', animation: 'lFadeUp .4s ease' }}>
                   <div style={{ fontFamily: T.serif, fontSize: 18, fontStyle: 'italic', color: T.cream, lineHeight: 1.4, marginBottom: 6 }}>{t('core.interpret.correctQ')}</div>
                   <div style={{ fontSize: 12, color: T.faint, marginBottom: 12 }}>{t('core.interpret.correctSub')}</div>
                   <textarea value={correctionText} onChange={e => setCorrectionText(e.target.value)} placeholder={t('core.interpret.correctPlaceholder')} style={{ width: '100%', minHeight: 90, padding: 14, borderRadius: 16, background: T.card, border: T.cardBorder, color: T.cream, fontFamily: T.serif, fontSize: 17, fontStyle: 'italic', lineHeight: 1.5, resize: 'vertical' }} />
                   <div style={{ marginTop: 10, display: 'flex', gap: 8, alignItems: 'center' }}>
-                    <button onMouseDown={() => startRec('correct')} onMouseUp={stopRec} onMouseLeave={() => recording === 'correct' && stopRec()} onTouchStart={() => startRec('correct')} onTouchEnd={stopRec} style={{ padding: '10px 14px', borderRadius: 999, border: recording === 'correct' ? `1px solid ${T.gold}` : '0.5px solid rgba(242,232,213,0.2)', background: recording === 'correct' ? 'rgba(201,168,106,0.18)' : 'transparent', color: recording === 'correct' ? T.cream : T.dim, fontSize: 12.5, fontWeight: 500, cursor: 'pointer', fontFamily: T.sans }}>{recording === 'correct' ? t('core.interpret.recListening') : (recBusy ? t('core.interpret.recTranscribing') : t('core.interpret.recHold'))}</button>
+                    <button onMouseDown={() => startRec('correct')} onMouseUp={stopRec} onMouseLeave={() => recording === 'correct' && stopRec()} onTouchStart={() => startRec('correct')} onTouchEnd={stopRec} style={{ padding: '10px 14px', borderRadius: 999, border: recording === 'correct' ? `1px solid ${T.gold}` : '0.5px solid rgba(202,191,206,0.2)', background: recording === 'correct' ? 'rgba(255,255,255,0.18)' : 'transparent', color: recording === 'correct' ? T.cream : T.dim, fontSize: 12.5, fontWeight: 500, cursor: 'pointer', fontFamily: T.sans }}>{recording === 'correct' ? t('core.interpret.recListening') : (recBusy ? t('core.interpret.recTranscribing') : t('core.interpret.recHold'))}</button>
                   </div>
                   <div style={{ marginTop: 14, display: 'flex', gap: 8 }}>
-                    <button onClick={submitCorrection} disabled={correctionBusy || correctionText.trim().length < 2} style={{ flex: 1, padding: '12px 8px', borderRadius: 999, border: `1px solid ${T.gold}66`, background: 'rgba(201,168,106,0.14)', color: T.cream, fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily: T.sans, opacity: correctionText.trim().length < 2 ? 0.5 : 1 }}>{correctionBusy ? t('core.interpret.correcting') : t('core.interpret.correct')}</button>
-                    <button onClick={proceedToName} style={{ flex: 1, padding: '12px 8px', borderRadius: 999, border: '1px solid rgba(242,232,213,0.2)', background: 'transparent', color: T.dim, fontSize: 13, fontWeight: 500, cursor: 'pointer', fontFamily: T.sans }}>{t('core.common.skip')}</button>
+                    <button onClick={submitCorrection} disabled={correctionBusy || correctionText.trim().length < 2} style={{ flex: 1, padding: '12px 8px', borderRadius: 999, border: `1px solid ${T.gold}66`, background: 'rgba(255,255,255,0.14)', color: T.cream, fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily: T.sans, opacity: correctionText.trim().length < 2 ? 0.5 : 1 }}>{correctionBusy ? t('core.interpret.correcting') : t('core.interpret.correct')}</button>
+                    <button onClick={proceedToName} style={{ flex: 1, padding: '12px 8px', borderRadius: 999, border: '1px solid rgba(202,191,206,0.2)', background: 'transparent', color: T.dim, fontSize: 13, fontWeight: 500, cursor: 'pointer', fontFamily: T.sans }}>{t('core.common.skip')}</button>
                   </div>
                 </div>
               )}
@@ -2289,7 +2367,7 @@ function InterpretScreen({ session, kairosId, dreamText, kairosType, presentCont
             {names.map(n => (
               <button key={n} onClick={() => saveName(n)} style={{ padding: '14px 18px', borderRadius: 18, background: T.card, border: T.cardBorder, color: T.cream, fontFamily: T.serif, fontSize: 17, fontStyle: 'italic', cursor: 'pointer', textAlign: 'left' }}>{n}</button>
             ))}
-            <button onClick={() => saveName(null)} style={{ marginTop: 6, padding: 12, borderRadius: 999, background: 'transparent', border: '1px solid rgba(242,232,213,0.18)', color: T.dim, fontSize: 13.5, cursor: 'pointer', fontFamily: T.sans }}>{t(isDay ? 'core.interpret.nameDefaultNote' : 'core.interpret.nameDefaultDream', { date: new Date().toLocaleDateString(locale, { day: 'numeric', month: 'long' }) })}</button>
+            <button onClick={() => saveName(null)} style={{ marginTop: 6, padding: 12, borderRadius: 999, background: 'transparent', border: '1px solid rgba(202,191,206,0.18)', color: T.dim, fontSize: 13.5, cursor: 'pointer', fontFamily: T.sans }}>{t(isDay ? 'core.interpret.nameDefaultNote' : 'core.interpret.nameDefaultDream', { date: new Date().toLocaleDateString(locale, { day: 'numeric', month: 'long' }) })}</button>
           </div>
         </div>
       )}
@@ -2308,12 +2386,12 @@ function JournalScreen({ session, view, setView, onOpen, onImport, onSettings, o
   onGallery: () => void
   onGreatDreams: () => void
 }) {
-  const { t } = useT()
+  const { t, locale } = useT()
   // le segmented « Liste | Univers » — même contrôle monté dans le header de chaque vue
   const seg = (
-    <div style={{ marginTop: 16, display: 'flex', gap: 4, padding: 4, borderRadius: 16, background: 'rgba(201,168,106,0.06)', border: T.cardBorder, width: 'fit-content' }}>
+    <div style={{ marginTop: 16, display: 'flex', gap: 3, padding: 3, borderRadius: SCALE.radius, background: T.card, border: T.cardBorder, width: 'fit-content' }}>
       {(['liste', 'univers'] as const).map(k => (
-        <button key={k} onClick={() => setView(k)} style={{ padding: '9px 22px', borderRadius: 12, fontFamily: T.sans, fontSize: 17, fontWeight: 600, cursor: 'pointer', background: view === k ? 'rgba(201,168,106,0.16)' : 'transparent', border: view === k ? `1px solid ${T.gold}55` : '1px solid transparent', color: view === k ? T.cream : T.dim }}>
+        <button key={k} onClick={() => setView(k)} style={{ minHeight: SCALE.touch, padding: '9px 21px', borderRadius: SCALE.radiusSm, fontFamily: T.sans, fontSize: SCALE.small, fontWeight: 600, cursor: 'pointer', background: view === k ? 'rgba(255,255,255,0.09)' : 'transparent', border: '1px solid transparent', color: view === k ? T.text : T.dim, transition: `background 233ms ${MOTION.ease}, color 233ms ${MOTION.ease}` }}>
           {t(k === 'liste' ? 'core.journal.viewList' : 'core.journal.viewUniverse')}
         </button>
       ))}
@@ -2333,34 +2411,97 @@ function JournalScreen({ session, view, setView, onOpen, onImport, onSettings, o
       .catch(() => {})
     return () => { alive = false }
   }, [session])
-  /* A3 — l'entrée vers les grands rêves : un lien discret SOUS le segmented, jamais
-     une 3ᵉ pilule (§0.5 « une idée par écran »). Le segmented liste|univers est intact. */
-  const greatLink = (
-    <button onClick={onGreatDreams} style={{ marginTop: 13, background: 'none', border: 'none', padding: '6px 0', cursor: 'pointer', fontFamily: T.sans, fontSize: 13, fontWeight: 600, color: T.gold, display: 'flex', alignItems: 'center', gap: 8 }}>
-      {t('screens.great.entry')} →
-      {/* B3 — une proposition attend. Un point, pas un chiffre : §0.5 interdit
-          les compteurs, et « 3 » transformerait une invitation en tâche à faire. */}
-      {pendingGreat && (
-        <span aria-hidden style={{ width: 6, height: 6, borderRadius: '50%', background: T.gold, opacity: 0.7, flexShrink: 0 }} />
+  /* ═══════ 2026-07-26 — LA PLACE DES GRANDS RÊVES ═══════
+     Tim, à l'instant : « pas de cinquième onglet mais il faut bien un endroit
+     pour pouvoir consulter ses favoris… les rêves qu'on veut garder en mémoire ».
+
+     Il y avait déjà une porte : un lien or de 13 px sous le segmented (A3/B3).
+     Elle marchait, et personne ne la voyait — parce qu'un lien de 13 px sous un
+     contrôle segmenté, c'est de la barre d'outils, et on ne lit pas les barres
+     d'outils. Le brief §4.2 le dit d'ailleurs pour cet écran précis : « la
+     première chose qu'on voit en entrant doit être un rêve, pas une barre
+     d'outils. »
+
+     Alors la porte DEVIENT un rêve. En tête du Journal, au-dessus des lunes :
+     un seul grand rêve — le dernier reconnu — avec sa double date. On ne
+     survole pas quarante vignettes : on en revoit un, et si on veut les autres,
+     on tape.
+
+     Trois états, et le troisième est le plus important :
+       · ≥ 1 marqué → la tête montre le dernier reconnu (+ un point si une
+         proposition attend).
+       · 0 marqué mais une proposition → la tête apparaît pour la proposition
+         seule ; sans ça, la proposition hebdomadaire ne serait jamais vue.
+       · 0 et 0 → RIEN. Pas de carte vide, pas de « commence par… », pas de
+         porte morte (§2.5). La fonction se découvre en marquant un rêve depuis
+         sa fiche, et le Journal se met à avoir une tête. Un état vide qui
+         n'affiche rien N'EST PAS un oubli : c'est la seule façon d'être beau
+         quand il n'y a rien.
+
+     Vocabulaire : le mot reste « les grands rêves » (D10, tranchée par Tim :
+     « déjà ton mot dans tes dictées »). Ni « favoris », ni « honorer » — ce
+     dernier est banni de l'écran depuis le 10/07 et le reste. */
+  const [lastGreat, setLastGreat] = useState<{ title: string | null; excerpt: string; created_at: string; marked_great_at: string | null } | null>(null)
+  useEffect(() => {
+    let alive = true
+    const h: Record<string, string> = {}
+    if (session?.access_token) h['Authorization'] = `Bearer ${session.access_token}`
+    fetch('/api/great-dreams?sort=reconnu', { headers: h })
+      .then(r => r.json())
+      .then(j => { if (alive) setLastGreat((j.dreams || [])[0] || null) })
+      .catch(() => {})
+    return () => { alive = false }
+  }, [session])
+  const monthYear = (d?: string | null) => (d ? new Date(d).toLocaleDateString(locale, { month: 'long', year: 'numeric' }) : '')
+  const greatHead = (!lastGreat && !pendingGreat) ? null : (
+    <button onClick={onGreatDreams} style={{ marginTop: 21, width: '100%', textAlign: 'left', display: 'block', padding: '15px 16px', borderRadius: SCALE.radius, background: T.card, border: T.cardBorder, cursor: 'pointer' }}>
+      <span style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+        {/* le même disque que la marque sur la fiche — un seul signe pour une seule idée */}
+        <span aria-hidden style={{ width: 13, height: 13, borderRadius: '50%', flexShrink: 0, background: `radial-gradient(circle at 38% 32%, ${T.goldLit} 0%, ${T.gold} 62%, #a8874e 100%)`, boxShadow: '0 0 8px 2px rgba(224,192,135,0.28)' }} />
+        <span style={{ fontFamily: T.sans, fontSize: SCALE.kicker, fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', color: T.faint }}>{t('screens.great.entry')}</span>
+        {/* B3 — une proposition attend. Un point, pas un chiffre : §2.4 interdit
+            les compteurs, et « 3 » transformerait une invitation en tâche à faire. */}
+        {pendingGreat && <span aria-hidden style={{ width: 6, height: 6, borderRadius: '50%', background: T.gold, opacity: 0.7, flexShrink: 0, marginLeft: 'auto' }} />}
+      </span>
+      {lastGreat ? (
+        <>
+          <span style={{ display: 'block', marginTop: 10, fontFamily: T.serif, fontSize: SCALE.body, lineHeight: 1.4, color: T.ink, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+            {lastGreat.title || lastGreat.excerpt || t('screens.great.untitled')}
+          </span>
+          {/* la double date — le seul fait vraiment intéressant qu'un journal de
+              grands rêves puisse raconter (BRIEF §4.6). Elle ne s'affiche que si
+              les deux dates existent ET diffèrent : sinon elle ne raconte rien. */}
+          {lastGreat.marked_great_at && monthYear(lastGreat.created_at) !== monthYear(lastGreat.marked_great_at) && (
+            <span style={{ display: 'block', marginTop: 6, fontFamily: T.sans, fontSize: SCALE.meta, color: T.faint }}>
+              {t('screens.great.doubleDate', { dreamed: monthYear(lastGreat.created_at), recognised: monthYear(lastGreat.marked_great_at) })}
+            </span>
+          )}
+        </>
+      ) : (
+        <span style={{ display: 'block', marginTop: 8, fontFamily: T.serif, fontSize: SCALE.body, lineHeight: 1.4, color: T.dim }}>{t('screens.great.candKickerOne')}</span>
       )}
     </button>
   )
-  const seg2 = <>{seg}{greatLink}</>
+  const seg2 = <>{seg}{greatHead}</>
   return view === 'liste'
     ? <AtlasScreen session={session} onOpen={onOpen} onImport={onImport} onSettings={onSettings} onGallery={onGallery} segmented={seg2} />
     : <UniverseScreen session={session} onOpenDream={onOpen} segmented={seg2} />
 }
 
 /* ═════════ L'ATLAS — le journal qui nourrit ═════════ */
+/* C1 2026-07-26 — les tracés sont sortis d'ici (`src/lib/kairos-glyphs.tsx`).
+   Raison : la bulle « ce qu'on dépose ici » doit montrer EXACTEMENT ces signes-là.
+   Les recopier dans le composant aurait garanti la dérive au premier ajustement de
+   trait ; ici, une seule source, deux lecteurs. Les libellés n'ont pas bougé. */
 const KTYPES: Record<string, { labelKey: string; glyph: (c: string) => JSX.Element }> = {
-  reve: { labelKey: 'core.ktypes.reve', glyph: (c) => I.moon(c, 14) },
-  signe: { labelKey: 'core.ktypes.signe', glyph: (c) => <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 5c4.5 0 8 4.2 9 7-1 2.8-4.5 7-9 7s-8-4.2-9-7c1-2.8 4.5-7 9-7z" stroke={c} strokeWidth="1.5" /><circle cx="12" cy="12" r="2.6" fill={c} /></svg> },
-  reverie: { labelKey: 'core.ktypes.reverie', glyph: (c) => <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 16a4 4 0 0 1 .5-7.97A5.5 5.5 0 0 1 17 9a3.5 3.5 0 0 1 1 6.9H6z" stroke={c} strokeWidth="1.5" strokeLinejoin="round" /></svg> },
-  hypnagogie: { labelKey: 'core.ktypes.hypnagogie', glyph: (c) => <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M4 15a8 8 0 0 1 16 0" stroke={c} strokeWidth="1.5" /><path d="M2 18h20" stroke={c} strokeWidth="1.5" strokeLinecap="round" opacity="0.6" /></svg> },
-  frisson: { labelKey: 'core.ktypes.frisson', glyph: (c) => <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M3 12c2-3 4-3 6 0s4 3 6 0 4-3 6 0" stroke={c} strokeWidth="1.5" strokeLinecap="round" /></svg> },
-  synchronicite: { labelKey: 'core.ktypes.synchronicite', glyph: (c) => <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 3l1.8 5.4L19 10l-5.2 1.6L12 17l-1.8-5.4L5 10l5.2-1.6z" stroke={c} strokeWidth="1.3" strokeLinejoin="round" /><circle cx="18.5" cy="17.5" r="2" stroke={c} strokeWidth="1.2" /></svg> },
-  intuition: { labelKey: 'core.ktypes.intuition', glyph: (c) => <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 4v5M12 15v5M4 12h5M15 12h5" stroke={c} strokeWidth="1.4" strokeLinecap="round" /><circle cx="12" cy="12" r="2" fill={c} /></svg> },
-  note_jour: { labelKey: 'core.ktypes.note_jour', glyph: (c) => I.sun(c, 14) },
+  reve: { labelKey: 'core.ktypes.reve', glyph: (c) => KGLYPH.reve(c, 14) },
+  signe: { labelKey: 'core.ktypes.signe', glyph: (c) => KGLYPH.signe(c, 14) },
+  reverie: { labelKey: 'core.ktypes.reverie', glyph: (c) => KGLYPH.reverie(c, 14) },
+  hypnagogie: { labelKey: 'core.ktypes.hypnagogie', glyph: (c) => KGLYPH.hypnagogie(c, 14) },
+  frisson: { labelKey: 'core.ktypes.frisson', glyph: (c) => KGLYPH.frisson(c, 14) },
+  synchronicite: { labelKey: 'core.ktypes.synchronicite', glyph: (c) => KGLYPH.synchronicite(c, 14) },
+  intuition: { labelKey: 'core.ktypes.intuition', glyph: (c) => KGLYPH.intuition(c, 14) },
+  note_jour: { labelKey: 'core.ktypes.note_jour', glyph: (c) => KGLYPH.note_jour(c, 14) },
 }
 const emoHalo = (v: number | null | undefined) => {
   if (typeof v !== 'number' || v === 0) return 'transparent'
@@ -2446,7 +2587,7 @@ function AtlasScreen({ session, onOpen, onImport, onSettings, onGallery, segment
   }
 
   const Chip = ({ on, onClick, children }: any) => (
-    <button onClick={onClick} style={{ padding: '6px 13px', borderRadius: 999, fontSize: 12, fontWeight: on ? 600 : 500, fontFamily: T.sans, cursor: 'pointer', whiteSpace: 'nowrap', background: on ? 'rgba(201,168,106,0.14)' : 'transparent', border: on ? `1px solid ${T.gold}55` : '1px solid rgba(242,232,213,0.14)', color: on ? T.cream : T.dim }}>{children}</button>
+    <button onClick={onClick} style={{ padding: '6px 13px', borderRadius: 999, fontSize: 12, fontWeight: on ? 600 : 500, fontFamily: T.sans, cursor: 'pointer', whiteSpace: 'nowrap', background: on ? 'rgba(255,255,255,0.14)' : 'transparent', border: on ? `1px solid ${T.gold}55` : '1px solid rgba(202,191,206,0.14)', color: on ? T.cream : T.dim }}>{children}</button>
   )
 
   return (
@@ -2464,7 +2605,7 @@ function AtlasScreen({ session, onOpen, onImport, onSettings, onGallery, segment
           </div>
         </div>
         {segmented}
-        <div style={{ marginTop: 12, fontSize: 12.5, color: 'rgba(242,232,213,0.45)' }}>{items === null ? t('core.common.dots') : tp('core.journal.innerWorlds', filtered.length)}</div>
+        <div style={{ marginTop: 12, fontSize: 12.5, color: '#b9b0bd' }}>{items === null ? t('core.common.dots') : tp('core.journal.innerWorlds', filtered.length)}</div>
         {searchOpen && (
           <input autoFocus value={q} onChange={e => setQ(e.target.value)} placeholder={t('core.journal.searchPlaceholder')} style={{ marginTop: 12, width: '100%', padding: '11px 16px', borderRadius: 14, background: T.card, border: T.cardBorder, color: T.cream, fontSize: 17, fontFamily: T.sans, fontWeight: 500 }} />
         )}
@@ -2472,10 +2613,10 @@ function AtlasScreen({ session, onOpen, onImport, onSettings, onGallery, segment
           <Chip on={dayF === 'tout'} onClick={() => setDayF('tout')}>{t('core.journal.filterAll')}</Chip>
           <Chip on={dayF === 'nuit'} onClick={() => setDayF('nuit')}>{t('core.journal.filterNight')}</Chip>
           <Chip on={dayF === 'jour'} onClick={() => setDayF('jour')}>{t('core.journal.filterDay')}</Chip>
-          <span style={{ width: 1, background: 'rgba(242,232,213,0.12)', margin: '2px 3px' }} />
+          <span style={{ width: 1, background: 'rgba(202,191,206,0.12)', margin: '2px 3px' }} />
           {Object.entries(KTYPES).filter(([k]) => k !== 'note_jour' && k !== 'intuition').map(([k, v]) => (
             <Chip key={k} on={typeF === k} onClick={() => setTypeF(typeF === k ? 'tout' : k)}>
-              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}>{v.glyph(typeF === k ? T.gold : 'rgba(242,232,213,0.4)')}{t(v.labelKey)}</span>
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}>{v.glyph(typeF === k ? T.gold : '#a49aad')}{t(v.labelKey)}</span>
             </Chip>
           ))}
         </div>
@@ -2498,9 +2639,9 @@ function AtlasScreen({ session, onOpen, onImport, onSettings, onGallery, segment
           groups.map(g => (
             <div key={g.key} style={{ marginBottom: 26 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 10, margin: '0 6px 12px' }}>
-                {I.moon('rgba(201,168,106,0.6)', 14)}
-                <span style={{ fontFamily: T.sans, fontSize: 17, fontWeight: 500, color: 'rgba(242,232,213,0.55)' }}>{g.label}</span>
-                <div style={{ flex: 1, height: 1, background: 'linear-gradient(90deg, rgba(201,168,106,0.25), transparent)' }} />
+                {I.moon('rgba(224,192,135,0.6)', 14)}
+                <span style={{ fontFamily: T.sans, fontSize: 17, fontWeight: 500, color: '#b9b0bd' }}>{g.label}</span>
+                <div style={{ flex: 1, height: 1, background: 'linear-gradient(90deg, rgba(255,255,255,0.25), transparent)' }} />
                 <span style={{ fontSize: 11, color: T.faint }}>{g.items.length}</span>
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 11 }}>
@@ -2521,8 +2662,8 @@ function AtlasScreen({ session, onOpen, onImport, onSettings, onGallery, segment
                       className="gReveal" style={{ width: '100%', animationDelay: `${Math.min(ki, 8) * 45}ms`, position: 'relative', padding: '16px 18px 14px', borderRadius: 20, background: T.card, border: big ? `1px solid ${T.gold}66` : T.cardBorder, cursor: 'pointer', textAlign: 'left', overflow: 'hidden', touchAction: 'manipulation' }}>
                       <div style={{ position: 'absolute', top: -30, right: -30, width: 110, height: 110, borderRadius: '50%', background: `radial-gradient(circle, ${emoHalo(k.affective_valence)}, transparent 70%)`, pointerEvents: 'none' }} />
                       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
-                        {ktype.glyph('rgba(201,168,106,0.75)')}
-                        <span style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(201,168,106,0.7)' }}>{t(ktype.labelKey)}</span>
+                        {ktype.glyph('rgba(224,192,135,0.75)')}
+                        <span style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(224,192,135,0.7)' }}>{t(ktype.labelKey)}</span>
                         {big && <span style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: T.gold }}>{t('core.journal.radiant')}</span>}
                         <span style={{ flex: 1 }} />
                         {/* B4 — la date affichée est celle du RÊVE. Quand il a été raconté un autre jour,
@@ -2530,10 +2671,10 @@ function AtlasScreen({ session, onOpen, onImport, onSettings, onGallery, segment
                         {(() => {
                           const d = formatDreamDate(k, locale)
                           return (
-                            <span style={{ fontSize: 11, color: 'rgba(242,232,213,0.4)', textAlign: 'right' }}>
+                            <span style={{ fontSize: 11, color: '#a49aad', textAlign: 'right' }}>
                               {d.when}
                               {d.deposited && (
-                                <span style={{ display: 'block', fontSize: 9.5, color: 'rgba(242,232,213,0.28)' }}>
+                                <span style={{ display: 'block', fontSize: 9.5, color: '#a49aad' }}>
                                   {t('core.journal.depositedOn', { date: d.deposited })}
                                 </span>
                               )}
@@ -2542,25 +2683,25 @@ function AtlasScreen({ session, onOpen, onImport, onSettings, onGallery, segment
                         })()}
                       </div>
                       {k.night_group_id && nightCounts[k.night_group_id] >= 2 && (
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 5, margin: '1px 0 7px', fontSize: 10.5, fontWeight: 500, letterSpacing: '0.03em', color: 'rgba(201,168,106,0.72)' }}>
-                          {I.moon('rgba(201,168,106,0.55)', 11)} {t('core.journal.nightOf', { date: new Date(k.occurred_at ?? k.created_at).toLocaleDateString(locale, { day: 'numeric', month: 'long' }) })}
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 5, margin: '1px 0 7px', fontSize: 10.5, fontWeight: 500, letterSpacing: '0.03em', color: 'rgba(224,192,135,0.72)' }}>
+                          {I.moon('rgba(224,192,135,0.55)', 11)} {t('core.journal.nightOf', { date: new Date(k.occurred_at ?? k.created_at).toLocaleDateString(locale, { day: 'numeric', month: 'long' }) })}
                         </div>
                       )}
                       <div style={{ fontFamily: T.serif, fontSize: 18.5, fontStyle: 'italic', color: T.cream, lineHeight: 1.2 }}>{k.title || t(k.kairos_type === 'note_jour' ? 'core.journal.fallbackNote' : 'core.journal.fallbackDream', { date: new Date(k.occurred_at ?? k.created_at).toLocaleDateString(locale, { day: 'numeric', month: 'long' }) })}</div>
-                      <div style={{ marginTop: 5, fontSize: 13.5, color: 'rgba(242,232,213,0.55)', lineHeight: 1.4, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{(k.raw_text || '').slice(0, 160)}</div>
+                      <div style={{ marginTop: 5, fontSize: 13.5, color: '#b9b0bd', lineHeight: 1.4, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{(k.raw_text || '').slice(0, 160)}</div>
                       {(k.place_label || k.dominant_emotion) && (
                         <div style={{ marginTop: 9, display: 'flex', flexWrap: 'wrap', gap: 7, alignItems: 'center' }}>
-                          {k.dominant_emotion && <span style={{ fontSize: 13, fontFamily: T.sans, fontWeight: 500, color: 'rgba(201,168,106,0.62)' }}>{k.dominant_emotion}</span>}
+                          {k.dominant_emotion && <span style={{ fontSize: 13, fontFamily: T.sans, fontWeight: 500, color: 'rgba(224,192,135,0.62)' }}>{k.dominant_emotion}</span>}
                           {k.dominant_emotion && k.place_label && <span style={{ color: T.faint, opacity: 0.5 }}>·</span>}
                           {k.place_label && <span style={{ fontSize: 13, color: T.faint, fontFamily: T.sans, fontWeight: 500 }}>{k.place_label}</span>}
                         </div>
                       )}
                     </button>
                     {confirming && (
-                      <div style={{ position: 'absolute', inset: 0, borderRadius: 20, background: 'rgba(20,14,11,0.94)', border: '0.5px solid rgba(189,109,74,0.5)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 12, padding: 16, zIndex: 5, animation: 'lFadeUp .2s ease' }}>
+                      <div style={{ position: 'absolute', inset: 0, borderRadius: 20, background: 'rgba(25,21,33,0.94)', border: '0.5px solid rgba(189,109,74,0.5)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 12, padding: 16, zIndex: 5, animation: 'lFadeUp .2s ease' }}>
                         <div style={{ fontFamily: T.serif, fontSize: 17, fontStyle: 'italic', color: T.cream, textAlign: 'center' }}>{t('core.common.deleteSure')}</div>
                         <div style={{ display: 'flex', gap: 10 }}>
-                          <button onClick={() => setConfirmDel(null)} style={{ padding: '9px 18px', borderRadius: 999, background: 'transparent', border: '1px solid rgba(242,232,213,0.2)', color: T.dim, fontSize: 13.5, cursor: 'pointer', fontFamily: T.sans }}>{t('core.common.cancelCap')}</button>
+                          <button onClick={() => setConfirmDel(null)} style={{ padding: '9px 18px', borderRadius: 999, background: 'transparent', border: '1px solid rgba(202,191,206,0.2)', color: T.dim, fontSize: 13.5, cursor: 'pointer', fontFamily: T.sans }}>{t('core.common.cancelCap')}</button>
                           <button onClick={() => doDelete(k.id)} disabled={delBusy} style={{ padding: '9px 18px', borderRadius: 999, background: 'oklch(0.64 0.120 45 / 0.15)', border: '1px solid oklch(0.64 0.120 45 / 0.5)', color: T.emberLive, fontSize: 13.5, fontWeight: 600, cursor: 'pointer', fontFamily: T.sans, opacity: delBusy ? 0.6 : 1 }}>{delBusy ? t('core.common.dots') : t('core.common.deleteCap')}</button>
                         </div>
                       </div>
@@ -2587,8 +2728,8 @@ function GuidesFaits({ guide, psd, onRedo }: { guide?: Guide; psd: any; onRedo: 
   const qa = guide ? guide.steps.filter(s => (answers[s.id] || '').trim()).map(s => ({ q: s.q, a: answers[s.id].trim() })) : []
   return (
     <div style={{ marginTop: 28 }}>
-      <div style={{ fontFamily: T.mono, fontSize: 10, fontWeight: 400, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(242,232,213,0.4)', marginBottom: 10 }}>{t('core.guidesDone.kicker')}</div>
-      <button onClick={() => setOpen(o => !o)} style={{ width: '100%', padding: '13px 16px', borderRadius: 16, background: 'rgba(201,168,106,0.06)', border: `0.5px solid ${T.gold}33`, cursor: 'pointer', textAlign: 'left', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10 }}>
+      <div style={{ fontFamily: T.sans, fontSize: SCALE.kicker, fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#a49aad', marginBottom: 10 }}>{t('core.guidesDone.kicker')}</div>
+      <button onClick={() => setOpen(o => !o)} style={{ width: '100%', padding: '13px 16px', borderRadius: 16, background: 'rgba(255,255,255,0.06)', border: `0.5px solid ${T.gold}33`, cursor: 'pointer', textAlign: 'left', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10 }}>
         <span style={{ fontFamily: T.sans, fontSize: 17, fontWeight: 600, color: T.cream }}>{name}</span>
         <span style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           {when && <span style={{ fontSize: 11.5, color: T.faint }}>{when}</span>}
@@ -2596,11 +2737,11 @@ function GuidesFaits({ guide, psd, onRedo }: { guide?: Guide; psd: any; onRedo: 
         </span>
       </button>
       {open && (
-        <div style={{ marginTop: 8, padding: '15px 16px', borderRadius: 16, background: 'rgba(201,168,106,0.04)', border: T.cardBorder, animation: 'lFadeUp .3s ease' }}>
+        <div style={{ marginTop: 8, padding: '15px 16px', borderRadius: 16, background: 'rgba(255,255,255,0.04)', border: T.cardBorder, animation: 'lFadeUp .3s ease' }}>
           {qa.length > 0 ? qa.map((x, i) => (
             <div key={i} style={{ marginBottom: i < qa.length - 1 ? 15 : 0 }}>
               <div style={{ fontFamily: T.sans, fontSize: 13, fontWeight: 500, color: T.faint, lineHeight: 1.4 }}>{x.q}</div>
-              <div style={{ marginTop: 4, fontFamily: T.serif, fontSize: 17, fontStyle: 'italic', color: 'rgba(242,232,213,0.9)', lineHeight: 1.5, whiteSpace: 'pre-wrap' }}>{x.a}</div>
+              <div style={{ marginTop: 4, fontFamily: T.serif, fontSize: 17, fontStyle: 'italic', color: '#f1e8d7', lineHeight: 1.5, whiteSpace: 'pre-wrap' }}>{x.a}</div>
             </div>
           )) : (
             <div style={{ fontSize: 13.5, color: T.dim, fontStyle: 'italic', fontFamily: T.serif }}>{t('core.guidesDone.noAnswers')}</div>
@@ -2631,7 +2772,7 @@ function DeleteDream({ session, kairosId, onDeleted }: { session: Session; kairo
         <div style={{ display: 'inline-flex', flexDirection: 'column', gap: 12, alignItems: 'center', padding: '16px 20px', borderRadius: 18, background: 'rgba(189,109,74,0.06)', border: '0.5px solid rgba(189,109,74,0.4)' }}>
           <div style={{ fontFamily: T.serif, fontSize: 17, fontStyle: 'italic', color: T.cream }}>{t('core.common.deleteSure')}</div>
           <div style={{ display: 'flex', gap: 10 }}>
-            <button onClick={() => setConfirm(false)} style={{ padding: '10px 20px', borderRadius: 999, background: 'transparent', border: '1px solid rgba(242,232,213,0.18)', color: T.dim, fontSize: 13.5, cursor: 'pointer', fontFamily: T.sans }}>{t('core.common.cancelCap')}</button>
+            <button onClick={() => setConfirm(false)} style={{ padding: '10px 20px', borderRadius: 999, background: 'transparent', border: '1px solid rgba(202,191,206,0.18)', color: T.dim, fontSize: 13.5, cursor: 'pointer', fontFamily: T.sans }}>{t('core.common.cancelCap')}</button>
             <button onClick={del} disabled={busy} style={{ padding: '10px 20px', borderRadius: 999, background: 'oklch(0.64 0.120 45 / 0.15)', border: '1px solid oklch(0.64 0.120 45 / 0.5)', color: T.emberLive, fontSize: 13.5, fontWeight: 600, cursor: 'pointer', fontFamily: T.sans, opacity: busy ? 0.6 : 1 }}>{busy ? t('core.common.dots') : t('core.common.deleteCap')}</button>
           </div>
         </div>
@@ -2663,7 +2804,7 @@ function renderWithLayers(raw: string, spans: LayerSpanView[], onTap?: (s: Layer
         onClick={onTap ? () => onTap(s) : undefined}
         style={{
           display: 'inline',
-          boxShadow: s.kind === 'lecture' ? `inset 2px 0 0 ${T.gold}55` : 'inset 2px 0 0 rgba(242,232,213,0.14)',
+          boxShadow: s.kind === 'lecture' ? `inset 2px 0 0 ${T.gold}55` : 'inset 2px 0 0 rgba(202,191,206,0.14)',
           paddingLeft: 8,
           cursor: onTap ? 'pointer' : 'default',
         }}
@@ -2743,23 +2884,70 @@ function ReadScreen({ session, kairosId, onBack, onInterpret, onGuides, onResume
     try { await api(`/api/wall/mine?kairos_id=${kairosId}`, { method: 'DELETE' }, session) } catch { /* le Mur arrive bientôt */ }
   }
   const tags: string[] = k?.motif_tags || []
-  const presentBtnStyle: React.CSSProperties = { marginTop: 16, width: '100%', padding: '13px 18px', borderRadius: 16, background: 'rgba(201,168,106,0.08)', border: `1px solid ${T.gold}44`, cursor: 'pointer', textAlign: 'center', fontFamily: T.sans, fontSize: 17, fontWeight: 600, color: T.cream }
+  /* ═══════ 2026-07-26 — LA FICHE REDEVIENT UN ÉCRAN DE LECTURE ═══════
+     Le diagnostic de B5 était juste et il était grave : « on arrive sur le récit
+     de son rêve et on voit une console ». Une vingtaine de sections empilées,
+     neuf montées sous condition, deux rangées de deux boutons au milieu, un
+     bloc de suppression au bout — et le texte du rêve, la seule chose qui
+     compte, noyé au milieu.
+
+     Aucune fonction n'est supprimée (elles servent toutes). Ce qui change,
+     c'est qu'il y a maintenant DEUX TEMPS, et un SEUIL entre les deux.
+
+     TEMPS 1 — ce qu'on voit en arrivant : la date, le titre, le texte, la voix.
+       Rien d'autre. Pas un bouton. On est venu relire un rêve : on relit un
+       rêve. (Seule exception : la vérification de transcription, parce qu'elle
+       porte sur CE texte-là et qu'elle disparaît une fois faite.)
+
+     LE SEUIL — un filet et de l'air. Au-dessus, le rêve. En dessous, ce qu'on
+       peut en faire. C'est le même geste que le liseré entre les deux faces :
+       on ne cache rien, on sépare deux natures.
+
+     TEMPS 2 — les dix gestes, en TROIS RANGS :
+       · rang 1, visible et seul en or : COMPRENDRE. C'est pour ça qu'on revient.
+       · rang 2, une ligne de trois liens : aller plus loin · partager · créer.
+         Trois liens, pas quatre boutons — un lien dit « si tu veux », un bouton
+         dit « fais-le ».
+       · rang 3, replié derrière « et aussi » : relire au présent, l'export, les
+         cercles où c'est partagé, la suppression. Ce sont des gestes qu'on
+         cherche quand on en a besoin ; ils n'ont pas à attendre à l'écran tous
+         les jours. (§15.5 : un bouton qui ne sert qu'une fois par an coûte un
+         emplacement 364 jours sur 365.)
+
+     Et la marque « un grand rêve » remonte dans l'en-tête, en haut à droite :
+     c'est un geste SUR le rêve, d'une seule touche, réversible — pas une
+     section qui commente le rêve. */
+  const [more, setMore] = useState(false)
+  /* 🔴 Défaut vu AU RENDU, pas au code. Ces trois liens étaient en `flex: 1` :
+     chaque lien occupait un tiers exact et centrait son texte dedans, donc les
+     points de séparation tombaient à 33 % et 66 % de la largeur — pendant que
+     « Aller plus loin » (14 caractères) et « Créer » (5) donnaient des blancs
+     complètement différents de part et d'autre. À l'écran : le premier point
+     collé au premier lien, le second flottant seul au milieu de rien.
+     `flex: none` + un `gap` unique : les trois liens se dimensionnent sur leur
+     texte, et tous les intervalles deviennent égaux. */
+  const quietLink: React.CSSProperties = { flex: 'none', minHeight: SCALE.touch, padding: '11px 5px', background: 'none', border: 'none', cursor: 'pointer', fontFamily: T.sans, fontSize: SCALE.small, fontWeight: 500, color: T.dim, whiteSpace: 'nowrap' }
+  const presentBtnStyle: React.CSSProperties = { marginTop: 13, width: '100%', minHeight: SCALE.touch, padding: '13px 18px', borderRadius: SCALE.radius, background: 'rgba(255,255,255,0.045)', border: T.cardBorder, cursor: 'pointer', textAlign: 'left', fontFamily: T.sans, fontSize: SCALE.body, fontWeight: 500, color: T.text }
   return (
     <div style={{ minHeight: '100dvh', paddingBottom: 60 }}>
-      <div style={{ paddingTop: 60, paddingLeft: 20, paddingRight: 20, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <button onClick={onBack} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 4 }}>{I.back('rgba(242,232,213,0.6)')}</button>
+      <div style={{ paddingTop: 55, paddingLeft: 21, paddingRight: 21, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <button onClick={onBack} aria-label={t('core.common.backAria')} style={{ minHeight: SCALE.touch, minWidth: SCALE.touch, display: 'flex', alignItems: 'center', background: 'none', border: 'none', cursor: 'pointer', padding: 4 }}>{I.back(T.ink)}</button>
         {/* B4 — la fiche date au RÊVE. La date de dépôt n'apparaît que si elle diffère. */}
-        <div style={{ fontSize: 12.5, color: 'rgba(242,232,213,0.45)', textAlign: 'center' }}>
+        <div style={{ fontFamily: T.sans, fontSize: SCALE.meta, color: T.faint, textAlign: 'center' }}>
           {k?.created_at ? formatDreamDate(k, locale).when : ''}
           {k?.created_at && formatDreamDate(k, locale).deposited && (
-            <span style={{ display: 'block', fontSize: 10.5, color: 'rgba(242,232,213,0.3)' }}>{t('core.journal.depositedOn', { date: formatDreamDate(k, locale).deposited as string })}</span>
+            <span style={{ display: 'block', fontSize: SCALE.kicker, color: T.faint }}>{t('core.journal.depositedOn', { date: formatDreamDate(k, locale).deposited as string })}</span>
           )}
         </div>
-        <div style={{ width: 24 }} />
+        {/* la marque « un grand rêve » vit ICI : un geste sur le rêve, pas une section */}
+        <div style={{ minWidth: SCALE.touch, display: 'flex', justifyContent: 'flex-end' }}>
+          {k && <GreatDreamFlag compact session={session} kairosId={kairosId} marked={!!k.user_marked_numinous} markedAt={k.marked_great_at} facets={k.great_dream_facets} note={k.great_dream_note} radiant={(k.numinosity_score ?? 0) >= 0.7} onChange={(next) => setK((prev: any) => ({ ...(prev || {}), user_marked_numinous: next.marked, great_dream_facets: next.facets, great_dream_note: next.note }))} />}
+        </div>
       </div>
-      <div style={{ margin: '28px 26px 0' }}>
-        <div style={{ fontFamily: T.serif, fontSize: 30, fontStyle: 'italic', color: T.cream, lineHeight: 1.1 }}>{k?.title || (k?.created_at ? t(k?.kairos_type === 'note_jour' ? 'core.journal.fallbackNote' : 'core.journal.fallbackDream', { date: new Date(k.occurred_at ?? k.created_at).toLocaleDateString(locale, { day: 'numeric', month: 'long' }) }) : t('core.common.dots'))}</div>
-        <div style={{ marginTop: 22, fontFamily: T.serif, fontSize: SCALE.bodyLg, lineHeight: 1.6, color: 'rgba(242,232,213,0.85)', whiteSpace: 'pre-wrap' }}>
+      <div style={{ margin: `28px ${SCALE.gutter}px 0` }}>
+        {/* ─────────── TEMPS 1 — LE RÊVE, ET RIEN D'AUTRE ─────────── */}
+        <div style={{ fontFamily: T.display, fontSize: SCALE.titleLg, fontWeight: 300, color: T.cream, lineHeight: 1.05 }}>{k?.title || (k?.created_at ? t(k?.kairos_type === 'note_jour' ? 'core.journal.fallbackNote' : 'core.journal.fallbackDream', { date: new Date(k.occurred_at ?? k.created_at).toLocaleDateString(locale, { day: 'numeric', month: 'long' }) }) : t('core.common.dots'))}</div>
+        <div style={{ marginTop: 22, fontFamily: T.serif, fontSize: SCALE.bodyLg, lineHeight: 1.618, color: T.ink, whiteSpace: 'pre-wrap' }}>
           {layers && layers.spans.length > 0
             ? renderWithLayers(k?.raw_text || '', layers.spans, layers.status === 'proposed' ? (s) => saveLayers(layers.spans.filter(x => !(x.start === s.start && x.end === s.end))) : undefined)
             : (k?.raw_text || '')}
@@ -2771,25 +2959,26 @@ function ReadScreen({ session, kairosId, onBack, onInterpret, onGuides, onResume
           <div style={{ marginTop: 13 }}>
             <div style={{ fontFamily: T.serif, fontSize: SCALE.body, fontStyle: 'italic', color: T.dim, lineHeight: 1.45 }}>{t('core.read.layersLegend')}</div>
             <div style={{ marginTop: 8, display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-              <button onClick={() => saveLayers(layers.spans)} disabled={layerBusy} style={{ minHeight: 34, padding: '8px 13px', borderRadius: 999, background: 'rgba(201,168,106,0.16)', border: `1px solid ${T.gold}66`, color: T.cream, fontSize: SCALE.meta, fontFamily: T.sans, cursor: 'pointer', opacity: layerBusy ? 0.6 : 1 }}>{t('core.read.layersConfirm')}</button>
-              <button onClick={dropLayers} disabled={layerBusy} style={{ minHeight: 34, padding: '8px 13px', borderRadius: 999, background: 'transparent', border: '1px solid rgba(242,232,213,0.14)', color: T.dim, fontSize: SCALE.meta, fontFamily: T.sans, cursor: 'pointer', opacity: layerBusy ? 0.6 : 1 }}>{t('core.read.layersReset')}</button>
+              <button onClick={() => saveLayers(layers.spans)} disabled={layerBusy} style={{ minHeight: 34, padding: '8px 13px', borderRadius: 999, background: 'rgba(255,255,255,0.16)', border: `1px solid ${T.gold}66`, color: T.cream, fontSize: SCALE.meta, fontFamily: T.sans, cursor: 'pointer', opacity: layerBusy ? 0.6 : 1 }}>{t('core.read.layersConfirm')}</button>
+              <button onClick={dropLayers} disabled={layerBusy} style={{ minHeight: 34, padding: '8px 13px', borderRadius: 999, background: 'transparent', border: '1px solid rgba(202,191,206,0.14)', color: T.dim, fontSize: SCALE.meta, fontFamily: T.sans, cursor: 'pointer', opacity: layerBusy ? 0.6 : 1 }}>{t('core.read.layersReset')}</button>
             </div>
           </div>
         )}
+        {/* Les motifs appartiennent au rêve : ils restent au-dessus du seuil.
+            Mais ils cessent d'être des pilules dorées de 17 px — à côté du texte
+            du rêve, elles pesaient autant que lui. Liseré neutre, texte au repos. */}
         {tags.length > 0 && (
-          <div style={{ marginTop: 28 }}>
-            <div style={{ fontFamily: T.mono, fontSize: 10, fontWeight: 400, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(242,232,213,0.4)', marginBottom: 12 }}>{t('core.read.tagsKicker')}</div>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-              {tags.slice(0, 8).map((s: string) => (
-                <span key={s} style={{ padding: '7px 14px', borderRadius: 999, border: `0.5px solid ${T.gold}4d`, background: 'rgba(201,168,106,0.06)', fontFamily: T.sans, fontSize: 17, fontWeight: 500, color: 'rgba(242,232,213,0.9)' }}>{s}</span>
-              ))}
-            </div>
+          <div style={{ marginTop: 21, display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+            {tags.slice(0, 8).map((s: string) => (
+              <span key={s} style={{ padding: '6px 13px', borderRadius: 999, border: T.cardBorder, background: T.card, fontFamily: T.sans, fontSize: SCALE.meta, fontWeight: 500, color: T.dim }}>{s}</span>
+            ))}
           </div>
         )}
-        {/* §12ter.D — la voix du rêve : lecteur audio fin si l'audio d'origine a été gardé */}
+        {/* §12ter.D — la voix du rêve. Elle fait partie du TEMPS 1 : c'est le rêve
+            tel qu'il a été dit, pas une fonction. Plus d'intertitre en capitales —
+            un lecteur nu suffit à se nommer. */}
         {dreamAudioUrl && (
-          <div style={{ marginTop: 26 }}>
-            <div style={{ fontFamily: T.mono, fontSize: 10, fontWeight: 400, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(242,232,213,0.4)', marginBottom: 10 }}>{t('core.read.dreamVoice')}</div>
+          <div style={{ marginTop: 21 }}>
             <audio controls src={dreamAudioUrl} style={{ width: '100%', height: 36 }} />
           </div>
         )}
@@ -2804,32 +2993,55 @@ function ReadScreen({ session, kairosId, onBack, onInterpret, onGuides, onResume
             onVerified={(newText) => setK((prev: any) => ({ ...(prev || {}), transcript_verified: true, ...(newText != null ? { raw_text: newText } : {}) }))}
           />
         )}
-        {/* A3 — « un grand rêve » : la marque du rêveur (TAXONOMIE-GRANDS-REVES.md §1).
-            Placée AVANT l'interprétation gardée : c'est un geste sur le rêve, pas sur sa lecture.
-            `radiant` = suggestion de l'IA seule (score ≥ 0.7), JAMAIS `|| user_marked_numinous` —
-            l'asymétrie IA/rêveur est le cœur de la fonction (§1.5). */}
-        {k && (
-          <GreatDreamFlag
+
+        {/* ═══════════════ LE SEUIL ═══════════════
+            Au-dessus : le rêve. En dessous : ce qu'on peut en faire.
+            Un filet, et 55 px d'air de chaque côté. C'est le même geste que le
+            liseré entre les deux faces — on ne cache rien, on sépare deux natures. */}
+        <div aria-hidden style={{ marginTop: 55, height: 1, background: T.line }} />
+
+        {/* ─── RANG 1 — le seul geste en or ─── */}
+        <div style={{ marginTop: 34, display: 'flex' }}>
+          <PillBtn primary onClick={() => onInterpret(kairosId, k?.raw_text || '', k?.kairos_type)}>{t('core.read.understand')}</PillBtn>
+        </div>
+
+        {/* ─── RANG 2 — trois liens, pas quatre boutons ───
+            Un lien dit « si tu veux », un bouton dit « fais-le ». Sur un rêve
+            qu'on relit trois ans après, c'est « si tu veux » qui est vrai. */}
+        <div style={{ marginTop: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 13, flexWrap: 'wrap' }}>
+          <button onClick={() => onGuides(kairosId, k?.raw_text || '', k?.kairos_type, (k?.numinosity_score ?? 0) >= 0.7 || !!k?.user_marked_numinous)} style={quietLink}>{t('core.read.goFurther')}</button>
+          <span aria-hidden style={{ color: T.mute, lineHeight: 1 }}>·</span>
+          <button onClick={() => setShareSheetOpen(true)} style={quietLink}>{t('core.read.share')}</button>
+          <span aria-hidden style={{ color: T.mute, lineHeight: 1 }}>·</span>
+          <button onClick={() => onCreate(kairosId, k?.title || null, k?.raw_text || '')} style={quietLink}>{t('core.read.create')}</button>
+        </div>
+
+        {/* ─── CE QUE L'APP A À DIRE SUR CE RÊVE ───
+            Ces sections ne sont pas des fonctions, ce sont des réponses. Elles
+            gardent leur ordre de priorité : d'abord réparer le texte, puis le
+            soin, puis ce qu'on a gardé, puis ce qui résonne, puis les traversées.
+            Aucune n'a plus son propre intertitre en capitales — c'est
+            l'empilement de kickers identiques qui faisait « console ». */}
+        {/* §12ter.D — correction transcription AUTO : elle porte sur CE texte-là,
+            et elle disparaît une fois faite. */}
+        {k && !k.transcript_verified && (['mvp_voice', 'mvp_night_split'].includes(k.capture_method) || !!dreamAudioUrl) && (
+          <TranscriptCheck
             session={session}
             kairosId={kairosId}
-            marked={!!k.user_marked_numinous}
-            markedAt={k.marked_great_at}
-            facets={k.great_dream_facets}
-            note={k.great_dream_note}
-            radiant={(k.numinosity_score ?? 0) >= 0.7}
-            onChange={(next) => setK((prev: any) => ({
-              ...(prev || {}),
-              user_marked_numinous: next.marked,
-              great_dream_facets: next.facets,
-              great_dream_note: next.note,
-            }))}
+            rawText={k.raw_text || ''}
+            onVerified={(newText) => setK((prev: any) => ({ ...(prev || {}), transcript_verified: true, ...(newText != null ? { raw_text: newText } : {}) }))}
           />
         )}
-        <KeptInterpretation session={session} kairosId={kairosId} />
         {/* §12bis.E — la carte de soin : ce sur quoi le rêve INSISTE. Seuil haut + cap ~1/semaine tenus
             en amont (lib/kairos/warning.ts → setting_metadata.warning_signal.card_eligible) ; si détresse
             réelle, la carte s'efface au profit de ressources humaines. Jamais prédictif, toujours écartable. */}
         <CareCard kairosId={kairosId} signal={k?.setting_metadata?.warning_signal} />
+        {/* A3 — l'APRÈS de la marque : la double date (« rêvé en mars 2019 ·
+            reconnu en juillet 2026 ») et « pourquoi celui-là ». Le GESTE, lui,
+            est dans l'en-tête (`compact`). Ces deux choses-ci sont des mots du
+            rêveur : leur famille, c'est « ce que j'ai gardé », juste en dessous. */}
+        {k && <GreatDreamFlag mark={false} session={session} kairosId={kairosId} marked={!!k.user_marked_numinous} markedAt={k.marked_great_at} facets={k.great_dream_facets} note={k.great_dream_note} onChange={(next) => setK((prev: any) => ({ ...(prev || {}), user_marked_numinous: next.marked, great_dream_facets: next.facets, great_dream_note: next.note }))} />}
+        <KeptInterpretation session={session} kairosId={kairosId} />
         {/* §12bis.A — CE QUI RÉSONNE : rêves reliés + moments de jour + écho ancien, mêlés, chacun avec sa raison + le 1-clic « résonne / pas vraiment ». */}
         <div ref={resonanceRef}>
           {/* A2 2026-07-26 — `emptyHint` toujours vrai : depuis la réécriture du moteur de
@@ -2840,19 +3052,14 @@ function ReadScreen({ session, kairosId, onBack, onInterpret, onGuides, onResume
               polyphonie le dit doucement ». Le silence doit être DIT, pas subi. */}
           <ResonanceSection session={session} kairosId={kairosId} kairosType={k?.kairos_type} onOpenDream={onOpenDream} emptyHint />
         </div>
-        {/* §12bis.B — « à la lumière du présent » : relire un rêve avec ce qu'on vit maintenant · sur une note, faire remonter les rêves qui en parlent. */}
-        {k && (k.kairos_type === 'note_jour'
-          ? <button onClick={() => resonanceRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })} style={presentBtnStyle}>{t('core.read.whatDreamsSay')}</button>
-          : <button onClick={() => onInterpret(kairosId, k?.raw_text || '', k?.kairos_type, true)} style={presentBtnStyle}>{t('core.read.rereadNow')}</button>
-        )}
         {/* §C3 — un guide en pause se reprend ici (au pas gardé, réponses restaurées) */}
         {(() => {
           const psd = k?.protocol_session_data
           if (!psd || !psd.paused || psd.completed || !psd.guide_id) return null
           return (
-            <button onClick={() => onResumeGuide(psd.guide_id, kairosId, k?.raw_text || '', { step: psd.step ?? 0, answers: psd.answers || {} })} style={{ marginTop: 30, width: '100%', padding: '13px 18px', borderRadius: 16, background: 'rgba(201,168,106,0.10)', border: `1px solid ${T.gold}55`, cursor: 'pointer', textAlign: 'left', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10 }}>
-              <span style={{ fontFamily: T.sans, fontSize: 17, fontWeight: 600, color: T.cream }}>{t('core.read.resume', { name: psd.guide_name || t('core.read.resumeDefault') })}</span>
-              <span style={{ color: T.gold, fontSize: 17 }}>→</span>
+            <button onClick={() => onResumeGuide(psd.guide_id, kairosId, k?.raw_text || '', { step: psd.step ?? 0, answers: psd.answers || {} })} style={{ ...presentBtnStyle, marginTop: 21, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10 }}>
+              <span style={{ fontFamily: T.sans, fontSize: SCALE.body, fontWeight: 600, color: T.text }}>{t('core.read.resume', { name: psd.guide_name || t('core.read.resumeDefault') })}</span>
+              <span style={{ color: T.gold, fontSize: SCALE.body }}>→</span>
             </button>
           )
         })()}
@@ -2862,33 +3069,42 @@ function ReadScreen({ session, kairosId, onBack, onInterpret, onGuides, onResume
           if (!psd || !psd.completed || !psd.guide_id) return null
           return <GuidesFaits guide={GUIDES_BY_ID[psd.guide_id]} psd={psd} onRedo={() => onRedoGuide(psd.guide_id, kairosId, k?.raw_text || '')} />
         })()}
-        {/* §J3 — Comprendre · Aller plus loin (guides) · Partager · Créer (une seule porte « aller plus loin » = les guides) */}
-        <div style={{ marginTop: 34, display: 'flex', gap: 10 }}>
-          <PillBtn onClick={() => onInterpret(kairosId, k?.raw_text || '', k?.kairos_type)}>{t('core.read.understand')}</PillBtn>
-          <GhostBtn onClick={() => onGuides(kairosId, k?.raw_text || '', k?.kairos_type, (k?.numinosity_score ?? 0) >= 0.7 || !!k?.user_marked_numinous)}>{t('core.read.goFurther')}</GhostBtn>
+
+        {/* ─── RANG 3 — ce qui mérite d'être trouvé ───
+            Replié par défaut. Ce sont des gestes qu'on vient chercher : relire au
+            présent, exporter, retirer d'un cercle, supprimer. Déplié, ils
+            n'ajoutent rien de neuf — ils étaient juste là tous les jours pour
+            rien. Le mot est « et aussi », pas « plus d'options » : on n'ouvre pas
+            un panneau de réglages, on continue une phrase. */}
+        <div style={{ marginTop: 34 }}>
+          <button onClick={() => setMore(v => !v)} aria-expanded={more} style={{ width: '100%', minHeight: SCALE.touch, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, background: 'none', border: 'none', cursor: 'pointer', fontFamily: T.sans, fontSize: SCALE.small, fontWeight: 500, color: T.faint }}>
+            {t('core.read.more')}
+            <span aria-hidden style={{ display: 'inline-block', transition: `transform ${MOTION.fade}ms ${MOTION.ease}`, transform: more ? 'rotate(180deg)' : 'none' }}>⌄</span>
+          </button>
         </div>
-        <div style={{ marginTop: 10, display: 'flex', gap: 10 }}>
-          <GhostBtn onClick={() => setShareSheetOpen(true)}>{t('core.read.share')}</GhostBtn>
-          <PillBtn onClick={() => onCreate(kairosId, k?.title || null, k?.raw_text || '')}>{t('core.read.create')}</PillBtn>
-        </div>
-        {/* §12ter.D — export / partage EXTERNE : bouton discret → ExportSheet (texte · voix · rêve+lecture) */}
-        <div style={{ marginTop: 14, textAlign: 'center' }}>
-          <button onClick={() => setExportOpen(true)} style={{ background: 'none', border: 'none', color: T.dim, fontFamily: T.sans, fontSize: 13, fontWeight: 500, cursor: 'pointer', padding: 6 }}>{t('core.read.export')}</button>
-        </div>
+        {more && (
+        <div style={{ animation: `dream-fade-in ${MOTION.fade}ms ${MOTION.easeOut} both` }}>
+        {/* §12bis.B — « à la lumière du présent » : relire un rêve avec ce qu'on vit maintenant · sur une note, faire remonter les rêves qui en parlent. */}
+        {k && (k.kairos_type === 'note_jour'
+          ? <button onClick={() => resonanceRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })} style={presentBtnStyle}>{t('core.read.whatDreamsSay')}</button>
+          : <button onClick={() => onInterpret(kairosId, k?.raw_text || '', k?.kairos_type, true)} style={presentBtnStyle}>{t('core.read.rereadNow')}</button>
+        )}
+        {/* §12ter.D — export / partage EXTERNE → ExportSheet (texte · voix · rêve+lecture) */}
+        <button onClick={() => setExportOpen(true)} style={{ ...presentBtnStyle, marginTop: 10 }}>{t('core.read.export')}</button>
         {((sharedCircles && sharedCircles.length > 0) || wallShared) && (
-          <div style={{ marginTop: 24 }}>
-            <div style={{ fontFamily: T.mono, fontSize: 10, fontWeight: 400, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(242,232,213,0.4)', marginBottom: 10 }}>{t('core.read.sharedIn')}</div>
+          <div style={{ marginTop: 21 }}>
+            <div style={{ fontFamily: T.sans, fontSize: SCALE.kicker, fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', color: T.faint, marginBottom: 10 }}>{t('core.read.sharedIn')}</div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
               {(sharedCircles || []).map(s => (
-                <span key={s.circle_id} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '7px 8px 7px 14px', borderRadius: 999, border: `0.5px solid ${T.gold}4d`, background: 'rgba(201,168,106,0.06)', fontFamily: T.sans, fontSize: 17, fontWeight: 500, color: 'rgba(242,232,213,0.9)' }}>
+                <span key={s.circle_id} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '6px 6px 6px 13px', borderRadius: 999, border: T.cardBorder, background: T.card, fontFamily: T.sans, fontSize: SCALE.meta, fontWeight: 500, color: T.dim }}>
                   {s.name}
-                  <button onClick={() => removeCircleShare(s.circle_id)} aria-label={t('core.read.removeFromAria', { name: s.name })} style={{ width: 20, height: 20, borderRadius: '50%', border: 'none', background: 'rgba(242,232,213,0.1)', color: T.dim, fontSize: 13, lineHeight: 1, cursor: 'pointer' }}>×</button>
+                  <button onClick={() => removeCircleShare(s.circle_id)} aria-label={t('core.read.removeFromAria', { name: s.name })} style={{ width: 21, height: 21, borderRadius: '50%', border: 'none', background: 'rgba(255,255,255,0.08)', color: T.dim, fontSize: SCALE.meta, lineHeight: 1, cursor: 'pointer' }}>×</button>
                 </span>
               ))}
               {wallShared && (
-                <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '7px 8px 7px 14px', borderRadius: 999, border: `0.5px solid ${T.gold}4d`, background: 'rgba(201,168,106,0.06)', fontFamily: T.sans, fontSize: 17, fontWeight: 500, color: 'rgba(242,232,213,0.9)' }}>
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '6px 6px 6px 13px', borderRadius: 999, border: T.cardBorder, background: T.card, fontFamily: T.sans, fontSize: SCALE.meta, fontWeight: 500, color: T.dim }}>
                   {t('core.read.wall')}
-                  <button onClick={removeWallShare} aria-label={t('core.read.removeWallAria')} style={{ width: 20, height: 20, borderRadius: '50%', border: 'none', background: 'rgba(242,232,213,0.1)', color: T.dim, fontSize: 13, lineHeight: 1, cursor: 'pointer' }}>×</button>
+                  <button onClick={removeWallShare} aria-label={t('core.read.removeWallAria')} style={{ width: 21, height: 21, borderRadius: '50%', border: 'none', background: 'rgba(255,255,255,0.08)', color: T.dim, fontSize: SCALE.meta, lineHeight: 1, cursor: 'pointer' }}>×</button>
                 </span>
               )}
             </div>
@@ -2896,6 +3112,8 @@ function ReadScreen({ session, kairosId, onBack, onInterpret, onGuides, onResume
         )}
         {/* §0.3 — suppression souveraine : double confirmation ; retrait cercle/Mur automatique côté serveur */}
         <DeleteDream session={session} kairosId={kairosId} onDeleted={onDeleted} />
+        </div>
+        )}
       </div>
       <ShareSheet session={session} kairosId={kairosId} kairosType={k?.kairos_type} open={shareSheetOpen} onClose={() => setShareSheetOpen(false)} onShared={loadShared} />
       <ExportSheet session={session} kairos={k} audioUrl={dreamAudioUrl} open={exportOpen} onClose={() => setExportOpen(false)} />
@@ -3025,7 +3243,7 @@ function UniverseScreen({ session, onOpenDream, segmented }: { session: Session;
           <div style={{ fontFamily: T.serif, fontSize: 28, fontStyle: 'italic', color: T.cream }}>{t('core.journal.title')}</div>
           <div style={{ display: 'flex', gap: 6 }}>
             {([['season', 'core.universe.winSeason'], ['year', 'core.universe.winYear'], ['all', 'core.universe.winAll']] as const).map(([k, l]) => (
-              <button key={k} onClick={() => setWin(k)} style={{ padding: '5px 11px', borderRadius: 999, fontSize: 11, fontWeight: win === k ? 600 : 500, fontFamily: T.sans, cursor: 'pointer', background: win === k ? 'rgba(201,168,106,0.14)' : 'transparent', border: win === k ? `1px solid ${T.gold}55` : '1px solid rgba(242,232,213,0.12)', color: win === k ? T.cream : T.faint }}>{t(l)}</button>
+              <button key={k} onClick={() => setWin(k)} style={{ padding: '5px 11px', borderRadius: 999, fontSize: 11, fontWeight: win === k ? 600 : 500, fontFamily: T.sans, cursor: 'pointer', background: win === k ? 'rgba(255,255,255,0.14)' : 'transparent', border: win === k ? `1px solid ${T.gold}55` : '1px solid rgba(202,191,206,0.12)', color: win === k ? T.cream : T.faint }}>{t(l)}</button>
             ))}
           </div>
         </div>
@@ -3033,7 +3251,7 @@ function UniverseScreen({ session, onOpenDream, segmented }: { session: Session;
       </div>
       <div style={{ marginTop: 18, display: 'flex', gap: 4, overflowX: 'auto', padding: '0 18px 6px', WebkitOverflowScrolling: 'touch' }}>
         {AXES.map((a, i) => (
-          <button key={a.kind} onClick={() => setTab(i)} style={{ padding: '9px 15px', borderRadius: 14, whiteSpace: 'nowrap', cursor: 'pointer', fontFamily: T.sans, fontWeight: 600, fontSize: 17, background: i === tab ? 'rgba(201,168,106,0.13)' : 'transparent', border: i === tab ? `1px solid ${T.gold}55` : '1px solid transparent', color: i === tab ? T.cream : 'rgba(242,232,213,0.45)', transition: 'all .25s ease' }}>
+          <button key={a.kind} onClick={() => setTab(i)} style={{ padding: '9px 15px', borderRadius: 14, whiteSpace: 'nowrap', cursor: 'pointer', fontFamily: T.sans, fontWeight: 600, fontSize: 17, background: i === tab ? 'rgba(255,255,255,0.13)' : 'transparent', border: i === tab ? `1px solid ${T.gold}55` : '1px solid transparent', color: i === tab ? T.cream : '#b9b0bd', transition: 'all .25s ease' }}>
             {t(a.labelKey)}
           </button>
         ))}
@@ -3056,7 +3274,7 @@ function UniverseScreen({ session, onOpenDream, segmented }: { session: Session;
               {list.slice(0, 16).map((s: any, i: number) => {
                 const awake = (s.count || 0) >= 3
                 return (
-                <button key={i} onClick={() => setSymModal(s)} style={{ padding: '18px 14px', borderRadius: 20, background: awake ? 'rgba(201,168,106,0.08)' : T.card, border: awake ? `0.5px solid ${T.gold}55` : T.cardBorder, boxShadow: awake ? '0 0 22px -8px rgba(201,168,106,0.4)' : 'none', cursor: 'pointer', textAlign: 'center' }}>
+                <button key={i} onClick={() => setSymModal(s)} style={{ padding: '18px 14px', borderRadius: 20, background: awake ? 'rgba(255,255,255,0.08)' : T.card, border: awake ? `0.5px solid ${T.gold}55` : T.cardBorder, boxShadow: awake ? '0 0 22px -8px rgba(224,192,135,0.4)' : 'none', cursor: 'pointer', textAlign: 'center' }}>
                   <Ring s={30} />
                   <div style={{ marginTop: 10, fontFamily: T.serif, fontSize: 17, fontStyle: 'italic', color: T.cream, lineHeight: 1.2 }}>{s.text}</div>
                   <div style={{ marginTop: 5, fontSize: 11, color: awake ? T.gold : T.faint }}>{tp(awake ? 'core.universe.recurring' : 'core.universe.visits', s.count || 0)}</div>
@@ -3074,8 +3292,8 @@ function UniverseScreen({ session, onOpenDream, segmented }: { session: Session;
                   </div>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
                     {g.items.map((s: any, i: number) => (
-                      <button key={i} onClick={() => setSymModal(s)} style={{ padding: '8px 14px', borderRadius: 999, border: `0.5px solid ${T.gold}33`, background: `rgba(201,168,106,${0.04 + Math.min(0.1, (s.count || 1) * 0.013)})`, fontFamily: T.sans, fontSize: 17, fontWeight: 500, color: 'rgba(242,232,213,0.84)', cursor: 'pointer' }}>
-                        {s.text} <span style={{ fontFamily: T.sans, fontSize: 10.5, fontStyle: 'normal', color: 'rgba(242,232,213,0.4)' }}>{s.count}×</span>
+                      <button key={i} onClick={() => setSymModal(s)} style={{ padding: '8px 14px', borderRadius: 999, border: `0.5px solid ${T.gold}33`, background: `rgba(201,168,106,${0.04 + Math.min(0.1, (s.count || 1) * 0.013)})`, fontFamily: T.sans, fontSize: 17, fontWeight: 500, color: '#ddd4de', cursor: 'pointer' }}>
+                        {s.text} <span style={{ fontFamily: T.sans, fontSize: 10.5, fontStyle: 'normal', color: '#a49aad' }}>{s.count}×</span>
                       </button>
                     ))}
                   </div>
@@ -3085,8 +3303,8 @@ function UniverseScreen({ session, onOpenDream, segmented }: { session: Session;
           ) : ['theme'].includes(ax.kind) ? (
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 9 }}>
               {list.slice(0, 20).map((s: any, i: number) => (
-                <button key={i} onClick={() => setSymModal(s)} style={{ padding: '10px 16px', borderRadius: 999, border: `0.5px solid ${T.gold}3a`, background: `rgba(201,168,106,${0.04 + Math.min(0.12, (s.count || 1) * 0.015)})`, fontFamily: T.serif, fontSize: 17 + Math.min(4, (s.count || 1) * 0.4), fontStyle: 'italic', color: 'rgba(242,232,213,0.88)', cursor: 'pointer' }}>
-                  {s.text} <span style={{ fontFamily: T.sans, fontSize: 11, fontStyle: 'normal', color: 'rgba(242,232,213,0.45)' }}>{s.count}×</span>
+                <button key={i} onClick={() => setSymModal(s)} style={{ padding: '10px 16px', borderRadius: 999, border: `0.5px solid ${T.gold}3a`, background: `rgba(201,168,106,${0.04 + Math.min(0.12, (s.count || 1) * 0.015)})`, fontFamily: T.serif, fontSize: 17 + Math.min(4, (s.count || 1) * 0.4), fontStyle: 'italic', color: '#f1e8d7', cursor: 'pointer' }}>
+                  {s.text} <span style={{ fontFamily: T.sans, fontSize: 11, fontStyle: 'normal', color: '#b9b0bd' }}>{s.count}×</span>
                 </button>
               ))}
             </div>
@@ -3095,17 +3313,17 @@ function UniverseScreen({ session, onOpenDream, segmented }: { session: Session;
               {list.slice(0, 12).map((s: any, i: number) => {
                 const awake = (s.count || 0) >= 3
                 return (
-                <button key={i} onClick={() => setSymModal(s)} className="gReveal" style={{ animationDelay: `${Math.min(i, 9) * 55}ms`, padding: '15px 17px', borderRadius: 20, background: awake ? 'rgba(201,168,106,0.08)' : T.card, border: awake ? `0.5px solid ${T.gold}55` : T.cardBorder, boxShadow: awake ? '0 0 22px -8px rgba(201,168,106,0.4)' : 'none', cursor: 'pointer', textAlign: 'left', width: '100%' }}>
+                <button key={i} onClick={() => setSymModal(s)} className="gReveal" style={{ animationDelay: `${Math.min(i, 9) * 55}ms`, padding: '15px 17px', borderRadius: 20, background: awake ? 'rgba(255,255,255,0.08)' : T.card, border: awake ? `0.5px solid ${T.gold}55` : T.cardBorder, boxShadow: awake ? '0 0 22px -8px rgba(224,192,135,0.4)' : 'none', cursor: 'pointer', textAlign: 'left', width: '100%' }}>
                   <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: 10 }}>
                     <div style={{ fontFamily: T.serif, fontSize: 19, fontStyle: 'italic', color: T.cream }}>{s.text}</div>
-                    <div style={{ fontSize: 12, fontWeight: 600, color: 'rgba(242,232,213,0.42)', whiteSpace: 'nowrap' }}>{s.count}×</div>
+                    <div style={{ fontSize: 12, fontWeight: 600, color: '#a49aad', whiteSpace: 'nowrap' }}>{s.count}×</div>
                   </div>
                   {awake && <div style={{ marginTop: 6, fontSize: 13, fontWeight: 500, fontFamily: T.sans, color: T.gold }}>{t('core.universe.awakened')}</div>}
-                  {s.user_meaning && <div style={{ marginTop: 6, fontFamily: T.serif, fontSize: 17, fontStyle: 'italic', color: 'rgba(242,232,213,0.62)', lineHeight: 1.35 }}>« {s.user_meaning} »</div>}
+                  {s.user_meaning && <div style={{ marginTop: 6, fontFamily: T.serif, fontSize: 17, fontStyle: 'italic', color: '#ddd4de', lineHeight: 1.35 }}>« {s.user_meaning} »</div>}
                   {typeof s.valence === 'number' && s.valence !== 0 && (
                     <div style={{ marginTop: 10, display: 'flex', alignItems: 'center', gap: 8 }}>
-                      <span style={{ fontSize: 9, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(242,232,213,0.35)' }}>{t('core.universe.charge')}</span>
-                      <div style={{ flex: 1, height: 2, borderRadius: 2, background: 'rgba(242,232,213,0.10)', position: 'relative' }}>
+                      <span style={{ fontSize: 9, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#a49aad' }}>{t('core.universe.charge')}</span>
+                      <div style={{ flex: 1, height: 2, borderRadius: 2, background: 'rgba(202,191,206,0.1)', position: 'relative' }}>
                         <div style={{ position: 'absolute', left: 0, top: 0, height: 2, borderRadius: 2, width: `${Math.min(100, Math.abs(s.valence) * 100)}%`, background: `linear-gradient(90deg, transparent, ${s.valence < 0 ? '#8c7250' : T.gold})` }} />
                       </div>
                     </div>
@@ -3153,7 +3371,7 @@ function SymbolPage({ session, sym, onClose, onOpenDream }: { session: Session; 
     <div style={{ position: 'fixed', inset: 0, zIndex: 50, background: 'rgba(14,8,6,0.96)', overflowY: 'auto' }} onClick={onClose}>
       <div style={{ maxWidth: 560, margin: '0 auto', padding: '60px 24px 60px' }} onClick={e => e.stopPropagation()}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <button onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 4 }}>{I.back('rgba(242,232,213,0.6)')}</button>
+          <button onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 4 }}>{I.back('#ddd4de')}</button>
           <Ring s={22} />
         </div>
         <div style={{ marginTop: 22, fontFamily: T.serif, fontSize: 32, fontStyle: 'italic', color: T.cream, lineHeight: 1.1 }}>{sym.text}</div>
@@ -3161,7 +3379,7 @@ function SymbolPage({ session, sym, onClose, onOpenDream }: { session: Session; 
           {tp('core.symbol.appearances', sym.count || 0)}
           {sym.first_seen && <> · {t('core.symbol.since', { date: new Date(sym.first_seen).toLocaleDateString(locale, { day: 'numeric', month: 'long', year: 'numeric' }) })}</>}
         </div>
-        <div style={{ marginTop: 26, padding: 18, borderRadius: 20, background: 'rgba(201,168,106,0.07)', border: `0.5px solid ${T.gold}3a` }}>
+        <div style={{ marginTop: 26, padding: 18, borderRadius: 20, background: 'rgba(255,255,255,0.07)', border: `0.5px solid ${T.gold}3a` }}>
           <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase', color: T.gold, marginBottom: 8 }}>{t('core.symbol.kicker')}</div>
           {editing ? (
             <>
@@ -3178,7 +3396,7 @@ function SymbolPage({ session, sym, onClose, onOpenDream }: { session: Session; 
           )}
         </div>
         <div style={{ marginTop: 26 }}>
-          <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'rgba(242,232,213,0.42)', marginBottom: 12 }}>{t('core.symbol.dreamsKicker')}</div>
+          <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#a49aad', marginBottom: 12 }}>{t('core.symbol.dreamsKicker')}</div>
           {dreams === null ? <div style={{ padding: '24px 0' }}><Constellation size={50} /></div>
           : dreams.length === 0 ? <div style={{ fontFamily: T.sans, fontSize: 17, fontWeight: 500, color: T.faint }}>{t('core.symbol.dreamsEmpty')}</div>
           : (
@@ -3267,10 +3485,10 @@ function ForgeScreen({ session, onBack }: { session: Session; onBack?: () => voi
     <div style={{ minHeight: '100dvh', paddingBottom: 110 }}>
       <div style={{ paddingTop: 62, paddingLeft: 20, paddingRight: 26, display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
-          {onBack && <button onClick={onBack} aria-label={t('core.common.backAria')} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 4, alignSelf: 'center' }}>{I.back('rgba(242,232,213,0.6)')}</button>}
+          {onBack && <button onClick={onBack} aria-label={t('core.common.backAria')} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 4, alignSelf: 'center' }}>{I.back('#ddd4de')}</button>}
           <div>
             <div style={{ fontFamily: T.serif, fontSize: 28, fontStyle: 'italic', color: T.cream }}>{t('core.forge.title')}</div>
-            <div style={{ marginTop: 3, fontSize: 12.5, color: 'rgba(242,232,213,0.45)' }}>{t('core.forge.sub')}</div>
+            <div style={{ marginTop: 3, fontSize: 12.5, color: '#b9b0bd' }}>{t('core.forge.sub')}</div>
           </div>
         </div>
         <div style={{ textAlign: 'right' }}>
@@ -3279,7 +3497,7 @@ function ForgeScreen({ session, onBack }: { session: Session; onBack?: () => voi
           </button>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
             <span style={{ fontSize: 10, letterSpacing: '0.1em', textTransform: 'uppercase', color: T.faint }}>{t('core.forge.credits')}</span>
-            <InfoDot id="credits" size={13} color="rgba(242,232,213,0.4)" />
+            <InfoDot id="credits" size={13} color="#a49aad" />
           </div>
         </div>
       </div>
@@ -3303,8 +3521,8 @@ function ForgeScreen({ session, onBack }: { session: Session; onBack?: () => voi
                       <span style={{ fontSize: 10.5, letterSpacing: '0.1em', textTransform: 'uppercase', color: T.gold }}>{t(KINDKEY[w.kind])}</span>
                     </div>
                     <div style={{ marginTop: 10, display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-                      {w.kind === 'game' && w.asset_url && <a href={w.asset_url} target="_blank" rel="noreferrer" style={{ padding: '9px 16px', borderRadius: 999, background: 'rgba(201,168,106,0.12)', border: `1px solid ${T.gold}55`, color: T.cream, fontSize: 12.5, fontWeight: 600, textDecoration: 'none', fontFamily: T.sans }}>{t('core.forge.play')}</a>}
-                      <button onClick={() => togglePublic(w)} style={{ padding: '9px 16px', borderRadius: 999, background: 'transparent', border: '1px solid rgba(242,232,213,0.18)', color: w.is_public ? T.gold : T.dim, fontSize: 12.5, cursor: 'pointer', fontFamily: T.sans }}>{t(w.is_public ? 'core.forge.publicByLink' : 'core.forge.private')}</button>
+                      {w.kind === 'game' && w.asset_url && <a href={w.asset_url} target="_blank" rel="noreferrer" style={{ padding: '9px 16px', borderRadius: 999, background: 'rgba(255,255,255,0.12)', border: `1px solid ${T.gold}55`, color: T.cream, fontSize: 12.5, fontWeight: 600, textDecoration: 'none', fontFamily: T.sans }}>{t('core.forge.play')}</a>}
+                      <button onClick={() => togglePublic(w)} style={{ padding: '9px 16px', borderRadius: 999, background: 'transparent', border: '1px solid rgba(202,191,206,0.18)', color: w.is_public ? T.gold : T.dim, fontSize: 12.5, cursor: 'pointer', fontFamily: T.sans }}>{t(w.is_public ? 'core.forge.publicByLink' : 'core.forge.private')}</button>
                       {w.is_public && <button onClick={() => copyLink(w)} style={{ padding: '9px 16px', borderRadius: 999, background: 'transparent', border: `1px solid ${T.gold}44`, color: T.gold, fontSize: 12.5, cursor: 'pointer', fontFamily: T.sans }}>{t(copied === w.id ? 'core.forge.copied' : 'core.forge.copyLink')}</button>}
                     </div>
                   </div>
@@ -3347,7 +3565,7 @@ function ForgeScreen({ session, onBack }: { session: Session; onBack?: () => voi
                       <span style={{ fontSize: 12, color: T.dim, fontFamily: T.sans }}>{tp('core.forge.cost', v.cost || 0)}</span>
                     </div>
                     <div style={{ marginTop: 6, fontFamily: T.sans, fontSize: 18, fontWeight: 600, color: T.cream }}>{v.title}</div>
-                    <div style={{ marginTop: 5, fontSize: 13.5, color: 'rgba(242,232,213,0.65)', lineHeight: 1.45 }}>{v.brief}</div>
+                    <div style={{ marginTop: 5, fontSize: 13.5, color: '#ddd4de', lineHeight: 1.45 }}>{v.brief}</div>
                     <div style={{ marginTop: 12, display: 'flex' }}>
                       <PillBtn primary onClick={() => generate(v)} disabled={disabled}>
                         {v.kind === 'video' && !videoOk ? t('core.forge.soon') : balance !== null && balance < v.cost ? t('core.forge.noCredits') : t('core.forge.forgeIt', { n: v.cost })}
@@ -3365,7 +3583,7 @@ function ForgeScreen({ session, onBack }: { session: Session; onBack?: () => voi
 
       {step === 'forging' && (
         <div style={{ marginTop: 70, textAlign: 'center', padding: '0 36px' }}>
-          <div style={{ width: 70, height: 70, margin: '0 auto', borderRadius: '50%', background: 'radial-gradient(circle at 42% 36%, #f3e6c4 0%, #c9a86a 42%, #5a4a1e 90%)', animation: 'lCore 1.4s ease-in-out infinite, lBreath 2.2s ease-in-out infinite' }} />
+          <div style={{ width: 70, height: 70, margin: '0 auto', borderRadius: '50%', background: 'radial-gradient(circle at 42% 36%, #f3e6c4 0%, #e0c087 42%, #5a4a1e 90%)', animation: 'lCore 1.4s ease-in-out infinite, lBreath 2.2s ease-in-out infinite' }} />
           <div style={{ marginTop: 22, fontFamily: T.serif, fontSize: 19, fontStyle: 'italic', color: T.cream, lineHeight: 1.45 }}>{t('core.forge.forgingL1')}<br />{t('core.forge.forgingL2')}</div>
           <div style={{ marginTop: 10, fontSize: 12.5, color: T.faint }}>{t('core.forge.forgingSub')}</div>
         </div>
@@ -3394,14 +3612,14 @@ function ForgeScreen({ session, onBack }: { session: Session; onBack?: () => voi
 
           {/* comment ça marche — la fiche ⓘ porte le texte exact de la spec */}
           <div style={{ marginTop: 24, padding: '14px 16px', borderRadius: 18, background: T.card, border: T.cardBorder, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
-            <div style={{ fontSize: 13.5, color: 'rgba(242,232,213,0.72)', lineHeight: 1.5 }}>{t('core.forge.creditsHow')}</div>
+            <div style={{ fontSize: 13.5, color: '#ddd4de', lineHeight: 1.5 }}>{t('core.forge.creditsHow')}</div>
             <InfoDot id="credits" size={17} color={T.gold} />
           </div>
 
           {/* abonnement — sobre, pas de pression */}
           <div style={{ marginTop: 12, padding: 16, borderRadius: 18, background: T.card, border: T.cardBorder }}>
             <div style={{ fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase', color: T.gold }}>{t('core.forge.subTitle')}</div>
-            <div style={{ marginTop: 8, fontSize: 13.5, color: 'rgba(242,232,213,0.7)', lineHeight: 1.55 }}>{t('core.forge.subSoon')}</div>
+            <div style={{ marginTop: 8, fontSize: 13.5, color: '#ddd4de', lineHeight: 1.55 }}>{t('core.forge.subSoon')}</div>
           </div>
 
           {/* historique simple des dépenses */}
@@ -3491,13 +3709,13 @@ function CirclesScreen({ session }: { session: Session }) {
         <>
           <div style={{ paddingTop: 62, paddingLeft: 26, paddingRight: 26 }}>
             <div style={{ fontFamily: T.serif, fontSize: 28, fontStyle: 'italic', color: T.cream }}>{t('core.circles.title')}</div>
-            <div style={{ marginTop: 4, fontSize: 13, color: 'rgba(242,232,213,0.48)' }}>{t('core.circles.sub')}</div>
+            <div style={{ marginTop: 4, fontSize: 13, color: '#b9b0bd' }}>{t('core.circles.sub')}</div>
           </div>
           <div style={{ margin: '24px 18px 0', display: 'flex', flexDirection: 'column', gap: 11 }}>
             {circles === null ? null : circles.length === 0 ? (
               <div style={{ marginTop: 36, textAlign: 'center', padding: '0 30px' }}>
                 <div style={{ position: 'relative', width: 90, height: 90, margin: '0 auto' }}>
-                  <div style={{ position: 'absolute', inset: -18, borderRadius: '50%', background: 'radial-gradient(circle, rgba(201,168,106,0.30), transparent 70%)', filter: 'blur(10px)', animation: 'lBreath 3.2s ease-in-out infinite' }} />
+                  <div style={{ position: 'absolute', inset: -18, borderRadius: '50%', background: 'radial-gradient(circle, rgba(255,255,255,0.3), transparent 70%)', filter: 'blur(10px)', animation: 'lBreath 3.2s ease-in-out infinite' }} />
                   <div style={{ position: 'absolute', left: '50%', bottom: 18, transform: 'translateX(-50%)', width: 34, height: 46, borderRadius: '50% 50% 42% 42%', background: 'radial-gradient(circle at 50% 80%, #f3e6c4 0%, #d8b85e 35%, #a8842f 70%, transparent 100%)', animation: 'lCore 1.6s ease-in-out infinite' }} />
                   <div style={{ position: 'absolute', left: '50%', bottom: 10, transform: 'translateX(-50%)', width: 54, height: 8, borderRadius: '50%', background: 'rgba(58,36,23,0.9)' }} />
                 </div>
@@ -3528,7 +3746,7 @@ function CirclesScreen({ session }: { session: Session }) {
             <input value={name} onChange={e => setName(e.target.value)} placeholder={t('core.circles.createName')} style={{ padding: '14px 18px', borderRadius: 16, background: T.card, border: T.cardBorder, color: T.cream, fontSize: 17, fontFamily: T.sans, fontWeight: 500 }} />
             <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
               {['suggFamily', 'suggDuo', 'suggFriends', 'suggWork'].map(k => (
-                <button key={k} onClick={() => setName(t(`core.circles.${k}`))} style={{ padding: '7px 14px', borderRadius: 999, background: 'transparent', border: '1px solid rgba(242,232,213,0.16)', color: T.dim, fontSize: 13, fontFamily: T.sans, cursor: 'pointer' }}>{t(`core.circles.${k}`)}</button>
+                <button key={k} onClick={() => setName(t(`core.circles.${k}`))} style={{ padding: '7px 14px', borderRadius: 999, background: 'transparent', border: '1px solid rgba(202,191,206,0.16)', color: T.dim, fontSize: 13, fontFamily: T.sans, cursor: 'pointer' }}>{t(`core.circles.${k}`)}</button>
               ))}
             </div>
             <input value={intention} onChange={e => setIntention(e.target.value)} placeholder={t('core.circles.createIntention')} style={{ padding: '14px 18px', borderRadius: 16, background: T.card, border: T.cardBorder, color: T.cream, fontSize: 17, fontFamily: T.sans, fontWeight: 500 }} />
@@ -3577,7 +3795,7 @@ function CirclesScreen({ session }: { session: Session }) {
               shares.map((s: any) => (
                 <div key={s.id} style={{ padding: '15px 17px', borderRadius: 20, background: T.card, border: T.cardBorder }}>
                   <div style={{ fontSize: 11, color: T.faint, marginBottom: 6 }}>{new Date(s.created_at).toLocaleDateString(locale, { day: 'numeric', month: 'long' })}</div>
-                  <div style={{ fontFamily: T.serif, fontSize: 17, fontStyle: 'italic', color: 'rgba(242,232,213,0.88)', lineHeight: 1.5 }}>{(s.content || s.dream_text || s.text || '…').slice(0, 400)}</div>
+                  <div style={{ fontFamily: T.serif, fontSize: 17, fontStyle: 'italic', color: '#f1e8d7', lineHeight: 1.5 }}>{(s.content || s.dream_text || s.text || '…').slice(0, 400)}</div>
                 </div>
               ))
             )}
@@ -3656,7 +3874,7 @@ function ReveilScreen({ onBack }: { onBack: () => void }) {
   if (ringing) {
     return (
       <div style={{ minHeight: '100dvh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 18, padding: 30 }}>
-        <div style={{ width: 84, height: 84, borderRadius: '50%', background: 'radial-gradient(circle at 42% 36%, #f3e6c4 0%, #c9a86a 45%, #5a4a1e 92%)', animation: 'lBreath 2.4s ease-in-out infinite' }} />
+        <div style={{ width: 84, height: 84, borderRadius: '50%', background: 'radial-gradient(circle at 42% 36%, #f3e6c4 0%, #e0c087 45%, #5a4a1e 92%)', animation: 'lBreath 2.4s ease-in-out infinite' }} />
         <div style={{ fontFamily: T.serif, fontSize: 30, fontStyle: 'italic', color: T.cream }}>{t('core.reveil.ringingHeadline')}</div>
         <div style={{ fontSize: 13.5, color: T.dim }}>{t('core.reveil.ringingSub')}</div>
         <div style={{ marginTop: 10, width: '100%', maxWidth: 280, display: 'flex' }}>
@@ -3694,7 +3912,7 @@ function ReveilScreen({ onBack }: { onBack: () => void }) {
             <div style={{ fontSize: 15, color: T.cream, fontFamily: T.sans }}>{t('core.reveil.soundOn')}</div>
             <div style={{ marginTop: 2, fontSize: 11.5, color: T.faint }}>{soundOn ? t('core.reveil.soundOnHint') : t('core.reveil.silent')}</div>
           </div>
-          <div style={{ width: 44, height: 26, borderRadius: 999, background: soundOn ? T.gold : 'rgba(242,232,213,0.14)', position: 'relative', transition: 'all .2s ease', flexShrink: 0 }}>
+          <div style={{ width: 44, height: 26, borderRadius: 999, background: soundOn ? T.gold : 'rgba(202,191,206,0.14)', position: 'relative', transition: 'all .2s ease', flexShrink: 0 }}>
             <div style={{ position: 'absolute', top: 3, left: soundOn ? 21 : 3, width: 20, height: 20, borderRadius: '50%', background: '#2a160e', transition: 'all .2s ease' }} />
           </div>
         </button>

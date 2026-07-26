@@ -113,7 +113,7 @@ export default function KeptInterpretation({ session, kairosId }: { session: Ses
               ) : (it.resonance_note || it.audio_url) ? (
                 <div style={{ marginTop: 14, paddingLeft: 12, borderLeft: `1px solid ${C.gold}44` }}>
                   <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase', color: C.faint, marginBottom: 6 }}>{t('screens.kept.noteLabel')}</div>
-                  {it.resonance_note && <div style={{ fontFamily: C.serif, fontSize: 15.5, fontStyle: 'italic', color: 'rgba(242,232,213,0.85)', lineHeight: 1.5 }}>{it.resonance_note}</div>}
+                  {it.resonance_note && <div style={{ fontFamily: C.serif, fontSize: 15.5, fontStyle: 'italic', color: '#f1e8d7', lineHeight: 1.5 }}>{it.resonance_note}</div>}
                   {it.audio_url && <audio controls src={it.audio_url} style={{ marginTop: 8, width: '100%', height: 34 }} />}
                 </div>
               ) : null}
@@ -128,8 +128,8 @@ export default function KeptInterpretation({ session, kairosId }: { session: Ses
                     <div style={{ marginTop: 10, display: 'flex', flexDirection: 'column', gap: 12 }}>
                       {corr.map((c, i) => (
                         <div key={i} style={{ padding: 12, borderRadius: 14, background: 'rgba(0,0,0,0.14)' }}>
-                          {c.user_correction && <div style={{ fontSize: 13, color: 'rgba(242,232,213,0.7)', fontFamily: C.sans, marginBottom: c.revised_body ? 8 : 0 }}><span style={{ color: C.faint }}>{t('screens.kept.youSaid')}</span>{c.user_correction}</div>}
-                          {c.revised_body && <div style={{ fontFamily: C.serif, fontSize: 14.5, fontStyle: 'italic', color: 'rgba(242,232,213,0.82)', lineHeight: 1.5 }}>{c.revised_body}</div>}
+                          {c.user_correction && <div style={{ fontSize: 13, color: '#ddd4de', fontFamily: C.sans, marginBottom: c.revised_body ? 8 : 0 }}><span style={{ color: C.faint }}>{t('screens.kept.youSaid')}</span>{c.user_correction}</div>}
+                          {c.revised_body && <div style={{ fontFamily: C.serif, fontSize: 14.5, fontStyle: 'italic', color: '#ddd4de', lineHeight: 1.5 }}>{c.revised_body}</div>}
                         </div>
                       ))}
                     </div>
@@ -163,8 +163,8 @@ function btn(primary: boolean, danger = false): React.CSSProperties {
   return {
     padding: '9px 14px',
     borderRadius: 999,
-    border: danger ? '0.5px solid rgba(199,115,75,0.5)' : primary ? `1px solid ${C.gold}66` : '0.5px solid rgba(242,232,213,0.2)',
-    background: primary ? 'rgba(201,168,106,0.14)' : 'transparent',
+    border: danger ? '0.5px solid rgba(199,115,75,0.5)' : primary ? `1px solid ${C.gold}66` : '0.5px solid rgba(202,191,206,0.2)',
+    background: primary ? 'rgba(255,255,255,0.14)' : 'transparent',
     color: danger ? '#c7734b' : primary ? C.cream : C.dim,
     fontFamily: C.sans,
     fontSize: 12.5,

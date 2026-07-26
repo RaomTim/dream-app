@@ -568,6 +568,7 @@
     "candSearching": "je regarde…",
     "candSilence": "Rien ne ressort particulièrement pour l’instant. C’est une réponse aussi.",
     "candNo": "pas celui-là",
-    "candNoRush": "Tu peux aussi ne rien décider. Rien ne se perd, et je ne le redemanderai pas."
+    "candNoRush": "Tu peux aussi ne rien décider. Rien ne se perd, et je ne le redemanderai pas.",
+    "doubleDate": "rêvé en {{dreamed}} · reconnu en {{recognised}}"
   }
 }

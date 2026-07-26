@@ -118,7 +118,7 @@ function DepositCard({ d, onChanged }: { d: PendingView; onChanged: () => void }
       : t('core.pending.audioLocal')
 
   return (
-    <div style={{ padding: '14px 15px', borderRadius: 16, background: 'rgba(242,232,213,0.03)', border: '1px solid rgba(242,232,213,0.10)', display: 'flex', flexDirection: 'column', gap: 10 }}>
+    <div style={{ padding: '14px 15px', borderRadius: 16, background: 'rgba(202,191,206,0.03)', border: '1px solid rgba(202,191,206,0.1)', display: 'flex', flexDirection: 'column', gap: 10 }}>
       <div style={{ display: 'flex', alignItems: 'baseline', gap: 8 }}>
         <span style={{ fontFamily: S.sans, fontSize: SCALE.meta, color: S.dim }}>{dateStr} · {timeStr}</span>
         {!!d.durationSec && <span style={{ fontFamily: S.mono, fontSize: SCALE.meta, color: S.faint }}>{fmtDur(d.durationSec)}</span>}
@@ -157,7 +157,7 @@ function DepositCard({ d, onChanged }: { d: PendingView; onChanged: () => void }
             value={draft}
             onChange={e => setDraft(e.target.value)}
             placeholder={t('core.pending.writePlaceholder')}
-            style={{ width: '100%', minHeight: 130, padding: 14, borderRadius: 14, background: 'rgba(242,232,213,0.04)', border: '1px solid rgba(242,232,213,0.12)', color: S.cream, fontSize: SCALE.body, lineHeight: 1.5, fontFamily: S.serif, fontStyle: 'italic', resize: 'vertical' }}
+            style={{ width: '100%', minHeight: 130, padding: 14, borderRadius: 14, background: 'rgba(202,191,206,0.04)', border: '1px solid rgba(202,191,206,0.12)', color: S.cream, fontSize: SCALE.body, lineHeight: 1.5, fontFamily: S.serif, fontStyle: 'italic', resize: 'vertical' }}
           />
           <div style={{ display: 'flex', gap: 8 }}>
             <button onClick={() => setWriting(false)} style={ghostBtn}>{t('core.pending.cancel')}</button>
@@ -194,12 +194,12 @@ function DepositCard({ d, onChanged }: { d: PendingView; onChanged: () => void }
 
 const ghostBtn: React.CSSProperties = {
   padding: '9px 14px', borderRadius: SCALE.radiusPill, background: 'transparent',
-  border: '1px solid rgba(242,232,213,0.16)', color: S.dim, fontSize: 13.5,
+  border: '1px solid rgba(202,191,206,0.16)', color: S.dim, fontSize: 13.5,
   fontWeight: 500, fontFamily: S.sans, cursor: 'pointer', minHeight: 38,
 }
 const primaryBtn: React.CSSProperties = {
   padding: '9px 16px', borderRadius: SCALE.radiusPill, border: 'none',
-  background: 'rgba(201,168,106,0.16)', color: S.goldLit, fontSize: 13.5,
+  background: 'rgba(255,255,255,0.16)', color: S.goldLit, fontSize: 13.5,
   fontWeight: 600, fontFamily: S.sans, cursor: 'pointer', minHeight: 38,
 }
 
@@ -257,7 +257,7 @@ export default function PendingDeposits() {
         >
           <div
             onClick={e => e.stopPropagation()}
-            style={{ width: '100%', maxWidth: 520, maxHeight: '86dvh', overflowY: 'auto', background: S.bgFlat, borderRadius: `${SCALE.radiusLg}px ${SCALE.radiusLg}px 0 0`, border: '1px solid rgba(201,168,106,0.16)', borderBottom: 'none', padding: '22px 18px 34px', display: 'flex', flexDirection: 'column', gap: 12 }}
+            style={{ width: '100%', maxWidth: 520, maxHeight: '86dvh', overflowY: 'auto', background: S.bgFlat, borderRadius: `${SCALE.radiusLg}px ${SCALE.radiusLg}px 0 0`, border: '1px solid rgba(255,255,255,0.16)', borderBottom: 'none', padding: '22px 18px 34px', display: 'flex', flexDirection: 'column', gap: 12 }}
           >
             <div style={{ fontFamily: S.serif, fontSize: SCALE.title, fontStyle: 'italic', color: S.cream, lineHeight: 1.1 }}>{t('core.pending.title')}</div>
             <div style={{ fontFamily: S.sans, fontSize: SCALE.small, color: S.dim, lineHeight: 1.45, marginBottom: 4 }}>{t('core.pending.subtitle')}</div>

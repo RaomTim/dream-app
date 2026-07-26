@@ -30,7 +30,7 @@ async function call(path: string, session: Session | null, opts: RequestInit = {
   return res.json()
 }
 
-function Back({ c = 'rgba(242,232,213,0.6)', s = 20 }: { c?: string; s?: number }) {
+function Back({ c = '#ddd4de', s = 20 }: { c?: string; s?: number }) {
   return (
     <svg width={s} height={s} viewBox="0 0 24 24" fill="none">
       <path d="M15 5l-7 7 7 7" stroke={c} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
@@ -44,8 +44,8 @@ function Heart({ on }: { on: boolean }) {
       <path
         d="M12 20s-7-4.5-9.2-9C1.4 8 2.6 5 5.6 5c1.9 0 3.1 1.1 3.9 2.3l.5.8.5-.8C11.3 6.1 12.5 5 14.4 5c3 0 4.2 3 2.8 6-2.2 4.5-9.2 9-9.2 9z"
         transform="translate(2 -1)"
-        fill={on ? 'rgba(201,168,106,0.85)' : 'none'}
-        stroke={on ? T.goldLit : 'rgba(242,232,213,0.55)'}
+        fill={on ? 'rgba(224,192,135,0.85)' : 'none'}
+        stroke={on ? T.goldLit : '#b9b0bd'}
         strokeWidth="1.4"
         strokeLinejoin="round"
         style={{ transition: 'fill .5s ease, stroke .5s ease' }}
@@ -109,7 +109,7 @@ export default function WallPostView({
   }
 
   return (
-    <div style={{ position: 'fixed', inset: 0, zIndex: 40, background: 'radial-gradient(120% 72% at 50% 40%, #241a12 0%, #1a1310 56%, #140e0a 100%)', color: T.ink, fontFamily: T.sans, display: 'flex', flexDirection: 'column', maxWidth: 560, margin: '0 auto' }}>
+    <div style={{ position: 'fixed', inset: 0, zIndex: 40, background: 'radial-gradient(120% 72% at 50% 40%, #2b2534 0%, #221d29 56%, #191521 100%)', color: T.ink, fontFamily: T.sans, display: 'flex', flexDirection: 'column', maxWidth: 560, margin: '0 auto' }}>
       {/* header : retour + signature anonyme */}
       <div style={{ paddingTop: 'max(56px, env(safe-area-inset-top))', paddingLeft: 20, paddingRight: 20, display: 'flex', alignItems: 'center', gap: 12 }}>
         <button onClick={onBack} aria-label={t('screens.common.backCap')} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 4 }}>
@@ -134,7 +134,7 @@ export default function WallPostView({
         <button
           onClick={toggleTouch}
           disabled={busy}
-          style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '13px 26px', borderRadius: 999, cursor: 'pointer', fontFamily: T.sans, fontSize: 15, fontWeight: 500, color: touched ? T.cream : T.ink, background: touched ? 'rgba(201,168,106,0.14)' : 'rgba(201,168,106,0.06)', border: `1px solid ${touched ? T.gold + '66' : 'rgba(201,168,106,0.22)'}`, transition: 'all .4s ease' }}
+          style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '13px 26px', borderRadius: 999, cursor: 'pointer', fontFamily: T.sans, fontSize: 15, fontWeight: 500, color: touched ? T.cream : T.ink, background: touched ? 'rgba(255,255,255,0.14)' : 'rgba(255,255,255,0.06)', border: `1px solid ${touched ? T.gold + '66' : 'rgba(255,255,255,0.22)'}`, transition: 'all .4s ease' }}
         >
           <Heart on={touched} />
           {t('screens.wall.touch')}
@@ -144,17 +144,17 @@ export default function WallPostView({
       {/* menu Signaler (appui long) */}
       {sheet && (
         <div onClick={() => setSheet(false)} style={{ position: 'fixed', inset: 0, zIndex: 50, background: 'rgba(20,14,10,0.72)', display: 'flex', alignItems: 'flex-end', justifyContent: 'center' }}>
-          <div onClick={(e) => e.stopPropagation()} style={{ width: '100%', maxWidth: 560, padding: '18px 20px calc(24px + env(safe-area-inset-bottom))', background: '#1a1310', borderTopLeftRadius: 24, borderTopRightRadius: 24, borderTop: '0.5px solid rgba(201,168,106,0.16)' }}>
+          <div onClick={(e) => e.stopPropagation()} style={{ width: '100%', maxWidth: 560, padding: '18px 20px calc(24px + env(safe-area-inset-bottom))', background: '#221d29', borderTopLeftRadius: 24, borderTopRightRadius: 24, borderTop: '0.5px solid rgba(255,255,255,0.16)' }}>
             <div style={{ fontFamily: T.serif, fontSize: 17, fontStyle: 'italic', color: T.cream, marginBottom: 14 }}>{t('screens.wall.reportTitle')}</div>
-            <button onClick={report} style={{ width: '100%', padding: 14, borderRadius: 14, cursor: 'pointer', fontFamily: T.sans, fontSize: 14.5, fontWeight: 600, color: T.cream, background: 'rgba(201,168,106,0.10)', border: `1px solid ${T.gold}44`, marginBottom: 10 }}>{t('screens.wall.report')}</button>
-            <button onClick={() => setSheet(false)} style={{ width: '100%', padding: 14, borderRadius: 14, cursor: 'pointer', fontFamily: T.sans, fontSize: 14, fontWeight: 500, color: T.dim, background: 'transparent', border: '1px solid rgba(242,232,213,0.18)' }}>{t('screens.common.cancelCap')}</button>
+            <button onClick={report} style={{ width: '100%', padding: 14, borderRadius: 14, cursor: 'pointer', fontFamily: T.sans, fontSize: 14.5, fontWeight: 600, color: T.cream, background: 'rgba(255,255,255,0.1)', border: `1px solid ${T.gold}44`, marginBottom: 10 }}>{t('screens.wall.report')}</button>
+            <button onClick={() => setSheet(false)} style={{ width: '100%', padding: 14, borderRadius: 14, cursor: 'pointer', fontFamily: T.sans, fontSize: 14, fontWeight: 500, color: T.dim, background: 'transparent', border: '1px solid rgba(202,191,206,0.18)' }}>{t('screens.common.cancelCap')}</button>
           </div>
         </div>
       )}
 
       {toast && (
         <div style={{ position: 'fixed', bottom: 120, left: 0, right: 0, display: 'flex', justifyContent: 'center', zIndex: 60, pointerEvents: 'none' }}>
-          <div style={{ padding: '9px 18px', borderRadius: 999, background: 'rgba(20,14,10,0.9)', border: '0.5px solid rgba(242,232,213,0.12)', fontFamily: T.sans, fontSize: 13.5, color: T.dim }}>{toast}</div>
+          <div style={{ padding: '9px 18px', borderRadius: 999, background: 'rgba(20,14,10,0.9)', border: '0.5px solid rgba(202,191,206,0.12)', fontFamily: T.sans, fontSize: 13.5, color: T.dim }}>{toast}</div>
         </div>
       )}
     </div>

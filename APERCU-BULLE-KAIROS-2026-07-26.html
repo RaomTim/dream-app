@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dream — la bulle des kaïros · trois étages, deux faces (C1, 26/07)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+/* ─────────────────────────────────────────────────────────────────────────
+   Tokens repris À L'IDENTIQUE de src/lib/dream-design.ts — aucun hex inventé.
+   Échelles φ/Fibonacci de DESIGN-MATHEMATIQUES-SACREES.md (5·8·13·21·34·55·89·144).
+   ───────────────────────────────────────────────────────────────────────── */
+:root{
+  --bg: radial-gradient(120% 72% at 50% 38%, #241a12 0%, #1a1310 58%, #140e0a 100%);
+  --bg-flat:#1a1310;
+  --gold:#c9a86a; --gold-lit:#e4cf9e;
+  --cream:#f2e8d5; --ink:#e5d8bd;
+  --dim:rgba(242,232,213,0.55); --faint:rgba(242,232,213,0.34);
+  --card:rgba(201,168,106,0.06); --card-border:0.5px solid rgba(201,168,106,0.16);
+  --line:rgba(201,168,106,0.14);
+  --paper: radial-gradient(122% 78% at 50% 32%, #faf3e2 0%, #f4ead1 56%, #ecdfbe 100%);
+  --paper-flat:#f4ead1;
+  --d-ink:#2b2115; --d-ink-soft:#4a3b28; --d-dim:rgba(43,33,21,0.58); --d-faint:rgba(43,33,21,0.36);
+  --d-gold:#8f7134; --d-sun:#f0dfae;
+  --d-card:rgba(143,113,52,0.07); --d-card-border:0.5px solid rgba(143,113,52,0.20);
+  --d-line:rgba(143,113,52,0.18);
+  --serif:"EB Garamond","Cormorant Garamond",Georgia,serif;
+  --sans:"Inter",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SF Mono",monospace;
+  --ease:cubic-bezier(0.382,0,0.618,1);
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='144' height='144'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#141210;color:#e8ddc8;font-family:var(--sans);padding:55px 34px 144px;min-height:100vh}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:99;opacity:.025;background-image:var(--grain);background-repeat:repeat}
+
+.wrap{max-width:1400px;margin:0 auto}
+header.page{max-width:1180px;margin:0 auto 89px}
+header.page .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(232,221,200,.42);margin-bottom:13px}
+header.page h1{font-family:var(--serif);font-style:italic;font-weight:400;font-size:57px;line-height:1.0;color:var(--cream);margin-bottom:21px}
+header.page .quote{max-width:66ch;font-family:var(--serif);font-style:italic;font-size:21px;line-height:1.5;color:var(--gold-lit);
+  border-left:1px solid rgba(201,168,106,.34);padding-left:21px;margin:21px 0}
+header.page p{max-width:70ch;font-size:17px;line-height:1.618;color:rgba(232,221,200,.72)}
+header.page p+p{margin-top:13px}
+header.page b{color:var(--cream);font-weight:500}
+
+/* ⚠️ `.wrap >` est obligatoire : sans lui, cette règle frappait AUSSI les <section>
+   de la page en profondeur, à l'intérieur du téléphone — 89 px de marge fantôme
+   entre chaque type. Défaut invisible dans le code, évident au rendu. */
+.wrap > section{margin:0 auto 89px;max-width:1400px}
+h2{font-family:var(--serif);font-style:italic;font-weight:400;font-size:35px;color:var(--cream);margin-bottom:8px}
+h2 .num{font-family:var(--mono);font-style:normal;font-size:13px;color:var(--gold);letter-spacing:.14em;margin-right:13px;vertical-align:middle}
+section>.lead{max-width:74ch;font-size:16px;line-height:1.618;color:rgba(232,221,200,.66);margin-bottom:34px}
+section>.lead b{color:var(--gold-lit);font-weight:500}
+.rule{height:1px;background:linear-gradient(90deg,rgba(201,168,106,.34),transparent);margin:0 0 34px}
+
+.frames{display:flex;flex-wrap:wrap;gap:55px;justify-content:center}
+.slot{width:390px}
+.slot .label{margin-bottom:13px;min-height:123px}
+.slot .label .n{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(232,221,200,.38)}
+.slot .label .t{font-family:var(--serif);font-style:italic;font-size:22px;color:var(--cream);margin-top:5px}
+.slot .label .s{font-size:13px;line-height:1.55;color:rgba(232,221,200,.55);margin-top:5px}
+.badge{display:inline-block;margin-top:8px;padding:4px 11px;border-radius:999px;font-family:var(--mono);font-size:10.5px;letter-spacing:.09em}
+.badge.bad{background:rgba(197,86,52,.14);border:.5px solid rgba(197,86,52,.5);color:#e0a184}
+.badge.ok{background:rgba(201,168,106,.12);border:.5px solid rgba(201,168,106,.5);color:var(--gold-lit)}
+
+/* ── le téléphone ── */
+.phone{position:relative;width:390px;height:790px;border-radius:34px;overflow:hidden;
+  box-shadow:0 21px 55px rgba(0,0,0,.55), 0 0 0 1px rgba(201,168,106,.13)}
+.phone .grain{position:absolute;inset:0;pointer-events:none;z-index:6;opacity:.025;background-image:var(--grain)}
+.phone .scrollable{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden}
+.phone .scrollable::-webkit-scrollbar{width:3px}
+.phone .scrollable::-webkit-scrollbar-thumb{background:rgba(201,168,106,.3);border-radius:2px}
+.night{background:var(--bg)}
+.day{background:var(--paper)}
+.glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(70% 50% at 50% 38.2%, rgba(201,168,106,.12), transparent 70%)}
+.glow.d{background:radial-gradient(70% 50% at 50% 38.2%, rgba(197,138,52,.10), transparent 70%)}
+/* le liseré de seuil */
+.edge{position:absolute;top:0;bottom:0;width:13px;pointer-events:none;z-index:3}
+.edge.r{right:0;background:linear-gradient(270deg, rgba(201,168,106,.34), transparent)}
+.edge.l{left:0;background:linear-gradient(90deg, rgba(36,26,18,.55), transparent)}
+
+.bar{position:absolute;top:55px;left:26px;right:21px;display:flex;justify-content:space-between;align-items:center;min-height:34px;z-index:2}
+.bar .date{font-size:12.5px;color:var(--faint)}
+.day .bar .date{color:var(--d-faint)}
+
+/* foyer sur la ligne φ : centre à 38,2 % de la hauteur */
+.focus{position:absolute;left:50%;top:38.2%;transform:translate(-50%,-50%);z-index:2}
+.moon{width:196px;height:196px;border-radius:50%;
+  background:radial-gradient(circle at 38% 32%, #fbf4e3 0%, #f2e8d5 55%, #dfd0b0 100%);
+  box-shadow:0 0 98px 25px rgba(242,232,213,.22), 0 0 216px 59px rgba(201,168,106,.10);
+  animation:breathe 5s ease-in-out infinite}
+.ember{width:168px;height:168px;border-radius:50%;
+  background:radial-gradient(circle at 38% 32%, #fdf4d8 0%, #f0dfae 42%, #e0bf78 78%, #cfa456 100%);
+  box-shadow:0 0 76px 20px rgba(240,223,174,.55), 0 0 150px 35px rgba(197,138,52,.24);
+  animation:breathe 5s ease-in-out infinite}
+@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.015)}}
+@media (prefers-reduced-motion: reduce){*{animation:none!important}}
+
+.words{position:absolute;left:0;right:0;top:calc(38.2% + 98px + 34px);padding:0 34px;text-align:center;z-index:2}
+.words.d{top:calc(38.2% + 84px + 34px)}
+.word{font-family:var(--serif);font-style:italic;font-size:40px;line-height:1.05;color:var(--cream)}
+.day .word{color:var(--d-ink)}
+/* LA TRAÎNE — 17px, collée à 5px, un cran φ² sous le mot */
+/* 🔴 le `div.trailwrap` n'est pas décoratif : `.trail` et `.micro` sont tous deux
+   `inline-flex`, donc ils se rangeaient CÔTE À CÔTE dès qu'ils tenaient dans la
+   largeur. Côté Rêve la traîne est assez longue pour repousser le geste à la ligne
+   suivante ; côté Cœur tout tenait sur une seule ligne. Vu au rendu, pas au code. */
+.trailwrap{display:block}
+.trail{margin-top:5px;font-family:var(--serif);font-style:italic;font-size:17px;line-height:1.25;color:var(--dim);
+  display:inline-flex;align-items:baseline;justify-content:center;gap:8px;background:none;border:none;padding:3px 0;cursor:pointer}
+.day .trail{color:var(--d-ink-soft)}
+.trail .dot{position:relative;top:2px;line-height:0;opacity:.85;flex-shrink:0}
+.micro{margin-top:13px;font-size:13px;color:var(--dim);line-height:1.4;display:inline-flex;align-items:center;gap:8px;justify-content:center}
+.day .micro{color:var(--d-ink-soft)}
+
+.lower{position:absolute;left:24px;right:24px;bottom:110px;z-index:2}
+.thread{display:flex;flex-direction:column;gap:8px;max-width:440px;margin:0 auto}
+.tcard{display:flex;align-items:center;gap:11px;padding:11px 13px;border-radius:13px 21px 13px 21px;background:var(--card);border:var(--card-border)}
+.day .tcard{border-radius:21px 13px 21px 13px;background:var(--d-card);border:var(--d-card-border)}
+.tcard .ttl{flex:1;font-size:15px;font-weight:500;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.day .tcard .ttl{color:var(--d-ink)}
+.tcard .dt{font-size:12.5px;color:var(--faint)}
+.day .tcard .dt{color:var(--d-faint)}
+.seclink{margin-top:21px;text-align:center;color:var(--gold);font-weight:500;font-size:13.5px;display:flex;flex-direction:column;gap:5px;align-items:center}
+.day .seclink{color:var(--d-gold)}
+.seclink .lnk{display:inline-flex;align-items:center;gap:8px;padding:8px 13px}
+.seclink .fil{display:inline-block;width:21px;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
+.day .seclink .fil{background:linear-gradient(270deg,transparent,var(--d-gold))}
+.day .seclink .grd{color:var(--d-ink-soft);font-weight:600}
+
+.nav{position:absolute;left:0;right:0;bottom:0;height:89px;display:flex;justify-content:space-around;align-items:flex-start;
+  padding-top:13px;background:linear-gradient(180deg,rgba(22,13,10,0),rgba(22,13,10,.9) 34%);z-index:4}
+.day .nav{background:linear-gradient(180deg,rgba(244,234,209,0),rgba(244,234,209,.94) 34%)}
+.nav i{display:flex;flex-direction:column;align-items:center;gap:5px;font-size:10.5px;color:var(--faint);font-style:normal}
+.day .nav i{color:var(--d-faint)}
+.nav i.on{color:var(--gold)} .day .nav i.on{color:var(--d-gold)}
+
+/* ── ÉTAGE 2 : la bulle ── */
+.scrim{position:absolute;inset:0;z-index:8;background:rgba(20,14,10,.5);display:flex;align-items:center;justify-content:center;padding:26px}
+.day .scrim{background:rgba(36,26,18,.34)}
+.bubble{width:100%;max-width:380px;background:var(--bg-flat);border:.5px solid rgba(201,168,106,.23);border-radius:22px;padding:20px 22px;box-shadow:0 18px 60px rgba(0,0,0,.5)}
+.day .bubble{background:var(--paper-flat);border:.5px solid rgba(143,113,52,.34)}
+.bubble .row1{display:flex;align-items:flex-start;gap:11px}
+.bubble .lead{margin:0;font-family:var(--serif);font-style:italic;font-size:17px;line-height:1.4;color:var(--cream)}
+.day .bubble .lead{color:var(--d-ink)}
+/* grille à trois colonnes : glyphe · nom · six-mots. `auto` cale la colonne des
+   noms sur le plus long (« hypnagogie »), donc les sept gloses démarrent au même x.
+   En flex, chacune démarrait après son propre nom et les deux plus longues
+   passaient à la ligne — constaté au rendu. */
+.klist{margin-top:15px;display:grid;grid-template-columns:14px auto 1fr;column-gap:9px;row-gap:10px;align-items:baseline}
+.klist.rows{display:flex;flex-direction:column;gap:10px}
+.krow{display:contents}
+.klist.rows .krow{display:flex;align-items:baseline;gap:9px}
+.krow .g{position:relative;top:2px;line-height:0}
+.krow .n{font-size:14px;font-weight:600;color:var(--cream);white-space:nowrap}
+.day .krow .n{color:var(--d-ink)}
+.krow .h{font-family:var(--serif);font-style:italic;font-size:14.5px;color:var(--dim);line-height:1.3}
+.day .krow .h{color:var(--d-ink-soft)}
+.krow .bul{width:4px;height:4px;border-radius:50%;background:var(--gold);opacity:.7;flex-shrink:0;position:relative;top:-3px}
+.day .krow .bul{background:var(--d-gold)}
+.krow .hr{font-family:var(--serif);font-style:italic;font-size:15.5px;color:var(--cream);line-height:1.3}
+.day .krow .hr{color:var(--d-ink)}
+.bbtns{margin-top:18px;display:flex;gap:9px}
+.bbtns button{min-height:44px;padding:11px;border-radius:999px;font-family:var(--sans);font-size:13px;cursor:pointer}
+.bbtns .ghost{flex:1;background:transparent;border:1px solid rgba(242,232,213,.16);color:var(--dim);font-weight:500}
+.day .bbtns .ghost{border-color:rgba(143,113,52,.30);color:var(--d-ink-soft)}
+.bbtns .more{flex:1.5;background:rgba(201,168,106,.12);border:1px solid rgba(201,168,106,.33);color:var(--cream);font-weight:600}
+.day .bbtns .more{background:rgba(143,113,52,.13);border-color:rgba(143,113,52,.55);color:var(--d-ink)}
+
+/* ── ÉTAGE 3 : la page ── */
+.deep{position:relative;max-width:560px;margin:0 auto;padding:0 24px 89px}
+.deep .back{padding-top:55px;min-height:44px;display:flex;align-items:center}
+.deep h1{margin-top:21px;font-family:var(--serif);font-style:italic;font-weight:400;font-size:34px;line-height:1.1;color:var(--cream)}
+.day .deep h1{color:var(--d-ink)}
+.deep .intro{margin-top:18px}
+.deep p{font-family:var(--serif);font-size:17px;line-height:1.5;color:var(--ink)}
+.deep .intro p{font-size:17.5px}
+.day .deep p{color:var(--d-ink-soft)}
+.deep p+p{margin-top:11px}
+.deep .secs{margin-top:34px;display:flex;flex-direction:column;gap:34px}
+.deep .kick{display:flex;align-items:center;gap:9px;margin-bottom:11px}
+.deep .kick h3{font-family:var(--serif);font-size:12px;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+.day .deep .kick h3{color:var(--d-ink-soft)}
+.deep .after{margin-top:55px;padding-top:26px;border-top:.5px solid rgba(242,232,213,.12)}
+.day .deep .after{border-top-color:rgba(43,33,21,.14)}
+.deep .after h2{font-family:var(--serif);font-style:italic;font-size:21px;color:var(--cream);margin:0 0 13px}
+.day .deep .after h2{color:var(--d-ink)}
+.deep .gbtn{margin-top:21px;min-height:44px;padding:13px 21px;border-radius:999px;background:rgba(201,168,106,.12);border:1px solid rgba(201,168,106,.33);color:var(--cream);font-size:14px;font-weight:600;font-family:var(--sans);display:inline-flex;align-items:center;gap:8px;cursor:pointer}
+.day .deep .gbtn{background:rgba(143,113,52,.13);border-color:rgba(143,113,52,.55);color:var(--d-ink)}
+.deep .src{margin-top:34px;padding-top:18px;border-top:.5px solid rgba(242,232,213,.12)}
+.deep .src p{font-family:var(--sans);font-size:13px;line-height:1.6;color:var(--dim);font-style:italic}
+.day .deep .src{border-top-color:rgba(43,33,21,.14)}
+
+/* ── tableaux & notes ── */
+table{width:100%;max-width:1180px;border-collapse:collapse;font-size:14.5px;margin-top:21px}
+th,td{text-align:left;padding:11px 13px;border-bottom:.5px solid rgba(201,168,106,.16);vertical-align:top;line-height:1.5}
+th{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:400}
+td b{color:var(--cream);font-weight:500}
+td.ok{color:var(--gold-lit)}
+.note{max-width:78ch;font-size:15.5px;line-height:1.618;color:rgba(232,221,200,.7);margin-top:21px}
+.note b{color:var(--cream);font-weight:500}
+.note+.note{margin-top:13px}
+.qs{max-width:1000px;display:flex;flex-direction:column;gap:21px;margin-top:21px}
+.q{padding:21px 24px;border-radius:21px;background:rgba(201,168,106,.05);border:.5px solid rgba(201,168,106,.18)}
+.q .qt{font-family:var(--serif);font-style:italic;font-size:21px;color:var(--cream);margin-bottom:8px}
+.q .qb{font-size:15px;line-height:1.618;color:rgba(232,221,200,.72)}
+.q .opt{margin-top:11px;font-size:14.5px;line-height:1.7;color:rgba(232,221,200,.62)}
+.q .opt b{color:var(--gold-lit);font-weight:500}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="page">
+  <div class="kicker">Dream · passe C1 · 26 juillet 2026 · branche yeshua/bulle-kairos</div>
+  <h1>La bulle des kaïros</h1>
+  <div class="quote">« Pour les mots courts “rêve ou un signe, un frisson…” la solution comme d’hab est cette petite bulle qui permet d’avoir + d’info → présente les kaïros direct, et “lire +” emmène sur une vraie page en profondeur sur tous les kaïros qu’on est invité à déposer. Idem dans Cœur, même principe. Ça amène même aux protocoles dans le “in depth”. »</div>
+  <p><b>« Comme d’hab » a une adresse précise dans le code</b> : le système ⓘ (<span style="font-family:var(--mono);font-size:.9em">InfoSystem.tsx</span>, 11/07) — une bulle d’une phrase, deux boutons, « En savoir plus » qui ouvre une fiche. Il n’a pas été imité : sa <b>coquille a été extraite</b> et les deux systèmes la partagent maintenant. Même scrim, mêmes rayons, mêmes boutons, même cible de 44 px. Si elle bouge un jour, les deux bougent ensemble.</p>
+  <p>Une seule chose change, et c’est exactement la demande : <b>le corps de la bulle n’est plus une phrase, c’est la liste elle-même</b> — les sept types, avec leurs vrais glyphes, ceux que le rêveur touchera trente secondes après son dépôt.</p>
+  <p>Et un ajout que la coquille ⓘ ne savait pas faire : <b>elle existe en lumière de jour</b>. La poser telle quelle sur le Cœur aurait refait, au pixel, le défaut de la nav corrigé ce matin — un bloc peint dans la lumière de l’autre face.</p>
+</header>
+
+<!-- ═══════════════════════ 01 — LA FACE RÊVE ═══════════════════════ -->
+<section>
+  <h2><span class="num">01</span>La face Rêve — les trois étages</h2>
+  <div class="lead">L’écran ne gagne pas un élément. <b>La traîne ne change ni de mot, ni de taille, ni de place</b> — elle devient tapable et gagne un ⓘ terminal. Les trois points de suspension promettaient déjà une suite&nbsp;; ils la tiennent enfin.</div>
+  <div class="rule"></div>
+  <div class="frames">
+
+    <!-- 1.1 — l'écran -->
+    <div class="slot">
+      <div class="label">
+        <div class="n">Étage 1 — l’écran</div>
+        <div class="t">Le mot, sa traîne, le geste</div>
+        <div class="s">Identique à hier, à un glyphe près. Emplacement n°3 du budget §15.1 : « 1 mot ». La traîne y vit avant comme après.</div>
+        <span class="badge ok">9 / 9 — inchangé</span>
+      </div>
+      <div class="phone night">
+        <div class="glow"></div><div class="edge r"></div>
+        <div class="bar"><span class="date">samedi 26 juillet</span>
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.6" stroke="rgba(242,232,213,.45)" stroke-width="1.5"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0" stroke="rgba(242,232,213,.45)" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="focus"><div class="moon"></div></div>
+        <div class="words">
+          <div class="word">rêve</div>
+          <div class="trailwrap"><button class="trail">
+            <span>ou un signe, un frisson…</span>
+            <span class="dot"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="rgba(242,232,213,.55)" stroke-width="1.4"/><circle cx="12" cy="8" r="1.05" fill="rgba(242,232,213,.55)"/><path d="M12 11.2v5" stroke="rgba(242,232,213,.55)" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+          </button></div>
+          <div class="micro"><span>maintiens · ou écris</span>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" style="opacity:.62"><rect x="3" y="7" width="18" height="13" rx="2.5" stroke="rgba(242,232,213,.55)" stroke-width="1.5"/><circle cx="12" cy="13.5" r="3.4" stroke="rgba(242,232,213,.55)" stroke-width="1.5"/><path d="M9 7l1.3-2.5h3.4L15 7" stroke="rgba(242,232,213,.55)" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+        <div class="lower">
+          <div class="thread">
+            <div class="tcard"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.5 6.5 0 0 0 9.8 9.8z" stroke="#c9a86a" stroke-width="1.5" stroke-linejoin="round"/></svg><span class="ttl">La maison qui respire</span><span class="dt">hier</span></div>
+            <div class="tcard"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M3 12c2-3 4-3 6 0s4 3 6 0 4-3 6 0" stroke="#c9a86a" stroke-width="1.5" stroke-linecap="round"/></svg><span class="ttl">Le frisson au troisième couplet</span><span class="dt">3 j</span></div>
+          </div>
+          <div class="seclink"><span class="lnk"><span class="fil"></span>le cœur →</span></div>
+        </div>
+        <div class="nav">
+          <i class="on"><svg width="21" height="21" viewBox="0 0 24 24" fill="none"><path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.5 6.5 0 0 0 9.8 9.8z" stroke="#c9a86a" stroke-width="1.5" stroke-linejoin="round"/></svg>Rêve</i>
+          <i><svg width="21" height="21" viewBox="0 0 24 24" fill="none"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15.5H6.5A1.5 1.5 0 0 0 5 20V4.5z" stroke="rgba(242,232,213,.34)" stroke-width="1.5" stroke-linejoin="round"/><path d="M8.5 8h7M8.5 11.5h7" stroke="rgba(242,232,213,.34)" stroke-width="1.5" stroke-linecap="round"/></svg>Journal</i>
+          <i><svg width="21" height="21" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="2.4" stroke="rgba(242,232,213,.34)" stroke-width="1.5"/><circle cx="5" cy="6" r="1" fill="rgba(242,232,213,.34)"/><circle cx="19" cy="7" r="1" fill="rgba(242,232,213,.34)"/><circle cx="18" cy="17" r="1" fill="rgba(242,232,213,.34)"/><circle cx="6" cy="18" r="1" fill="rgba(242,232,213,.34)"/></svg>Univers</i>
+          <i><svg width="21" height="21" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="9" r="3.2" stroke="rgba(242,232,213,.34)" stroke-width="1.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0" stroke="rgba(242,232,213,.34)" stroke-width="1.5" stroke-linecap="round"/><circle cx="17" cy="10" r="2.4" stroke="rgba(242,232,213,.34)" stroke-width="1.4"/></svg>Groupe</i>
+        </div>
+        <div class="grain"></div>
+      </div>
+    </div>
+
+    <!-- 1.2 — la bulle -->
+    <div class="slot">
+      <div class="label">
+        <div class="n">Étage 2 — la bulle</div>
+        <div class="t">Les kaïros, direct</div>
+        <div class="s">Pas une définition du mot « kaïros » : les <b>sept types eux-mêmes</b>, glyphe + nom + six mots. Ce sont les glyphes des puces « c’était… » — une seule source dans le code depuis ce matin.</div>
+        <span class="badge ok">refermable · « merci »</span>
+      </div>
+      <div class="phone night">
+        <div class="glow"></div>
+        <div class="bar"><span class="date">samedi 26 juillet</span></div>
+        <div class="focus" style="opacity:.45"><div class="moon"></div></div>
+        <div class="words" style="opacity:.45"><div class="word">rêve</div></div>
+        <div class="scrim">
+          <div class="bubble">
+            <div class="row1">
+              <span style="margin-top:2px;flex-shrink:0;line-height:0"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#c9a86a" stroke-width="1.4"/><circle cx="12" cy="8" r="1.05" fill="#c9a86a"/><path d="M12 11.2v5" stroke="#c9a86a" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+              <div style="flex:1;min-width:0">
+                <p class="lead">Sous « rêve », il n’y a pas que les rêves. Tout ça se dépose ici :</p>
+                <div class="klist">
+                  <div class="krow"><span class="g"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.5 6.5 0 0 0 9.8 9.8z" stroke="#c9a86a" stroke-width="1.5" stroke-linejoin="round"/></svg></span><span class="n">rêve</span><span class="h">entier ou en miettes</span></div>
+                  <div class="krow"><span class="g"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 5c4.5 0 8 4.2 9 7-1 2.8-4.5 7-9 7s-8-4.2-9-7c1-2.8 4.5-7 9-7z" stroke="#c9a86a" stroke-width="1.5"/><circle cx="12" cy="12" r="2.6" fill="#c9a86a"/></svg></span><span class="n">signe</span><span class="h">ce que le monde te tend</span></div>
+                  <div class="krow"><span class="g"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 16a4 4 0 0 1 .5-7.97A5.5 5.5 0 0 1 17 9a3.5 3.5 0 0 1 1 6.9H6z" stroke="#c9a86a" stroke-width="1.5" stroke-linejoin="round"/></svg></span><span class="n">rêverie</span><span class="h">les yeux ouverts, ailleurs</span></div>
+                  <div class="krow"><span class="g"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M4 15a8 8 0 0 1 16 0" stroke="#c9a86a" stroke-width="1.5"/><path d="M2 18h20" stroke="#c9a86a" stroke-width="1.5" stroke-linecap="round" opacity=".6"/></svg></span><span class="n">hypnagogie</span><span class="h">juste avant de dormir</span></div>
+                  <div class="krow"><span class="g"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M3 12c2-3 4-3 6 0s4 3 6 0 4-3 6 0" stroke="#c9a86a" stroke-width="1.5" stroke-linecap="round"/></svg></span><span class="n">frisson</span><span class="h">le corps répond avant toi</span></div>
+                  <div class="krow"><span class="g"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 3l1.8 5.4L19 10l-5.2 1.6L12 17l-1.8-5.4L5 10l5.2-1.6z" stroke="#c9a86a" stroke-width="1.3" stroke-linejoin="round"/><circle cx="18.5" cy="17.5" r="2" stroke="#c9a86a" stroke-width="1.2"/></svg></span><span class="n">synchro</span><span class="h">deux choses qui riment</span></div>
+                  <div class="krow"><span class="g"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4.2" stroke="#c9a86a" stroke-width="1.5"/><path d="M12 3v2.4M12 18.6V21M21 12h-2.4M5.4 12H3M18.4 5.6l-1.7 1.7M7.3 16.7l-1.7 1.7M18.4 18.4l-1.7-1.7M7.3 7.3 5.6 5.6" stroke="#c9a86a" stroke-width="1.4" stroke-linecap="round"/></svg></span><span class="n">jour</span><span class="h">le reste de ta journée</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="bbtns"><button class="ghost">merci</button><button class="more">lire +</button></div>
+          </div>
+        </div>
+        <div class="grain"></div>
+      </div>
+    </div>
+
+    <!-- 1.3 — la page -->
+    <div class="slot">
+      <div class="label">
+        <div class="n">Étage 3 — la page (défilable)</div>
+        <div class="t">Ce qu’on dépose ici</div>
+        <div class="s">Une vraie page : plein écran, retour, défilement. <b>Fais défiler dans le cadre</b> — sept sections, puis le pont vers les guides, puis « d’où ça vient ».</div>
+        <span class="badge ok">→ mène aux guides</span>
+      </div>
+      <div class="phone night">
+        <div class="scrollable">
+          <div class="deep">
+            <div class="back"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M15 5l-7 7 7 7" stroke="rgba(242,232,213,.55)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <h1>Ce qu’on dépose ici</h1>
+            <div class="intro">
+              <p>Sous le mot « rêve », il n’y a pas que les rêves. Il y a tout ce qui t’arrive sans que tu l’aies demandé — la nuit, et le jour aussi.</p>
+              <p>Tu n’as rien à classer sur le moment. Tu déposes ; l’app demande après.</p>
+            </div>
+            <div class="secs">
+              <section><div class="kick"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.5 6.5 0 0 0 9.8 9.8z" stroke="#c9a86a" stroke-width="1.5" stroke-linejoin="round"/></svg><h3>rêve</h3></div>
+                <p>Entier ou en miettes. Trois images floues valent un récit complet — c’est même le cas le plus courant.</p>
+                <p>Il n’y a pas de rêve trop petit, ni trop bête. Une porte qui ferme mal compte autant qu’un rêve où tu voles.</p>
+                <p>Le meilleur moment, c’est au réveil, avant le café. Après, il s’en va.</p></section>
+              <section><div class="kick"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M12 5c4.5 0 8 4.2 9 7-1 2.8-4.5 7-9 7s-8-4.2-9-7c1-2.8 4.5-7 9-7z" stroke="#c9a86a" stroke-width="1.5"/><circle cx="12" cy="12" r="2.6" fill="#c9a86a"/></svg><h3>signe</h3></div>
+                <p>Un corbeau qui se pose. Un mot qui revient trois fois dans la journée. Une phrase entendue dans le bus, pile sur ce que tu rumines depuis une semaine.</p>
+                <p>Rien de magique en soi. Ce qui compte, c’est que ça t’ait attrapé, toi, ce jour-là.</p>
+                <p>Dream ne te dira jamais ce que ça veut dire — un signe n’a pas de sens fixe. Mais à force d’en noter, les tiens finissent par former une langue que tu es seul à parler.</p></section>
+              <section><div class="kick"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M6 16a4 4 0 0 1 .5-7.97A5.5 5.5 0 0 1 17 9a3.5 3.5 0 0 1 1 6.9H6z" stroke="#c9a86a" stroke-width="1.5" stroke-linejoin="round"/></svg><h3>rêverie</h3></div>
+                <p>Les yeux ouverts. Dans le train, sous la douche, en regardant par la fenêtre — et te voilà ailleurs.</p>
+                <p>On la prend pour un rêve raté, ou pour du temps perdu. C’est autre chose : un mode éveillé, où les images viennent sans qu’on aille les chercher.</p>
+                <p>Note-la comme elle est venue. L’image, pas l’explication.</p></section>
+              <section><div class="kick"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M4 15a8 8 0 0 1 16 0" stroke="#c9a86a" stroke-width="1.5"/><path d="M2 18h20" stroke="#c9a86a" stroke-width="1.5" stroke-linecap="round" opacity=".6"/></svg><h3>hypnagogie</h3></div>
+                <p>Juste avant de tomber de sommeil, ou juste après avoir remonté. Un visage. Une phrase entendue très clairement. Des formes qui se déplacent.</p>
+                <p>Ça dure quelques secondes et ça s’efface presque toujours.</p>
+                <p>Si tu en attrapes une, écris vite : deux mots suffisent.</p></section>
+              <section><div class="kick"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M3 12c2-3 4-3 6 0s4 3 6 0 4-3 6 0" stroke="#c9a86a" stroke-width="1.5" stroke-linecap="round"/></svg><h3>frisson</h3></div>
+                <p>La chair de poule sur un morceau de musique. La gorge qui se serre. Le truc qui te traverse quand quelqu’un dit vrai.</p>
+                <p>Souvent, le corps a répondu avant que tu aies compris quoi.</p>
+                <p>Tu peux ne noter que ça : quand c’est arrivé, et devant quoi. C’est déjà un dépôt.</p></section>
+              <section><div class="kick"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M12 3l1.8 5.4L19 10l-5.2 1.6L12 17l-1.8-5.4L5 10l5.2-1.6z" stroke="#c9a86a" stroke-width="1.3" stroke-linejoin="round"/><circle cx="18.5" cy="17.5" r="2" stroke="#c9a86a" stroke-width="1.2"/></svg><h3>synchro</h3></div>
+                <p>Tu penses à quelqu’un, il appelle. Tu rêves d’un lieu, tu le croises le lendemain.</p>
+                <p>Le plus souvent c’est le hasard, et Dream ne prétendra jamais l’inverse. Mais certaines tombent pile au moment où tu te posais la question — celles-là, on s’en souvient dix ans après.</p>
+                <p>Ça n’annonce rien. Raconte-la dans l’ordre où c’est arrivé : c’est souvent là qu’elle s’éclaire toute seule.</p></section>
+              <section><div class="kick"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4.2" stroke="#c9a86a" stroke-width="1.5"/><path d="M12 3v2.4M12 18.6V21M21 12h-2.4M5.4 12H3M18.4 5.6l-1.7 1.7M7.3 16.7l-1.7 1.7M18.4 18.4l-1.7-1.7M7.3 7.3 5.6 5.6" stroke="#c9a86a" stroke-width="1.4" stroke-linecap="round"/></svg><h3>jour</h3></div>
+                <p>Ce qui n’entre dans aucune case. Une phrase de la journée. Un truc qui t’a serré. Une joie.</p>
+                <p>C’est la porte de sortie de toutes les autres : quand ça ne ressemble à rien de ce qui précède, dépose-le là.</p></section>
+            </div>
+            <div class="after">
+              <h2>Et après ?</h2>
+              <p>Rien n’est obligatoire. Un dépôt qui reste un dépôt, c’est déjà tout ce qu’on te demande.</p>
+              <p>Mais si tu veux aller plus loin avec l’un d’eux, Dream a des petites traversées : quelques questions, une à la fois, cinq minutes. Il y en a une pour écouter son corps, une pour retourner dans un rêve interrompu, une pour raconter une coïncidence.</p>
+              <button class="gbtn">voir les guides <span>→</span></button>
+            </div>
+            <div class="src"><p>D’où ça vient : kaïros est un mot grec — le moment juste, celui qu’on ne veut pas laisser filer. Robert Moss en a fait une pratique de tous les jours : lire les signes du jour comme on lit un rêve. Le mot synchronicité vient de Carl Jung, qui ne disait pas que ces coïncidences étaient magiques, mais qu’elles méritaient qu’on les regarde. Gaston Bachelard a écrit un livre entier pour défendre la rêverie, qu’on prenait pour du temps perdu. Et le chercheur Harry Hunt a montré qu’il n’y a pas une seule sorte de rêve, mais plusieurs — c’est pour ça qu’il y a plusieurs cases ici.</p></div>
+          </div>
+        </div>
+        <div class="grain"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════ 02 — LA FACE CŒUR ═══════════════════════ -->
+<section>
+  <h2><span class="num">02</span>La face Cœur — « idem, même principe »</h2>
+  <div class="lead">Même geste, même coquille, <b>en lumière de jour</b>. Le contenu, lui, n’est pas une taxonomie : côté Rêve les sept sont de vrais types (ils existent en base, le Journal filtre dessus). Côté Cœur, tout est une note du jour — « une joie », « une colère » sont des <b>registres de parole</b>, pas des cases. Leur dessiner des glyphes promettrait un classement qui n’existe pas. Des mots nus, donc.</div>
+  <div class="rule"></div>
+  <div class="frames">
+
+    <div class="slot">
+      <div class="label">
+        <div class="n">Étage 1 — l’écran</div>
+        <div class="t">La question devient la porte</div>
+        <div class="s">« comment tu te sens, là ? » — la copie de Tim, inchangée. Elle gagne le ⓘ et devient tapable. Le Cœur était à 9/9 et le reste.</div>
+        <span class="badge ok">9 / 9 — inchangé</span>
+      </div>
+      <div class="phone day">
+        <div class="glow d"></div><div class="edge l"></div>
+        <div class="bar"><span class="date">samedi 26 juillet</span></div>
+        <div class="focus"><div class="ember"></div></div>
+        <div class="words d">
+          <div class="word">le cœur</div>
+          <div class="trailwrap"><button class="trail">
+            <span>comment tu te sens, là ?</span>
+            <span class="dot"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#4a3b28" stroke-width="1.4"/><circle cx="12" cy="8" r="1.05" fill="#4a3b28"/><path d="M12 11.2v5" stroke="#4a3b28" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+          </button></div>
+          <div class="micro">maintiens · ou écris</div>
+        </div>
+        <div class="lower">
+          <div class="thread">
+            <div class="tcard"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4.2" stroke="#8f7134" stroke-width="1.5"/><path d="M12 3v2.4M12 18.6V21M21 12h-2.4M5.4 12H3" stroke="#8f7134" stroke-width="1.4" stroke-linecap="round"/></svg><span class="ttl">Ce que je n’ai pas dit hier</span><span class="dt">hier</span></div>
+          </div>
+          <div class="seclink"><span class="lnk grd">les grands rêves →</span><span class="lnk"><span class="fil"></span>rêve →</span></div>
+        </div>
+        <div class="nav">
+          <i class="on"><svg width="21" height="21" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4.2" stroke="#8f7134" stroke-width="1.5"/><path d="M12 3v2.4M12 18.6V21M21 12h-2.4M5.4 12H3M18.4 5.6l-1.7 1.7M7.3 16.7l-1.7 1.7M18.4 18.4l-1.7-1.7M7.3 7.3 5.6 5.6" stroke="#8f7134" stroke-width="1.4" stroke-linecap="round"/></svg>Cœur</i>
+          <i><svg width="21" height="21" viewBox="0 0 24 24" fill="none"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15.5H6.5A1.5 1.5 0 0 0 5 20V4.5z" stroke="rgba(43,33,21,.36)" stroke-width="1.5" stroke-linejoin="round"/><path d="M8.5 8h7M8.5 11.5h7" stroke="rgba(43,33,21,.36)" stroke-width="1.5" stroke-linecap="round"/></svg>Journal</i>
+          <i><svg width="21" height="21" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="2.4" stroke="rgba(43,33,21,.36)" stroke-width="1.5"/><circle cx="5" cy="6" r="1" fill="rgba(43,33,21,.36)"/><circle cx="19" cy="7" r="1" fill="rgba(43,33,21,.36)"/><circle cx="18" cy="17" r="1" fill="rgba(43,33,21,.36)"/><circle cx="6" cy="18" r="1" fill="rgba(43,33,21,.36)"/></svg>Univers</i>
+          <i><svg width="21" height="21" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="9" r="3.2" stroke="rgba(43,33,21,.36)" stroke-width="1.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0" stroke="rgba(43,33,21,.36)" stroke-width="1.5" stroke-linecap="round"/><circle cx="17" cy="10" r="2.4" stroke="rgba(43,33,21,.36)" stroke-width="1.4"/></svg>Groupe</i>
+        </div>
+        <div class="grain"></div>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="label">
+        <div class="n">Étage 2 — la bulle</div>
+        <div class="t">La parole, le chant, le cri, le murmure</div>
+        <div class="s">Le lead reprend <b>tes mots de VISION-CHANT §3</b>, mot pour mot. Le panneau est du parchemin, pas le panneau de nuit — c’est le point de la passe.</div>
+        <span class="badge ok">peau de jour</span>
+      </div>
+      <div class="phone day">
+        <div class="glow d"></div>
+        <div class="bar"><span class="date">samedi 26 juillet</span></div>
+        <div class="focus" style="opacity:.45"><div class="ember"></div></div>
+        <div class="words d" style="opacity:.45"><div class="word">le cœur</div></div>
+        <div class="scrim">
+          <div class="bubble">
+            <div class="row1">
+              <span style="margin-top:2px;flex-shrink:0;line-height:0"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#8f7134" stroke-width="1.4"/><circle cx="12" cy="8" r="1.05" fill="#8f7134"/><path d="M12 11.2v5" stroke="#8f7134" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+              <div style="flex:1;min-width:0">
+                <p class="lead">La parole, le chant, le cri, le murmure. Ce que ton cœur a à dire, là, maintenant :</p>
+                <div class="klist rows">
+                  <div class="krow"><span class="bul"></span><span class="hr">une joie</span></div>
+                  <div class="krow"><span class="bul"></span><span class="hr">une peur</span></div>
+                  <div class="krow"><span class="bul"></span><span class="hr">une colère, un cri</span></div>
+                  <div class="krow"><span class="bul"></span><span class="hr">un doute, une décision qui pèse</span></div>
+                  <div class="krow"><span class="bul"></span><span class="hr">une gratitude</span></div>
+                  <div class="krow"><span class="bul"></span><span class="hr">une douleur</span></div>
+                  <div class="krow"><span class="bul"></span><span class="hr">ou rien de précis — juste comment ça va</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="bbtns"><button class="ghost">merci</button><button class="more">lire +</button></div>
+          </div>
+        </div>
+        <div class="grain"></div>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="label">
+        <div class="n">Étage 3 — la page (défilable)</div>
+        <div class="t">Ce que le cœur a le droit de dire</div>
+        <div class="s">Six registres. Aucune promesse que l’app ne tient pas : les quatre verbes du Chant ne sont pas construits, ils ne sont donc pas décrits.</div>
+        <span class="badge ok">→ guides du soir</span>
+      </div>
+      <div class="phone day">
+        <div class="scrollable">
+          <div class="deep">
+            <div class="back"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M15 5l-7 7 7 7" stroke="#4a3b28" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <h1>Ce que le cœur a le droit de dire</h1>
+            <div class="intro">
+              <p>Il n’y a pas de bonne réponse à « comment tu te sens ». Il y a la tienne, aujourd’hui, telle qu’elle sort.</p>
+              <p>Tu enregistres pour toi d’abord. Rien ne part nulle part tant que tu ne l’as pas décidé.</p>
+            </div>
+            <div class="secs">
+              <section><div class="kick"><h3>une joie</h3></div>
+                <p>Elle mérite d’être dite autant que le reste. On note ce qui coince et on oublie de garder ce qui va bien — six mois plus tard, il n’en reste rien.</p></section>
+              <section><div class="kick"><h3>une peur, un doute</h3></div>
+                <p>Ce qui t’empêche de dormir. La décision que tu remets à demain depuis trois semaines.</p>
+                <p>Le dire à voix haute ne la règle pas. Ça lui donne sa vraie taille.</p></section>
+              <section><div class="kick"><h3>une colère, un cri</h3></div>
+                <p>La rage qui n’a pas trouvé où aller. L’injustice que tu as encaissée sans rien dire.</p>
+                <p>Elle a le droit d’exister ici, sans qu’on te demande de la calmer d’abord.</p></section>
+              <section><div class="kick"><h3>une douleur</h3></div>
+                <p>Ce qui fait mal. On ne te dira pas que ce n’est rien, ni que ça passera.</p>
+                <p>Tu déposes, et c’est gardé.</p></section>
+              <section><div class="kick"><h3>une gratitude</h3></div>
+                <p>Merci à qui, merci de quoi. Ça se dit mal sur le moment — ici, ça peut se dire mal.</p></section>
+              <section><div class="kick"><h3>ou rien de précis</h3></div>
+                <p>Certains jours, il n’y a pas de nouvelle. « Ça va, c’est plat » est un dépôt valable.</p>
+                <p>Relu dans trois mois, il dira quelque chose.</p></section>
+            </div>
+            <div class="after">
+              <h2>Et après ?</h2>
+              <p>Après un dépôt, Dream propose de parler avec toi de ce que tu viens de dire. Tu peux aussi ne rien faire : l’avoir dit, c’est déjà quelque chose.</p>
+              <p>Et si tu veux une traversée guidée, il y en a pour le soir — relire sa journée, poser une intention avant de dormir, se rendormir quand la nuit s’est cassée.</p>
+              <button class="gbtn">voir les guides <span>→</span></button>
+            </div>
+          </div>
+        </div>
+        <div class="grain"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════ 03 — LE BUDGET ═══════════════════════ -->
+<section>
+  <h2><span class="num">03</span>Le compte d’emplacements — et la réponse honnête</h2>
+  <div class="lead">La question posée était : <b>est-ce que la bulle rend de la place ?</b> Réponse franche : <b>non, et elle n’en prend pas non plus</b> — parce que la traîne n’a jamais occupé d’emplacement à elle. Elle vit dans le n°3, « 1 mot », depuis hier. Ce que la bulle rend, ce n’est pas un slot, c’est de <b>l’attention</b> : la traîne n’a plus à porter le périmètre toute seule, donc elle peut rester courte au lieu de grossir.</div>
+  <div class="rule"></div>
+  <table>
+    <tr><th>n°</th><th>§15.1</th><th>Face Rêve — après C1</th><th>Face Cœur — après C1</th></tr>
+    <tr><td>1</td><td>1 méta discrète</td><td>la date</td><td>la date</td></tr>
+    <tr><td>2</td><td>1 foyer</td><td>la lune</td><td>la braise</td></tr>
+    <tr><td>3</td><td><b>1 mot</b></td><td class="ok">« rêve » + sa traîne, <b>devenue tapable</b></td><td class="ok">« le cœur » + sa traîne, <b>devenue tapable</b></td></tr>
+    <tr><td>4</td><td>1 micro-ligne d’usage</td><td>maintiens · ou écris (+ 📷)</td><td>maintiens · ou écris</td></tr>
+    <tr><td>5</td><td>1 geste — le foyer EST le bouton</td><td>anneau de maintien</td><td>anneau de maintien</td></tr>
+    <tr><td>6-7</td><td>≤ 2 liens secondaires</td><td>« le cœur → » — 1 seul, une place reste libre</td><td>« les grands rêves » · « rêve → » — plein</td></tr>
+    <tr><td>8</td><td>fil ≤ 2 items</td><td>2 derniers dépôts</td><td>2 derniers dits</td></tr>
+    <tr><td>9</td><td>nav</td><td>lune / « Rêve »</td><td>soleil / « Cœur »</td></tr>
+  </table>
+  <div class="note"><b>9 / 9 sur les deux faces, comme hier.</b> La bulle et la page ne sont pas des éléments d’écran : ce sont des états ouverts par un geste, comme la fiche ⓘ. Le test de §15.1 n’est pas « combien de nœuds dans le DOM » mais « combien de choses se disputent l’attention au repos » — et au repos, l’écran est celui d’hier.</div>
+  <div class="note">La conséquence pratique, et elle compte pour la suite : <b>le Cœur reste plein.</b> C’était déjà écrit dans §16.4 ; ce n’est pas cette passe qui le débloque. Le prochain ajout côté Cœur devra toujours en retirer un.</div>
+</section>
+
+<!-- ═══════════════════════ 04 — LES QUESTIONS ═══════════════════════ -->
+<section>
+  <h2><span class="num">04</span>Ce qui t’attend</h2>
+  <div class="lead">Quatre questions fermées. Chacune se règle en une réponse, et rien n’est bloquant pour lire le reste.</div>
+  <div class="rule"></div>
+  <div class="qs">
+    <div class="q">
+      <div class="qt">Q1 — Le mot « protocoles »</div>
+      <div class="qb">Tu dis « ça amène même aux protocoles ». J’ai tranché : <b>tes « protocoles » = les 10 guides vivants</b> (<span style="font-family:var(--mono);font-size:.9em">guides.ts</span>), pas le <span style="font-family:var(--mono);font-size:.9em">PROTO_CATALOG</span> supprimé ce matin. Preuve : les guides <i>sont</i> ce catalogue, dé-jargonné — « Écouter son corps » ← Focusing/Gendlin, « Parler à une image » ← Dream Tending, « Raconter la coïncidence » ← synchronicity story. Même matière, autres mots. Le mot « protocole » est banni de l’écran depuis la refonte MVP, je ne l’ai donc pas ressuscité.</div>
+      <div class="opt"><b>(a)</b> juste, on n’en parle plus &nbsp;·&nbsp; <b>(b)</b> il manquait quelque chose dans l’ancien catalogue, je te dis quoi &nbsp;·&nbsp; <b>(c)</b> je veux relire ce qu’il contenait (les 10 sont listés dans RAPPORT-C1 §2)</div>
+    </div>
+    <div class="q">
+      <div class="qt">Q2 — La traîne : elle reste, elle raccourcit, ou elle tombe ?</div>
+      <div class="qb">Tu écrivais « la traîne devient peut-être inutile, ou se réduit encore ». Je l’ai <b>gardée telle quelle</b> et rendue tapable. Raison : elle est <i>passive</i> — on la lit sans rien faire. Le ⓘ est <i>actif</i> — il faut le vouloir. À 6 h du matin, personne ne tape un ⓘ. La supprimer rendrait le périmètre invisible à qui n’a pas la curiosité, c’est-à-dire au rêveur du premier jour.</div>
+      <div class="opt"><b>(a)</b> garder « ou un signe, un frisson… » &nbsp;·&nbsp; <b>(b)</b> raccourcir à « ou un signe… » &nbsp;·&nbsp; <b>(c)</b> couper la traîne, ne garder que le ⓘ à côté du mot</div>
+    </div>
+    <div class="q">
+      <div class="qt">Q3 — Un tap sur un type doit-il lancer son guide ?</div>
+      <div class="qb">Aujourd’hui la page mène aux guides par <b>un seul lien en bas</b>. Le tap-par-type serait plus riche — mais il y a un piège réel : un guide lancé sans rêve déposé enregistre le résultat en <b>note du jour</b>. « Raconter en entier » lancé depuis la page classerait donc un rêve comme une note de journée. Ça se règle, mais c’est un chantier, pas une ligne.</div>
+      <div class="opt"><b>(a)</b> un lien en bas suffit &nbsp;·&nbsp; <b>(b)</b> oui, tap-par-type — je prends le chantier du classement &nbsp;·&nbsp; <b>(c)</b> tap-par-type seulement là où c’est sûr (frisson, synchro, rêverie)</div>
+    </div>
+    <div class="q">
+      <div class="qt">Q4 — Le bloc « d’où ça vient » sur la page du Rêve</div>
+      <div class="qb">Il nomme quatre personnes : Robert Moss, Carl Jung, Gaston Bachelard, Harry Hunt. Ce n’est pas de l’érudition décorative — la politique éthique de la Forêt demande que <b>l’attribution remonte jusqu’à l’utilisateur</b> quand on s’appuie sur un auteur vivant ou une tradition, et le cluster Moss est flagué. C’est aussi la seule chose de la page qui « fait savant ».</div>
+      <div class="opt"><b>(a)</b> garder tel quel &nbsp;·&nbsp; <b>(b)</b> garder mais raccourcir de moitié &nbsp;·&nbsp; <b>(c)</b> le replier derrière un « d’où ça vient » à déplier</div>
+    </div>
+  </div>
+</section>
+
+</div>
+</body>
+</html>
