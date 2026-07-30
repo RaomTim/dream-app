@@ -10,6 +10,119 @@
 
 ---
 
+### 2026-07-30 — 🔴 SEPT PRINCIPES AU CANON, ET LE VIRAGE DU 27/07 — Yeshua (Opus)
+
+> **Ce qui change** : le canon a désormais un **principe-souche au-dessus des trois méta-principes** (`1_BIBLE` §2.0), six principes dérivés avec chacun sa source lue et son test qui échoue (§3.15), et deux écrans renommés. **Rien n'est en code.** C'est une session de documents.
+> **Ce qui reste ouvert** : les quatre points du §5 ci-dessous, plus les deux **[À TRANCHER — Tim]** ajoutés à `2_DESIGN` (n°8 : quel élément meurt pour loger la sortie humaine · n°9 : « Weave » en anglais dans l'app FR).
+
+---
+
+#### 1. LES SEPT PRINCIPES — ce qui a été écrit, et où
+
+Validés par Tim le 27/07, écrits au canon le 30/07. La règle du 26/07 a été appliquée sans exception : **un principe qui n'a pas de test qui échoue quand on le viole n'est pas un principe, c'est un vœu.** Chacun porte donc sa source lue **et** sa vérification.
+
+| # | Principe | Source lue | Où il vit |
+|---|---|---|---|
+| **1** | **« Être vu est nécessaire. Être caractérisé déforme. »** | Hillman, *The Soul's Code* — *esse est percipi* | `1_BIBLE` **§2.0**, au-dessus des trois méta-principes |
+| 2 | **Le biais d'ascension** | Weller, *The Wild Edge of Sorrow*, p. 21 | `1_BIBLE` §3.15.1 · durcissement §8.2 · `2_DESIGN` anti-pattern 26 |
+| 3 | **L'insistance**, le troisième miroir | mesure du corpus 26/07 + Kalsched (figure duplex) | `1_BIBLE` §3.15.2 · `2_DESIGN` §17.4 |
+| 4 | **La loi des 16 fruits** | code des 16 fruits, vérifié entrée par entrée | `1_BIBLE` §3.15.3 · `2_DESIGN` §17.1, anti-pattern 27 |
+| 5 | **Le miroir est beau par montage** | Bachelard + §0.1 | `1_BIBLE` §3.15.4 · `2_DESIGN` §17.2-17.3, anti-pattern 28 |
+| 6 | **La sortie vers un humain** | Weller p. 74 / p. 116 · Kalsched p. 214 | `1_BIBLE` §3.15.5 · durcissement §8.7 · `2_DESIGN` §17.6, anti-pattern 30 |
+| 7 | **Le 18ᵉ fruit — « Le Fil »** | méta-plénière du 19/04 | `1_BIBLE` §3.15.6 |
+
+**Le n°1 est la souche, et c'est structurel, pas rhétorique.** Tim, verbatim : *« Ça résume très profondément la nature de l'app. Il faut le canoniser. »* Les six autres en découlent ou le servent — c'est écrit comme tel en fin de §2.0, et c'est ce qui justifie de l'avoir mis **au-dessus** de P-Zéro, P-Inversion et P-Tenir plutôt qu'à côté.
+
+**Les quatre arbitrages qui vont avec** (`1_BIBLE` §3.15.7) :
+- **Traçabilité** — la question était ouverte depuis le 26/07, elle est tranchée : *la prose peut respirer, à condition que les rêves entiers dont elle est faite soient ouvrables juste en dessous, dans le texte du rêveur, avec leurs dates.* Pas une note de bas de page : **un accès**. La formule qui tranche : **la liberté créative porte sur *comment on assemble*, jamais sur *ce qu'on assemble*.**
+- **Interdit 10 révisé** — la porte somatique **ne doit pas être un écran de plus**. Le principe est gardé, la forme change : c'est le premier geste du miroir lui-même, dans le même écran. Et **le non-tracking de la fermeture est maintenu et assumé** — on accepte de ne jamais savoir si la protection sert. C'est un coût consenti, pas un oubli.
+- **« Qu'il repose »** — le geste qui manquait entre tout garder et tout brûler. Le rêve reste au journal, lisible, marqué ; il cesse seulement d'être cité par le miroir. Réversible en un tap, sans justification, sans notification, sans confirmation.
+- **Le fil « rêve »** — Tim tranche : *« ça touche plutôt au cœur »*. **Ça contredit `FAISABILITE-MIROIR` §4.2**, qui y voyait un défaut de méthode (*« un miroir de la psyché qui parle surtout de la façon dont on tient le miroir a raté quelque chose »*). L'arbitrage de Tim prime ; la conclusion du rapport est caduque sur ce point, et il reste au dossier avec sa mesure.
+
+**Le nommage** — critère qui a tranché : **un acte, pas un lieu.** C'est la leçon directe de l'autopsie des cercles (*« on a construit des lieux, pas des actes »*).
+
+| Avant | Après | En anglais |
+|---|---|---|
+| Le Mur | **Le Courant** | *Current* |
+| Les Groupes | **Weave** | *Weave* — « Dream Weaving Circles » sur la page |
+| Journal | *inchangé* — **« Reçus ☾ / Dits ♥ » conservés** (déjà des participes, donc déjà des actes) | — |
+
+---
+
+#### 2. 🌍 LE VIRAGE DU 27/07 — le reproche de Tim, et pourquoi il est fondé
+
+Il faut l'écrire sans l'adoucir, parce que c'est la critique la plus utile reçue sur ce projet depuis avril.
+
+**Le reproche.** La doctrine s'est construite sur Hillman, Kalsched, Gendlin, Weller, Jung, IFS — **clinique occidentale du XXᵉ siècle** — en traitant les traditions comme un **risque éthique à gérer** plutôt que comme une **source de sagesse de design**. C'est vrai, c'est vérifiable dans `DOCTRINE-MIROIR` §11 (les 18 digests lus, tous occidentaux sauf par citation), et ça n'a été remarqué par aucun des huit agents du 26/07.
+
+**La raison structurelle, et c'est elle qui commande la suite** :
+
+> **Toute la psychologie des profondeurs occidentale suppose que le rêve appartient à une psyché individuelle.**
+
+C'est exactement l'hypothèse qui casse dès qu'on veut du **rêve partagé en groupe avec une intention** — c'est-à-dire dès qu'on veut Weave. Sur le rêve collectif, le canon occidental n'a presque rien à dire ; **les traditions ont tout, parce que chez elles le partage *est* la pratique.** Ce n'est donc pas une lacune de bibliographie qu'on comble en ajoutant trois livres : c'est une lacune d'**ontologie**, et elle explique pourquoi les cercles n'ont jamais démarré. On a essayé de construire du collectif avec une doctrine bâtie sur l'individu.
+
+**🔴 Et le trou qui est un problème d'intégrité avant d'être une lacune.**
+
+> **Zéro épistémologie du rêve d'Afrique australe dans la Forêt** — alors qu'INFUSE vend des plantes de rêve xhosa/zulu (tradition **Ubulawu**).
+
+Le commerce repose sur cette tradition et la doctrine de l'app n'en contient rien. Ce n'est pas une ressource manquée, c'est un déséquilibre entre ce qu'on prend et ce qu'on connaît. À combler en priorité, avec des auteurs issus de la tradition ou de l'ethnographie académique sourcée — **jamais un « manuel »**.
+
+**⚠️ Une correction à porter à Tim, sur un point qu'il croyait acquis.** **Les Senoi ne sont pas Moss.** Le matériel Senoi vient de **Kilton Stewart** et il est **académiquement tenu pour largement fictif** (ruling déjà en base sur `kaplan-williams-jungian-senoi`). Moss, c'est l'Active Dreaming, adossé à l'iroquois, avec bénédiction d'un aîné (Tom Porter) — bénédiction qu'INFUSE, en source secondaire, n'a pas. Les deux ne doivent jamais être cités dans la même phrase comme si c'était le même adossement.
+
+**Ce que le virage ne remet pas en cause** : les sept principes ci-dessus tiennent, parce qu'ils portent tous sur ce que l'app **n'a pas le droit de faire** à un rêveur — et sur ce terrain la clinique occidentale est précisément la source la plus qualifiée, puisque c'est elle qui a produit les dégâts qu'elle décrit. **Ce que le virage ouvre, c'est tout le versant collectif, sur lequel le canon actuel est muet.**
+
+---
+
+#### 3. LES CONTRADICTIONS TROUVÉES ENTRE DOCUMENTS CANONIQUES, ET COMMENT ELLES SONT TRANCHÉES
+
+Plusieurs agents ont écrit dans ces documents en parallèle le 26/07. Sept contradictions en sont sorties. **Aucune n'est laissée ouverte sans le dire.**
+
+| # | Contradiction | Résolution |
+|---|---|---|
+| 1 | `1_BIBLE` §3.4.1 affirmait que le tour de parole *« est structurellement le protocole d'Ullman »*. **Ullman n'est pas dans la Forêt** — zéro digest, item non digéré de `BOOK-LIST-DREAM.md`. | **Affirmation retirée.** Elle est probablement juste, elle n'est pas sourcée, donc elle ne se cite pas. Refondée sur **Taylor** (le seuil de 3 personnes) et **Moss** (le partage comme événement rare), qui sont lus. Digestion d'Ullman = première acquisition si Weave avance. |
+| 2 | `DOCTRINE-MIROIR` §0 : *« une app peut faire la contenance »*. Weller p. 73-74 dit l'inverse — l'app produit exactement le **mode d'échec** qu'il décrit, le rêveur devenu son propre contenant. | **Corrigé dans la doctrine.** L'app ne fait ni contenance ni libération : **elle garde et elle rend.** C'est un troisième terme que Weller ne nomme pas, et il valait mieux l'inventer honnêtement que s'attribuer le sien. |
+| 3 | `DOCTRINE-MIROIR` §8.2 : *« aucun livre de la Forêt ne fonde ce §8 »*. Faux sur un point — **Weller p. 92** fonde textuellement l'asymétrie de disponibilité, via la *premature revelation*. | **Note d'honnêteté allégée d'un cran**, sur ce point seulement. Le reste du §8 demeure non mesuré et le dit. |
+| 4 | `DOCTRINE-MIROIR` §3.1 mettait entre guillemets une phrase de Weller qui n'est pas un verbatim. | **Guillemets retirés**, remplacés par la thèse réelle et sa page. Une citation inventée dans un document qui interdit d'inventer aurait été le pire endroit possible. |
+| 5 | `1_BIBLE` §17.1 (Lucid Dream) listait un **« streak »** dans ses statistiques, alors que §8.2 interdit les streaks absolument. | **Exception nommée et bornée**, plutôt que niée : les stats de lucidité sont un tableau de bord d'**entraînement**, pour soi seul, jamais comparatif, jamais sur la matière onirique. **Si elles débordent un jour sur le contenu des rêves, elles tombent sous l'interdit.** |
+| 6 | Deux modèles économiques coexistaient depuis trois mois : `2_DESIGN` §11.bis.20.22 (7 €/mois après 14 jours) et `1_BIBLE` §9 (abonnements + crédits Forge, mega-freemium, 26/07). | **`1_BIBLE` §9 fait foi.** Le chiffre d'avril est marqué périmé sur place plutôt que supprimé, pour qu'on ne le recite pas. |
+| 7 | `2_DESIGN` §9 portait **deux fois le même anti-pattern** sous deux noms quasi identiques (n°6 `PROPHETIC_NOTIFICATION_PUSH` et n°22 `PROPHETIC_PUSH_NOTIFICATION`). | **Fusionnés dans le n°6.** Le n°22 garde une ligne qui dit où il est parti — un anti-pattern qui disparaît sans trace revient six mois plus tard. |
+
+---
+
+#### 4. LA COMPRESSION — ce qui a été retiré, et pourquoi
+
+Règle INFUSE : à chaque révision, retirer au moins autant qu'ajouter.
+
+| Doc | Avant | Après | Solde |
+|---|---|---|---|
+| `1_BIBLE.md` | 1458 | 1531 | **+73** (180 ajoutées, 107 retirées) |
+| `2_DESIGN.md` | 2948 | 3004 | **+56** (132 ajoutées, 76 retirées) |
+| `4_LOG.md` | 4707 | 4820 | **+113** — c'est cette entrée. Un log est additif par construction (« ANTI-PERTE TOTAL »). |
+| `DOCTRINE-MIROIR.md` | 591 | 632 | **+41** (60 ajoutées, 19 retirées) |
+
+**Les coupes, justifiées une par une :**
+- `1_BIBLE` **§18 et §19 fusionnés** — les deux refontes d'avril étaient racontées une troisième fois, après `4_LOG` et après `2_DESIGN`, sans rien ajouter.
+- `1_BIBLE` **§3.5.4 dédoublonné avec §6.1** — douze voix décrites deux fois dans le même document. Ne restent que les quatre qui sont propres au moteur.
+- `1_BIBLE` **§3.1.ter** — les trois exemples de polyphonie sont partis vers `2_DESIGN` : ce sont des exemples de **ton**, ils ne portaient aucun arbitrage. Le titre `[ABSORBÉ]` était trompeur : la section porte SILENCE_AS_FEATURE et la règle du test, elle n'est pas absorbée du tout.
+- `1_BIBLE` **§4** ramené à ce qui n'est pas déjà dans §3.13, et **§14** transformé de synthèse en index.
+- `2_DESIGN` **§11.bis.20.20** — une roadmap de sprints exécutée en avril. *Une roadmap exécutée survit dans un document de design comme une carte périmée qu'on continue de lire.* Seul le critère de merge est gardé (pas de merge sous 7/10 chez Tim).
+- `2_DESIGN` **§11.bis.20.22** compressé, dont le pricing marqué périmé.
+
+**Et l'aveu.** Le solde reste positif de 129 lignes sur la Bible et le Design, et de 41 sur la doctrine. **Je n'ai pas trouvé de coupe honnête au-delà.** Sept principes qui portent chacun leur source lue et leur vérification exécutable coûtent ce qu'ils coûtent, et les couper pour tenir un compte de lignes aurait été exactement le geste que la règle du 26/07 interdit — écrire de la morale au lieu de construire un garde-fou. Les vraies réserves de compression restantes sont **`2_DESIGN` §7.7.bis** (103 lignes de spec d'écrans de cercles qui n'ont **jamais servi** et qui vont être refondus sous Weave) et **§7.8** (128 lignes). Les deux demandent un arbitrage de Tim, pas une décision d'agent.
+
+---
+
+#### 5. CE QUI RESTE OUVERT POUR TIM
+
+1. **[À TRANCHER n°8]** L'écran du Cœur est à **9 éléments sur 9**. La sortie vers un humain en réclame un. **Lequel des neuf meurt ?** Recommandation : le second lien secondaire. À décider avant de coder.
+2. **[À TRANCHER n°9]** **« Weave » reste en anglais** dans l'app française. Assumé faute d'équivalent français qui soit un acte (« Tissage » est une chose, « Tisser » un infinitif nu). À valider sur son téléphone.
+3. **Le plancher de corpus** (`DOCTRINE-MIROIR` §6.3) reste sans mesure. La piste du 27/07 le résout mieux qu'un seuil : **un parcours initiatique avant les miroirs** — ce n'est plus un chiffre arbitraire, c'est une aventure traversée.
+4. **La grande recherche sur le rêve collectif** (§2 ci-dessus) est **bloquée par un préalable** : plusieurs livres majeurs sont en base sous une forme illisible (`hillman-dream-and-the-underworld` : 231 chunks, **254 mots au total**, espaces perdus à l'extraction). Tant que ce n'est pas réparé, toute lecture profonde de ces livres est impossible. **⚠️ Ce que ça fait à la doctrine du miroir : rien, et il faut le dire précisément.** `DOCTRINE-MIROIR` est fondée sur les **digests** Tier 1, qui sont intacts — pas sur `forest_chunks`. Ce qui est bloqué, c'est l'**amplification** future depuis le texte intégral, pas ce qui est écrit.
+
+> **Le fait le plus réutilisable de cette semaine, et il vient de la lecture Weller/Kalsched** : `forest_chunks` contient le **texte intégral** de nombreux livres, avec les **numéros de page**, interrogeable en SQL. Aucun agent avant le 26/07 au soir ne s'en était servi — tous s'arrêtaient au digest. **Chaque futur agent Forêt doit interroger `forest_chunks` avant de conclure que « le digest ne descend pas à ce niveau ».** C'est de là que viennent toutes les paginations de cette entrée.
+
+---
+
 ### 2026-07-26 — 🔴 PERTE D'UN RÊVE, FLOTTE DE 8 AGENTS, REFONTE DES CANONIQUES — Yeshua (Fable 5) + 8 agents Opus/Sonnet
 
 > **Déclencheur** : Tim enregistre un rêve de 8 minutes au réveil. Il est perdu. Définitivement.

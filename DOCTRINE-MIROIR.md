@@ -1,9 +1,13 @@
 # DOCTRINE DU MIROIR — être vu sans être assigné
 
-> Écrit le 2026-07-26, avant toute ligne de code. Destiné à devenir une section de `1_BIBLE.md`.
+> Écrit le 2026-07-26, avant toute ligne de code.
 > Répond à la demande de Tim du 26/07 (« l'IA doit apprendre à me connaître à travers mes rêves… une sorte de miroir magnifique »).
-> Fondé sur 18 digests Tier 1 réellement ouverts en session (liste et limites au §10), sur `forest/dream_alpha/safety-checks.json`, et sur le canon existant (`1_BIBLE` §0.1, §2.2, §3.5, §3.13, §3.14, §5, §8).
+> Fondé sur 18 digests Tier 1 réellement ouverts en session (liste et limites au §11), sur `forest/dream_alpha/safety-checks.json`, et sur le canon existant (`1_BIBLE` §0.1, §2.2, §3.5, §3.13, §3.14, §5, §8).
 > **Aucune ligne de ce document n'est une prescription de code. C'est la loi que le code devra passer.**
+>
+> **🔴 Statut au 2026-07-30 — ce document n'est plus seul.** Sept de ses thèses sont **passées au canon** : `1_BIBLE` **§2.0** (la souche : *être vu est nécessaire, être caractérisé déforme*) et **§3.15** (les six principes dérivés, avec leur source et leur test). **En cas de divergence, `1_BIBLE` fait foi** ; ce document reste le lieu du raisonnement détaillé et des sources.
+> **Révisions du 30/07, toutes signalées sur place** : §0 (l'erreur sur la contenance, corrigée) · §3.1 (une citation de Weller qui n'en était pas une) · §7 interdit 5 (justification) · §7 interdit 10 (forme révisée) · §8.1b et §8.1d (arbitrés par Tim) · §8.2 (allégée d'un cran) · §13 (tensions closes et tensions neuves).
+> **Une limite de source à connaître avant de citer plus loin** : cette doctrine est fondée sur les **digests** Tier 1, qui sont sains. Le **texte intégral** de plusieurs livres qu'elle cite — dont `hillman-dream-and-the-underworld` — est en base sous une forme illisible (espaces perdus à l'extraction). Rien de ce qui est écrit ici n'en dépend ; toute **amplification future** depuis le texte intégral en dépend, et attend la réparation.
 
 ---
 
@@ -14,7 +18,13 @@ Sa phrase centrale n'est pas « analyse-moi ». C'est *« reflète ma psyché da
 - **Splendeur** — le miroir doit être beau. Un miroir juste et laid a raté. C'est une exigence de forme, et elle a une source : Bachelard, *La Poétique de la Rêverie* — *« toute prise de conscience est un accroissement de conscience, une augmentation de lumière »*, et *« l'image cosmique donne le tout avant les parties »*. Le miroir doit **augmenter**, et il doit **ouvrir par une image, jamais par une liste**.
 - **Profondeur** — il doit aller chercher loin dans le corpus, pas dans les sept derniers jours.
 - **Tendresse** — c'est la spécification la plus difficile et la plus facile à rater. La tendresse n'est pas un adjectif dans la copy. C'est la **porte de sortie qui ne demande rien**. Voir §4.5 et l'exemple encadré au §8.
-- **Fragilité** — il doit pouvoir approcher ce qui est fragile **sans le nommer fragile**. Weller (*The Wild Edge of Sorrow*) : le deuil ne se métabolise pas seul, il demande *contenance* et *libération*. Une app peut faire la contenance. Elle ne peut pas faire la libération, qui est communautaire et corporelle. **Elle doit savoir laquelle des deux elle est en train de faire.**
+- **Fragilité** — il doit pouvoir approcher ce qui est fragile **sans le nommer fragile**. Weller (*The Wild Edge of Sorrow*) : le deuil ne se métabolise pas seul, il demande *contenance* et *libération*.
+
+> **🔴 Correction du 30/07, sur lecture du texte intégral.** Ce paragraphe affirmait : *« une app peut faire la contenance, elle ne peut pas faire la libération »*. **C'est faux, et c'était faux dans le sens qui nous arrangeait.** Chez Weller (p. 73-74), la contenance est précisément ce qui permet de *lâcher* — c'est **un endroit où tomber**. Une app ne rattrape personne. Ce qu'elle produit, si elle produit quelque chose, est exactement le mode d'échec que Weller nomme p. 74 : *« par défaut, nous devenons le contenant nous-mêmes »*, et le chagrin recycle sans se libérer.
+>
+> **Une app ne peut faire ni l'une ni l'autre.** Ce qu'elle peut faire est un troisième terme que Weller ne nomme pas, et qu'il valait mieux inventer honnêtement que lui emprunter : **elle garde la mémoire de ce qui a été déposé, et le rend au bon moment.** C'est un service de garde, pas un contenant. C'est déjà ce que dit `1_BIBLE` §0.1 — *« le soutien vient de sa mémoire, pas de notre éloquence »*. La doctrine avait raison ailleurs et s'était sur-vendue ici.
+>
+> Conséquence directe, et c'est le principe 6 : **sur la matière lourde, la sortie vers un humain est une condition d'existence du mode** (§3.15.5 de `1_BIBLE`).
 
 Et la peur, sous le garde-fou qu'il pose lui-même : il a peur d'**être figé**. Assigné à un diagnostic. Ou pire : de s'entendre dire qu'il a échoué à guérir. Sa phrase *« si un nouveau rêve vient réveiller la même blessure »* n'est pas une demande de fonctionnalité. C'est une demande de garantie.
 
@@ -148,7 +158,8 @@ Six conditions cumulatives. Si une seule manque, ce mode ne s'ouvre pas.
 - **von Franz** : la compensation est une **régulation permanente**, le système immunitaire de la psyché. Un système immunitaire ne finit pas son travail.
 - **Kalsched, et c'est la phrase qui compte le plus pour la peur de Tim** : le Protecteur/Persécuteur **n'est pas éducable**. Il fonctionne au niveau de conscience magique qu'il avait au moment du trauma d'origine, et identifie toute nouvelle occasion de vie comme une menace. **Le retour d'un motif n'est donc pas la preuve d'un échec du rêveur : c'est la propriété structurelle de la défense.**
 - **Gendlin** : les rêves sont des *« commentaires du moment »*, des relevés de baromètre — la même personne peut faire des rêves contradictoires deux nuits de suite selon la journée. **Un retour isolé ne prouve rien sur l'ensemble.**
-- **Weller** : le deuil est une **compétence**, un apprentissage de toute une vie. *« La tâche n'est pas de surmonter le chagrin mais de devenir de plus en plus habile à le digérer. »* **Le dépassement n'a jamais été l'objectif.**
+- **Weller** : le deuil est une **compétence**, un apprentissage de toute une vie — la tâche n'est pas de surmonter le chagrin, mais de devenir de plus en plus habile à le porter et à le digérer. **Le dépassement n'a jamais été l'objectif.** *(⚠️ Correction du 30/07 : cette thèse était donnée ici **entre guillemets**, comme un verbatim. Ce n'en est pas un — c'est la thèse du livre, restituée. Les guillemets sont retirés. Dans un document qui interdit d'inventer, une citation fabriquée était l'erreur la plus coûteuse possible.)*
+- **Weller encore, et c'est le principe 2 du canon** : p. 21, le **biais d'ascension** — une culture qui ne montre que de la montée oblige à lire ses propres descentes comme pathologiques, *« et à croire que nous échouons »*. C'est la raison clinique de l'interdiction de toute courbe (`1_BIBLE` §3.15.1).
 
 ### 3.2 La règle, et ce qu'elle interdit
 
@@ -317,14 +328,20 @@ Douze interdits. Chacun porte sa source lue et **sa vérification qui échoue qu
 | 2 | **Un attribut de personne** (« tu es », « tu as tendance à », « ton besoin de ») | Hillman *Soul's Code* (la mauvaise perception déforme) · §3.14.1 | Porte lexicale sur la sortie : `tu es` · `tu as tendance` · `ton rapport à` · `ta peur de` · `ton besoin de` · `tu cherches à`. Détection → blocage. |
 | 3 | **Le mot « ombre »**, et ses cousins moraux | `safety-checks.json` (`never_say: "C'est ton ombre"`) · Schwartz | Lexique banni : ombre · part sombre · côté obscur · refoulé · ton inconscient te dit. Blocage. |
 | 4 | **Un état de résolution**, en mot ou en colonne | Jung (enantiodromia, *longissima via*) · Kalsched (protecteur non éducable) · §8.8 | Assertion de schéma (aucun champ de résolution/progression) **+** porte lexicale (dépassé · réglé · guéri · résolu · étape · phase). |
-| 5 | **Un lien de cause** | §8.8 · Kalsched (le persécuteur n'est PAS l'agresseur intériorisé — le lien serait faux) | Porte lexicale : `parce que` · `à cause de` · `cela vient de` · `est lié à ton`. Blocage. |
+| 5 | **Un lien de cause** | §8.8 · Kalsched — ⚠️ *corrigé 30/07* : le texte dit que l'assimilation du persécuteur à l'agresseur intériorisé est **« only half correct »**, pas « fausse ». **L'interdit tient, sa justification change** : un lien causal serait à moitié vrai, donc invérifiable, donc indéfendable devant le rêveur. | Porte lexicale : `parce que` · `à cause de` · `cela vient de` · `est lié à ton`. Blocage. |
 | 6 | **Parler à la place d'une figure** | §8.6 · Aizenstat (*eidola*) · Buber | Aucune parole rapportée attribuée à une figure ; aucune première personne non attribuée au rêveur. Grep sur la sortie. |
 | 7 | **Comparer à d'autres rêveurs** | §8.2 · §3.7.2 red line | La requête du miroir est bornée à `user_id = auth.uid()`, sans jointure vers les tables globales. Test d'intégration : zéro ligne issue de `global_meaning_clusters` dans le contexte du miroir. |
 | 8 | **Deux miroirs sur un corpus inchangé** | §0.1 (mémoire > éloquence) · P-Silence | Empreinte de corpus (§6.2a). Test de régression sur deux appels consécutifs. |
 | 9 | **Un miroir non demandé** | §8.5 | Aucune tâche planifiée n'écrit un miroir ; l'unique point d'entrée exige un geste du rêveur porteur d'un identifiant de requête. Test : la table des tâches ne contient aucun producteur de miroir. |
-| 10 | **Ouvrir de la matière lourde sans porte** | `safety-checks.json` `somatic_first_protocol` · §8.7 · P7 | Sur un kairos marqué intense, la route renvoie **d'abord** l'étape somatique. Test de route. Et le bouton de fermeture n'émet **aucun** événement de suivi — test d'interface. |
+| 10 | **Ouvrir de la matière lourde sans porte** — *forme révisée 30/07, voir sous la table* | `safety-checks.json` `somatic_first_protocol` · §8.7 · P7 | Sur un kairos marqué intense, la charge utile contient la porte **et** la ressource humaine, **avant** la matière, dans la même réponse. Test de route. Et le bouton de fermeture n'émet **aucun** événement de suivi — test d'interface. |
 | 11 | **Flatter** | Gendlin (seul le corps valide, y compris la lecture du rêveur) · Taylor | Porte lexicale : `tu as raison` · `exactement` · `belle intuition` · `c'est très juste` · `quelle profondeur`. Blocage. |
 | 12 | **Remplir** — servir le moins mauvais plutôt que rien | §3.5 SILENCE_AS_FEATURE · comportement déjà mesuré le 26/07 (0 rendu sur 3 permis) | Jeu d'essai composé uniquement de candidats faibles → la sortie attendue est **vide**. Le test échoue si quoi que ce soit est rendu. |
+
+> **🔴 Interdit 10 — la forme révisée (Tim, 30/07).** Le principe est gardé, entièrement. Ce qui change est la manière : **la porte somatique ne doit pas être un écran de plus.** Un sas intermédiaire, avec sa propre route et son propre retour arrière, ajoute une friction là où on voulait de la douceur — et une friction, à 6 h du matin, est ce qui fait renoncer.
+>
+> **Elle est le premier geste du miroir lui-même, dans le même écran** : trois lignes, deux touches, et la matière se déplie en dessous, dans le même défilement. Un sas se traverse ; un premier geste est une manière d'entrer.
+>
+> **Et le non-tracking est maintenu, et assumé comme un coût.** La fermeture n'émet aucun événement — ni analytique, ni compteur, ni champ en base. **On accepte donc de ne jamais savoir si cette protection sert.** C'est un choix, pas un oubli : mesurer les fermetures transformerait un moment intime en donnée, et le prix de le savoir est plus élevé que la valeur de le savoir. Rendu écran : `2_DESIGN` §17.5.
 
 **Règle annexe sur les nombres.** §3.13.4 interdit les compteurs (« 12 rêves »). Mais compter les retours d'un motif *est* le fait honnête. Arbitrage : **un nombre n'est autorisé que s'il est accompagné, dans la même phrase, de l'énumération ou des dates qui le composent.** *« Sept fois depuis 2021 »* passe ; *« 7 rêves »* ne passe pas. Test : tout numéral de la sortie doit être suivi dans la même phrase d'une date ou d'une énumération.
 
@@ -358,6 +375,8 @@ C'est ça, le gap. Il ne se comble pas par une lecture. Il se comble en **réint
 
 C'est la contrepartie exacte d'une mémoire qui ne fatigue pas.
 
+> **✅ Validé par Tim le 30/07.** Entré au canon : `1_BIBLE` §8.3 (privacy) et §3.15.7c · rendu écran : `2_DESIGN` §17.7. Deux précisions ajoutées à l'arbitrage : le geste vit **sur la fiche du rêve, jamais dans le miroir** (on ne retire pas un rêve depuis l'écran qui vient de le citer — ce serait une réaction, pas une décision), et **il n'y a pas de section « rêves au repos »** (une section fabriquerait un purgatoire, et un purgatoire se compte).
+
 **(c) Jamais en désaccord.** C'est le plus dangereux des quatre. Un accompagnant humain dit parfois *« je ne vois pas ça »*, et cette friction est ce qui garde le muscle oraculaire du rêveur en état (P-Inversion : sans elle, il **s'atrophie**). Un interprète qui est toujours d'accord n'est pas doux : il flatte, et la flatterie est une anesthésie lente.
 → **Le miroir doit pouvoir décevoir.** Trois formes, et il n'y en a pas d'autre :
   - il ne rend rien, souvent (interdit 12) ;
@@ -370,9 +389,21 @@ C'est la contrepartie exacte d'une mémoire qui ne fatigue pas.
 
 Ça renverse l'autorité : il peut toujours aller vérifier, et ce qu'il vérifie, c'est lui-même.
 
+> **🔴 Arbitré par Tim le 30/07 — la contradiction est close.** Tim proposait les sources en bas de texte, pour laisser une liberté créative à l'IA ; ce paragraphe exigeait l'inverse. Les deux avaient raison sur ce qu'ils protégeaient. La formule qui tranche :
+>
+> **La prose du miroir peut respirer et prendre des libertés de forme, à condition que les rêves entiers dont elle est faite soient ouvrables juste en dessous, dans le texte du rêveur, avec leurs dates. Pas une note de bas de page : un accès.**
+>
+> **La liberté créative porte sur *comment on assemble*, jamais sur *ce qu'on assemble*. Une phrase du miroir qui ne s'adosse à aucun rêve ouvrable n'a pas le droit d'exister.**
+>
+> Ce qui suit en design (`2_DESIGN` §17.2) : les rêves sont dans le **même défilement**, dépliés d'un tap au même endroit — pas une modale, pas un chevron « sources ». Et la prose **ne domine pas typographiquement** : ce sont les phrases datées du rêveur qui portent le poids visuel. Canon : `1_BIBLE` §3.15.7a.
+
 ### 8.2 Honnêteté sur cette section
 
-Rien de ce §8 n'est mesuré, et aucun livre de la Forêt ne le fonde. **C'est la partie la moins solide de cette doctrine.** Elle est écrite parce qu'il fallait qu'elle existe avant le code, pas parce qu'elle est sûre. À réviser après usage réel, et à considérer comme une hypothèse jusque-là.
+Rien de ce §8 n'est mesuré. **C'est la partie la moins solide de cette doctrine** : elle est écrite parce qu'il fallait qu'elle existe avant le code, pas parce qu'elle est sûre. À réviser après usage réel, et à considérer comme une hypothèse jusque-là.
+
+> **⚠️ Allégée d'un cran le 30/07, sur un point précis.** Ce paragraphe disait aussi *« aucun livre de la Forêt ne le fonde »*. C'est faux pour l'asymétrie **(a)**, la disponibilité permanente : **Weller la fonde textuellement, p. 92**, avec la *premature revelation* — révéler trop, trop tôt, sans laisser mûrir, *« avec peu d'égard pour la timidité de l'âme »*. Un dispositif ouvert en permanence et qui invite à déposer chaque matin est une machine à révélation prématurée. **Ce n'était donc pas une intuition : c'est dans un texte.** Les trois autres asymétries (b, c, d) restent non fondées et non mesurées.
+>
+> Et une **captation à surveiller**, du même livre (p. 85) : Weller raconte avoir dit à un patient *« je crois que tu te caches dans ton chagrin »*. **Un miroir qui rend fidèlement, tendrement, sans jamais rien demander est un excellent endroit où se cacher.** La tendresse absolue est aussi une absence de friction — c'est le pendant exact de l'asymétrie (c), et le remède, chez un humain, est une phrase qu'aucune app ne devrait avoir le droit de dire.
 
 ---
 
@@ -424,17 +455,7 @@ Dosage retenu pour cette surface : **85 clarté / 15 poésie / 0 tranchant.** Et
 
 ### Exemple 3 — La blessure qui se réveille
 
-> Cette nuit, une porte fermée. Il y en avait une aussi dans un rêve de mars 2021, celui de l'escalier.
->
-> Sous ce rêve-là, tu avais écrit : *« je crois que j'en ai fini avec ça. »*
->
-> Je te rends ta phrase, avec sa date. Je ne sais pas si elle est encore vraie. Toi seul peux le sentir.
->
-> Relis-la. Qu'est-ce que ça fait, là, dans ton corps ?
->
-> `[ ça bouge encore ]` `[ ce n'est plus vrai ]` `[ je ne sais pas ]`
-
-*Voir §4.2 pour la justification ligne à ligne. Aucune des trois réponses n'est comptée. `[ ce n'est plus vrai ]` ne clôt rien.*
+**Le texte est au §4.2, justifié ligne à ligne** — il était reproduit ici mot pour mot, et un exemple recopié dans le même document se met à diverger dès la première retouche. Ce qu'il faut retenir ici : les trois réponses possibles sont `[ ça bouge encore ]` · `[ ce n'est plus vrai ]` · `[ je ne sais pas ]`. **Aucune n'est comptée, `[ ce n'est plus vrai ]` ne clôt rien**, et `[ je ne sais pas ]` est un état normal et définitif sur lequel l'app ne relance jamais.
 
 ---
 
@@ -582,7 +603,27 @@ Dosage retenu pour cette surface : **85 clarté / 15 poésie / 0 tranchant.** Et
 
 7. **« ce que j'en ai dit » dépend d'une détection à ~90 %.** Bonne nouvelle mesurée par B4 : Tim s'interprète beaucoup en dictant (171 passages « lecture » sur 64 rêves), donc le mode est faisable **aujourd'hui**. Mauvaise nouvelle : un faux positif de cette couche met dans sa bouche une phrase qu'il n'a pas dite comme lecture. Sur ce mode précis, il faut probablement **exiger la confirmation** avant citation, contrairement à la règle B4 n°9 (rien pendant la capture) — parce qu'ici on ne fait pas que classer, on **cite**.
 
-8. **Le §8 n'est fondé sur rien de mesuré.** C'est la partie la plus neuve et la plus fragile. Elle existe parce qu'il fallait qu'elle existe avant le code. À réviser après usage réel.
+8. **Le §8 n'est fondé sur rien de mesuré** — sauf l'asymétrie (a), que Weller p. 92 fonde (voir §8.2). Le reste est la partie la plus neuve et la plus fragile, écrite parce qu'il fallait qu'elle existe avant le code. À réviser après usage réel.
+
+---
+
+### Closes le 30/07 (Tim a tranché)
+
+| Ancienne tension | Ce qui a été décidé |
+|---|---|
+| **La traçabilité contre la liberté créative** (§8.1d) | La prose peut respirer ; **les rêves entiers doivent être ouvrables juste en dessous**. La liberté porte sur l'assemblage, jamais sur la matière. → `1_BIBLE` §3.15.7a |
+| **La porte somatique** (interdit 10) | Principe gardé, forme changée : **premier geste du miroir, même écran**, pas un sas. Non-tracking maintenu et **assumé comme un coût**. → §7, `2_DESIGN` §17.5 |
+| **Le fil « rêve »** — défaut de méthode ou matière ? | Tim : *« ça touche plutôt au cœur »*. **C'est du matériau.** Contredit `FAISABILITE-MIROIR` §4.2, dont la conclusion sur ce point est caduque. → `1_BIBLE` §3.15.7d |
+| **Le plancher de corpus** (tension 1) | Reste sans mesure, mais **la piste du 27/07 le résout mieux qu'un chiffre** : un parcours initiatique avant les miroirs. Ce n'est plus un seuil arbitraire, c'est une aventure traversée. Tension 1 reste ouverte tant que le parcours n'est pas conçu. |
+
+### Neuves, ouvertes le 27/07 — et plus grandes que les huit ci-dessus
+
+9. **🔴 Cette doctrine est occidentale, et elle ne le savait pas.** Les 18 digests du §11 viennent tous de la clinique occidentale du XXᵉ siècle. Les traditions ont été traitées comme un **risque éthique à gérer**, jamais comme une **source de sagesse de design**. La raison est structurelle et commande tout le reste : **toute la psychologie des profondeurs occidentale suppose que le rêve appartient à une psyché individuelle** — l'hypothèse exacte qui casse dès qu'on veut du rêve partagé en groupe avec une intention. Sur le rêve collectif, ce canon-ci n'a presque rien ; les traditions ont tout, parce que chez elles **le partage *est* la pratique**. Ce n'est pas une bibliographie à compléter, c'est une ontologie qui manque.
+
+10. **🔴 Zéro épistémologie du rêve d'Afrique australe, alors qu'INFUSE vend des plantes de rêve xhosa/zulu** (tradition **Ubulawu**). Problème d'intégrité avant d'être une lacune : le commerce repose sur cette tradition et la doctrine n'en contient rien. À combler avec des auteurs issus de la tradition ou de l'ethnographie académique sourcée — **jamais un « manuel »**.
+    ⚠️ Et une correction à ne pas perdre : **les Senoi ne sont pas Moss.** Le matériel Senoi vient de **Kilton Stewart** et est académiquement tenu pour **largement fictif**. Moss, c'est l'Active Dreaming adossé à l'iroquois, avec bénédiction d'un aîné — que nous n'avons pas, étant source secondaire. Ne jamais les citer dans la même phrase comme un même adossement.
+
+11. **Ce que Kalsched implique et que la doctrine n'a pas regardé en face.** Il donne une séquence en deux temps : localiser et honorer l'esprit prisonnier, **puis** l'incarner — et il avertit que beaucoup de gens font l'étape 1 et jamais l'étape 2, s'installant dans leur monde intérieur sans rien incarner. **Une app de journal de rêves est un dispositif d'étape 1 par construction.** C'est peut-être le vrai problème de design du produit, plus grand que le miroir. Aucune réponse ici.
 
 ---
 

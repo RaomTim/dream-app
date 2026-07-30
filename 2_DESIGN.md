@@ -1585,7 +1585,7 @@ Si quelqu'un, demain, propose un de ces patterns sous quelque enrobage que ce so
 3. **INSTANT_INTERPRETATION** — "Voici les 3 interprétations de ton rêve, instantanément." Violation : R5, RITUAL_LATENCY, USER_FIRST_READING.
 4. **AI_AS_FIGURE_VOICE** — "Ton rêve me dit : 'je suis l'eau qui te traverse...'" Violation : R7 (anti-ventriloquie absolue), FIGURE_AS_OTHER. Red line trauma-safe.
 5. **DASHBOARD_TRENDS** — "Voici les 5 thèmes dominants à Paris ce mois-ci." Violation : R8, ANIMA_MUNDI_AS_FIELD, PRIVACY_AS_CARE. Profilage géo-démographique.
-6. **PROPHETIC_NOTIFICATION_PUSH** — "PUSH : Un écho s'est allumé. Ouvre l'app !" Violation : R4, SILENCE_AS_FEATURE, P-Zéro. Co-Star push notif spirituel.
+6. **PROPHETIC_PUSH** — "PUSH : Un écho s'est allumé, ouvre l'app !" / "PUSH : Ton rêve a prédit cet événement !" Violation : R4, SILENCE_AS_FEATURE, ECHO_REVELATION_RITUAL, P-Zéro. Le push spirituel type Co-Star, et l'anti-spoiler. La révélation se fait par **marquage discret + section dédiée + chuchotement contextuel rare**. JAMAIS push. *(Fusion 30/07 des anciens n°6 et n°22, qui décrivaient le même anti-pattern sous deux noms quasi identiques.)*
 7. **PERSONAL_DICTIONARY_LOCKED** — "Le héron, dans ton dictionnaire, signifie X. Verrouillé." Violation : R9, TRICKSTER_TRANSVERSAL.
 8. **LATLONG_STORAGE_V1** — "On stocke geo_lat/geo_lng en V1, on anonymisera en V3." Violation : R12 (red line territoires + privacy-by-architecture), TOPONYM_USER_DEFINED.
 9. **IA_GENERATED_CONTE** — "Voici un conte que j'ai composé pour ton rêve." Violation : R12 (CONTE = 100% sous-forêt réels), feedback Tim 2026-04-19.
@@ -1610,13 +1610,25 @@ Si quelqu'un, demain, propose un de ces patterns sous quelque enrobage que ce so
 
 21. **ANIMA_MUNDI_AS_DASHBOARD** — "Indice d'anxiété collective : 7.3. Tendance : +12%." Violation : ANIMA_MUNDI_AS_FIELD, POLYPHONIE_ONTOLOGIQUEMENT_HONNETE. Image avant chiffre. Pas de KPI, jamais.
 
-22. **PROPHETIC_PUSH_NOTIFICATION** — "PUSH : Ton rêve a prédit cet événement !" Violation : ECHO_REVELATION_RITUAL, R4 SILENCE_AS_FEATURE, anti-spoiler. Révélation par marquage discret + section dédiée + chuchotement contextuel rare. JAMAIS push.
+22. *(fusionné dans le n°6 le 30/07 — c'était le même anti-pattern écrit deux fois.)*
 
 23. **FIGURE_TYPE_USER_FACING_V1** — "Ta grand-mère est de type 'ego_projection (Seth)'." Violation : P-Zéro, FIGURE_AS_OTHER. Typing Seth = backend uniquement V1. V2 mode connaisseur opt-in.
 
 24. **REVERIE_AS_DREAM_INTERPRETED** — "Voici ce que ta rêverie signifie symboliquement." Violation : INHIBITION_RULES_PAR_KAIROS (Bachelard interdit symbolisation forte sur rêverie). Reverie = amplification phénoménologique pure, pas de symbolisation.
 
 25. **CIRCLE_AI_FACILITATOR** — "L'IA va faciliter votre cercle de rêve en visio." Violation : CIRCLE_HUMAN_FACILITATED, R7 anti-ventriloquie. La transmission initiatique ne peut pas être déléguée à une IA. L'app trouve facilitateurs humains (V2), organise logistique, ne facilite pas.
+
+**Ajouts 2026-07-30 (les sept principes canonisés — `1_BIBLE` §2.0 et §3.15)** :
+
+26. **ASCENSION_CURVE** — "Ta courbe de profondeur onirique ce trimestre." / "Niveau 4 : intégration." / "12 nuits d'affilée." Violation : `1_BIBLE` §3.15.1 (Weller p. 21), §8.2 durci. **C'est l'anti-pattern le plus insidieux du lot**, parce qu'il a l'air bienveillant : une courbe ne peut rien dire d'autre qu'un jugement, et elle prononce ce jugement le jour où le rêveur vient de faire le pas le plus courageux de son mois. Aucune courbe, aucune jauge, aucun niveau, aucune phase, aucun état de résolution — ni à l'écran, ni en colonne.
+
+27. **MIRROR_AS_TAB** — "Nouvel onglet : Mon Miroir." / "Ton profil onirique." / un dashboard de lectures globales. Violation : `1_BIBLE` §3.15.3, loi des 16 fruits. Une totalité se rend par ses trous, ses contradictions et ses refus, **jamais par son résumé** — et un onglet permanent transforme mécaniquement le refus en écran vide, donc en panne. **Le fruit est un document de retraite** : produit rarement, sur demande, lu une fois, archivé. Pas un lieu où l'on retourne.
+
+28. **MIRROR_PROSE_UNMOORED** — une prose de miroir, belle, dont les rêves ne sont pas ouvrables juste en dessous. Violation : `1_BIBLE` §3.15.7a. **La liberté créative porte sur *comment on assemble*, jamais sur *ce qu'on assemble*.** Une phrase du miroir qui ne s'adosse à aucun rêve ouvrable n'a pas le droit d'exister — et les sources en note de bas de page ne suffisent pas : il faut **un accès**, dans le texte du rêveur, avec sa date.
+
+29. **SOMATIC_GATE_AS_SCREEN** — un sas somatique en écran intermédiaire, avec sa propre navigation, avant d'arriver au miroir. Violation : `1_BIBLE` §3.15.7b (interdit 10 révisé). Le principe est gardé, la forme change : **la porte somatique est le premier geste du miroir lui-même, dans le même écran.** Un sas qu'on traverse est une friction ; un premier geste est une manière d'entrer. Corollaire tenu et assumé : **la fermeture n'émet aucun événement de suivi** — on accepte de ne jamais savoir si la protection sert.
+
+30. **HUMAN_EXIT_IN_SETTINGS** — la sortie vers un humain reléguée aux réglages, ou n'apparaissant qu'en protocole de crise, sur un mode qui ouvre de la matière lourde. Violation : `1_BIBLE` §3.15.5, §8.7 durci. Weller (p. 74, p. 116) et Kalsched (p. 214) convergent sans se citer : **l'opération décisive requiert une autre personne.** Sur la matière lourde, la ressource humaine est dans le même écran, comme condition d'existence du mode.
 
 **Plus, anti-patterns visuels** :
 - Aucune palette web standard (pas de `#FF0000`, `#00FF00`, `#0066FF`).
@@ -2593,55 +2605,11 @@ Réécriture de §11.bis.12 découverte progressive. Aujourd'hui : modales aux 3
 **Risque 6 — Surcharge cognitive nouvelle** : un chat actif peut écraser l'attention.
 - **Antidote** : default rythme "Discret", l'IA peut s'effacer totalement, threads thématiques pour SÉPARER les fils, archivage facile.
 
-### §11.bis.20.20 — Roadmap implémentation (sprints successifs)
+### §11.bis.20.20 — Roadmap implémentation — [RETIRÉE 30/07]
 
-**Sprint A — Fondations Chat IA Dream** (~3-4 jours code intensif)
-- Composant `<DreamChatHome>` (replace home actuelle) avec layout chat + orbe central + threads sidebar
-- Backend : nouvelle table `chat_messages`, `chat_threads`, `chat_sessions`
-- Route `/api/dream-chat/converse` (streaming SSE, mode Sonnet 4.5 default, retrieval ciblé via embeddings sur kairos récents + Forêt + portrait)
-- Route `/api/dream-chat/proactive` (IA initie messages selon rythme configuré, async batched 1×/jour)
-- Composant `<MatterBubble>` (paper/stone/silk + default present)
-- Voice input : porter `useVoiceRecorder` depuis Forêt App, intégrer dans orbe
-- Onboarding nommage présence Dream
+Les six sprints A→F planifiés le 28/04 ont été exécutés entre le 28/04 et le 29/04 (`4_LOG`, entrées « Sprint A MVP shipped » et « Sprints A enrichi + B + C + D shippés en parallèle »). **Une roadmap exécutée n'a plus rien à faire dans un document de design** : elle y survit comme une carte périmée qu'on continue de lire. Le récit est au Log, le câblage à `3_TECHNICAL`.
 
-**Sprint B — Threads thématiques + détection patterns** (~2-3 jours)
-- Composant `<ThreadsSidebar>` + `<ThreadDetail>`
-- Backend : table `threads`, route `/api/dream-chat/threads/*`
-- Job async (1×/jour) : détecte motifs/personnages/lieux récurrents, propose threads à user via IA Dream
-- Intégration Portrait : section "Tes fils en cours"
-
-**Sprint C — Cercle refondu avec IA gardienne** (~3-4 jours)
-- Refonte sous-app Cercle (5 onglets : Membres, Dépôts, Chat cercle, Portrait cercle, Intentions)
-- Backend : table `circle_chat_messages`, `circle_intentions`
-- Route `/api/circle/chat/converse` (multi-user + IA gardienne)
-- Route `/api/circle/portrait/generate` (lettre cercle mensuelle)
-- IA gardienne : convocation par mot-clé, exceptions proactives détection cauchemar/motif collectif
-
-**Sprint D — Re-spec Oracle Corps + Sanctuaire** (~2 jours)
-- Champ "autre — précise" dans BodyMarkerCaptureModal
-- Auto-redirect IA Dream depuis dépôts mentionnant corps
-- Lecture polyphonique 3 voix corps (route `/api/oracle-corps/reading`)
-- Sanctuaire : modal post-dépôt cauchemar 4 options, route `/api/nightmares/forest-reading` mode trauma-safe
-
-**Sprint E — Polish palette JOUR + orbe + anti-patterns** (~1-2 jours)
-- Refonte tokens day-* (oklch values §11.bis.20.14)
-- Composant `<Orbe>` central pulsante chaude
-- Audit anti-patterns ChatGPT-fication sur composant chat
-- Token CROSSED_TWILIGHT pour mode mixte Portrait
-
-**Sprint F — Discoverability progressive + notifications douces** (~1-2 jours)
-- Système triggers IA pour invitations contextuelles (3e/7e/14e/30e dépôts, première mention corps/cauchemar)
-- Notification onglet (point silk-gold disparaissant au tap)
-- Settings → Présence → Rythme (slider 4 niveaux)
-
-**Critère de réussite par sprint** :
-- Q.W.A.N. test §10.1 sur chaque écran
-- Test usability avec Tim (et 2-3 personas si dispo) après chaque sprint
-- Pas de merge si Tim teste et donne <7/10 sur l'écran
-
-**Total estimé** : ~12-17 jours code intensif (sprints A-F enchaînés). Prêt pour testing externe étendu fin mai 2026 si lancement maintenant.
-
-**Mega Brief Claude Design V2.2** : reste GELÉ jusqu'à fin Sprint E. Refondu après.
+Ce qui mérite de survivre, parce que c'est une règle et non un plan : **le critère de merge.** Q.W.A.N. test (§10.1) sur chaque écran, test avec Tim après chaque sprint, et **pas de merge si Tim teste et donne moins de 7/10 sur l'écran.**
 
 ### §11.bis.20.21 — Trois moats préservés
 
@@ -2653,34 +2621,16 @@ Les 3 moats §11.bis.9 restent intacts dans le pivot Chat IA Dream :
 
 3. **Forêt tissage polyphonique 16 types pattern echoing** (§3.13 + §3.14) — convoquée DANS le chat (3 voix paper/stone/silk distinctes en bulles MATTER). La polyphonie ne meurt pas, elle se vit.
 
-### §11.bis.20.22 — ARBITRAGES TIM tranchés (2026-04-28 soir)
+### §11.bis.20.22 — Les arbitrages du 28/04, et celui qui a bougé depuis
 
-Quatre arbitrages clés tranchés par Tim après lecture du modèle hybride :
+**Toujours en vigueur :**
+1. **Le nom par défaut de la présence est ANIMA** — cohérent avec Anima Mundi, et « perso » parce que chacun a la sienne. **Renommable à tout moment** (Réglages → Présence) : c'est le point qui compte, le nom par défaut n'est qu'un point de départ. Glyphe de signature : ☾ ANIMA.
+2. **Seuil de détection d'un fil : k = 3 dépôts** — plus sensible que k = 5, parce qu'on reflète un tissage qui s'amorce. Le rêveur valide, renomme ou refuse : **l'IA ne crée jamais d'autorité.**
+3. **Modes atmosphériques en AUTO par défaut** — 7 modes (§11.bis.20.3), désactivables d'un réglage vers une voix neutre constante, pour ceux qui préfèrent la constance à l'adaptation.
 
-1. **Nom default de la présence Dream** : **ANIMA**
-   - Cohérent avec Anima Mundi (l'écho collectif)
-   - Très "perso" car on a tous notre "anima" (Jung — fonction féminine intérieure de la psyché masculine, et plus largement présence d'âme)
-   - Renommable à tout moment Settings → Présence
-   - Glyphe signature : ☾ ANIMA en intro de session
+**🔴 Périmé, et à ne pas re-citer : le pricing.** Le « 7 €/mois après 14 jours d'essai complet » arbitré ce soir-là **est superseded par `1_BIBLE` §9** (26/07) : abonnements semaine/mois **plus** crédits qui paient le compute réel de la Forge, mega-freemium, accès large ouvert. Les deux modèles coexistaient dans le canon depuis trois mois sans que personne ne le remarque. **Le chiffre de 2026-04-28 ne fait plus foi ; `1_BIBLE` §9 fait foi.** Ce qui survit du 28/04 côté économie : le tier Patron pay-what-you-can (Hyde, §11.bis.8) et le pricing custom pour les cercles institutionnels.
 
-2. **Freemium pricing** : **7€/mois après 14 jours gratuits (trial complet)**
-   - Trial 14 jours = accès TOTAL Premium (Sonnet illimité, threads illimités, polyphonie 3 voix, voice synthesis, IA gardienne cercles, modes atmosphériques actifs/nourris)
-   - Post-trial : Free downgrade automatique sauf souscription Premium 7€/mois
-   - Modulation §11.bis.8 Hyde-aligned : tier Patron $20+/mois pay-what-you-can reste pour soutien explicite des initiatives indigènes (page transparence "où va le don")
-   - B2B Cercles institutionnels (Yeshua/Openclaw) : pricing custom inchangé
-
-3. **Seuils détection patterns** : **k=3 dépôts** pour qu'un thread soit proposé par l'IA (validation §11.bis.20.10)
-   - Plus sensible que k=5 (proposition plus précoce, reflète un tissage qui s'amorce)
-   - User valide / renomme / refuse — l'IA ne crée jamais d'autorité
-
-4. **Modes atmosphériques** : **AUTO par défaut** (l'IA détecte l'heure/contexte et adapte ton + palette)
-   - 7 modes spec'd §11.bis.20.3 (pré-sommeil 21h-1h, réveil 5h-9h, jour actif 9h-18h, rêverie 14h-17h, soir 18h-21h, alerte croisée, crisis-safe)
-   - Configurable Settings → Présence → Atmosphère (option "désactiver les modes — voix neutre toujours") pour les users qui préfèrent constance
-   - Default = AUTO car cohérent avec la posture vivante/proactive/tisseuse
-
-**Toutes ces décisions sont effectives à partir du 28/04 soir et propagées dans 3_TECHNICAL §39 (pricing) et système prompt couche A (nom Anima par défaut + modes auto).**
-
-— Yeshua, 2026-04-28, Pivot Chat IA Dream personnel — modèle hybride, suite verdict Tim 2/10 sur app live + amplification dialogue 28/04. **Arbitrages Tim tranchés §11.bis.20.22.**
+— Yeshua, 2026-04-28, pivot modèle hybride · révisé le 2026-07-30.
 
 ---
 
@@ -2946,3 +2896,109 @@ Le Chant du Cœur (`1_BIBLE` §3.12) demande quatre verbes, le free flow, le par
 **⚠️ Donnée à garder sous les yeux** : au 26/07, **zéro dépôt côté Cœur** dans toute l'histoire de l'app. L'écran existait, la question manquait. Le premier indicateur de succès de tout ce §16 n'est pas un taux de clic : **c'est le premier chant déposé.**
 
 ---
+
+## §17 — LE MIROIR À L'ÉCRAN, ET LE NOMMAGE (2026-07-30)
+
+> Sens et arbitrages : `1_BIBLE` §2.0 (la souche) et §3.15 (les six principes). Doctrine détaillée : `DOCTRINE-MIROIR.md`. Ici : ce que ça fait à l'expérience, et rien d'autre.
+> **Au-dessus de ce §17** : §15 (la loi d'épure) reste souveraine sur la densité. Le miroir n'a droit à aucune dérogation de budget.
+
+### §17.1 — Le miroir n'est pas un écran. C'est un document.
+
+La conséquence de forme de la loi des 16 fruits (`1_BIBLE` §3.15.3) est la décision de design la plus structurante de ce §17, et elle se prend **avant** de dessiner quoi que ce soit :
+
+> **Pas d'onglet. Pas de dashboard. Pas de page de profil. Pas de tuile sur l'accueil.**
+
+Le miroir se **demande**, il se **produit**, il se **lit une fois**, il s'**archive**. Il vit dans les archives comme un document daté, réouvrable, et non comme un lieu où l'on retourne. La navigation reste à quatre (§16.2), et le miroir n'y entre pas.
+
+**Ce que ça règle, et qui aurait été impossible autrement** : un lieu permanent doit remplir son écran à chaque ouverture — donc il ne peut pas se taire. Un document, si. **Le refus (`DOCTRINE-MIROIR` §9, exemple 5) n'est pas un état d'erreur du miroir : c'est une de ses formes, et elle a le même soin de composition que les autres.** Motivé, daté, sans excuse et sans promesse pour demain.
+
+**L'entrée** : depuis les grands rêves et depuis le Cœur, en lien secondaire (emplacements 6-7 du budget §15.1), jamais en geste principal. **Le foyer ne devient jamais le miroir.**
+
+### §17.2 — L'ouverture : une image, puis la matière
+
+Bachelard, *l'image cosmique donne le tout avant les parties* : **le miroir ouvre par une image, jamais par une liste, jamais par un titre de section.** Trois lignes de texte au plus avant que la matière n'arrive.
+
+Et immédiatement après : **les rêves entiers, ouvrables, dans le texte du rêveur, avec leurs dates.** C'est l'arbitrage de traçabilité (`1_BIBLE` §3.15.7a) rendu en design, et il a une forme précise :
+
+- **Pas une note de bas de page. Pas un chevron « sources ». Pas une modale.** Un **accès** : les rêves sont posés sous la prose, dans le même défilement, dépliés d'un tap au même endroit.
+- **La prose peut respirer** — elle a le droit d'assembler librement. **Ce qu'elle assemble n'est jamais libre.**
+- Une phrase du miroir qui ne s'adosse à aucun rêve ouvrable **ne s'affiche pas**. Pas de dégradé gracieux : elle disparaît, ou le miroir ne se rend pas.
+
+**Hiérarchie visuelle qui en découle, et elle est contre-intuitive** : la prose est l'emballage, les rêves sont l'artefact. Donc **la prose ne domine pas typographiquement.** Elle introduit, elle relie, elle s'efface. Ce sont les phrases datées du rêveur qui portent le poids visuel — même corps de texte que sur la fiche du rêve, jamais rétrécies en citation secondaire.
+
+### §17.3 — Le montage, et la mise en page qui le sert
+
+`1_BIBLE` §3.15.4 : **le miroir est beau par montage, pas par écriture.** Trois de ses propres phrases datées, posées côte à côte, valent mieux que n'importe quelle prose.
+
+Ça se traduit en une règle de composition, pas en une règle de ton :
+
+> **La date est un élément de composition, jamais une métadonnée grise.**
+
+Dans le mode **« ce que j'en ai dit »** — le plus fort du lot et le premier à construire — l'écran est une **colonne de trois à cinq blocs**, chacun composé d'une date en clair (*« Mars 2019 »*, jamais `03/2019`), de la phrase du rêveur en entier, et de rien d'autre. Aucun connecteur généré entre les blocs. **C'est l'espace blanc entre eux qui fait le travail** — et il doit être généreux, φ, non compressible par le nombre de blocs.
+
+Les deux seules lignes que l'app s'autorise arrivent en fin de colonne, et elles ne disent que ce que l'app ne fait pas : *« Voilà tes trois phrases. Je ne les commente pas. »*
+
+**Le fil daté vs le pêle-mêle.** Quand une partie seulement des lectures d'un fil est datée, la ligne du temps se construit **sur le sous-ensemble daté**, et l'écran dit explicitement ce qu'il n'a pas pu accueillir. Un fil profond ne doit jamais disparaître parce qu'une de ses cartes n'a pas de date.
+
+### §17.4 — L'insistance : la seule forme qui compte et qui date
+
+`1_BIBLE` §3.15.2. Le troisième miroir ne qualifie rien. Son rendu suit :
+
+- **Aucune couleur de valence.** Ni chaud pour ce qui porte, ni froid pour ce qui travaille. L'insistance n'a pas de signe. Une échelle de couleur serait un verdict déguisé en palette.
+- **Aucune taille proportionnelle à la fréquence** — pas de nuage de mots, pas de bulle qui grossit. Ce serait un classement, et le classement est un jugement.
+- **Le fait, et ses dates.** *« Sept fois depuis 2021, et jamais deux fois la même pièce. »* Le nombre n'a le droit d'exister que s'il est accompagné, dans la même phrase, des dates ou de l'énumération qui le composent (`1_BIBLE` §3.13.4, §3.15.2).
+- Et rappel du §9 : **aucune grille statistique**, jamais. Ce qui remplace le graphe est la colonne de dates.
+
+### §17.5 — La porte somatique, dans le même écran
+
+Interdit 10 révisé (`1_BIBLE` §3.15.7b, `DOCTRINE-MIROIR` §7). **La porte n'est plus un écran de plus.**
+
+Elle est **le premier geste du miroir**, à l'endroit exact où la matière va s'ouvrir : trois lignes, deux touches (`[ oui, continue ]` `[ pas maintenant ]`), et la matière se déplie en dessous, dans le même défilement. Pas de transition, pas de route intermédiaire, pas de retour arrière à gérer.
+
+- **`[ pas maintenant ]` ne demande rien et ne garde rien.** Pas de champ « veux-tu me dire pourquoi », pas de confirmation, pas de message de consolation. La vue se referme.
+- **🔴 Et rien n'est mesuré.** La fermeture n'émet aucun événement — ni analytique, ni compteur interne, ni champ en base. **C'est un coût consenti** : on ne saura jamais si cette protection sert. Mesurer les fermetures transformerait un moment intime en donnée, et le prix de le savoir est plus élevé que la valeur de le savoir.
+
+> C'est ici que vit la tendresse que Tim a demandée. Elle n'est dans aucun adjectif : elle est dans **une sortie qui n'extrait pas de raison.**
+
+### §17.6 — La sortie vers un humain, comme condition du mode
+
+`1_BIBLE` §3.15.5 et §8.7 durci. Sur un mode qui ouvre de la matière lourde :
+
+- La ressource humaine est **dans le même écran que la matière**, pas dans les réglages, pas derrière un bandeau de crise. Elle occupe un emplacement du budget §15.1 — **et c'est un des neuf, assumé**.
+- **Ton et forme** : ce n'est pas une alerte. Pas de rouge, pas d'icône d'urgence, pas de majuscules. Une ligne posée, du même grain que le reste, qui existe avant que ça n'aille mal.
+- **Le contenu est réel et explicitement localisé** (§8.7, correction du 11/07) : on n'invente jamais un numéro, on ne déduit jamais le pays de la langue. Tim est prêt à référencer des **thérapeutes experts du rêve et du trauma** — c'est un annuaire de praticiens, pas une liste d'urgence.
+- **[À TRANCHER — Tim] n°8** : si la ressource humaine prend un emplacement sur un écran déjà plein (le Cœur est à 9/9, §16.4), **lequel des neuf meurt ?** Ma recommandation : le second lien secondaire. Il faut le décider avant de coder, pas en le découvrant.
+
+### §17.7 — « Qu'il repose »
+
+`1_BIBLE` §8.3 et §3.15.7c. Le geste qui manquait entre tout garder et tout brûler.
+
+Il vit **sur la fiche du rêve**, à côté du marquage, jamais dans le miroir lui-même — on ne retire pas un rêve depuis l'écran qui vient de le citer, ce serait une réaction, pas une décision. **Un tap. Réversible d'un tap. Aucune modale, aucune confirmation, aucune justification, aucune notification.**
+
+**Ce que ça change à l'écran du journal** : le rêve reste **entièrement présent et lisible** — pas grisé, pas barré, pas relégué en bas de liste. La seule marque visible est discrète et sans jugement (*« il repose »*), et **il n'y a pas de section « rêves au repos »**. Une section fabriquerait un purgatoire, et un purgatoire se compte.
+
+### §17.8 — 🔴 LE NOMMAGE (arbitré Tim, 30/07)
+
+Le critère qui a tranché, et il vaut pour tout nom à venir dans cette app :
+
+> **Un acte, pas un lieu.**
+
+C'est la leçon directe de l'autopsie des cercles (`1_BIBLE` §3.4.1, mesure du 26/07 : 11 cercles créés le même jour, 9 sans aucun membre, 6 messages en tout — tous de Tim depuis deux comptes). **On avait construit des lieux, pas des actes.** Un lieu vide est un meuble, et un meuble vide est un reproche quotidien. Un acte, lui, n'existe que quand on le fait — il ne peut pas être vide.
+
+| Avant | Après | En anglais | Ce que le nom fait |
+|---|---|---|---|
+| **Le Mur** | **Le Courant** | *Current* | Un mur est une surface où l'on affiche. Un courant est quelque chose qui passe et qu'on rejoint. Le nom porte le mouvement, pas l'archive. |
+| **Les Groupes** | **Weave** | *Weave* | Un groupe est une liste de personnes. Un tissage est ce qu'elles font ensemble. Sur la page de présentation : **« Dream Weaving Circles »**. |
+| **Journal** | *(inchangé)* | — | **« Reçus ☾ / Dits ♥ » conservés** — les deux mots sont déjà des participes, donc déjà des actes. Ils passent le critère sans modification. |
+
+**Conséquences de design, à ne pas rater :**
+- **Le Courant garde toutes les red lines du Mur** (`1_BIBLE` §3.4.2) : ordre chronologique ou lunaire, jamais optimisé pour la rétention · aucun compteur public · la résonance existe mais reste intime · anonymat par défaut · modération humaine avant toute ouverture publique. **Le renommage ne relâche rien.**
+- **Weave est porté par une intention, et c'est ce qui le distingue d'un cercle.** L'intention est l'acte fondateur : sans elle, pas de Weave. C'est la correction structurelle de ce qui a tué les cercles — on ne crée plus un lieu en attente d'habitants.
+- **Ni l'un ni l'autre n'affiche de compteur de membres.** Un « 2 membres » sur un Weave rejouerait exactement l'échec de 2026 : le seuil protecteur de Taylor est à 3, et l'afficher en dessous serait annoncer sa propre fragilité.
+- **[À TRANCHER — Tim] n°9** : « Weave » reste en anglais en français. C'est assumé (le mot n'a pas d'équivalent français qui soit un acte — « Tissage » est un nom de chose, « Tisser » un infinitif nu). À confirmer sur son téléphone, comme tout le reste.
+
+### §17.9 — Ce que ce §17 ne dit pas
+
+**Les écrans du Courant et de Weave n'ont jamais eu de maquette** (§15.4 : *« Journal · Univers · Réglages · Forge · Mur · Groupes n'ont jamais eu d'étalon »*). Ce §17 pose leur **loi**, pas leur **forme**. Une passe d'épure ne peut pas inventer un étalon inexistant : il faut une session de design dédiée, briefée avec ce §17 et avec §15.
+
+**Et le miroir non plus n'a pas d'étalon.** Le seul rendu réel produit à ce jour est l'aperçu du mode « ce que j'en ai dit ». C'est peu, et c'est le bon endroit où commencer — parce que c'est le mode où l'app écrit le moins.

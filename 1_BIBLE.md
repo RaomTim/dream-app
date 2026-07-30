@@ -2,8 +2,9 @@
 
 > **Statut** : doc canonique du SENS de Dream App. Source de vérité philosophique, fondationnelle, qui oriente tout (design, technique, communication, gouvernance, économique).
 > **Origine** : 2026-04-24 — Forêt absorbée (30+ livres digérés), 5 plénières ouvertes, arbitrages Tim datés.
-> **Dernière refonte de fond** : **2026-07-26** — la thèse promue en tête (§0.1) · le Cœur devient pilier égal au rêve (§1.5, §3.12) · les grands rêves et la double lecture entrent au canon (§3.13, §3.14) · la génération de mondes reçoit ses garde-fous et sa question ouverte **avant** la feature (§1.1.bis) · restauration du silence comme organe (§3.1.ter, §3.5) · couche 0 de persistance après l'incident audio (§3.8).
-> **Bilan de compression** : ~345 lignes ajoutées, ~362 retirées (doublons §3.1.ter/§3.10, table de cautions dédoublonnée, détails d'implémentation renvoyés vers `3_TECHNICAL`/`4_LOG`, listes de voix mobilisées répétées trois fois). **1474 → 1458 lignes.**
+> **Dernière refonte de fond** : **2026-07-30** — **le principe-souche entre au-dessus des trois méta-principes (§2.0 : *être vu est nécessaire, être caractérisé déforme*)** · les six principes du miroir sont canonisés avec leur source lue et leur test qui échoue (§3.15) · durcissements §8.2 (biais d'ascension), §8.3 (« qu'il repose »), §8.7 (sortie humaine dans le même écran) · correction de l'attribution non sourcée à Ullman (§3.4.1) · nommage Courant / Weave au glossaire.
+> **Refonte précédente** : 2026-07-26 — thèse en tête (§0.1) · le Cœur pilier égal au rêve (§1.5, §3.12) · grands rêves et double lecture (§3.13, §3.14) · génération de mondes (§1.1.bis) · silence comme organe (§3.1.ter, §3.5) · couche 0 de persistance (§3.8).
+> **Bilan de compression 30/07** : ~180 lignes ajoutées, ~107 retirées (§18+§19 fusionnés — ils redisaient `4_LOG` et `2_DESIGN` une troisième fois · §3.5.4 dédoublonné avec §6.1 · exemples de polyphonie du §3.1.ter renvoyés vers `2_DESIGN` · §4 ramené à ce qui n'est pas déjà dans §3.13 · §14 transformé en index · glossaire dédoublonné sur « Big Dream »). **1458 → 1531 lignes.** Le solde est positif de 73 lignes : c'est le prix de sept principes qui portent chacun leur source et leur vérification, et je n'ai pas trouvé de coupe honnête au-delà.
 > **Posture** : brother-mode. Anti-flatterie. Tensions honorées, pas résolues. Vocabulaire désensorcelé.
 > **Mode de lecture** : à relire chaque trimestre, à amender quand la Forêt ou l'expérience révèlent. Pas une bible immuable — un socle vivant. Si une décision contredit explicitement plusieurs red lines, signal d'alarme.
 
@@ -219,7 +220,35 @@ Aucun écran de l'app n'est neutre. Côté Orbe : **nuit**, feu qui s'éteint, l
 
 ## §2 — Méta-principes (au-dessus de tout)
 
-Trois principes sont **au-dessus** des autres. Ils orientent. Ils ne sont pas négociables. Quand un principe inférieur entre en tension avec eux, ils priment.
+Un principe-souche (§2.0) et trois méta-principes (§2.1 à §2.3) sont **au-dessus** des autres. Ils orientent. Ils ne sont pas négociables. Quand un principe inférieur entre en tension avec eux, ils priment. Quand les trois entrent en tension avec la souche, la souche prime.
+
+### 2.0 — 🔴 LA SOUCHE : être vu est nécessaire, être caractérisé déforme (Tim 2026-07-27, canonisé 2026-07-30)
+
+> *« Ça résume très profondément la nature de l'app. Il faut le canoniser. »* — Tim, 27/07
+
+**Source lue** : Hillman, *The Soul's Code* (digest Tier 1, ouvert en session le 26/07). Une seule phrase y porte le mandat et l'interdiction :
+
+> *« Le daimon exige que la personne soit vue — reconnue, reflétée, tenue dans la perception — pour que son image prenne forme dans le monde. Ne pas être perçu arrête le devenir de l'âme. À l'inverse, la mauvaise sorte de perception — la réduction à un diagnostic, à un rôle familial, à une catégorie sociale — peut le déformer. »*
+
+C'est l'ancienne formule scolastique *esse est percipi* retournée vers l'âme : **être vu est nécessaire, être caractérisé déforme.** Ce n'est pas un équilibre à doser. Ce sont deux opérations différentes, et l'app n'a le droit qu'à la première.
+
+**Le geste exact qui est permis.** Trois gestes, trois statuts, et la ligne passe entre le deuxième et le troisième :
+
+| Geste | Exemple | Statut |
+|---|---|---|
+| **RENDRE** | *« Trois fois, tu as écrit sur une école. En 2019, en 2022, cette nuit. »* | **permis — c'est le cœur** |
+| **RELIER** | *« Dans les trois, il y a une porte que tu n'ouvres pas. »* (présent dans les images) | **permis, sous conditions** |
+| **CONCLURE** | *« Tu as un rapport difficile à l'autorité. »* | **interdit, absolument** |
+
+> **L'app cite. Elle ne caractérise pas. Son sujet n'est jamais le rêveur — son sujet est ce qui revient chez lui.**
+
+Le déplacement de sujet est tout. *« Tu es quelqu'un qui fuit »* est un verdict sur une personne. *« Il y a une course dans sept de tes rêves, et tu ne l'as jamais nommée »* est un inventaire d'images. Le premier assigne, le second rend.
+
+**Vérification qui échoue quand on la viole.** Porte lexicale sur toute sortie adressée au rêveur : `tu es` · `tu as tendance` · `ton rapport à` · `ta peur de` · `ton besoin de` · `tu cherches à`. Détection → blocage de la génération, jamais réparation. Doublée de la **traçabilité** (§3.15.7) : tout énoncé factuel sur le rêveur porte un `kairos_id` et sa date, et un énoncé sans source fait échouer la génération.
+
+**Pourquoi c'est la souche.** Les six principes du §3.15 en découlent ou la servent : le biais d'ascension est une caractérisation déguisée en courbe · l'insistance est la seule forme de vision qui ne caractérise pas · la loi des 16 fruits dit *quelle forme* une totalité peut prendre sans devenir un portrait · le montage dit *par quel moyen* on rend sans gloser · la sortie vers un humain dit *ce que la vision seule ne suffit pas à faire* · Le Fil est le fruit qui applique la souche à une vie entière.
+
+Détail opératoire complet : `DOCTRINE-MIROIR.md` §1, dont les §1.3 à §1.5 sont désormais promus ici.
 
 ### 2.1 — P-Zéro : Profonde Simplicité
 
@@ -353,31 +382,11 @@ Ce qui reste valide de la conception du 25/04, et qui est repris tel quel :
 
 **Sources Forêt** : Bachelard (rêverie diurne), Yunkaporta (réveillé/rêvé inséparables), brown *Holding Change*, Frankl (porter la vie nue avec dignité), Aizenstat (le tending s'étend à la vie), Hopcke (le récit est la donnée), Damasio + Gendlin (le corps sait), Eliade (le quotidien comme hiérophanie possible), Buber (rencontre dans la vie nue).
 
-### 3.1.ter — [ABSORBÉ] → voir §3.10
+### 3.1.ter — 🔴 SILENCE_AS_FEATURE, et la règle du test qui échoue
 
-L'« appel à la sagesse des kairos » était décrit deux fois dans ce document, en avril, à deux endroits. **§3.10 fait foi** (il le promeut explicitement au rang de geste secondaire central et le supersede depuis le 26/04). Section fusionnée le 26/07 pour supprimer le doublon — aucun contenu perdu.
+> La description de l'« appel à la sagesse des kairos » qui vivait ici a été fusionnée dans **§3.10**, qui fait foi depuis le 26/04. Les trois exemples de polyphonie qui l'illustraient sont retirés le 30/07 : ce sont des exemples de **ton**, donc du ressort de `2_DESIGN`, et ils ne portaient aucun arbitrage. Ce qui reste ci-dessous est ce que cette section apporte et qui n'existe nulle part ailleurs.
 
-#### Exemples de polyphonies attendues (conservés ici, illustration du ton juste)
-
-**Entrée Journal de Vie (section Travail)** : *"Je doute de quitter mon job. C'est stable mais je m'éteins."*
-**Polyphonie tissée** :
-> *"Cette question — quitter ce qui éteint — n'est pas neuve dans ton sol. Il y a deux lunes, tu rêvais d'une maison aux pièces inconnues : tu en ouvrais une, et la lumière revenait. La semaine d'avant, tu avais croisé deux fois un oiseau au bord d'une fenêtre fermée. Il y a un an, tu avais marqué un frisson en lisant Hyde sur ce qui circule. Ces choses ne disent pas la décision — elles posent une qualité d'attention. Aizenstat dirait : ne demande pas à ton rêve s'il faut partir, demande-lui de quoi il a besoin pour respirer. Hyde dirait : ce qui ne circule plus en toi cherche son lit ailleurs.*
->
-> *Que sait ton corps que ton mental n'a pas encore osé nommer ?"*
-
-**Entrée Journal de Vie (section Relations / amour)** : *"On s'est disputés hier. Je suis encore tendu."*
-**Polyphonie tissée** :
-> *"Cette tension — celle d'hier soir — touche peut-être quelque chose de plus ancien. Ton corps a marqué un frisson semblable trois fois ce printemps : toujours quand tu sentais qu'on ne voyait pas vraiment ta présence. Le rêve du couloir aux portes fermées de mars portait la même couleur. Ce ne sont pas des explications de la dispute — ce sont des fils qui suggèrent qu'autre chose se demande à toi à travers cette tension. Hopcke dirait : la dispute est l'événement, mais le récit que tu en fais est la donnée. Buber dirait : ce qui blesse dans le tu est ce qu'on attendait du tu.*
->
-> *Si tu pouvais nommer en un mot ce qui s'est demandé à voir hier — quel mot viendrait ?"*
-
-**Entrée Journal de Vie (section Corps & santé)** : *"Mal au pied droit depuis trois jours, sans raison."*
-**Polyphonie tissée — appel Oracle du Corps** :
-> *"Ce pied droit a pris une forme dans tes nuits récentes : la semaine dernière, tu rêvais que tu marchais sur un sol mouvant, attentif à ne pas glisser. Trois fois cette saison, des frissons sur le pied droit pendant des conversations sur le travail. Damasio dirait : le corps sait avant l'esprit. Aizenstat dirait : qu'est-ce qui te demande de poser le pied autrement ?*
->
-> *Qu'est-ce que tu refuses peut-être de prendre comme appui ces temps-ci ?"*
-
-#### 🔴 SILENCE_AS_FEATURE — l'anti-pattern qui gouverne tous les autres
+#### Ce que le moteur n'a jamais le droit de faire
 
 - **Pas de « voici ce que ça veut dire »** : jamais de verdict.
 - **Pas de psychologisation** : ni « tu es en évitement », ni « tu projettes », ni « tu refoules ».
@@ -464,7 +473,9 @@ Pas "Couche Individu / Couche Cercle / Couche Anima Mundi" comme 3 couches d'un 
 
 **Sources Forêt** : brown, Eisenstein, Council Process (Coyle/Zimmerman), Wheatley, Scharmer (*Theory U*), Bohm (*On Dialogue*), Caucus iroquois (consensus aux sept générations), Yarning Circles aboriginals, Junger (*Tribe*), Vogl, Moss (*Dreaming True*).
 
-> **⚠️ Donnée d'usage à ne pas ignorer (26/07)** : les cercles existent en code depuis avril et **n'ont jamais servi** — deux cercles, deux membres, **zéro message**. Le précédent de `cercles.infuse.earth` est identique. **Ce n'est pas un accident, c'est une donnée** : elle doit être traitée comme telle avant d'investir davantage dans le social (question ouverte de l'audit Forêt : *le partage est-il une aide ou une profanation ?*). Le protocole retenu par Tim — **le tour de parole à ouverture différée** — est structurellement celui d'Ullman, et c'est probablement la bonne piste.
+> **⚠️ Donnée d'usage à ne pas ignorer (26/07)** : les cercles existent en code depuis avril et **n'ont jamais servi** — deux cercles, deux membres, **zéro message**. Le précédent de `cercles.infuse.earth` est identique. **Ce n'est pas un accident, c'est une donnée** : elle doit être traitée comme telle avant d'investir davantage dans le social (question ouverte de l'audit Forêt : *le partage est-il une aide ou une profanation ?*). Le protocole retenu par Tim est **le tour de parole à ouverture différée**.
+>
+> ⚠️ **Correction du 30/07 — cette ligne affirmait que ce protocole « est structurellement celui d'Ullman ». L'affirmation n'est fondée sur aucune lecture disponible** : Ullman n'est pas dans la Forêt (zéro digest ; *The Variety of Dream Experience* figure comme item **non digéré** de `BOOK-LIST-DREAM.md`). Elle est probablement juste ; elle n'est pas sourcée, donc elle ne se cite pas. Ce qui est fondé et lu : **Taylor** — le groupe ne protège que par la **pluralité de projections qui s'annulent** (d'où le seuil dur à 3 personnes : en dessous, il n'y a pas d'annulation, il y a une interprétation qui écrase) — et **Moss**, le partage comme événement rare et cadré. **La digestion d'Ullman est la première acquisition prioritaire si le volet groupe avance.**
 
 #### 3.4.2 — Le Mur de Rêve, les groupes qui rêvent ensemble, l'Anima de Cercle (vision Tim 2026-07-09, canonisée 2026-07-10)
 
@@ -537,18 +548,7 @@ Extraction LLM toujours dans une langue d'ontologie standardisée (anglais comme
 
 #### 3.5.4 — Ancrage philosophique du moteur
 
-- **Jung** — archétypes, synchronicité acausale, individuation
-- **Bateson** *Mind and Nature* — *"the pattern that connects"*, structure des résonances cross-domaines
-- **Lakoff & Johnson** — métaphores conceptuelles comme structure de la pensée
-- **Hofstadter** *I Am a Strange Loop* — résonance auto-référentielle, scaling fractal
-- **Damasio** *The Feeling of What Happens* — somatic markers
-- **Sheldrake** — champs morphiques, résonance
-- **Seth** — Framework 1/2, prophétie 90%, all inventions from dream world
-- **Aizenstat** — eidola autonomes, body-to-body resonance
-- **Hopcke** *No Accidents* — synchronicity-as-narrative event
-- **von Franz** — numinosity, série temporelle
-- **Cambray** — synchronicity = developmental achievement
-- **Larsen** — mythogem (unité condensée de sens mythique)
+Les douze voix qui le fondent sont déjà décrites une par une au **§6.1** (cautions centrales) — la liste vivait ici en double depuis avril. Ce qui est propre au moteur et ne se lit nulle part ailleurs : **Bateson**, *the pattern that connects* (la structure même des résonances cross-domaines), **Lakoff & Johnson** (la métaphore conceptuelle comme structure de la pensée, donc du matching), **Hofstadter** (la résonance auto-référentielle et son scaling fractal), et **Larsen** (le mythogem comme unité condensée de sens). Les huit autres — Jung, Damasio, Sheldrake, Seth, Aizenstat, Hopcke, von Franz, Cambray — sont au §6.1.
 
 #### 3.5.5 — Reformulation centrale (anti-vol oraculaire)
 
@@ -906,44 +906,123 @@ Testé en réel sur 64 rêves et 3 situations (A3, 26/07) :
 
 ---
 
+### 3.15 — 🔴 LE MIROIR : les six principes qui découlent de la souche (validés Tim 27/07, canonisés 30/07)
+
+> Souche : §2.0. Doctrine complète et sourcée : `DOCTRINE-MIROIR.md`. Ici : ce qui a rang de canon, avec sa source lue et **sa vérification qui échoue quand on le viole** — règle du 26/07 : *un principe qui n'a pas de test qui échoue quand on le viole n'est pas un principe, c'est un vœu.*
+
+#### 3.15.1 — Le biais d'ascension
+
+**Source lue** : Weller, *The Wild Edge of Sorrow*, p. 21 (texte intégral en `forest_chunks`, pagination vérifiée). Il y nomme un biais culturel : tout ce qui monte nous rassure, et *« même à l'intérieur de la psychologie, il y a une prémisse qui est biaisée vers l'amélioration, le fait d'aller toujours mieux, de s'élever au-dessus de nos problèmes »*. Mais la psyché a été façonnée par la nature — elle connaît la décomposition, l'arrêt, la régression, l'immobilité. **Quand on ne montre que des images d'ascension, il ne reste qu'à interpréter ses propres descentes comme pathologiques, et à croire qu'on échoue.**
+
+> **Une interface qui n'affiche que de la montée fabrique du sentiment d'échec.**
+
+Conséquence dure, et elle est spécifique à un journal de rêve : **aucune courbe de progression, aucun score qui monte, aucun « streak », aucune jauge, aucune phase.** §8.2 interdisait déjà la gamification par éthique anti-extractive ; Weller ajoute la raison clinique, et elle est plus contraignante — le mal n'est pas la dopamine, c'est le verdict silencieux qu'une courbe descendante prononce.
+
+**Et le scénario que ça rend prévisible** (Kalsched, rêve de la hache, ch. 1) : le geste que l'app demande — se souvenir, dicter, marquer, rouvrir un rêve ancien — est exactement le geste que le système d'auto-soin est conçu à intercepter. **On doit s'attendre à des nuits dures qui suivent les pas les plus courageux.** Un dispositif à jauge lirait cette nuit-là comme un recul, et le rendrait à quelqu'un qui vient de faire le pas le plus courageux de son mois.
+
+> **VÉRIFICATION.** Assertion de schéma : aucun champ de progression, de série, de niveau ou d'état de résolution dans les modèles exposés au rêveur (`progress`, `streak`, `stage`, `level`, `is_resolved`, `healed`). Doublée d'une porte lexicale sur la sortie : `dépassé` · `réglé` · `guéri` · `résolu` · `surmonté` · `tu as avancé` · `étape` · `phase`. Le test échoue si un tel champ ou un tel mot apparaît.
+
+#### 3.15.2 — L'insistance, le troisième miroir
+
+Ni lumière ni ombre : **ce qui revient sans qu'on l'ait voulu.**
+
+La partition lumière/ombre est fausse et le canon l'a déjà tranché (`DOCTRINE-MIROIR` §2 : Kalsched — la figure persécutrice *est aussi* la protectrice ; `safety-checks.json` interdit littéralement le mot « ombre »). Ce qui restait sans nom, c'est **la troisième chose que le corpus dit sans ambiguïté**. Un rêve n'affirme rien, ne se contredit pas, ne porte pas de thèse. Il fait une seule chose de façon incontestable : **il revient.**
+
+> **L'insistance ne qualifie rien. Elle compte et elle date.**
+
+C'est le seul miroir qui ne peut pas caractériser, parce qu'il ne dit rien d'autre qu'un fait vérifiable par le rêveur lui-même. Et c'est le seul qui tienne à l'échelle : mesuré le 26/07, le comptage direct sur les **récits bruts** est robuste (école 22 · communauté 21 · business 19 · sacré 18 · vol 16 · père 13 · mère 10), là où les étiquettes sont du bruit — 918 `motif_tags` pour 872 valeurs distinctes, 95,4 % d'hapax.
+
+> **VÉRIFICATION.** La détection d'insistance se fait sur `recit_only_text`, jamais sur `motif_tags` ni sur le dictionnaire personnel. Test : un jeu d'essai où les étiquettes contredisent les récits doit produire le résultat des récits. **Et la règle des nombres** — un numéral n'est autorisé que s'il est accompagné, dans la même phrase, des dates ou de l'énumération qui le composent. *« Sept fois depuis 2021 »* passe ; *« 7 rêves »* ne passe pas (§3.13.4).
+
+#### 3.15.3 — La loi des 16 fruits
+
+> **Une totalité se rend par ses trous, ses contradictions et ses refus. Jamais par son résumé.**
+
+**Source lue** : le code des 16 fruits de la plénière (`forest/build_outputs/output_types/output-types-catalog.ts`), vérifié entrée par entrée le 26/07. **Aucun des seize ne produit une synthèse** : des trous (Zones vides, Carte du Vide, Veille), des contradictions tenues sans résolution (Tensions, Antiphonaire), des refus et des décisions (Ruling, `refus_formel`), ce qui a été composté (Cendre), des passages (Seuil, Pli), une forme neuve (Artéfact orphelin). Le seul qui confirme porte dans sa propre note de risque la mention *« clichés déguisés »*.
+
+C'est la réponse structurelle à la peur d'être figé : **ce n'est pas qu'on s'interdit le portrait par prudence, c'est qu'une totalité ne se dit pas ainsi.**
+
+**Corollaire de forme, et il est plus contraignant que la loi elle-même.** Tiré du code de la plénière (`page-plenary.tsx`, étape `document`) : le fruit est un **document de retraite** — produit rarement, sur demande, précédé de cinq secondes d'écran noir, lu une fois, archivé. **Ce n'est pas un écran.**
+
+> **Toute lecture globale qui prend la forme d'un onglet permanent, d'un dashboard ou d'une page de profil trahit les 16 fruits à la racine.**
+
+> **VÉRIFICATION.** Aucune route de lecture globale n'est atteignable depuis la barre de navigation, et aucune n'est rendue par un composant persistant. Test de navigation : le miroir n'a pas d'onglet. Doublée de la **règle du corpus inchangé** (`DOCTRINE-MIROIR` §6.2a) : empreinte des kairos contributifs identique → refus de générer, et le test échoue si une prose est produite.
+
+#### 3.15.4 — Le miroir est beau par montage, pas par écriture
+
+> **Trois de ses propres phrases datées, posées côte à côte, valent mieux que n'importe quelle prose. La splendeur vient de la matière ; la glose l'abîme.**
+
+Tim demande un miroir *« magnifique »* — c'est une exigence de forme, pas un ornement (Bachelard : *« l'image cosmique donne le tout avant les parties »* — on ouvre par une image, jamais par une liste). Mais le beau ne vient pas d'écrire beau. Il vient de ce que **c'est le temps qui a fait le travail**, et que les phrases sont de lui. C'est §0.1 appliqué à l'esthétique : *une phrase générée qui console vaut moins qu'un de ses propres rêves ramené au bon moment.*
+
+Conséquence : le mode **« ce que j'en ai dit »** — uniquement ses lectures successives, datées, côte à côte, zéro prose générée — est **le moins cher à construire et le plus fort du lot**. Il est prioritaire sur tous les autres modes.
+
+> **VÉRIFICATION.** Sur ce mode, la part de texte non-verbatim dans la sortie est plafonnée, et ce qui reste ne dit que ce que l'app ne fait pas (*« voilà tes trois phrases. Je ne les commente pas. »*). Test : toute phrase de la sortie est soit une citation attribuée et datée, soit une ligne d'auto-limitation. Une troisième catégorie fait échouer le test.
+> **Règle du « je »** : le miroir ne dit « je » que pour dire **ce qu'il ne sait pas** et **ce qu'il ne fera pas**. Un « je » qui affirme fabrique un compagnon ; un « je » qui se limite fabrique un instrument.
+
+#### 3.15.5 — La sortie vers un humain est une condition du mode, pas un réglage
+
+**Deux sources lues, deux disciplines qui ne se citent pas, même verdict.**
+
+- **Weller**, p. 74 : *« Grief has never been private; it has always been communal. »* Et p. 74 encore, le mode d'échec : en l'absence de communauté, *« par défaut, nous devenons le contenant nous-mêmes »*, et le chagrin recycle sans se libérer. p. 116, la formule qu'il attribue à un mentor : *« This is the solitary journey that we cannot do alone. »*
+- **Kalsched**, p. 214, après *Prince Lindworm* : *« Seule la compassion humaine peut activer le potentiel intégratif du Soi quand ses énergies ont été détournées vers le mal et la haine par un trauma insupportable. »* Et sur le cas de Lenore : *« This was not, however, compassion she could give herself. »*
+
+**Ce qui transforme n'est pas de l'insight : c'est un instant de compassion humaine reçue.** Pas donnée par soi. Pas générée. Reçue.
+
+> **Sur la matière lourde, la sortie vers un humain est dans le même écran. Pas dans les réglages. Pas comme protocole de crise. Comme condition d'existence du mode.**
+
+Ce n'est pas un durcissement de §8.7 (*« à 2 clics de n'importe quel écran »*, qui reste vrai partout ailleurs) : c'est une exigence d'une autre nature. §8.7 est un filet. Ici, c'est le mode lui-même qui n'a pas le droit de s'ouvrir sans elle. **Tim est prêt à référencer des thérapeutes experts du rêve et du trauma** — l'annuaire cesse d'être une liste d'urgence pour devenir une ressource du produit.
+
+**Et la conséquence qu'il faut oser écrire** : le miroir n'est pas le produit — **c'est ce qui prépare quelqu'un à aller vers un autre.** À ce compte-là, la mesure du succès n'est pas qu'il revienne. C'est qu'il en parle à quelqu'un. Métrique désagréable, probablement la bonne.
+
+> **VÉRIFICATION.** Test de route : sur un kairos marqué intense, la réponse du miroir contient la ressource humaine dans la même charge utile que la matière. Absence → la route renvoie une erreur, pas un miroir dégradé. Et le libellé affiché est réel et explicitement localisé (§8.7, correction du 11/07 : on n'invente jamais un numéro, on ne déduit jamais le pays de la langue).
+
+#### 3.15.6 — Le 18ᵉ fruit : « Le Fil »
+
+La méta-plénière du 19/04 a engendré 14 fruits. Douze ont été codés, deux sont tombés. L'un des deux s'appelle **« Le Fil »**, et sa description d'origine tient en une ligne :
+
+> *La Ligne de Vie Personnelle — accepté avec fort garde-fou : **jamais produit automatiquement, toujours demandé.***
+
+C'est exactement le miroir que Tim a demandé le 26/07, et exactement le déclencheur que `DOCTRINE-MIROIR` §6.2 a re-déduit le même matin sans savoir qu'il existait. **C'est le seul fruit de la plénière que personne n'a construit** — il attendait un corpus de rêves plutôt qu'un corpus de livres. Il entre au canon sous son nom d'origine et avec son garde-fou d'origine, intact.
+
+> **VÉRIFICATION.** Aucune tâche planifiée n'écrit un Fil. L'unique point d'entrée exige un geste du rêveur porteur d'un identifiant de requête. Test : la table des tâches ne contient aucun producteur de Fil, et deux appels sans dépôt intermédiaire produisent un refus (§3.15.3).
+
+#### 3.15.7 — Les quatre arbitrages qui vont avec (Tim, 30/07)
+
+**a) La traçabilité — ce que la liberté créative recouvre exactement.** La question était ouverte : Tim proposait les sources en bas de texte pour laisser de la liberté à l'IA ; `DOCTRINE-MIROIR` §8.1(d) exigeait l'inverse. **Tranché** :
+
+> La prose du miroir peut respirer et prendre des libertés de forme, **à condition que les rêves entiers dont elle est faite soient ouvrables juste en dessous**, dans le texte du rêveur, avec leurs dates. Pas une note de bas de page : **un accès**.
+> **La liberté créative porte sur *comment on assemble*, jamais sur *ce qu'on assemble*. Une phrase du miroir qui ne s'adosse à aucun rêve ouvrable n'a pas le droit d'exister.**
+
+Ça renverse l'asymétrie d'échelle : le miroir voit le corpus entier, le rêveur voit un rêve à la fois — mais il peut toujours aller vérifier, et ce qu'il vérifie, c'est lui-même.
+
+**b) La porte somatique n'est pas un écran de plus.** L'interdit 10 de `DOCTRINE-MIROIR` §7 est **gardé, sa forme change** : la porte somatique n'est plus une étape préalable dans un écran séparé — **c'est le premier geste du miroir lui-même, dans le même écran.** Un sas qu'on traverse avant d'arriver quelque part est une friction ; un premier geste est une manière d'entrer.
+**Le non-tracking de la fermeture est maintenu et assumé** : mesurer les fermetures transformerait un moment intime en donnée. **On accepte de ne jamais savoir si la protection sert.** C'est un coût réel, consenti.
+
+**c) « Qu'il repose ».** Un rêve peut sortir du miroir **sans être détruit** — il reste au journal, lisible, marqué. Il cesse simplement d'être cité. **Réversible en un tap, sans justification, sans notification, sans confirmation.** C'est la contrepartie d'une mémoire qui ne fatigue pas : un témoin humain oublie, et l'oubli est une forme de miséricorde. Jusqu'ici la seule sortie était *« brûler ce rêve »* (§8.3) — pour cesser d'être rappelé, il fallait supprimer la trace. C'était cruel.
+
+**d) Le fil « rêve » est du cœur, pas un défaut.** Le mode « ce que j'en ai dit » fait remonter un fil où Tim parle **de sa pratique du rêve dans ses lectures de rêve** — le fil le plus profond du corpus (24 rêves, 28 mois). `FAISABILITE-MIROIR` §4.2 concluait à un défaut de méthode : *« un miroir de la psyché qui parle surtout de la façon dont on tient le miroir a raté quelque chose »*. **Tim tranche l'inverse** : *« ça touche plutôt au cœur »*.
+
+> Qu'un rêveur parle de son rapport au rêve **dans** ses lectures de rêve est **du matériau, pas du bruit**. La séparation `recit_only_text` / commentaire reste utile pour l'embedding (§3.14.2) ; elle n'est pas un filtre de valeur.
+
+⚠️ Cette entrée **contredit explicitement** `FAISABILITE-MIROIR` §4.2, et c'est l'arbitrage de Tim qui prime. Le rapport reste au dossier avec sa mesure ; sa conclusion sur ce point est caduque.
+
+---
+
 ## §4 — Trinité conceptuelle Big Dreams / Master Events / Titanic Dreams
 
 Les 3 ensemble forment l'**axe vertical** de l'app. Le journal quotidien = horizontal (capture, day, fragments). Big/Master/Titanic = vertical (compas, convergence, numineux).
 
-### 4.1 — Big Dreams (visualisation révisée)
+> **🔴 Les trois sont des concepts d'analyse, backend, jamais montrés.** Ce que le rêveur voit, c'est **« un grand rêve »**, qui est *sa* décision (§3.13). Les deux ne se confondent pas : le premier est ce que l'app remarque, le second est ce que le rêveur reconnaît. **Rien n'entre dans le journal par un score** — c'est ce qui empêche le journal d'être une galerie de trophées, et c'est ce qui résout la tension Carse (*Finite and Infinite Games*) : un compas, une bordure dorée, un écran dédié fabriqueraient un trophée fini, alors que le grand rêve est la porte d'un jeu infini.
 
-**Source Forêt** : Moss + Bulkeley.
+### 4.1 — Big Dreams
+**Source Forêt** : Moss + Bulkeley. Rêve révélant un Ondinnonk (désir caché de l'âme — iroquois via Moss, attribution culturelle obligatoire), avec carry-over effects mesurables. **4 prototypes Bulkeley** (aggressive / sexual / gravitational / mystical) en classification soft, jamais imposée. Visualisation : pas de halo doré permanent, pas de galerie figée — le Big Dream se **dissout dans le sol psychique** du rêveur après quelques semaines.
 
-Rêve révélant un Ondinnonk (désir caché de l'âme — Iroquois via Moss, attribution culturelle obligatoire). Carry-over effects mesurables. Compas individuel.
-
-**Visualisation REVISITÉE** (verdict intégratif 2026-04-24) : pas de halo doré permanent. Pas d'écran dédié "Big Dreams" comme une galerie figée. Big Dream se **dissout dans le terreau du rêveur** après semaines (devient sol psychique). D'abord visible et lumineux (premières semaines), puis implicite, partie de son sol psychique.
-
-**Tension à honorer** (Carse — *Finite and Infinite Games*) : un compas, une bordure dorée, un écran dédié = construction d'un trophée fini. Or les Big Dreams sont la **porte d'un infinite game**. Big Dream n'est pas un trophée. C'est une lumière qui éclaire la traversée.
-
-**4 prototypes Bulkeley** (aggressive / sexual / gravitational / mystical) en classification soft jamais imposée.
-
-> **🔴 Articulation avec §3.13 (2026-07-26).** « Big Dream » est un concept d'analyse, backend, jamais montré. **« Un grand rêve » est le mot du rêveur**, et c'est lui qui décide. Les deux ne se confondent pas : le premier est ce que l'app remarque, le second est ce que le rêveur reconnaît. La tension Carse ci-dessus se résout d'ailleurs par §3.13 : le journal des grands rêves n'est pas une galerie de trophées parce que **rien n'y entre par un score** — seulement par une décision, souvent tardive, révisable, et sans classement entre elles.
-
-### 4.2 — Master Events (reportés post-MVP)
-
-**Source Forêt** : Seth (*Individual & Mass Events*).
-
-Nœud dense Portrait Croisé Global. Convergence massive entre rêves agrégés et événements jour. Expression Framework 2 → Framework 1. Les événements vraiment décisifs (apparitions de civilisations, religions, technologies) émergent **du Framework 2**, dans le rêve collectif, **avant** de s'inscrire historiquement.
-
-> *"Master events originate outside time and space."* — Seth, *Vol. 2*
-
-**4 algorithmes shippés 2026-04-20** (process_convergence, figure_convergence, theme_surge, numinous_cluster) avec pondération numinosité von Franz (4→2.5x, 5→4x). Infrastructure conservée.
-
-**Clarification 2026-04-24 — Architecture câblée jour 1, UI activée à seuil** : pas reporté "techniquement" mais **"à exposition utilisateur"**. Le code reste actif, les algorithmes tournent, les agrégations se construisent en silence. L'UI surface est activée quand seuil utilisateur atteint pour que les Master Events détectés aient une véritable assise statistique (k-anonymity 100+, idéalement 250 conservatif au démarrage). Préserver le code, garder l'exposition user gating jusqu'à quorum suffisant.
+### 4.2 — Master Events (UI gatée par quorum)
+**Source Forêt** : Seth (*Individual & Mass Events*). Convergence massive entre rêves agrégés et événements du jour — expression Framework 2 → Framework 1. Les événements décisifs émergent du rêve collectif **avant** de s'inscrire historiquement. *« Master events originate outside time and space. »*
+**Câblé jour 1, exposé à seuil** : 4 algorithmes tournent en silence depuis le 20/04 (détail → `3_TECHNICAL`, historique → `4_LOG`). L'UI ne s'ouvre qu'au quorum statistique (k ≥ 100, démarrage conservateur à 250). Le report est **d'exposition, pas de technique**.
 
 ### 4.3 — Titanic Dreams (sous-catégorie Big)
-
-**Source Forêt** : Bulkeley (gravitational prototype) + Otto (Numinous).
-
-Sous-cat Big Dream, scale cosmique/élémentaire (séismes, inondations, apocalypse, lévitation, contact avec le sacré). Phenomenologically numinous. Souvent collectif sans le savoir.
-
-**Marquage discret** quand IA détecte ou user marque, pas écran "Titanic Dreams" séparé. Pont avec Master Events : plusieurs Titanic Dreams individuels similaires = signal Anima Mundi anxieuse ou enthousiaste collective.
-
+**Source Forêt** : Bulkeley (prototype gravitational) + Otto. Échelle cosmique ou élémentaire (séismes, inondations, apocalypse, lévitation, contact avec le sacré), phénoménologiquement numineux, souvent collectif sans le savoir. **Marquage discret, jamais d'écran dédié.** Pont avec Master Events : plusieurs Titanic Dreams similaires = signal d'une Anima Mundi anxieuse ou enthousiaste.
 > *"Titanic Dreams centrale a l'app, ultra important."* — Tim 2026-04-23
 
 ---
@@ -1097,14 +1176,17 @@ Non-négociable. Si une décision les contredit explicitement, signal d'alarme �
 ### 8.1 — CONTE = 100% sous-forêt contes réels, JAMAIS d'IA générée
 **Source** : feedback Tim 2026-04-19 critical + Plénière Émergence + Plénière Trauma-safe red line 17. Pas chatbox. Pas générateur IA. Pas création littéraire. Logique matching = **amplification von Franz** (3-5 fragments de contes réels qui touchent à des éléments du rêve, pas LE conte qui correspond). Le rêveur choisit. Cadrage explicite : *"voici un récit qui résonne, il n'est pas l'explication, juste une possible compagnie"*. Code actuel `ai-router.ts` ligne 79 viole encore cette règle (Opus génère encore un conte) → correctif urgent avant launch.
 
-### 8.2 — Anti-gamification stricte
+### 8.2 — Anti-gamification stricte, et le biais d'ascension
 Pas de streaks. Pas de badges. Pas de points. Pas de leaderboard. Pas de comparaison avec d'autres users (*"82% des users font des cauchemars de chute"* — interdit). Pas de notifications push de révélation. Pas de "tadaaa" quand un pattern émerge.
 **Source** : Han (*Psychopolitics* — achievement-subject auto-exploitant), Eyal (*Hooked* — anti-modèle), substance Wangyal "devotion over mechanics" (sans la caution).
+
+> **🔴 Durcissement 30/07 — la raison clinique, plus contraignante que la raison éthique.** Weller (p. 21) : **une interface qui n'affiche que de la montée fabrique du sentiment d'échec** (§3.15.1). Le mal n'est donc pas seulement la dopamine — c'est le **verdict silencieux** qu'une courbe descendante prononce sur quelqu'un qui vient de faire un pas courageux. **S'ajoutent aux interdits ci-dessus : aucune courbe de progression, aucune jauge, aucun niveau, aucune phase, aucun état de résolution**, ni à l'écran ni en colonne.
 
 ### 8.3 — Privacy radicale comme acte de soin (Pilier 5 trauma-safe)
 - Chiffrement bout en bout par défaut.
 - Mode rêve éphémère (pas archivé) en un clic.
 - Effacement immédiat sans questionnement.
+- **« Qu'il repose »** (30/07) — le geste intermédiaire qui manquait entre tout garder et tout brûler. Le rêve **reste au journal, lisible, marqué** ; il cesse seulement d'être cité par le miroir. **Réversible en un tap, sans justification, sans notification, sans confirmation.** C'est la contrepartie d'une mémoire qui ne fatigue pas (§3.15.7c) : un témoin humain oublie, et l'oubli est une forme de miséricorde.
 - Engagement contractuel : **aucun rêve marqué sensible n'entraîne IA**.
 - Aucune donnée de rêve ne sort jamais de l'app vers tiers (analytics tiers, pubs, etc.).
 - Audit annuel public par tiers indépendant.
@@ -1128,6 +1210,8 @@ Si tu codes Lat/Long en V1 *"pour V3"*, tu construis un actif que tu ne peux plu
 
 ### 8.7 — Sortie vers humain V1 obligatoire
 **Source** : Plénière Trauma-safe, Pilier 7. Non-négociable. Lignes d'urgence en premier, annuaires de praticiens ensuite (SE International, IFS Institute, EMDR, SOS Amitié, lignes thématiques). Jamais dans une page « à propos ». **Toujours à 2 clics maximum de n'importe quel écran.**
+
+> **🔴 Durcissement 30/07, sur la matière lourde uniquement.** Deux clics restent la règle partout. Mais sur un mode qui ouvre de la matière lourde, **la sortie vers un humain est dans le même écran, comme condition d'existence du mode** — pas dans les réglages, pas comme protocole de crise. Weller (p. 74, p. 116) et Kalsched (p. 214) convergent sans se citer : l'opération décisive requiert une autre personne (§3.15.5). Tim est prêt à référencer des **thérapeutes experts du rêve et du trauma** : l'annuaire cesse d'être une liste d'urgence pour devenir une ressource du produit.
 
 > **🔴 Correction 2026-07-11, à ne pas perdre** : on avait affiché un numéro **américain** pour l'anglais. C'est **supposer le pays du rêveur** à partir de sa langue — un anglophone à Paris serait tombé sur une ligne américaine. **Règle : on n'invente jamais un numéro d'urgence, et on ne déduit jamais le pays de la langue.** Ce qui est affiché est réel, explicitement localisé (« ces lignes sont en France »), complété par un annuaire international réel. Le filet de détection de crise, lui, teste **toujours toutes les langues** — on peut écrire en anglais dans une app en français.
 
@@ -1266,23 +1350,24 @@ Une Dreaming Society planétaire émergera — ou n'émergera pas — à partir 
 
 ---
 
-## §14 — La fondation en 13 points (synthèse)
+## §14 — La fondation en 14 points (index)
 
-Pour Tim, pour les collaborateurs et les concepteurs à venir :
+Pour Tim, pour les collaborateurs et les concepteurs à venir. Chaque point renvoie à sa section — c'est un index, pas un second exposé.
 
-1. **La thèse** *(§0.1)* : apprendre à se soutenir soi-même, et découvrir la force et la sagesse déjà présentes dans sa propre psyché. Tout le reste est au service de ça.
-2. **Diagnostic** : l'humanité moderne souffre d'une **dream drought** civilisationnelle qui sous-tend ses crises systémiques (Moss, confirmé par neuf autres voix).
-3. **Cosmologie** : le rêve donne accès à une **couche source** (Framework 2 / implicate order / Real World iroquois / mundus imaginalis), matrice d'où émergent les futurs.
-4. **Précédent** : presque toutes les civilisations pré-modernes ont eu des dispositifs d'accès au rêve oraculaire comme institution centrale. **La modernité occidentale est l'exception, pas la norme.**
-5. **Possibilité contemporaine** : les sciences de la matière, du vivant et de la conscience ouvrent un cadre conceptuel respectable — un signal, jamais une preuve.
-6. **Nécessité présente** : le moment historique demande des instruments de retour à la fonction oraculaire.
-7. **L'organisme a deux faces** *(§1.5)* : l'Orbe reçoit ce que la vie nous chante, le Cœur porte ce qu'on chante en retour. **Une seule des deux ne suffit pas** — sans le Cœur, le rêve n'a rien à éclairer.
-8. **Mythos** : trois récits superposés (§11) — Renaissance Oraculaire visible, Anamnèse comme couche produit, Infrastructure de Transition comme couche stratégique.
-9. **Posture éthique** : refus structurel des patterns destructeurs — extraction de données, gamification, surveillance, growth-at-all-cost, appropriation culturelle, capture par les pouvoirs.
-10. **Posture pratique** : l'app **tend**, elle n'interprète pas autoritairement. Le rêveur est son propre oracle. L'app fournit des conditions favorables, pas des vérités — **et elle sait se taire.**
-11. **Dimension communautaire** : ce n'est pas seulement une app individuelle, c'est l'infrastructure d'une communauté distribuée. Lightning Dreamwork et murmuration comme modèles, jamais la timeline sociale.
-12. **Croissance fractale et réciprocité** : densité avant largeur, confiance avant échelle, horizon générationnel — et retour matériel et symbolique aux traditions dont les ontologies nourrissent le projet. **Pas optionnel : structurel.**
-13. **Humilité cosmique** : Dream App n'est pas la solution, mais **un instrument parmi d'autres** dans une transformation dont elle ne maîtrise ni la vitesse ni l'issue. **Le sujet est plus grand que le projet, le projet plus grand que la personne.**
+1. **La souche** *(§2.0)* : **être vu est nécessaire, être caractérisé déforme.** L'app cite, elle ne caractérise pas.
+2. **La thèse** *(§0.1)* : apprendre à se soutenir soi-même, et découvrir la force et la sagesse déjà présentes dans sa propre psyché.
+3. **Diagnostic** : une **dream drought** civilisationnelle sous-tend les crises systémiques modernes (Moss, confirmé par neuf autres voix).
+4. **Cosmologie** : le rêve donne accès à une **couche source** (Framework 2 / implicate order / Real World iroquois / mundus imaginalis), matrice d'où émergent les futurs.
+5. **Précédent** : presque toutes les civilisations pré-modernes ont eu le rêve oraculaire comme institution. **La modernité occidentale est l'exception, pas la norme.**
+6. **Possibilité contemporaine** : les sciences de la matière, du vivant et de la conscience ouvrent un cadre respectable — un signal, jamais une preuve.
+7. **L'organisme a deux faces** *(§1.5)* : l'Orbe reçoit ce que la vie nous chante, le Cœur porte ce qu'on chante en retour. **Une seule ne suffit pas.**
+8. **Mythos** *(§11)* : Renaissance Oraculaire visible · Anamnèse comme couche produit · Infrastructure de Transition comme couche stratégique.
+9. **Posture éthique** *(§8)* : refus structurel de l'extraction, de la gamification, de la surveillance, du growth-at-all-cost, de l'appropriation, de la capture par les pouvoirs.
+10. **Posture pratique** *(§2.3, §3.5)* : l'app **tend**, elle n'interprète pas autoritairement — **et elle sait se taire.**
+11. **La forme des lectures globales** *(§3.15.3)* : une totalité se rend par ses trous, ses contradictions et ses refus. Jamais par son résumé, jamais dans un onglet.
+12. **Ce que l'app ne peut pas faire** *(§3.15.5)* : l'opération décisive requiert une autre personne. Le miroir prépare quelqu'un à aller vers un autre ; il ne le remplace pas.
+13. **Croissance fractale et réciprocité** : densité avant largeur, confiance avant échelle, horizon générationnel — et retour matériel et symbolique aux traditions dont les ontologies nourrissent le projet. **Structurel, pas optionnel.**
+14. **Humilité cosmique** : **un instrument parmi d'autres** dans une transformation dont l'app ne maîtrise ni la vitesse ni l'issue. Le sujet est plus grand que le projet, le projet plus grand que la personne.
 
 ---
 
@@ -1292,8 +1377,9 @@ Pour Tim, pour les collaborateurs et les concepteurs à venir :
 - **Aha capture** : micro-UI 3-niveaux (résonne fort / peut-être / non) après chaque synthèse IA. Autorité finale du rêveur. Alimente cluster `aha_recurrence` pour personnalisation.
 - **Anamnèse** : non-oubli, mémoire retrouvée. Mythos B. Le rêve n'est pas à apprendre — c'est à se rappeler.
 - **Atetshents** : iroquois — celui/celle qui rêve = guérisseur. Rêver et guérir sont **le même verbe**. Attribution culturelle obligatoire.
-- **Big Dream** : rêve révélant un Ondinnonk (Moss + Bulkeley). Carry-over effects mesurables. Compas individuel.
-- **Big Dream / Titanic Dream** : concepts d'analyse (Moss, Bulkeley), **backend, jamais montrés**. À ne pas confondre avec « un grand rêve », qui est la décision du rêveur (§3.13).
+- **Biais d'ascension** : Weller p. 21 — une interface qui n'affiche que de la montée fabrique du sentiment d'échec (§3.15.1). Fonde l'interdiction de toute courbe, jauge, phase ou état de résolution.
+- **Big Dream / Titanic Dream** : concepts d'analyse (Moss, Bulkeley) — rêve révélant un Ondinnonk, carry-over effects mesurables. **Backend, jamais montrés.** À ne pas confondre avec « un grand rêve », qui est la décision du rêveur (§3.13).
+- **Le Courant** *(en. Current)* : le dépôt public et anonyme — ancien « Mur » (§3.4.2). Renommé le 30/07, critère : **un acte, pas un lieu**.
 - **Le Cœur** : la face de la vérité consciente — ce qu'on chante en retour (§1.5). Remplace « Journal de Vie » / « substrat » comme mot d'écran.
 - **Chant du Cœur** : le dépôt de la vérité du moment, suivi des quatre verbes (§3.12).
 - **Ciel de prières** : les chants gardés ou offerts qui remontent, **avec leur audio d'origine**, quand le rêveur a besoin de soutien (§3.12.2).
@@ -1301,9 +1387,11 @@ Pour Tim, pour les collaborateurs et les concepteurs à venir :
 - **Dream drought / Dreaming Society** : Moss — le déficit civilisationnel d'accès au rêve, et la société qu'il s'agit de redevenir.
 - **Eidola** : les figures du rêve, **autonomes et vivantes** (Aizenstat). Fonde l'anti-ventriloquie.
 - **Felt-shift** : Gendlin — le déplacement somatique qui valide ou invalide une lecture. Critère non intellectuel.
+- **Le Fil** : le 18ᵉ fruit — la ligne de vie personnelle, engendrée par la méta-plénière du 19/04 et jamais construite. Garde-fou d'origine, intact : **jamais produit automatiquement, toujours demandé** (§3.15.6).
 - **Framework 1 / Framework 2** : Seth — le monde physique, et l'univers intérieur d'où il est généré.
 - **Un grand rêve** : marque posée par le rêveur, un tap, réversible, souvent des années après le rêve (§3.13). **Seule décision qui fait entrer dans le journal.**
 - **I-thou** : Buber — relation sujet-sujet. Posture vis-à-vis des figures et des chants.
+- **L'insistance** : le troisième miroir — ni lumière ni ombre, **ce qui revient sans qu'on l'ait voulu**. Ne qualifie rien : compte et date (§3.15.2). Détectée sur les récits bruts, jamais sur les étiquettes.
 - **Kairos** : moment marqué qui porte trace. Six types (§3.2). Côté Orbe.
 - **K-anonymity** : seuil minimal pour qu'une agrégation ne révèle pas un individu. Cercle : k ≥ 3. Anima Mundi : k ≥ 100, démarrage conservateur à 250.
 - **Mundus imaginalis** : Corbin — ordre de réalité distinct, ni subjectif ni objectif.
@@ -1313,12 +1401,14 @@ Pour Tim, pour les collaborateurs et les concepteurs à venir :
 - **Ondinnonk · Atetshents · Karadji** : concepts iroquois et aboriginals (via Moss, Elkin). **Attribution culturelle obligatoire, jamais en nom de feature.**
 - **P-Zéro / P-Inversion / P-Tenir** : les trois méta-principes (§2). Simplicité profonde · rendre le rêveur oraculaire · tenir plutôt qu'analyser.
 - **Pattern echoing** : le moteur de résonance — 16 types sur 8 niveaux de signification. **Organe central, pas feature** (§3.5).
+- **Qu'il repose** : le geste qui retire un rêve du miroir **sans le détruire** — il reste au journal, lisible, marqué. Réversible en un tap, sans justification (§8.3, §3.15.7c).
 - **Saison d'âme** : période entre deux seuils initiatiques marqués par le rêveur (§3.9).
 - **SILENCE_AS_FEATURE** : l'app peut ne rien avoir à dire, et le dit. **Zéro résonance est un résultat valide** (§3.1.ter).
 - **Tenir (verbe)** : brown, *Holding Change*. Geste collectif silencieux, irréversible, sans compteur. Pas voter, pas liker.
 - **Tending** : Aizenstat — tendre, écouter, accueillir. Jamais démonter.
 - **Toponyme user-defined** : champ libre opaque. Jamais de latitude/longitude, jamais de POI (§8.4).
 - **Trickster** : principe transversal — l'app doit pouvoir **se déjouer elle-même**.
+- **Weave** : les groupes de rêve portés par une intention — anciens « Groupes ». *« Dream Weaving Circles »* sur la page de présentation. Renommé le 30/07, critère : **un acte, pas un lieu**.
 
 ---
 
@@ -1335,15 +1425,10 @@ Dream App n'est pas un produit unique fermé. Elle est l'**organe central** d'un
 ### 17.1 — Lucid Dream (sous-app pour praticiens du rêve lucide)
 
 *Pour pratiquant lucide curieux, FR. Persona étendue depuis Marcus-Berlin vers grand public francophone.*
-- Reality checks configurables, contextuels (intervalle / ouverture app / matin / soir / aléatoire) + max/jour anti-spam
-- Dream signs detection (NLP) + tap ★ pour les marquer "personnels" → intention MILD générée
-- WBTB smart alarm (Wake-Back-To-Bed) + texte d'intention configurable + sound profile (gentle/chime/vibration)
-- Lucidity index 0-5 + DILD/MILD/WILD/SSILD/WBTB techniques tracking
-- Statistiques pour soi (lucidité 30j graphe ligne SVG, technique par fréquence, top 10 dream signs, streak) + export Markdown (Obsidian) / JSON
-- **Vocabulaire technique LaBerge/Tholey** introduit en douceur — toujours suivi d'un descriptif FR au premier hit
-- **Esthétique Dream main** (night-warm + EB Garamond italic + chips silk-gold + halos respirants) — l'idée pré-26/04 d'un "dark monospace pur" est ABANDONNÉE depuis 28/04 (jugée moche/incompréhensible par Tim sur testing externe)
-- 100% français, onboarding 3 écrans rituels, opt-in strict, anti-gamification (stats pour soi seul, aucune comparaison inter-rêveurs).
-- *(Détail de l'implémentation shippée le 28/04 : `4_LOG` 2026-04-28 · câblage : `3_TECHNICAL`.)*
+- **La pratique lucide est technique, et c'est légitime ici et nulle part ailleurs** : reality checks, dream signs, WBTB, index de lucidité, techniques nommées (LaBerge/Tholey — toujours suivies d'un descriptif FR au premier emploi). Le vocabulaire d'expert est admis dans cette sous-app parce que son public le demande ; il ne remonte jamais dans Dream main (P-Zéro).
+- **⚠️ Et la seule exception au §8.2 de tout le produit** : les statistiques de lucidité (dont la série de nuits) existent ici. Elles tiennent à une condition dure — **pour soi seul, jamais de comparaison entre rêveurs, jamais de push, jamais sur la matière onirique elle-même**. C'est un tableau de bord d'entraînement, pas un jugement sur une psyché. La frontière avec le biais d'ascension (§3.15.1) passe exactement là, et elle est fine : **si un jour ces stats débordent sur le contenu des rêves, elles tombent sous l'interdit.**
+- **Esthétique Dream main** (night-warm, EB Garamond italic, chips silk-gold, halos respirants). L'idée pré-26/04 d'un « dark monospace pur » est abandonnée depuis le 28/04 (testing externe Tim).
+- *(Liste de fonctions, implémentation et câblage : `4_LOG` 2026-04-28 · `3_TECHNICAL`.)*
 
 ### 17.2 — Oracle du Corps
 
@@ -1374,31 +1459,19 @@ Dream App n'est pas un produit unique fermé. Elle est l'**organe central** d'un
 
 ---
 
-## §18 — Refonte 2026-04-26 — verdict B+D (spec complète : `2_DESIGN` §11.bis)
+## §18 — Les deux refontes d'avril, et ce qu'il en reste (26/04 et 28/04)
 
-Après un audit méga (cohérence des canoniques, 8 personas incarnés, 14 apps concurrentes, critique honnête de l'app live), Tim tranche : **B (le Sanctuaire Quotidien — douceur d'accès, profondeur opt-in) + D (simplification radicale de la navigation)**.
+> Récit complet : `4_LOG` (entrées 2026-04-26 et 2026-04-28). Specs : `2_DESIGN` §11.bis et §11.bis.20 · économie du modèle : `3_TECHNICAL` §39. **§18 et §19 fusionnés le 30/07** — ils redisaient une troisième fois ce que le Log et le Design portaient déjà, à leur date.
 
-L'essentiel, en une ligne chacun : onboarding rituel plutôt que tutoriel · vocabulaire vulgarisé en surface, glossaire au tap long pour la profondeur · navigation ramenée à 3 onglets · bascule des deux faces par **swipe horizontal** (le geste retenu, encore valide au 26/07 — cf. §1.5) · Anima Mundi en un seul écran narratif · gates somatiques allégés par défaut, profondeur opt-in après J30.
+**26/04 — verdict B+D.** Après un audit méga (8 personas incarnés, 14 apps concurrentes, critique de l'app live), Tim tranche : **douceur d'accès** (onboarding rituel plutôt que tutoriel · vocabulaire vulgarisé en surface, glossaire au tap long · profondeur opt-in) **+ simplification radicale de la navigation**. Trois moats gardés intacts : la lettre du Portrait (narrative, jamais dashboard) · l'opt-in granulaire du Cercle · le tissage Forêt à 16 types.
 
-**Trois moats identifiés à l'audit, gardés intacts** : la lettre du Portrait (narrative, pas dashboard) · l'opt-in granulaire du Cercle · le tissage Forêt à 16 types.
-
-Cette refonte **n'annule pas** §1-§10 : elle les incarne. En cas de conflit sur l'**incarnation pratique**, §18 prime à partir du 26/04. Sur la **philosophie de fond**, §0-§3 restent souverains.
-
----
-
-## §19 — Pivot 2026-04-28 — Chat IA Dream personnel, modèle hybride (référence vers 2_DESIGN §11.bis.20)
-
-Le 28/04, après testing externe par Tim de l'app live, verdict 2/10 sur l'expérience surface. L'infrastructure profonde (Forêt 333 livres, échos prophétiques, croisements vie/nuit, pipelines 8 phases, privacy by architecture) reste solide — mais le user lambda n'y accède jamais. Le modèle mental n'est pas transmis. La promesse n'est pas tenue à la surface.
-
-**Décision Tim** : pivot vers un **modèle hybride** — une présence conversationnelle nommée par le rêveur (Anima), plus des lieux tangibles et persistants (Portrait, Cercle, Anima Mundi, Oracle du Corps, Sanctuaire, Lucid, les deux faces), l'IA tissant entre les deux. Spec complète : **`2_DESIGN` §11.bis.20** · économie du modèle : **`3_TECHNICAL` §39**.
-
-Ce qui compte pour le sens, et qui tient toujours au 26/07 :
-- **La conversation est le bon véhicule** — la vision du 13/07 le confirme et l'étend : pouvoir réagir à une lecture, dire ce qu'on en pense, rouvrir un vieux rêve « à la lumière d'aujourd'hui ».
-- **La polyphonie est préservée dans le chat** : plusieurs voix distinctes, jamais une IA unique qui tranche.
-- **Enregistrement en un geste** : maintenir = la voix, tap = écrire. C'est devenu la loi du foyer (§1.5, `2_DESIGN` §15).
+**28/04 — pivot hybride.** Testing externe : **2/10 sur l'expérience de surface**, alors que l'infrastructure profonde était solide. Le diagnostic tient encore et vaut plus que la solution : **une profondeur non découvrable n'existe pas.** Décision : une présence conversationnelle nommée par le rêveur, plus des lieux tangibles et persistants, l'IA tissant entre les deux. Ce qui en reste au canon :
+- **La conversation est le bon véhicule** — réagir à une lecture, dire ce qu'on en pense, rouvrir un vieux rêve « à la lumière d'aujourd'hui ».
+- **La polyphonie survit dans le chat** : plusieurs voix distinctes, jamais une IA unique qui tranche.
+- **Enregistrement en un geste** : maintenir = la voix, tap = écrire. Devenu la loi du foyer (§1.5, `2_DESIGN` §15).
 - **Anti-patterns absolus** : la ChatGPT-fication · une IA qui dit le sens (P-Inversion) · le faux compagnonnage · la notification intrusive.
 
-Ce pivot **réinvente l'incarnation en surface**, il n'annule aucun principe. En cas de conflit sur l'incarnation pratique, §19 prime à partir du 28/04 ; sur la philosophie de fond, **§0-§3 restent souverains**.
+**Statut.** Les deux réinventent l'**incarnation en surface** et n'annulent aucun principe. Sur l'incarnation pratique, elles priment à partir de leur date ; sur la philosophie de fond, **§0-§3 restent souverains** — et `2_DESIGN` §15 prime désormais sur tout le visuel.
 
 ---
 
