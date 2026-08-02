@@ -7,7 +7,9 @@
 >
 > **🔴 Statut au 2026-07-30 — ce document n'est plus seul.** Sept de ses thèses sont **passées au canon** : `1_BIBLE` **§2.0** (la souche : *être vu est nécessaire, être caractérisé déforme*) et **§3.15** (les six principes dérivés, avec leur source et leur test). **En cas de divergence, `1_BIBLE` fait foi** ; ce document reste le lieu du raisonnement détaillé et des sources.
 > **Révisions du 30/07, toutes signalées sur place** : §0 (l'erreur sur la contenance, corrigée) · §3.1 (une citation de Weller qui n'en était pas une) · §7 interdit 5 (justification) · §7 interdit 10 (forme révisée) · §8.1b et §8.1d (arbitrés par Tim) · §8.2 (allégée d'un cran) · §13 (tensions closes et tensions neuves).
-> **Une limite de source à connaître avant de citer plus loin** : cette doctrine est fondée sur les **digests** Tier 1, qui sont sains. Le **texte intégral** de plusieurs livres qu'elle cite — dont `hillman-dream-and-the-underworld` — est en base sous une forme illisible (espaces perdus à l'extraction). Rien de ce qui est écrit ici n'en dépend ; toute **amplification future** depuis le texte intégral en dépend, et attend la réparation.
+> **🔴 Passe d'intégrité du 2026-08-02 — toutes les citations de ce document ont été vérifiées une par une contre `forest_chunks`.** Rapport complet, avec le tableau des statuts (verbatim / approximatif / introuvable) : **`RAPPORT-W3.md`**. Trois corrections de fond y sont portées : §1.1b (une citation de Jung sur l'inflation qui n'existe pas), §8.0 (une erreur de fait sur le dispositif de Jung — il a rencontré le rêveur), §13 tension 10 (l'affirmation « zéro épistémologie du rêve d'Afrique australe » était fausse). Plus §1.1a, §1.2, §1.3, §3.1, §5.1, §5.2, §6.3, §11. **La loi qui empêche que ça recommence est au §11 bis.**
+>
+> **Une limite de source à connaître avant de citer plus loin** : cette doctrine a été fondée sur les **digests** Tier 1. C'était sa faiblesse structurelle et la cause des citations fabriquées : **un digest contient des gloses du digesteur, et rien n'y distingue une glose d'un verbatim.** Le texte intégral de la quasi-totalité des livres cités est en base et interrogeable — y compris `hillman-dream-and-the-underworld`, dont l'extraction n'a pas « perdu les espaces » comme on l'a cru, mais coupé les lignes mot à mot : il est parfaitement lisible après normalisation. **La seule absence réelle et bloquante est `hillman-souls-code`, qui n'est pas en base du tout** (§1.3).
 
 ---
 
@@ -42,17 +44,31 @@ Jung a fait exactement ce que Tim demande. *Psychology and Alchemy* est bâti su
 
 Trois choses y sont décisives, et toutes trois sont des contraintes, pas des permissions.
 
-**a) Ce que Jung lit n'est pas un homme, c'est une série.** Le sujet du texte n'est jamais « cet individu est ainsi ». Le sujet est le mouvement des images à travers le temps. Le rêveur y est le lieu du processus, pas son résultat.
+**a) Ce que Jung lit n'est pas un homme, c'est une série.** Le sujet du texte est massivement le mouvement des images à travers le temps, et le rêveur y est le lieu du processus, pas son résultat. Son propre bilan le dit, p. 214 : *« I hope I may have succeeded in throwing some light upon the development of the symbols of the self »* — le sujet est **les symboles**, jamais l'homme.
 
-**b) Jung nomme lui-même le danger, et il le nomme inflation.** *« Quand la conscience s'identifie aux contenus numineux qu'elle récupère de la projection, le résultat est l'inflation — un ego qui croit qu'il EST la psyché entière. »* Il ajoute que les vieux alchimistes étaient **plus en sécurité** précisément parce qu'ils gardaient le mystère dehors, dans la matière. Traduit pour nous : **un portrait rendu au rêveur est une projection retirée. C'est l'opération la plus dangereuse du livre, et Jung le dit.**
+> **🔴 Correction du 02/08 — « jamais » était faux.** Cette ligne écrivait : *« Le sujet du texte n'est jamais "cet individu est ainsi" »*. Jung caractérise **trois fois** : la typologie (« The unknown woman or anima always represents the "inferior," i.e., the undifferentiated function, **which in the case of our dreamer is feeling** », p. 114), le certificat de normalité (« the present case shows **a normal development** », p. 215) et le jugement moral (« **Running away thus becomes a moral question.** », p. 146-147). **L'interdit de l'app ne bouge pas** — nous devons rester plus stricts que Jung, parce qu'il avait un cadre clinique, un contrat, et un homme en face qui pouvait le contredire. Aucune de ces trois conditions n'est réunie chez nous. Mais **la doctrine doit cesser d'invoquer Jung comme s'il ne caractérisait jamais.**
+
+**b) Jung nomme lui-même le danger, et il le nomme inflation.** Sa définition, Épilogue, p. 480 :
+
+> *« An inflated consciousness is always egocentric and conscious of nothing but its own existence. … Paradoxically enough, inflation is a regression of consciousness into unconsciousness. This always happens when consciousness takes too many unconscious contents upon itself and loses the faculty of discrimination, the sine qua non of all consciousness. »*
+
+Et la cause, même page, qui décrit exactement notre dispositif : *« There was no psyche outside the ego. Inevitably, then, the ego identified with the contents accruing from the withdrawal of projections. »* Avec le prix général du geste, p. 477 : *« every increase in consciousness harbours the danger of inflation »*.
+
+Il ajoute que les alchimistes étaient **plus en sécurité**, et c'est exact — §43, p. 37 : *« So long as the alchemist was working in his laboratory he was in a favourable position, psychologically speaking, for he had no opportunity to identify himself with the archetypes as they appeared, since they were all projected immediately into the chemical substances. »*
+
+Traduit pour nous : **un portrait rendu au rêveur est une projection retirée. C'est l'opération la plus dangereuse du livre, et Jung le dit.**
+
+> **🔴 Correction du 02/08 — une citation fabriquée, la deuxième en une semaine.** Ce paragraphe portait entre guillemets, attribuée à Jung : *« Quand la conscience s'identifie aux contenus numineux qu'elle récupère de la projection, le résultat est l'inflation — un ego qui croit qu'il EST la psyché entière. »* **Cette phrase n'est nulle part dans le livre.** C'était une glose du digest, mise entre guillemets. Le mode d'échec est identique à celui corrigé le 30/07 sur Weller (§3.1), sur un autre livre, par un autre agent — donc **systémique, pas accidentel**. Les verbatims ci-dessus sont vérifiés un par un contre `forest_chunks` (`book_id = 'jung-red-book'`, qui contient réellement *Psychology and Alchemy* ; page du livre = `page_start` − 35). Règle opposable au §11 bis.
 
 **c) La voie est *longissima via*, « un chemin serpentin ».** Pas une ligne. Ça commande le §3.
 
-> ⚠️ Honnêteté de source : le digest canonique de *Psychology and Alchemy* signale dans son propre self-audit que **l'analyse détaillée des 400 rêves (Partie II) est ce qu'il couvre le moins**. Ce que j'affirme ci-dessus porte sur la thèse du livre telle que le digest la restitue, pas sur la série elle-même, que je n'ai pas lue.
+> ✅ **Levée de la réserve, 30/07 → confirmée 02/08.** Ce paragraphe portait : *« Ce que j'affirme ci-dessus porte sur la thèse du livre telle que le digest la restitue, pas sur la série elle-même, que je n'ai pas lue. »* **La série a depuis été lue en source primaire** (Partie I et Partie II intégrales, Épilogue intégral, Partie III échantillonnée) — voir `JUNG-PSYCHOLOGY-ALCHEMY-POUR-LAPP.md` §1. La réserve tombe pour ce livre-ci, et pour lui seul.
+>
+> Ce que la lecture a ajouté, et qui n'est pas dans le digest : **l'unité d'analyse de Jung n'est ni le rêve ni le motif, c'est le motif suivi à travers le temps** — *« The series is the context which the dreamer himself supplies »* (§50, p. 44). Et **la série est ce qui achète le droit de lire sans connaître la personne** : hors série, le même procédé serait *« a gross technical blunder »* (§50, p. 44).
 
 ### 1.2 L'objection de Hillman, prise au sérieux
 
-*The Dream and the Underworld* est frontalement contre. Sa thèse : *« toute la procédure moderne qui consiste à interpréter les rêves comme des messages sur la vie éveillée est fondamentalement fausse — elle fait tort au rêve, tort à l'âme »*. Et **l'erreur d'Hercule** : l'ego héroïque qui descend chez les morts, matraque les figures, et les remonte de force à la lumière du jour. Les figures ne sont pas « des parties de moi » : ce sont des *eidola*, des présences autonomes. La méthode juste est l'**épistrophè** — ramener l'image à sa ressemblance, jamais la développer vers un sens utile.
+*The Dream and the Underworld* est frontalement contre. Sa thèse, restituée sans guillemets parce qu'elle n'est la traduction d'aucune phrase unique : convertir le rêve en langage diurne est l'effort principal de l'usage thérapeutique des rêves, et c'est cet effort que Hillman refuse. Le texte réel, p. 21 : *« there is a definite resistance on the part of the dream to be converted into the dayworld and put to its uses. Yet this conversion has become the main effort in the therapeutic use of dreams … we read them for messages about living situations, choices and relationships of our conscious life »*, et il annonce dans la même page *« our thesis against dreams being translated into the ego's language »*. Et **l'erreur d'Hercule** : l'ego héroïque qui descend chez les morts, matraque les figures, et les remonte de force à la lumière du jour. Les figures ne sont pas « des parties de moi » : ce sont des *eidola*, des présences autonomes. La méthode juste est l'**épistrophè** — ramener l'image à sa ressemblance, jamais la développer vers un sens utile.
 
 Un portrait est Hercule avec un tableur. Il prend les figures, les convertit en traits, et rend le tout au rêveur sous forme d'identité. C'est l'opération que Hillman interdit.
 
@@ -60,11 +76,13 @@ Un portrait est Hercule avec un tableur. Il prend les figures, les convertit en 
 
 ### 1.3 La sortie : le daimon, et *esse est percipi*
 
-C'est Hillman lui-même qui donne l'issue, dans *The Soul's Code*. Il y écrit que **l'âme a besoin de témoins** :
+C'est Hillman lui-même qui donne l'issue, dans *The Soul's Code* : **l'âme a besoin de témoins.** Le daimon demande que la personne soit vue — reconnue, reflétée, tenue dans la perception — pour que son image prenne forme dans le monde ; ne pas être perçu arrête le devenir de l'âme ; et la mauvaise sorte de perception, la réduction à un diagnostic, à un rôle familial, à une catégorie sociale, le déforme.
 
-> *« Le daimon exige que la personne soit vue — reconnue, reflétée, tenue dans la perception — pour que son image prenne forme dans le monde. Ne pas être perçu arrête le devenir de l'âme. À l'inverse, la mauvaise sorte de perception — la réduction à un diagnostic, à un rôle familial, à une catégorie sociale — peut le déformer. »*
+> **🔴 Statut de source, 02/08 — à lire avant de s'appuyer là-dessus ailleurs.** Ce passage était donné **entre guillemets, comme un verbatim de Hillman**. Il ne peut pas l'être : **`hillman-souls-code` n'existe pas dans `forest_chunks`.** Les seuls Hillman en base sont `hillman-dream-and-the-underworld`, `hillman-re-visioning-psychology` et `hillman-archetypal-psychology`. La formulation ci-dessus vient donc d'un digest, et **rien ne permet aujourd'hui de la retrouver dans le livre**. Les guillemets sont retirés ; la thèse est conservée en restitution assumée.
+>
+> **Ça n'est pas un détail de forme : c'est le §1.3 qui donne la sortie de tout le §1, et `1_BIBLE` §2.0 en a fait le principe-souche.** Le principe est bon — il est corroboré indépendamment par Jung (§1.1a, le sujet est les symboles) et par la méthode de Hillman en base (l'épistrophè, `hillman-dream-and-the-underworld`). **Mais tant que *The Soul's Code* n'est pas en base, la formule ne se cite pas entre guillemets, nulle part.** Acquisition prioritaire.
 
-Une seule phrase contient le mandat et l'interdiction. **Être vu est nécessaire. Être caractérisé déforme.** Tim demande la première ; c'est la seconde que sa peur redoute. Il a raison des deux côtés.
+Une seule thèse contient le mandat et l'interdiction. **Être vu est nécessaire. Être caractérisé déforme.** Tim demande la première ; c'est la seconde que sa peur redoute. Il a raison des deux côtés.
 
 Et Hillman ajoute le mode de lecture qui va avec l'acorn theory : **lire une vie à rebours**, du motif révélé aujourd'hui vers ses signes anciens. Ce n'est pas de la causalité inversée : c'est reconnaître que le présent éclaire ce vers quoi le passé se dirigeait. C'est exactement §3.13.1 du canon : *« un rêve de 2019 peut devenir grand en 2026 »*.
 
@@ -154,12 +172,17 @@ Six conditions cumulatives. Si une seule manque, ce mode ne s'ouvre pas.
 ### 3.1 Ce que disent les sources, à l'unanimité
 
 - **Jung, *Archetypes*** : l'individuation n'est pas la perfection ni l'amélioration de soi. C'est l'intégration continue, et elle passe par l'**enantiodromia** — les processus psychiques basculent dans leur contraire quand ils atteignent un extrême. Sa formule : *« more light means more night »*. **Il n'y a pas d'état terminal.**
-- **Jung, *Psychology and Alchemy*** : la voie est *longissima via*, un chemin serpentin qui « unit les opposés à la manière du caducée ». Une spirale, littéralement, et pas une ligne de progrès.
-- **von Franz** : la compensation est une **régulation permanente**, le système immunitaire de la psyché. Un système immunitaire ne finit pas son travail.
+- **Jung, *Psychology and Alchemy*** : la voie est *longissima via*, p. 5 — *« it is a longissima via, not straight but snakelike, a path that unites the opposites in the manner of the guiding caduceus, a path whose labyrinthine twists and turns are not lacking in terrors »* (verbatim vérifié). **Mais la phrase à retenir est ailleurs**, §34, p. 28, parce qu'elle décrit des données et pas un chemin :
+
+  > *« The way is not straight but appears to go round in circles. More accurate knowledge has proved it to go in spirals: the dream-motifs always return after certain intervals to definite forms, whose characteristic it is to define a centre. »*
+
+  Retour à intervalles, formes définies, centre défini : **c'est la seule phrase du corpus que le code puisse implémenter.** Et p. 215 : *« the unconscious process moves spiral-wise round a centre, gradually getting closer »*.
+  ⚠️ **Sa réserve vient avec, et le §3 ne l'avait pas** — même page 28 : *« Nor should it be taken for granted that dream sequences are subject to any governing principle. »* Le §3 est le point le plus assuré de cette doctrine ; Jung y met un doute.
+- **von Franz** : la compensation est une régulation permanente. ⚠️ *Corrigé le 02/08* : l'image du **« système immunitaire de la psyché »** était donnée ici comme adossée à Jung. **Elle ne l'est pas.** Chez Jung, le compensateur n'est pas automatique : *« the unconscious does not simply act contrary to the conscious mind but modifies it more in the manner of an opponent or partner »* (§26, p. 23) — un opposant négocie, un système immunitaire ne négocie pas. Et il admet des rêves qui ne compensent rien : *« I would not deny the possibility of parallel dreams … but, in my experience at least, these are rather rare »* (§48, p. 43). **Ce qui survit, et qui suffit au §3 : la compensation ne finit pas son travail.** L'image immunitaire n'est pas reprise. (À noter aussi : `von-franz-way-of-the-dream`, `von-franz-interpretation-fairy-tales` et `von-franz-feminine-fairy-tales` portent en base **le même texte** — 206 chunks, 80 879 mots chacun. Deux des trois slugs sont faux. Rien ici n'en dépend, mais aucune citation de von Franz ne doit être attribuée à un titre tant que ce n'est pas démêlé.)
 - **Kalsched, et c'est la phrase qui compte le plus pour la peur de Tim** : le Protecteur/Persécuteur **n'est pas éducable**. Il fonctionne au niveau de conscience magique qu'il avait au moment du trauma d'origine, et identifie toute nouvelle occasion de vie comme une menace. **Le retour d'un motif n'est donc pas la preuve d'un échec du rêveur : c'est la propriété structurelle de la défense.**
-- **Gendlin** : les rêves sont des *« commentaires du moment »*, des relevés de baromètre — la même personne peut faire des rêves contradictoires deux nuits de suite selon la journée. **Un retour isolé ne prouve rien sur l'ensemble.**
+- **Gendlin** : les rêves sont des commentaires du moment, des relevés de baromètre — la même personne peut faire des rêves contradictoires deux nuits de suite selon la journée. **Un retour isolé ne prouve rien sur l'ensemble.** *(⚠️ 02/08 : « commentaires du moment » était entre guillemets. La formule* momentary comments *ne se trouve pas dans `gendlin-let-body-interpret-dreams`. Guillemets retirés ; la thèse est conservée en restitution.)*
 - **Weller** : le deuil est une **compétence**, un apprentissage de toute une vie — la tâche n'est pas de surmonter le chagrin, mais de devenir de plus en plus habile à le porter et à le digérer. **Le dépassement n'a jamais été l'objectif.** *(⚠️ Correction du 30/07 : cette thèse était donnée ici **entre guillemets**, comme un verbatim. Ce n'en est pas un — c'est la thèse du livre, restituée. Les guillemets sont retirés. Dans un document qui interdit d'inventer, une citation fabriquée était l'erreur la plus coûteuse possible.)*
-- **Weller encore, et c'est le principe 2 du canon** : p. 21, le **biais d'ascension** — une culture qui ne montre que de la montée oblige à lire ses propres descentes comme pathologiques, *« et à croire que nous échouons »*. C'est la raison clinique de l'interdiction de toute courbe (`1_BIBLE` §3.15.1).
+- **Weller encore, et c'est le principe 2 du canon** : p. 21, le **biais d'ascension**. Verbatim vérifié : *« even within psychology there is a premise that is biased toward improvement, always getting better, rising above our troubles … when all we are shown is the imagery of ascent, we are left to interpret the times of descent as pathological. We feel that we are somehow failing. »* C'est la raison clinique de l'interdiction de toute courbe (`1_BIBLE` §3.15.1). *(⚠️ 02/08 : la fin était citée « et à croire que nous échouons » — Weller écrit* we feel *, pas* we believe *. Remplacé par le verbatim.)*
 
 ### 3.2 La règle, et ce qu'elle interdit
 
@@ -249,13 +272,13 @@ Nulle part dans les adjectifs. Dans **la porte qui ne demande rien**. Un miroir 
 
 ### 5.1 Les sources sont sans ambiguïté
 
-- **Gendlin** : *« Aucune autorité extérieure — thérapeute, théorie, dictionnaire — ne peut déterminer ce qu'un rêve signifie. Le rôle de l'interprète se limite à poser des questions (comment) et jamais à déclarer un sens (quoi). Imposer une idée étrangère au felt sense le fait se contracter et se retirer. »*
-- **Delaney** : *« tout acte d'interprétation imposée par un expert est un acte potentiel de colonisation psychologique. »* Sa méthode entière — *« fais comme si je venais d'une autre planète »* — existe pour empêcher l'interprète de savoir.
-- **Taylor** : le *« if it were my dream »* obligatoire, et l'*aha* du rêveur comme unique critère de validité.
+- **Gendlin** : aucune autorité extérieure — thérapeute, théorie, dictionnaire — ne détermine ce qu'un rêve signifie ; l'interprète pose des questions, il ne déclare pas de sens ; et une idée étrangère imposée fait se contracter le *felt sense*. *(⚠️ 02/08 : donné ici comme un verbatim en trois phrases. Introuvable tel quel dans `gendlin-let-body-interpret-dreams`. Guillemets retirés. Ce qui est vérifié en base est le mécanisme, pas la formule — voir la citation du* Bias Control *au §5.2.)*
+- **Delaney** : sa méthode entière — **« fais comme si je venais d'une autre planète »** — existe pour empêcher l'interprète de savoir. Ce dispositif-là est vérifié : *« another planet »* revient dans `delaney-living-your-dreams` (p. 75-79, 100, 134) et dans `delaney-all-about-dreams`, c'est l'ossature du livre. *(⚠️ 02/08 : la formule « tout acte d'interprétation imposée par un expert est un acte potentiel de **colonisation psychologique** » est retirée. Le mot* colonization *n'apparaît dans aucun des deux Delaney en base — il apparaît chez Hillman,* Re-Visioning Psychology *p. 54. Attribuer à Delaney un mot qu'il n'emploie pas, dans un document sur la colonisation psychologique, est exactement le geste qu'il interdit.)*
+- **Taylor** : le **« if it were my dream »** obligatoire — vérifié, la formule est partout dans `taylor-where-people-fly` (27 chunks) — et l'*aha* du rêveur comme unique critère de validité.
 
 ### 5.2 Mais la lecture du rêveur n'est pas vraie non plus
 
-Gendlin fournit lui-même le contrepoids, et c'est le *Bias Control* : *« En interprétant ses propres rêves, le rêveur impose inévitablement ses attitudes conscientes habituelles. »* Inévitablement.
+Gendlin fournit lui-même le contrepoids, et c'est le *Bias Control*. Verbatim vérifié, p. 10 : *« when I interpret my own dream I use meanings I know, therefore I must exactly miss what is more than I already know. … everyone who studied dreams found this problem. They all concluded that people cannot interpret their own dreams. The Bias Control solves this puzzle: how can I get beyond imposing my usual conscious attitudes on the dream? »* *(⚠️ 02/08 : la version française entre guillemets — « le rêveur impose **inévitablement** ses attitudes conscientes habituelles » — était une condensation, et « inévitablement » n'est pas dans le texte. Remplacée par le verbatim.)*
 
 L'agent B4 a déjà tranché exactement juste, et sa règle est reprise ici sans modification : la lecture du rêveur n'est **ni au-dessus ni en dessous** du récit. **D'une autre nature.** Poids d'entrée 0,5 dans `user_meaning_layer`, qui ne monte que s'il le redit lui-même.
 
@@ -314,7 +337,15 @@ Jung avait plus de 400 rêves d'un seul rêveur. Tim en a 64, dont 42 importés 
 
 Je n'ai pas de plancher mesuré et je ne vais pas en inventer un. **Décision conservatrice, valable jusqu'à mesure** : le miroir ne tourne que sur les **rêves explicitement marqués** par le rêveur (il y a une décision derrière chacun), jamais sur le corpus entier. Il s'ouvre au corpus entier le jour où la mesure suivante est faite :
 
-> **MESURE À FAIRE.** Sur le corpus de Tim, produire le miroir à N = 10, 20, 40, tout. Lui demander, en aveugle sur N, lequel lui « fait quelque chose ». Le plancher est le N à partir duquel les verdicts cessent de bouger. Sans cette mesure, tout seuil est un chiffre inventé.
+> **🔴 MESURE À FAIRE — reformulée le 02/08, parce que l'ancienne était mal posée.**
+>
+> L'ancienne version disait : *« produire le miroir à N = 10, 20, 40, tout, et demander à Tim, en aveugle sur N, lequel lui fait quelque chose »*. Elle ne marche pas : le critère est subjectif, non reproductible, et **Tim ne peut pas être en aveugle sur son propre corpus** — il reconnaîtra ses rêves.
+>
+> **Jung donne la bonne mesure, et il l'a faite à la main.** Note 155, p. 221 : il découpe ses 400 rêves en huit tranches de 50 et compte la fréquence du motif mandala dans chacune — **6, 4, 2, 9, 11, 11, 11, 17** — puis conclut *« So a considerable increase in the occurrence of the mandala motif takes place in the course of the whole series. »* Sa lecture sérielle est **herméneutique *et* quantifiée**.
+>
+> **La bonne question n'est donc pas « à partir de combien de rêves le miroir fait-il quelque chose », c'est : à partir de combien d'occurrences la densité d'un motif cesse-t-elle de bouger quand on ajoute des rêves ?** C'est un test de stabilité : il se fait sans Tim, il tourne en intégration continue, et il donne un plancher **par motif** au lieu d'un plancher global. Concrètement : découper le corpus par tranches, compter les motifs par tranche, n'autoriser le miroir sur un motif que lorsque son comptage est stable sur les deux dernières tranches.
+>
+> **La tension 1 cesse d'être une question de doctrine et devient une tâche d'ingénierie.**
 
 ---
 
@@ -353,15 +384,43 @@ Le canon a posé le gap le 26/07 (`AUDIT-DREAM-2026-07-26.md` §297) : *« aucun
 
 **Le miroir est exactement cette asymétrie en action.** Voici ce qui manque, et ce que ça impose.
 
-### 8.0 Ce qui manque, en une phrase
+### 8.0 Ce qui manque — et ce que Jung nous donne à la place
 
-Toutes les protections écrites par le corpus sont des **raretés**.
+> **🔴 Réécrit le 02/08. Ce paragraphe portait une erreur de fait sur Jung, au point le plus sensible du document.** Il affirmait : *« Jung, dans Psychology and Alchemy, s'est protégé lui-même en **ne rencontrant pas** le rêveur des 400 rêves. »* **Jung écrit le contraire en toutes lettres**, §45, p. 41 : *« Except for a short interview at the very beginning, before the commencement of the observation, I did not see the dreamer at all during the first eight months. Thus it happened that 355 of the dreams were dreamed away from any personal contact with myself. **Only the last forty-five occurred under my observation.** »* Il y avait en outre un canal de questions (§88, p. 68). Donc : **un entretien au début, 355 rêves sans contact, 45 sous observation directe.** Dans un document qui interdit d'inventer, c'était l'erreur la plus coûteuse possible — et elle a tenu quatre jours.
+>
+> **La thèse ne s'effondre pas : elle change de nature et se durcit.** Voir ci-dessous.
 
-Taylor protège le rêveur par le groupe : plusieurs projections concurrentes s'annulent. Delaney le protège par l'entretien : un interprète humain se fatigue, coûte, a sa propre vie, et n'est là que le mardi à 16 h. Gendlin le protège par le corps : le thérapeute ne peut pas sentir le vôtre. Jung, dans *Psychology and Alchemy*, s'est protégé lui-même en **ne rencontrant pas** le rêveur des 400 rêves.
+Une partie des protections écrites par le corpus sont des **raretés**.
 
-> **Chacune de ces protections est une contrainte de disponibilité. Retirez la rareté, et la protection disparaît avec elle.** Aucun de ces auteurs n'a eu à écrire ce garde-fou, parce qu'aucun n'a imaginé qu'on puisse le retirer.
+Taylor protège le rêveur par le groupe : plusieurs projections concurrentes s'annulent. Delaney le protège par l'entretien : un interprète humain se fatigue, coûte, a sa propre vie, et n'est là que le mardi à 16 h. Gendlin le protège par le corps : le thérapeute ne peut pas sentir le vôtre.
 
-C'est ça, le gap. Il ne se comble pas par une lecture. Il se comble en **réintroduisant délibérément des raretés qui ne sont plus économiques**.
+> **Chacune de ces trois protections est une contrainte de disponibilité. Retirez la rareté, et la protection disparaît avec elle.** Aucun de ces auteurs n'a eu à écrire ce garde-fou, parce qu'aucun n'a imaginé qu'on puisse le retirer.
+
+**Mais la protection de Jung n'était pas de celles-là, et c'est la découverte.** Ce n'était pas une absence, c'était une **délégation** — il a mis entre le rêveur et lui quelqu'un qui ne savait pas. §45, p. 41 : *« In order to avoid all personal influence I asked one of my pupils, a woman doctor, who was then a beginner, to undertake the observation of the process. »* Et p. 101, la raison, en clair :
+
+> *« I readily admit that I have such a great respect for what happens in the human soul that I would be afraid of disturbing and distorting the silent operation of nature by clumsy interference. That was why I even refrained from observing this particular case myself and **entrusted the task to a beginner who was not handicapped by my knowledge**—anything rather than disturb the process. »*
+
+**Le dispositif réel a trois étages, et c'est une architecture, pas une posture :**
+
+| Étage | Qui | Ce qu'il fait | Ce qu'il sait |
+|---|---|---|---|
+| 1 | Le rêveur | dépose, note, dessine | rien des interprétations |
+| 2 | **La débutante** | observe et enregistre | délibérément peu — **c'est la condition, pas un défaut** |
+| 3 | Jung | interprète, **après**, sur le corpus constitué | tout, et c'est pour ça qu'il est tenu à l'écart de l'étage 1 |
+
+Ce que ça protège : **la production du matériau contre la connaissance de l'interprète.** Jung se met hors du circuit de capture parce que son savoir est contaminant. Ce n'est pas de la modestie, c'est de la méthodologie — et il en donne le principe, §20, p. 16 : *« It is precisely the spontaneity of archetypal contents that convinces, whereas any prejudiced intervention is a bar to genuine experience. »*
+
+> **🔴 CE N'EST DONC PAS UN GARDE-FOU PERDU. C'EST UNE ARCHITECTURE À COPIER.**
+>
+> **Sépare la capture de la lecture — dans le produit, pas seulement dans le prompt.** L'app qui reçoit le dépôt du matin doit être **la débutante** : elle enregistre, elle horodate, elle ne sait rien, elle ne remonte rien, elle ne suggère rien, elle n'a aucun accès au corpus interprété. Le miroir est **un autre acte, plus tard, plus rare**, et il n'a **aucun droit d'écriture** sur le dépôt.
+>
+> Ça donne un fondement textuel à la règle B4 n°9 (« rien pendant la capture »), que cette doctrine tenait pour un choix d'ergonomie. Et ça **résout la tension 7** : sur le mode *« ce que j'en ai dit »*, la confirmation d'une citation ne se demande pas pendant la capture — elle se demande **au moment du miroir, par l'autre étage**.
+>
+> **Vérification qui échoue.** Le chemin de code du dépôt ne lit aucune table de motifs, ne consulte aucun miroir antérieur, n'appelle aucun modèle génératif. Test d'intégration : tracer les requêtes émises pendant un dépôt — toute lecture d'une table interprétative fait échouer le test.
+
+⚠️ **Et ce que la transposition perd, qu'il faut dire.** Jung est en cabinet, en 1935, avec un rêveur qui a un médecin, un contrat, un cadre, et qui peut arrêter. Surtout : **son étage 2 était un être humain qui, elle, était présente.** La chaîne n'a jamais été « personne ». Ce que l'app reproduit, c'est l'étage 3 sans l'étage 2. **Cette place vide est le vrai problème, et aucun réglage de prompt ne la remplit.** C'est un argument de plus pour la sortie humaine (§3.15.5 du canon).
+
+Le gap du §8 tient donc toujours pour (a), (b), (c) et (d). Il ne se comble pas par une lecture. Il se comble en **réintroduisant délibérément des raretés qui ne sont plus économiques** — et, depuis Jung, en **séparant des rôles qui n'ont aucune raison technique d'être séparés**.
 
 ### 8.1 Quatre asymétries, quatre contraintes
 
@@ -538,7 +597,7 @@ Dosage retenu pour cette surface : **85 clarté / 15 poésie / 0 tranchant.** Et
 
 | Digest | Ce qu'il a changé dans cette doctrine |
 |---|---|
-| `jung-psychology-and-alchemy` | A fourni le précédent **et** son prix. La série, pas la personne. L'inflation comme danger nommé par Jung lui-même → §1.1. Le *longissima via* → §3.1. |
+| `jung-psychology-and-alchemy` ⚠️ | A fourni le précédent **et** son prix. La série, pas la personne. L'inflation comme danger nommé par Jung lui-même → §1.1. Le *longissima via* → §3.1. **🔴 02/08 — le livre a depuis été lu en source primaire, et ce slug n'est pas le bon.** *Psychology and Alchemy* (CW 12, 469 chunks, pagination 0→616) est en base sous **`jung-red-book`**, qui ne contient pas le Livre Rouge ; **page du livre = `page_start` − 35**. Le slug `jung-psychology-and-alchemy` (79 chunks) contient autre chose. Toute citation de ce livre dans ce document porte désormais sa page vérifiée. |
 | `jung-archetypes-collective-unconscious` | L'enantiodromia et *« more light means more night »* → il n'y a pas d'état terminal → §3.1. A tué la courbe de progression. |
 | `hillman-dream-and-the-underworld` | L'erreur d'Hercule et l'épistrophè → a forcé le **déplacement de sujet** du §1.4 (le miroir parle de ce qui revient, pas de qui il est). |
 | `hillman-souls-code` | ***Esse est percipi*** → la sortie du problème. Le mandat (être vu) et l'interdiction (être caractérisé) dans une seule phrase → §1.3. La lecture à rebours → confirme §3.13.1. |
@@ -562,10 +621,28 @@ Dosage retenu pour cette surface : **85 clarté / 15 poésie / 0 tranchant.** Et
 **NON lus, et donc jamais cités ici** : les traductions Tier 2 (`digests_infuse_translation/`) — **aucune ouverte** · les audits (`logs_or_audits/`) — **aucun ouvert** · Corbin · Moss (les neuf) · Mindell · Levine · Dana · Badenoch · Plotkin · Larsen · von Franz *Interpretation of Fairy Tales* · Estes · Murdock · Eliade · Lawlor · Van Gennep · Abram · Hill · Kaplan-Williams.
 
 **Limites de méthode, à ne pas passer sous silence :**
-- J'ai lu des **digests**, pas des livres. Là où le digest signale sa propre lacune (la série de 400 rêves de *Psychology and Alchemy*), je l'ai dit sur place.
+- J'ai lu des **digests**, pas des livres. Là où le digest signale sa propre lacune (la série de 400 rêves de *Psychology and Alchemy*), je l'ai dit sur place. **🔴 02/08 — cette limite était vraie de l'agent qui a écrit ce document, et fausse au niveau du système : les textes intégraux sont en base (`forest_chunks`, 98 123 chunks), interrogeables en SQL, et les chunks portent leurs numéros de page. C'est de cette confusion que sont nées les citations fabriquées. Voir §11 bis.**
 - Le champ `ethical_notes` en base pour Aizenstat, que le brief signale comme visant nommément une Dream App INFUSE, **n'a pas été consulté** — je n'ai lu que le digest disque, dont le drapeau éthique est LOW. À vérifier avant toute reprise publique de son vocabulaire.
 - Weller porte un drapeau éthique dans l'inventaire (auteur blanc américain citant des sources !Kung, Navajo, Lakota, Maya). Je n'ai retenu de lui que **ses** thèses propres — le deuil comme compétence, contenance et libération — et **aucun** de ses termes empruntés.
 - L'arbitrage §6.2 du canon écarte Hillman sur Léthé / l'oubli rituel / Hadès. **Aucun de ces trois points n'est utilisé ici**, ni leur vocabulaire. Ce que j'ai retenu de lui est *stick to the image*, l'erreur d'Hercule et *esse est percipi* — trois points sur lesquels §6.2 le déclare compatible ou ne se prononce pas. Voir tension 5.
+
+---
+
+## §11 bis — 🔴 LA LOI DE CITATION (nouvelle, 2026-08-02)
+
+**Trois citations fabriquées en une semaine**, par trois agents différents, sur trois livres différents : Weller (§3.1, corrigée le 30/07), Jung (§1.1b, corrigée le 02/08), Hillman *Soul's Code* (§1.3, dé-citée le 02/08). **Ce n'est pas de l'inattention, c'est un mode d'échec systémique**, et il a une cause identifiable : les agents lisent des **digests**, qui contiennent des gloses du digesteur, et recopient ces gloses **entre guillemets** parce que rien ne distingue visuellement une glose d'un verbatim dans un digest.
+
+La règle qui ferme ça :
+
+> **Aucune citation entre guillemets, dans aucun document canonique de Dream App, sans son `book_id` et sa page.**
+>
+> 1. **Un digest n'est jamais une source citable.** Il fonde une thèse ; il ne fournit pas un verbatim. Une phrase lue dans un digest se restitue **sans guillemets**.
+> 2. **Les guillemets sont réservés au texte retrouvé dans `forest_chunks`**, avec son `book_id` et sa page, dans la langue du texte. Une traduction française d'un livre anglais se signale comme telle — *« trad. libre »* — ou reste en anglais.
+> 3. **Un trou nommé vaut mieux qu'un remplissage plausible.** Si le livre n'est pas en base (`hillman-souls-code`), on écrit *« introuvable dans le corpus »* et on ne répare pas au jugé.
+> 4. **La vérification est automatisable, donc elle est obligatoire.** Script : `scripts/verify_citations.py` (voir `RAPPORT-W3.md` §3). Il extrait toute chaîne entre guillemets de plus de 25 caractères, cherche dans `forest_chunks` après normalisation (césures et sauts de ligne écrasés), et rend trois statuts : `verbatim` · `approximatif` · `introuvable`. **Toute nouvelle occurrence `introuvable` non annotée fait échouer la passe.**
+> 5. **Le décalage de pagination se mesure une fois par livre et se note.** `jung-red-book` : page = `page_start` − 35. `weller-wild-edge-of-sorrow` : − 24. `kalsched-inner-world-trauma` : − 10. Un agent qui cite une page sans connaître le décalage de son livre cite un numéro inventé.
+
+**Et la leçon de méthode, plus large que la citation** : `LECTURE-WELLER-KALSCHED.md` §5 l'avait déjà écrite le 26/07 et personne ne l'a appliquée — *« les livres sont là, ils sont interrogeables en SQL, et les chunks portent les numéros de page. Chaque futur agent Forêt devrait interroger `forest_chunks` avant de conclure "le digest ne descend pas à ce niveau". »* Le protocole `forest/feedback/POST-CONSULTATION-PROTOCOL.md` doit porter cette ligne.
 
 ---
 
@@ -620,8 +697,34 @@ Dosage retenu pour cette surface : **85 clarté / 15 poésie / 0 tranchant.** Et
 
 9. **🔴 Cette doctrine est occidentale, et elle ne le savait pas.** Les 18 digests du §11 viennent tous de la clinique occidentale du XXᵉ siècle. Les traditions ont été traitées comme un **risque éthique à gérer**, jamais comme une **source de sagesse de design**. La raison est structurelle et commande tout le reste : **toute la psychologie des profondeurs occidentale suppose que le rêve appartient à une psyché individuelle** — l'hypothèse exacte qui casse dès qu'on veut du rêve partagé en groupe avec une intention. Sur le rêve collectif, ce canon-ci n'a presque rien ; les traditions ont tout, parce que chez elles **le partage *est* la pratique**. Ce n'est pas une bibliographie à compléter, c'est une ontologie qui manque.
 
-10. **🔴 Zéro épistémologie du rêve d'Afrique australe, alors qu'INFUSE vend des plantes de rêve xhosa/zulu** (tradition **Ubulawu**). Problème d'intégrité avant d'être une lacune : le commerce repose sur cette tradition et la doctrine n'en contient rien. À combler avec des auteurs issus de la tradition ou de l'ethnographie académique sourcée — **jamais un « manuel »**.
-    ⚠️ Et une correction à ne pas perdre : **les Senoi ne sont pas Moss.** Le matériel Senoi vient de **Kilton Stewart** et est académiquement tenu pour **largement fictif**. Moss, c'est l'Active Dreaming adossé à l'iroquois, avec bénédiction d'un aîné — que nous n'avons pas, étant source secondaire. Ne jamais les citer dans la même phrase comme un même adossement.
+10. **🔴 RÉTRACTÉE le 02/08 — l'affirmation était fausse, et la vraie leçon est meilleure que la tension.**
+
+    Cette tension écrivait : *« Zéro épistémologie du rêve d'Afrique australe, alors qu'INFUSE vend des plantes de rêve xhosa/zulu (tradition Ubulawu). »* **La Forêt en contient une, complète, et depuis le début.**
+
+    | Livre | Chunks | Ce qu'il porte |
+    |---|---|---|
+    | `sobiecki-southern-african-psychoactive-plants` | **133** | Jean-François Sobiecki, ethnobotaniste sud-africain **initié**, publié en revue à comité de lecture (*Journal of Psychoactive Drugs* 44(3) ; *Southern African Humanities* 20). **L'épistémologie ubulawu complète.** |
+    | `ngubane-body-mind-zulu-medicine` | **187** | Harriet Ngubane, anthropologue **zulu** — une voix interne à la tradition, pas une observation de l'extérieur. |
+    | `mutwa-indaba-my-children` | 476 | Vusamazulu Credo Mutwa. Statut contesté, à traiter comme tel. |
+    | `cumes-africa-in-my-bones` | 126 | David Cumes, médecin sud-africain formé auprès de sangomas. |
+
+    **Ce que Sobiecki donne, en première main** (verbatim vérifié, p. 4) : *« The term ubulawu comes from the Xhosa verb ukulawula (to control) and refers to "that spirit that controls one" (Hirst 2005). … Whereas lay people can obtain insight or spiritual guidance into their lives with ubulawu, the diviner healer learns to use dreams as a path to heal. »* Et le cadre ontologique : **dans la vision du monde bantoue méridionale, les rêves appartiennent au domaine des ancêtres** et sont le médium par lequel le devin reçoit sa connaissance de guérison. Plus le geste qui nous intéresse directement : **le rêve de l'initié·e est un baromètre psychospirituel lu par le tuteur**, pas par le rêveur seul — ce qui est un modèle de miroir *déjà institué*, avec un humain à l'étage 2 (cf. §8.0).
+
+    > **La leçon, et elle vaut plus que la tension qu'elle remplace :**
+    > **Un silence de l'index n'est pas un silence de la tradition.**
+    > Ces quatre livres étaient classés `guerison`, `prophetie` et `mythe` — **jamais `rêve`**. Le rayonnage a produit la cécité, et quatre agents successifs ont recopié « zéro » sans jamais interroger la base. C'est le même mode d'échec qu'au §11 bis : **on a pris l'absence dans notre carte pour une absence dans le monde.** Avant d'écrire « la Forêt n'a rien sur X », il faut avoir interrogé `forest_chunks` sur X **et sur les mots de la tradition** (`ubulawu`, `ukulawula`, `ukuthwasa`, `sangoma`, `igqirha`), pas seulement sur nos catégories.
+
+    > **🔴 FLAG ÉTHIQUE — HIGH. Ce point est d'abord commercial, ensuite documentaire.**
+    > **INFUSE vend deux des plantes que Sobiecki documente** : *undlela-ziimlophe* (**Silene undulata / capensis**) et *uvuma-omhlope* (**Synaptolepis kirkii**). Tradition **vivante et nommée** (Xhosa / Cape Nguni, Zulu, Sotho ; initiation *ukuthwasa* ; informateurs nommés, dont Mama Maponya). Conséquences opposables :
+    > - Toute page produit qui parle de rêve xhosa/zulu **cite Sobiecki**, **nomme les peuples**, **nomme l'initiation**.
+    > - **Ne jamais suggérer que l'usage laïc équivaut à l'usage du devin** — Mama Maponya dit exactement le contraire : *« Anyone can use the plants to connect with their ancestors. … Those people with a strong spirit, only they can have this connection. »*
+    > - **Jamais « ubulawu » comme nom de feature**, dans l'app ou ailleurs.
+    > - Risque nommé en base : romantisation de la « magie du rêve africaine ». Ton sobre, obligatoire.
+    > - **Réciprocité concrète à définir avant toute publication.** On prend le commerce à une tradition ; on lui doit autre chose que des guillemets.
+
+    **Ce qui reste vrai, et qui est le vrai trou** : **personne dans le corpus n'est un·e sangoma ou igqirha écrivant en son nom propre aujourd'hui.** Ngubane est une voix interne mais c'est une ethnographie de 1977 ; Sobiecki est un chercheur blanc initié ; Cumes est un médecin blanc ; Mutwa est contesté. Acquisition à viser (piste : Nokuzola Mndende, universitaire xhosa, Icamagu Institute). Détail et bibliographie : `ECOUTE-REVE-COLLECTIF-2026-07-30.md` §③ et §⑧.
+
+    ⚠️ Et une correction à ne pas perdre : **les Senoi ne sont pas Moss.** Le matériel Senoi vient de **Kilton Stewart** et est académiquement tenu pour **largement fictif**. Moss, c'est l'Active Dreaming adossé à l'iroquois, avec bénédiction d'un aîné — que nous n'avons pas, étant source secondaire. Ne jamais les citer dans la même phrase comme un même adossement. Et le peuple réel s'appelle **Sng'oi** (Malaisie) : c'est sous ce nom qu'il faut le nommer, jamais « méthode Senoi ».
 
 11. **Ce que Kalsched implique et que la doctrine n'a pas regardé en face.** Il donne une séquence en deux temps : localiser et honorer l'esprit prisonnier, **puis** l'incarner — et il avertit que beaucoup de gens font l'étape 1 et jamais l'étape 2, s'installant dans leur monde intérieur sans rien incarner. **Une app de journal de rêves est un dispositif d'étape 1 par construction.** C'est peut-être le vrai problème de design du produit, plus grand que le miroir. Aucune réponse ici.
 

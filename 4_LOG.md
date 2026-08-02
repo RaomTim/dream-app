@@ -10,6 +10,35 @@
 
 ---
 
+### 2026-08-02 — 🔴 PASSE D'INTÉGRITÉ SUR LES CITATIONS : UN TIERS NE TIENT PAS — Yeshua (Opus)
+
+> **Rapport complet : `RAPPORT-W3.md`.** Session de documents, zéro ligne de code.
+
+**Le fait.** Toutes les citations attribuées à un auteur dans `DOCTRINE-MIROIR.md`, `1_BIBLE.md` et `LECTURE-WELLER-KALSCHED.md` ont été cherchées une par une dans `forest_chunks`. **Sur 33 vérifiées : 14 verbatims, 8 approximations présentées comme des verbatims, 11 introuvables — dont trois entièrement fabriquées.**
+
+**Les trois corrections nommées :**
+
+1. **`DOCTRINE-MIROIR` §1.1b — une citation de Jung sur l'inflation qui n'existe pas.** Deuxième fabrication de la semaine après Weller (30/07), sur un autre livre, par un autre agent. Remplacée par les verbatims p. 480 et p. 477. L'affirmation voisine sur les alchimistes « plus en sécurité » **était exacte** (§43, p. 37) et porte maintenant son texte.
+2. **`DOCTRINE-MIROIR` §8.0 — une erreur de fait.** La doctrine écrivait que Jung s'était protégé en **ne rencontrant pas** le rêveur. Faux : entretien initial, 355 rêves sans contact, **45 sous son observation directe** (p. 41), plus un canal de questions (p. 68). **La thèse survit et se durcit** : sa protection n'était pas l'absence, c'était une **délégation** — l'observation confiée à une débutante *« not handicapped by my knowledge »* (p. 101). **Ce n'est plus un garde-fou perdu, c'est une architecture à copier : séparer la capture de la lecture dans le produit.** L'app du matin est la débutante — elle enregistre, elle ne sait rien, elle ne suggère rien ; le miroir est un autre acte, plus tard, sans droit d'écriture sur le dépôt. Fonde la règle B4 n°9 et **résout la tension 7**.
+3. **« Zéro épistémologie du rêve d'Afrique australe » — RÉTRACTÉ.** Voir le bloc barré du 30/07 ci-dessous. La Forêt en contient une, complète (Sobiecki 133 chunks, Ngubane 187, + Cumes et Mutwa). **Entré au canon : `1_BIBLE` P6 bis**, avec le flag éthique HIGH — **INFUSE vend deux des plantes documentées** (*Silene undulata/capensis*, *Synaptolepis kirkii*).
+
+**Ce que ça a fait apparaître, et qui compte plus :**
+
+> **Le problème n'est pas les agents, c'est la source.** Un digest contient des gloses du digesteur, et rien n'y distingue visuellement une glose d'un verbatim. L'agent la recopie entre guillemets de bonne foi ; au troisième document elle est du canon. **La preuve par l'exception est dans le corpus** : `LECTURE-WELLER-KALSCHED.md`, écrit en interrogeant `forest_chunks` en direct, ne contient **aucune** fabrication — et attrape celle des autres.
+
+**🔴 Entrée au canon — LA LOI DE CITATION** (`DOCTRINE-MIROIR` §11 bis, en-tête de `1_BIBLE`) : **aucune citation entre guillemets sans son `book_id` et sa page** · un digest fonde une thèse, il ne fournit jamais un verbatim · livre absent de la base → « introuvable dans le corpus », jamais de réparation au jugé · **script livré : `scripts/verify_citations.py`**, mode `--ci`.
+C'est l'**interdit 1 du §7 retourné vers nous** : nous l'avions écrit pour la machine et ne nous l'étions pas appliqué.
+
+**Autres corrections portées** : §1.1a (« jamais » retiré — Jung caractérise trois fois) · §1.1 (réserve d'honnêteté levée, la série a été lue) · §1.2 et §1.3 (dé-citées) · §3.1 (citation de la spirale remplacée par la p. 28, la seule implémentable, **avec sa réserve** ; image immunitaire de von Franz retirée) · §5.1 (« colonisation psychologique » n'est **pas** de Delaney, c'est un mot de Hillman) · §5.2 · §6.3 (**mesure du plancher de corpus reformulée** — test de stabilité par motif en CI, d'après le comptage de Jung note 155 p. 221 ; la tension 1 devient une tâche d'ingénierie) · §11 · `1_BIBLE` §3.4.1 et `2_DESIGN` (**Sng'oi ≠ Senoi**).
+
+**🔴 Restes à traiter, hors périmètre de cette passe :**
+- **`hillman-souls-code` n'est pas en base.** `1_BIBLE` §2.0, le principe-souche, repose sur une citation d'un livre absent. Le principe tient (corroboré par Jung et par l'épistrophè), mais **il ne se cite pas**. Acquisition prioritaire.
+- **Trois entrées de `forest_chunks` à nettoyer** : `jung-red-book` n'est pas le Livre Rouge (c'est *Psychology and Alchemy* CW 12, page = `page_start` − 35) · les trois slugs von Franz portent **le même texte** · `aizenstat-dream-tending` n'a que **9 chunks**.
+- **« Zéro épistémologie » est encore faux dans `PLAN-REPRISE-JEUDI.md`, `BACKLOG-2026-07-27.md` et `RAPPORT-T9.md`** (périmètre d'autres agents).
+- **Re-taguer les 4 livres d'Afrique australe en `rêve`** — ils sont en `guerison`/`prophetie`/`mythe`, et c'est ce rangement qui a produit quatre jours de cécité recopiée. **Un silence de l'index n'est pas un silence de la tradition.**
+
+---
+
 ### 2026-07-30 — 🔴 SEPT PRINCIPES AU CANON, ET LE VIRAGE DU 27/07 — Yeshua (Opus)
 
 > **Ce qui change** : le canon a désormais un **principe-souche au-dessus des trois méta-principes** (`1_BIBLE` §2.0), six principes dérivés avec chacun sa source lue et son test qui échoue (§3.15), et deux écrans renommés. **Rien n'est en code.** C'est une session de documents.
@@ -63,9 +92,21 @@ C'est exactement l'hypothèse qui casse dès qu'on veut du **rêve partagé en g
 
 **🔴 Et le trou qui est un problème d'intégrité avant d'être une lacune.**
 
-> **Zéro épistémologie du rêve d'Afrique australe dans la Forêt** — alors qu'INFUSE vend des plantes de rêve xhosa/zulu (tradition **Ubulawu**).
+> ~~**Zéro épistémologie du rêve d'Afrique australe dans la Forêt** — alors qu'INFUSE vend des plantes de rêve xhosa/zulu (tradition **Ubulawu**).~~
 
-Le commerce repose sur cette tradition et la doctrine de l'app n'en contient rien. Ce n'est pas une ressource manquée, c'est un déséquilibre entre ce qu'on prend et ce qu'on connaît. À combler en priorité, avec des auteurs issus de la tradition ou de l'ethnographie académique sourcée — **jamais un « manuel »**.
+> **🔴 RÉTRACTÉ le 2026-08-02 — l'affirmation était fausse.** Elle a circulé quatre jours et a été recopiée dans cinq documents (`DOCTRINE-MIROIR` §13, `PLAN-REPRISE-JEUDI`, `BACKLOG-2026-07-27`, `RAPPORT-T9`, ici) sans que personne interroge la base.
+>
+> **La Forêt contient l'épistémologie ubulawu, complète, depuis le début :** `sobiecki-southern-african-psychoactive-plants` (**133 chunks** — ethnobotaniste sud-africain initié, publié en revue à comité de lecture) et `ngubane-body-mind-zulu-medicine` (**187 chunks** — anthropologue **zulu**, voix interne), plus `cumes-africa-in-my-bones` (126) et `mutwa-indaba-my-children` (476, statut contesté).
+>
+> Sobiecki donne l'étymologie (*ubulawu* ← verbe xhosa *ukulawula*, « contrôler » ; *« that spirit that controls one »*), la distinction laïc / devin, **le rêve comme domaine des ancêtres**, et **le rêve de l'initié·e comme baromètre psychospirituel lu par le tuteur** — c'est-à-dire un dispositif de miroir déjà institué, avec un humain à l'étage de lecture.
+>
+> **Pourquoi la cécité :** ces livres sont classés `guerison`, `prophetie`, `mythe` — **jamais `rêve`**. Le rayonnage a produit le trou.
+>
+> **La leçon, à garder :** **un silence de l'index n'est pas un silence de la tradition.** Avant d'écrire « la Forêt n'a rien sur X », interroger `forest_chunks` sur X **et sur les mots de la tradition** (`ubulawu`, `ukulawula`, `ukuthwasa`, `sangoma`, `igqirha`), jamais seulement sur nos catégories.
+>
+> **⚠️ FLAG ÉTHIQUE HIGH — le point est d'abord commercial.** **INFUSE vend deux des plantes que Sobiecki documente** : *undlela-ziimlophe* (**Silene undulata / capensis**) et *uvuma-omhlope* (**Synaptolepis kirkii**). Tradition vivante et nommée (Xhosa / Cape Nguni, Zulu, Sotho ; initiation *ukuthwasa* ; informateurs nommés). Opposable : citer Sobiecki, nommer les peuples et l'initiation, **ne jamais suggérer que l'usage laïc équivaut à celui du devin**, **jamais « ubulawu » comme nom de feature**, ton sobre (risque de romantisation nommé en base), **réciprocité concrète à définir avant toute publication**.
+>
+> **Ce qui reste vrai et qui est le vrai trou** : personne dans le corpus n'est un·e sangoma ou igqirha écrivant en son nom propre aujourd'hui. Piste d'acquisition : Nokuzola Mndende. Détail : `ECOUTE-REVE-COLLECTIF-2026-07-30.md` · `RAPPORT-W3.md`.
 
 **⚠️ Une correction à porter à Tim, sur un point qu'il croyait acquis.** **Les Senoi ne sont pas Moss.** Le matériel Senoi vient de **Kilton Stewart** et il est **académiquement tenu pour largement fictif** (ruling déjà en base sur `kaplan-williams-jungian-senoi`). Moss, c'est l'Active Dreaming, adossé à l'iroquois, avec bénédiction d'un aîné (Tom Porter) — bénédiction qu'INFUSE, en source secondaire, n'a pas. Les deux ne doivent jamais être cités dans la même phrase comme si c'était le même adossement.
 

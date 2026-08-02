@@ -2,6 +2,9 @@
 
 > **Statut** : doc canonique du SENS de Dream App. Source de vérité philosophique, fondationnelle, qui oriente tout (design, technique, communication, gouvernance, économique).
 > **Origine** : 2026-04-24 — Forêt absorbée (30+ livres digérés), 5 plénières ouvertes, arbitrages Tim datés.
+> **🔴 Passe d'intégrité — 2026-08-02.** Toutes les citations entre guillemets de ce document ont été vérifiées contre `forest_chunks` (rapport : **`RAPPORT-W3.md`**). Entrées au canon : **P6 bis** (Afrique australe — l'affirmation « zéro épistémologie du rêve d'Afrique australe » est **rétractée**, et le flag éthique HIGH devient opposable parce qu'INFUSE **vend** deux des plantes documentées) · correction de nommage **Sng'oi ≠ Senoi** (§3.4.1).
+> **🔴 LOI DE CITATION, opposable à tous les documents Dream App** *(détail et script : `DOCTRINE-MIROIR` §11 bis)* : **aucune citation entre guillemets sans son `book_id` et sa page.** Un digest fonde une thèse, il ne fournit jamais un verbatim — ce qu'on lit dans un digest se restitue **sans guillemets**. Si le livre n'est pas en base, on écrit « introuvable dans le corpus ». **Trois citations fabriquées en une semaine** (Weller 30/07, Jung 02/08, Hillman *Soul's Code* 02/08) : c'est un mode d'échec systémique, pas une inattention.
+>
 > **Dernière refonte de fond** : **2026-07-30** — **le principe-souche entre au-dessus des trois méta-principes (§2.0 : *être vu est nécessaire, être caractérisé déforme*)** · les six principes du miroir sont canonisés avec leur source lue et leur test qui échoue (§3.15) · durcissements §8.2 (biais d'ascension), §8.3 (« qu'il repose »), §8.7 (sortie humaine dans le même écran) · correction de l'attribution non sourcée à Ullman (§3.4.1) · nommage Courant / Weave au glossaire.
 > **Refonte précédente** : 2026-07-26 — thèse en tête (§0.1) · le Cœur pilier égal au rêve (§1.5, §3.12) · grands rêves et double lecture (§3.13, §3.14) · génération de mondes (§1.1.bis) · silence comme organe (§3.1.ter, §3.5) · couche 0 de persistance (§3.8).
 > **Bilan de compression 30/07** : ~180 lignes ajoutées, ~107 retirées (§18+§19 fusionnés — ils redisaient `4_LOG` et `2_DESIGN` une troisième fois · §3.5.4 dédoublonné avec §6.1 · exemples de polyphonie du §3.1.ter renvoyés vers `2_DESIGN` · §4 ramené à ce qui n'est pas déjà dans §3.13 · §14 transformé en index · glossaire dédoublonné sur « Big Dream »). **1458 → 1531 lignes.** Le solde est positif de 73 lignes : c'est le prix de sept principes qui portent chacun leur source et leur vérification, et je n'ai pas trouvé de coupe honnête au-delà.
@@ -455,7 +458,9 @@ Pas "Couche Individu / Couche Cercle / Couche Anima Mundi" comme 3 couches d'un 
 
 #### 3.4.1 — Trois types de cercles (arbitré Tim 2026-04-24)
 
-**L'idée centrale** : reproduire ce qui se passait dans les **villages** — résolution de conflits, décisions collectives, intelligence partagée. Le rêve solitaire est une anomalie moderne occidentale. Dans presque toutes les traditions humaines vivantes (Aboriginal, Iroquois, Ojibwa, Bushman, Senoi, certains villages européens préchrétiens), **le rêve se partage le matin au feu** comme information vitale sur ce qui se trame dans le tissu collectif.
+**L'idée centrale** : reproduire ce qui se passait dans les **villages** — résolution de conflits, décisions collectives, intelligence partagée. Le rêve solitaire est une anomalie moderne occidentale. Dans presque toutes les traditions humaines vivantes (Aboriginal, Iroquois, Ojibwa, Bushman, **Sng'oi**, Xhosa / Cape Nguni et Zulu, certains villages européens préchrétiens), **le rêve se partage le matin** comme information vitale sur ce qui se trame dans le tissu collectif.
+
+> **⚠️ Deux corrections de nommage, 2026-08-02.** (1) Cette liste écrivait **« Senoi »**. Le peuple réel s'appelle **Sng'oi** (Malaisie) ; « Senoi » renvoie à la littérature de **Kilton Stewart**, académiquement tenue pour **largement fictive** (contrôle du rêve, « affronte ton ennemi », entraînement des enfants — rien de tout ça n'est attesté). Ce qui est attesté vient de Wolff, qui a vécu chez les Sng'oi et parlait leur langue. **Ne jamais écrire « méthode Senoi ».** (2) « au feu » est retiré : c'est un décor, pas une donnée — aucune des sources lues ne le pose comme universel.
 
 | Type | Position roadmap | Caractéristique |
 |---|---|---|
@@ -952,7 +957,7 @@ C'est la réponse structurelle à la peur d'être figé : **ce n'est pas qu'on s
 
 > **Trois de ses propres phrases datées, posées côte à côte, valent mieux que n'importe quelle prose. La splendeur vient de la matière ; la glose l'abîme.**
 
-Tim demande un miroir *« magnifique »* — c'est une exigence de forme, pas un ornement (Bachelard : *« l'image cosmique donne le tout avant les parties »* — on ouvre par une image, jamais par une liste). Mais le beau ne vient pas d'écrire beau. Il vient de ce que **c'est le temps qui a fait le travail**, et que les phrases sont de lui. C'est §0.1 appliqué à l'esthétique : *une phrase générée qui console vaut moins qu'un de ses propres rêves ramené au bon moment.*
+Tim demande un miroir *« magnifique »* — c'est une exigence de forme, pas un ornement (Bachelard, *La Poétique de la Rêverie*, p. 150, verbatim : *« l'image cosmique est immédiate, elle nous donne le tout avant les parties »* — on ouvre par une image, jamais par une liste). Mais le beau ne vient pas d'écrire beau. Il vient de ce que **c'est le temps qui a fait le travail**, et que les phrases sont de lui. C'est §0.1 appliqué à l'esthétique : *une phrase générée qui console vaut moins qu'un de ses propres rêves ramené au bon moment.*
 
 Conséquence : le mode **« ce que j'en ai dit »** — uniquement ses lectures successives, datées, côte à côte, zéro prose générée — est **le moins cher à construire et le plus fort du lot**. Il est prioritaire sur tous les autres modes.
 
@@ -964,7 +969,8 @@ Conséquence : le mode **« ce que j'en ai dit »** — uniquement ses lectures 
 **Deux sources lues, deux disciplines qui ne se citent pas, même verdict.**
 
 - **Weller**, p. 74 : *« Grief has never been private; it has always been communal. »* Et p. 74 encore, le mode d'échec : en l'absence de communauté, *« par défaut, nous devenons le contenant nous-mêmes »*, et le chagrin recycle sans se libérer. p. 116, la formule qu'il attribue à un mentor : *« This is the solitary journey that we cannot do alone. »*
-- **Kalsched**, p. 214, après *Prince Lindworm* : *« Seule la compassion humaine peut activer le potentiel intégratif du Soi quand ses énergies ont été détournées vers le mal et la haine par un trauma insupportable. »* Et sur le cas de Lenore : *« This was not, however, compassion she could give herself. »*
+- **Kalsched**, après *Prince Lindworm* : la scission centrale de la figure duplex se répare **par la compassion humaine**, et le sort de l'ensemble en dépend. Verbatims vérifiés — p. 213 : *« the moment when a central split in the primal duplex self-figure serving as the self-care defense is healed through human compassion »* ; p. 214 : *« whether good or evil triumphs depends to a frightening degree upon whether human compassion can mediate the volcanic archetypal energies of the psyche. The self itself seems indifferent to this singularly human dilemma »* ; et p. 215, sur le Soi : *« she can do none of this herself, after all she is only a spirit »*. Sur le cas de Lenore, p. 214 : *« This was not, however, compassion she could give herself. »*
+  *(⚠️ 02/08 : ce point était donné comme un verbatim de p. 214 — « Seule la compassion humaine peut activer le potentiel intégratif du Soi… ». Cette phrase n'est pas dans le livre ; c'était une glose de digest. La thèse est identique, les verbatims ci-dessus la portent mieux.)*
 
 **Ce qui transforme n'est pas de l'insight : c'est un instant de compassion humaine reçue.** Pas donnée par soi. Pas générée. Reçue.
 
@@ -1050,6 +1056,28 @@ Les 18 principes initiaux étaient trop nombreux et auto-contradictoires. Refond
 
 ### P6 — Forêt éthique (territoire et sacré)
 **Source** : Said (*Orientalism*) + Smith (*Decolonizing Methodologies*) + Kimmerer (*Honorable Harvest*) + Abram (*Spell of the Sensuous*) + Aboriginal/Anishinaabe/Lakota. Triple filtre obligatoire pour toute mention culturelle. Réciprocité structurelle (X% revenus → initiatives indigènes dont les ontologies ont nourri le projet). Pas d'esthétisation exotisée. Pas de marketing utilisant Dreamtime/Songline/Karadji/ondinnonk/atetshents/nahual.
+
+#### P6 bis — 🔴 Afrique australe : le seul endroit où INFUSE **vend** la tradition qu'elle cite *(entré au canon le 2026-08-02)*
+
+C'est le point où P6 cesse d'être une précaution éditoriale et devient une obligation commerciale. **INFUSE vend deux des plantes documentées par Sobiecki** : *undlela-ziimlophe* (**Silene undulata / capensis**) et *uvuma-omhlope* (**Synaptolepis kirkii**). Tradition **vivante et nommée** — Xhosa / Cape Nguni, Zulu, Sotho ; initiation ***ukuthwasa*** ; informateurs nommés dans la source (dont Mama Maponya). Flag éthique en base : **HIGH**.
+
+**Ce que la Forêt contient réellement** (contre l'affirmation « zéro épistémologie du rêve d'Afrique australe », **rétractée le 02/08**, cf. `4_LOG` et `DOCTRINE-MIROIR` §13) : `sobiecki-southern-african-psychoactive-plants` (133 chunks, ethnobotaniste sud-africain **initié**, publié en revue à comité de lecture) · `ngubane-body-mind-zulu-medicine` (187 chunks, anthropologue **zulu**, voix interne) · `cumes-africa-in-my-bones` (126) · `mutwa-indaba-my-children` (476, statut contesté).
+
+**L'épistémologie, en première main** (Sobiecki, p. 4, verbatim vérifié) : *« The term ubulawu comes from the Xhosa verb ukulawula (to control) and refers to "that spirit that controls one" (Hirst 2005). … Whereas lay people can obtain insight or spiritual guidance into their lives with ubulawu, the diviner healer learns to use dreams as a path to heal. »* Trois choses en découlent, et la troisième nous concerne directement :
+1. **Le rêve appartient au domaine des ancêtres** — ce n'est pas une production de psyché individuelle. C'est une ontologie que le canon occidental de cette app n'a pas.
+2. **L'usage laïc et l'usage du devin ne sont pas le même acte.** Mama Maponya : *« Anyone can use the plants to connect with their ancestors. The plants give you what you are. … Those people with a strong spirit, only they can have this connection. »*
+3. **Le rêve de l'initié·e est un baromètre psychospirituel lu par le tuteur, pas par le rêveur seul.** C'est un dispositif de miroir *déjà institué*, avec un humain à l'étage de lecture — exactement l'architecture à deux étages que Jung a bricolée en 1935 (`DOCTRINE-MIROIR` §8.0) et que nous devons reproduire.
+
+**Red lines opposables :**
+- Toute page produit ou tout écran qui parle de rêve xhosa/zulu **cite Sobiecki**, **nomme les peuples**, **nomme *ukuthwasa***.
+- **Jamais suggérer que l'usage laïc équivaut à l'usage du devin.** La source dit littéralement le contraire.
+- **Jamais « ubulawu » comme nom de feature**, de mode, de catégorie ou de produit.
+- Ton sobre obligatoire — le risque nommé en base est la romantisation de la « magie du rêve africaine ».
+- **Réciprocité concrète à définir avant toute publication.** On prend le commerce à une tradition ; on lui doit autre chose que des guillemets. C'est le X% du §9.4, appliqué ici en premier parce que c'est ici qu'il y a une vente.
+
+**Ce qui reste manquant, et qu'il ne faut pas maquiller** : personne dans le corpus n'est un·e **sangoma ou igqirha écrivant en son nom propre aujourd'hui**. Ngubane est une voix interne mais c'est une ethnographie de 1977. Piste d'acquisition : Nokuzola Mndende (Icamagu Institute). **Jamais un « manuel ».**
+
+> **Et la leçon de méthode, qui vaut au-delà de ce cas : un silence de l'index n'est pas un silence de la tradition.** Ces quatre livres étaient classés `guerison`, `prophetie` et `mythe` — jamais `rêve`. Le rayonnage a produit quatre jours de cécité recopiée. Avant d'écrire « la Forêt n'a rien sur X », interroger `forest_chunks` **sur les mots de la tradition**, pas seulement sur nos catégories.
 
 ### P7 — Co-régulation (NOUVEAU)
 **Source** : Badenoch (*The Heart of Trauma*) + Porges (polyvagal). L'app crée un **sentiment de présence**, pas une autonomie autosuffisante. Voix prosodique, rythme lent, pauses, mention discrète d'autres présences (*"d'autres rêveurs sont éveillés en ce moment"* sans tracking), proximité d'humains accessibles toujours visible.
