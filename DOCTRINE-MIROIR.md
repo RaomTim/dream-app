@@ -1,230 +1,224 @@
 # DOCTRINE DU MIROIR — être vu sans être assigné
 
-> Écrit le 2026-07-26, avant toute ligne de code.
-> Répond à la demande de Tim du 26/07 (« l'IA doit apprendre à me connaître à travers mes rêves… une sorte de miroir magnifique »).
-> Fondé sur 18 digests Tier 1 réellement ouverts en session (liste et limites au §11), sur `forest/dream_alpha/safety-checks.json`, et sur le canon existant (`1_BIBLE` §0.1, §2.2, §3.5, §3.13, §3.14, §5, §8).
+> Écrit le 2026-07-26, avant toute ligne de code. Répond à la demande de Tim du 26/07 : *« l'IA doit apprendre à me connaître à travers mes rêves… une sorte de miroir magnifique »*.
 > **Aucune ligne de ce document n'est une prescription de code. C'est la loi que le code devra passer.**
 >
-> **🔴 Statut au 2026-07-30 — ce document n'est plus seul.** Sept de ses thèses sont **passées au canon** : `1_BIBLE` **§2.0** (la souche : *être vu est nécessaire, être caractérisé déforme*) et **§3.15** (les six principes dérivés, avec leur source et leur test). **En cas de divergence, `1_BIBLE` fait foi** ; ce document reste le lieu du raisonnement détaillé et des sources.
-> **Révisions du 30/07, toutes signalées sur place** : §0 (l'erreur sur la contenance, corrigée) · §3.1 (une citation de Weller qui n'en était pas une) · §7 interdit 5 (justification) · §7 interdit 10 (forme révisée) · §8.1b et §8.1d (arbitrés par Tim) · §8.2 (allégée d'un cran) · §13 (tensions closes et tensions neuves).
-> **🔴 Passe d'intégrité du 2026-08-02 — toutes les citations de ce document ont été vérifiées une par une contre `forest_chunks`.** Rapport complet, avec le tableau des statuts (verbatim / approximatif / introuvable) : **`RAPPORT-W3.md`**. Trois corrections de fond y sont portées : §1.1b (une citation de Jung sur l'inflation qui n'existe pas), §8.0 (une erreur de fait sur le dispositif de Jung — il a rencontré le rêveur), §13 tension 10 (l'affirmation « zéro épistémologie du rêve d'Afrique australe » était fausse). Plus §1.1a, §1.2, §1.3, §3.1, §5.1, §5.2, §6.3, §11. **La loi qui empêche que ça recommence est au §11 bis.**
+> **Rang.** Sept thèses sont passées au canon : `1_BIBLE` **§2.0** (la souche : *être vu est nécessaire, être caractérisé déforme*) et **§3.15** (les six principes dérivés). **En cas de divergence, `1_BIBLE` fait foi.** Ici vit le raisonnement, avec ses sources et ses trous.
 >
-> **Une limite de source à connaître avant de citer plus loin** : cette doctrine a été fondée sur les **digests** Tier 1. C'était sa faiblesse structurelle et la cause des citations fabriquées : **un digest contient des gloses du digesteur, et rien n'y distingue une glose d'un verbatim.** Le texte intégral de la quasi-totalité des livres cités est en base et interrogeable — y compris `hillman-dream-and-the-underworld`, dont l'extraction n'a pas « perdu les espaces » comme on l'a cru, mais coupé les lignes mot à mot : il est parfaitement lisible après normalisation. **La seule absence réelle et bloquante est `hillman-souls-code`, qui n'est pas en base du tout** (§1.3).
+> **Refonte du 2026-08-02 — amplification Jung × Seth × rêve collectif.** Trois lectures de fond y entrent : `JUNG-PSYCHOLOGY-ALCHEMY-POUR-LAPP.md` · `SETH-POUR-LAPP.md` · `ECOUTE-REVE-COLLECTIF-2026-07-30.md`. Ce qu'elles ont changé : `RAPPORT-X1.md`.
+> **Neuf** : la charte du droit de lire (§1.0) · l'antériorité contre la progression (§3.5) · l'hypothèse que la doctrine ne savait pas qu'elle faisait (§5 bis) · quatre interdits (13-16) · le sanctuaire (§8.2) · cinq nouveaux exemples (§9) · la tension frontale, traitée (§13.0).
+> **Retiré** : la narration des corrections passées (fondue en §11 bis). Un document qui raconte ses erreurs plus qu'il n'énonce sa loi devient un journal. **Compression > accrétion.**
+>
+> **🔴 Loi de citation (§11 bis), opposable.** Aucune citation entre guillemets sans son `book_id` et sa page vérifiables dans `forest_chunks`. Un digest fonde une thèse, **jamais un verbatim**. Livre absent → *« introuvable dans le corpus »*, jamais de réparation au jugé. Décalages mesurés : `jung-red-book` −35 · `weller-wild-edge-of-sorrow` −24 · `kalsched-inner-world-trauma` −10 · `von-franz-interpretation-fairy-tales` −15 · `bachelard-poetique-reverie` −4. **Toutes les citations de cette version ont été re-vérifiées par SQL le 02/08** — sortie : `RAPPORT-X1.md` §4.
 
 ---
 
 ## §0 — Ce que Tim demande, sous ce qu'il dit
 
-Sa phrase centrale n'est pas « analyse-moi ». C'est *« reflète ma psyché dans toute sa splendeur, sa profondeur, sa tendresse, sa fragilité »*. Ce sont quatre mots, et ce sont quatre spécifications, pas quatre ornements.
+Sa phrase centrale n'est pas « analyse-moi ». C'est *« reflète ma psyché dans toute sa splendeur, sa profondeur, sa tendresse, sa fragilité »*. Quatre mots, quatre spécifications.
 
-- **Splendeur** — le miroir doit être beau. Un miroir juste et laid a raté. C'est une exigence de forme, et elle a une source : Bachelard, *La Poétique de la Rêverie* — *« toute prise de conscience est un accroissement de conscience, une augmentation de lumière »*, et *« l'image cosmique donne le tout avant les parties »*. Le miroir doit **augmenter**, et il doit **ouvrir par une image, jamais par une liste**.
-- **Profondeur** — il doit aller chercher loin dans le corpus, pas dans les sept derniers jours.
-- **Tendresse** — c'est la spécification la plus difficile et la plus facile à rater. La tendresse n'est pas un adjectif dans la copy. C'est la **porte de sortie qui ne demande rien**. Voir §4.5 et l'exemple encadré au §8.
-- **Fragilité** — il doit pouvoir approcher ce qui est fragile **sans le nommer fragile**. Weller (*The Wild Edge of Sorrow*) : le deuil ne se métabolise pas seul, il demande *contenance* et *libération*.
+- **Splendeur** — le miroir doit être beau. Un miroir juste et laid a raté. Bachelard : *« l'image cosmique est immédiate, elle nous donne le tout avant les parties »* (`bachelard-poetique-reverie` #154, p. 150). **On ouvre par une image, jamais par une liste.**
+- **Profondeur** — il va chercher loin dans le corpus, pas dans les sept derniers jours.
+- **Tendresse** — ce n'est pas un adjectif dans la copy. C'est **la porte de sortie qui ne demande rien** (§4.5, §9 fragment).
+- **Fragilité** — approcher ce qui est fragile **sans le nommer fragile**.
 
-> **🔴 Correction du 30/07, sur lecture du texte intégral.** Ce paragraphe affirmait : *« une app peut faire la contenance, elle ne peut pas faire la libération »*. **C'est faux, et c'était faux dans le sens qui nous arrangeait.** Chez Weller (p. 73-74), la contenance est précisément ce qui permet de *lâcher* — c'est **un endroit où tomber**. Une app ne rattrape personne. Ce qu'elle produit, si elle produit quelque chose, est exactement le mode d'échec que Weller nomme p. 74 : *« par défaut, nous devenons le contenant nous-mêmes »*, et le chagrin recycle sans se libérer.
->
-> **Une app ne peut faire ni l'une ni l'autre.** Ce qu'elle peut faire est un troisième terme que Weller ne nomme pas, et qu'il valait mieux inventer honnêtement que lui emprunter : **elle garde la mémoire de ce qui a été déposé, et le rend au bon moment.** C'est un service de garde, pas un contenant. C'est déjà ce que dit `1_BIBLE` §0.1 — *« le soutien vient de sa mémoire, pas de notre éloquence »*. La doctrine avait raison ailleurs et s'était sur-vendue ici.
->
-> Conséquence directe, et c'est le principe 6 : **sur la matière lourde, la sortie vers un humain est une condition d'existence du mode** (§3.15.5 de `1_BIBLE`).
+**Ce qu'une app ne peut pas faire, et qu'il fallait cesser de promettre.** Weller n'oppose pas contenance et libération : chez lui (p. 73-74) la contenance est *ce qui permet* de lâcher, un endroit où tomber. Une app ne rattrape personne, et le mode d'échec qu'elle produit est celui qu'il nomme p. 74 — *« By default, we become the container ourselves »*, et le chagrin recycle sans se libérer. **Ce qu'elle peut faire est un troisième terme, qu'il valait mieux inventer honnêtement que lui emprunter : elle garde la mémoire de ce qui a été déposé, et le rend au bon moment.** Un service de garde, pas un contenant (`1_BIBLE` §0.1 : *le soutien vient de sa mémoire, pas de notre éloquence*). Conséquence : **sur la matière lourde, la sortie vers un humain est une condition d'existence du mode.**
 
-Et la peur, sous le garde-fou qu'il pose lui-même : il a peur d'**être figé**. Assigné à un diagnostic. Ou pire : de s'entendre dire qu'il a échoué à guérir. Sa phrase *« si un nouveau rêve vient réveiller la même blessure »* n'est pas une demande de fonctionnalité. C'est une demande de garantie.
+Et la peur, sous le garde-fou qu'il pose lui-même : il a peur d'**être figé**. Assigné. Ou pire, de s'entendre dire qu'il a échoué à guérir. Sa phrase *« si un nouveau rêve vient réveiller la même blessure »* n'est pas une demande de fonctionnalité, c'est une demande de garantie.
 
-Enfin, et c'est le cœur : **il ne demande pas une analyse, il demande d'être vu.** Ce n'est pas la même opération. Une analyse produit un objet — un portrait — qui existe indépendamment de lui et qu'il devra ensuite porter. Être vu ne produit aucun objet : c'est un événement entre deux présences, qui ne laisse derrière lui que ce qui était déjà là.
-
-**Tout ce document découle de cette distinction.**
+Le cœur : **il ne demande pas une analyse, il demande d'être vu.** Une analyse produit un objet — un portrait — qui existe indépendamment de lui et qu'il devra porter. Être vu ne produit aucun objet. **Tout ce document découle de cette distinction.**
 
 ---
 
-## §1 — Le portrait est-il légitime ? (question 1)
+## §1 — Le portrait est-il légitime ?
+
+### 1.0 🔴 LA CHARTE — le droit de lire est acheté par la série, et par rien d'autre
+
+**C'est le principe cardinal du miroir. Il fonde tout et il interdit du même geste.**
+
+Jung vient d'admettre qu'il interprète 400 rêves sans prendre le contexte associatif du rêveur, contre sa propre règle. Sa justification tient en un paragraphe, §50, p. 44 :
+
+> *« This procedure, if applied to isolated dreams of someone unknown to me personally, would indeed be a gross technical blunder. But here we are not dealing with isolated dreams; they form a coherent series in the course of which the meaning gradually unfolds more or less of its own accord. The series is the context which the dreamer himself supplies. It is as if not one text but many lay before us, throwing light from all sides on the unknown terms, so that a reading of all the texts is sufficient to elucidate the difficult passages in each individual one. »*
+> — `jung-red-book` p. 44 *(l'OCR intercale un en-tête courant entre « The series is » et « the context » ; le texte est continu dans le livre — voir §11 bis)*
+
+Et immédiatement, le mécanisme d'auto-correction : *« Of course the interpretation of each individual passage is bound to be largely conjecture, but the series as a whole gives us all the clues we need to correct any possible errors in the preceding passages. »*
+
+> **UNE SÉRIE EST LISIBLE SANS CONNAÎTRE LA PERSONNE. UN RÊVE ISOLÉ NE L'EST PAS.**
+> Ce que le rêveur ne fournit pas en associations, il le fournit en récurrences. **La série *est* le contexte.**
+
+**Trois conséquences, et aucune n'est décorative.**
+
+1. **Le miroir est licite.** C'est le seul argument qui autorise une machine à lire quelqu'un qu'elle n'a jamais rencontré. Il n'y en a pas d'autre, et il ne vient pas de nous.
+2. **Le rêve isolé est fermé** — pas « moins riche », **fermé**. Un rêve seul chez un inconnu n'est pas une petite version de la même opération : c'est *a gross technical blunder*. → **interdit 13**.
+3. **L'unité d'analyse n'est ni le rêve ni le motif : c'est le motif suivi à travers le temps.** C'est la texture même du commentaire de Jung, qui renvoie d'un rêve à l'autre sur de très longues distances — un rêve tardif **valide** une conjecture ancienne (*« The analogy is confirmed here »*, p. 168), un rêve **répond** à un autre (p. 170), un autre **compense** un troisième (p. 80).
+
+**Ce que le miroir hérite, et ce qu'il n'hérite pas.** Jung amplifie : il convoque les sept degrés d'initiation, le *paut neteru*, Tom Thumb et Mercurius pour peupler l'image d'un rêve d'une ligne. La moitié mécanique de ce geste, une machine la fait mieux que lui — c'est de la recherche dans un corpus, et la Forêt sait faire. **Mais livrer une amplification est interdit par Jung lui-même** : *« any prejudiced intervention is a bar to genuine experience »* (p. 16). Une amplification servie au rêveur lui dit d'avance à quoi son image ressemble.
+
+> **L'app ne fait pas l'amplification de Jung, et ce n'est pas un renoncement — c'est le bon héritage.** Jung est allé chercher chez Zosime le contexte qu'il n'avait pas sous la main. Nous l'avons : le corpus d'un seul homme, daté, relu par lui. L'amplification reste utilisable **en interne, jamais en sortie** : pour classer, pour repérer qu'un motif est dense, pour décider quoi remonter.
 
 ### 1.1 Le précédent, et son prix
 
-Jung a fait exactement ce que Tim demande. *Psychology and Alchemy* est bâti sur la série de plus de 400 rêves d'un même rêveur, lue comme un mouvement unique — l'émergence spontanée du mandala, le « processus de centrage », la production d'un nouveau centre de personnalité. C'est LE précédent historique du portrait par les rêves.
+*Psychology and Alchemy* est bâti sur la série de plus de 400 rêves d'un même rêveur. C'est LE précédent historique du portrait par les rêves — **lu en source primaire** (`JUNG-PSYCHOLOGY-ALCHEMY-POUR-LAPP.md` §1).
 
-Trois choses y sont décisives, et toutes trois sont des contraintes, pas des permissions.
+**a) Ce que Jung lit n'est pas un homme, c'est une série.** Son bilan, p. 214 : *« I hope I may have succeeded in throwing some light upon the development of the symbols of the self »* — le sujet est **les symboles**, et le personnel est écarté par décision : *« So I had to confine myself to the impersonal material. »*
+⚠️ **Mais il caractérise trois fois** : typologie (p. 114), certificat de normalité (p. 215), jugement moral (*« Running away thus becomes a moral question »*, p. 146-147). **L'interdit de l'app ne bouge pas — nous restons plus stricts que Jung, parce qu'il avait un cadre, un contrat, et un homme en face qui pouvait le contredire. Aucune de ces trois conditions n'est réunie chez nous.** La doctrine cesse seulement d'invoquer un Jung qui ne caractériserait jamais.
 
-**a) Ce que Jung lit n'est pas un homme, c'est une série.** Le sujet du texte est massivement le mouvement des images à travers le temps, et le rêveur y est le lieu du processus, pas son résultat. Son propre bilan le dit, p. 214 : *« I hope I may have succeeded in throwing some light upon the development of the symbols of the self »* — le sujet est **les symboles**, jamais l'homme.
+**b) Le danger a un nom, et c'est lui qui le donne : l'inflation.** p. 480 : *« An inflated consciousness is always egocentric and conscious of nothing but its own existence. … Paradoxically enough, inflation is a regression of consciousness into unconsciousness. »* La cause, même page, décrit exactement notre dispositif : *« the ego identified with the contents accruing from the withdrawal of projections »*, et le prix du geste, p. 477 : *« every increase in consciousness harbours the danger of inflation »*. Les alchimistes étaient **plus en sécurité**, §43, p. 37 : *« So long as the alchemist was working in his laboratory he was in a favourable position, psychologically speaking, for he had no opportunity to identify himself with the archetypes as they appeared, since they were all projected immediately into the chemical substances. »*
 
-> **🔴 Correction du 02/08 — « jamais » était faux.** Cette ligne écrivait : *« Le sujet du texte n'est jamais "cet individu est ainsi" »*. Jung caractérise **trois fois** : la typologie (« The unknown woman or anima always represents the "inferior," i.e., the undifferentiated function, **which in the case of our dreamer is feeling** », p. 114), le certificat de normalité (« the present case shows **a normal development** », p. 215) et le jugement moral (« **Running away thus becomes a moral question.** », p. 146-147). **L'interdit de l'app ne bouge pas** — nous devons rester plus stricts que Jung, parce qu'il avait un cadre clinique, un contrat, et un homme en face qui pouvait le contredire. Aucune de ces trois conditions n'est réunie chez nous. Mais **la doctrine doit cesser d'invoquer Jung comme s'il ne caractérisait jamais.**
+> **Un portrait rendu au rêveur est une projection retirée. C'est l'opération la plus dangereuse du livre, et Jung le dit.**
 
-**b) Jung nomme lui-même le danger, et il le nomme inflation.** Sa définition, Épilogue, p. 480 :
+Son remède est de *structure*, pas de ton, p. 480 : il faut *« a psychic non-ego »*, un destinataire qui n'est pas le moi, où loger ce qui revient de la projection. Et le garde-fou qu'il repère chez les alchimistes est **une voix qui répond et qui n'est pas moi** : la *meditatio* comme dialogue intérieur avec un autre en nous (p. 273-274). → **interdit 15**.
 
-> *« An inflated consciousness is always egocentric and conscious of nothing but its own existence. … Paradoxically enough, inflation is a regression of consciousness into unconsciousness. This always happens when consciousness takes too many unconscious contents upon itself and loses the faculty of discrimination, the sine qua non of all consciousness. »*
-
-Et la cause, même page, qui décrit exactement notre dispositif : *« There was no psyche outside the ego. Inevitably, then, the ego identified with the contents accruing from the withdrawal of projections. »* Avec le prix général du geste, p. 477 : *« every increase in consciousness harbours the danger of inflation »*.
-
-Il ajoute que les alchimistes étaient **plus en sécurité**, et c'est exact — §43, p. 37 : *« So long as the alchemist was working in his laboratory he was in a favourable position, psychologically speaking, for he had no opportunity to identify himself with the archetypes as they appeared, since they were all projected immediately into the chemical substances. »*
-
-Traduit pour nous : **un portrait rendu au rêveur est une projection retirée. C'est l'opération la plus dangereuse du livre, et Jung le dit.**
-
-> **🔴 Correction du 02/08 — une citation fabriquée, la deuxième en une semaine.** Ce paragraphe portait entre guillemets, attribuée à Jung : *« Quand la conscience s'identifie aux contenus numineux qu'elle récupère de la projection, le résultat est l'inflation — un ego qui croit qu'il EST la psyché entière. »* **Cette phrase n'est nulle part dans le livre.** C'était une glose du digest, mise entre guillemets. Le mode d'échec est identique à celui corrigé le 30/07 sur Weller (§3.1), sur un autre livre, par un autre agent — donc **systémique, pas accidentel**. Les verbatims ci-dessus sont vérifiés un par un contre `forest_chunks` (`book_id = 'jung-red-book'`, qui contient réellement *Psychology and Alchemy* ; page du livre = `page_start` − 35). Règle opposable au §11 bis.
-
-**c) La voie est *longissima via*, « un chemin serpentin ».** Pas une ligne. Ça commande le §3.
-
-> ✅ **Levée de la réserve, 30/07 → confirmée 02/08.** Ce paragraphe portait : *« Ce que j'affirme ci-dessus porte sur la thèse du livre telle que le digest la restitue, pas sur la série elle-même, que je n'ai pas lue. »* **La série a depuis été lue en source primaire** (Partie I et Partie II intégrales, Épilogue intégral, Partie III échantillonnée) — voir `JUNG-PSYCHOLOGY-ALCHEMY-POUR-LAPP.md` §1. La réserve tombe pour ce livre-ci, et pour lui seul.
->
-> Ce que la lecture a ajouté, et qui n'est pas dans le digest : **l'unité d'analyse de Jung n'est ni le rêve ni le motif, c'est le motif suivi à travers le temps** — *« The series is the context which the dreamer himself supplies »* (§50, p. 44). Et **la série est ce qui achète le droit de lire sans connaître la personne** : hors série, le même procédé serait *« a gross technical blunder »* (§50, p. 44).
+**c) La voie est *longissima via*, « un chemin serpentin »** (p. 5). Ça commande le §3.
 
 ### 1.2 L'objection de Hillman, prise au sérieux
 
-*The Dream and the Underworld* est frontalement contre. Sa thèse, restituée sans guillemets parce qu'elle n'est la traduction d'aucune phrase unique : convertir le rêve en langage diurne est l'effort principal de l'usage thérapeutique des rêves, et c'est cet effort que Hillman refuse. Le texte réel, p. 21 : *« there is a definite resistance on the part of the dream to be converted into the dayworld and put to its uses. Yet this conversion has become the main effort in the therapeutic use of dreams … we read them for messages about living situations, choices and relationships of our conscious life »*, et il annonce dans la même page *« our thesis against dreams being translated into the ego's language »*. Et **l'erreur d'Hercule** : l'ego héroïque qui descend chez les morts, matraque les figures, et les remonte de force à la lumière du jour. Les figures ne sont pas « des parties de moi » : ce sont des *eidola*, des présences autonomes. La méthode juste est l'**épistrophè** — ramener l'image à sa ressemblance, jamais la développer vers un sens utile.
+*The Dream and the Underworld* est frontalement contre. Sa thèse, restituée sans guillemets parce qu'elle n'est la traduction d'aucune phrase unique : convertir le rêve en langage diurne est l'effort principal de l'usage thérapeutique des rêves, et c'est cet effort qu'il refuse. Texte réel, p. 21 : *« there is a definite resistance on the part of the dream to be converted into the dayworld and put to its uses »*, et *« our thesis against dreams being translated into the ego's language »*. Plus **l'erreur d'Hercule** : l'ego héroïque qui descend chez les morts, matraque les figures et les remonte de force au jour. Les figures ne sont pas « des parties de moi », ce sont des *eidola*. La méthode juste est l'**épistrophè** — ramener l'image à sa ressemblance, jamais la développer vers un sens utile.
 
-Un portrait est Hercule avec un tableur. Il prend les figures, les convertit en traits, et rend le tout au rêveur sous forme d'identité. C'est l'opération que Hillman interdit.
-
-**On ne contourne pas cette objection. On l'intègre par un déplacement de sujet.**
+**Un portrait est Hercule avec un tableur.** On ne contourne pas l'objection : on l'intègre par un déplacement de sujet (§1.4).
 
 ### 1.3 La sortie : le daimon, et *esse est percipi*
 
-C'est Hillman lui-même qui donne l'issue, dans *The Soul's Code* : **l'âme a besoin de témoins.** Le daimon demande que la personne soit vue — reconnue, reflétée, tenue dans la perception — pour que son image prenne forme dans le monde ; ne pas être perçu arrête le devenir de l'âme ; et la mauvaise sorte de perception, la réduction à un diagnostic, à un rôle familial, à une catégorie sociale, le déforme.
+C'est Hillman qui donne l'issue, dans *The Soul's Code* : **l'âme a besoin de témoins.** Le daimon demande que la personne soit vue — reconnue, reflétée, tenue dans la perception — pour que son image prenne forme ; ne pas être perçu arrête le devenir de l'âme ; et la mauvaise sorte de perception, la réduction à un diagnostic, à un rôle familial, à une catégorie sociale, le déforme.
 
-> **🔴 Statut de source, 02/08 — à lire avant de s'appuyer là-dessus ailleurs.** Ce passage était donné **entre guillemets, comme un verbatim de Hillman**. Il ne peut pas l'être : **`hillman-souls-code` n'existe pas dans `forest_chunks`.** Les seuls Hillman en base sont `hillman-dream-and-the-underworld`, `hillman-re-visioning-psychology` et `hillman-archetypal-psychology`. La formulation ci-dessus vient donc d'un digest, et **rien ne permet aujourd'hui de la retrouver dans le livre**. Les guillemets sont retirés ; la thèse est conservée en restitution assumée.
->
-> **Ça n'est pas un détail de forme : c'est le §1.3 qui donne la sortie de tout le §1, et `1_BIBLE` §2.0 en a fait le principe-souche.** Le principe est bon — il est corroboré indépendamment par Jung (§1.1a, le sujet est les symboles) et par la méthode de Hillman en base (l'épistrophè, `hillman-dream-and-the-underworld`). **Mais tant que *The Soul's Code* n'est pas en base, la formule ne se cite pas entre guillemets, nulle part.** Acquisition prioritaire.
+> **🔴 Statut de source, à connaître avant de s'appuyer là-dessus ailleurs. `hillman-souls-code` n'est pas dans `forest_chunks`** — seuls `hillman-dream-and-the-underworld`, `hillman-re-visioning-psychology` et `hillman-archetypal-psychology` y sont. La formulation ci-dessus vient d'un digest et **rien ne permet aujourd'hui de la retrouver dans le livre**. Les guillemets sont retirés ; la thèse est conservée en restitution assumée.
+> **Le principe tient** — il est corroboré indépendamment par Jung (§1.1a, le sujet est les symboles) et par l'épistrophè de Hillman, elle en base. **Mais il ne se cite pas.** C'est le §1.3 qui fonde `1_BIBLE` §2.0, le principe-souche : acquisition prioritaire.
 
 Une seule thèse contient le mandat et l'interdiction. **Être vu est nécessaire. Être caractérisé déforme.** Tim demande la première ; c'est la seconde que sa peur redoute. Il a raison des deux côtés.
 
-Et Hillman ajoute le mode de lecture qui va avec l'acorn theory : **lire une vie à rebours**, du motif révélé aujourd'hui vers ses signes anciens. Ce n'est pas de la causalité inversée : c'est reconnaître que le présent éclaire ce vers quoi le passé se dirigeait. C'est exactement §3.13.1 du canon : *« un rêve de 2019 peut devenir grand en 2026 »*.
+Et Hillman ajoute le mode de lecture qui va avec l'acorn theory : **lire une vie à rebours**, du motif révélé aujourd'hui vers ses signes anciens. Ce n'est pas de la causalité inversée, c'est reconnaître que le présent éclaire ce vers quoi le passé se dirigeait. **Jung le confirme indépendamment, sur données** (§3.5). C'est le point le plus solide de tout le document.
 
 ### 1.4 Le geste exact qui est permis
-
-Trois gestes, trois statuts. La ligne passe entre le deuxième et le troisième.
 
 | Geste | Exemple | Statut |
 |---|---|---|
 | **RENDRE** | *« Trois fois, tu as écrit sur une école. En 2019, en 2022, cette nuit. »* | **permis, c'est le cœur du miroir** |
-| **RELIER** | *« Dans les trois, il y a une porte que tu n'ouvres pas. »* (fait vérifiable, présent dans les images) | **permis, sous conditions §1.5** |
+| **RELIER** | *« Dans les trois, il y a une porte que tu n'ouvres pas. »* (fait présent dans les images) | **permis, sous conditions §1.5** |
 | **CONCLURE** | *« Tu as un rapport difficile à l'autorité. »* | **interdit, absolument** |
-
-**Formulation canonique du geste permis :**
 
 > **Le miroir cite. Il ne caractérise pas.**
 > **Son sujet n'est jamais le rêveur. Son sujet est ce qui revient chez lui.**
 
-Le déplacement de sujet est tout. « Tu es quelqu'un qui fuit » est un verdict sur une personne. « Il y a une course dans sept de tes rêves, et tu ne l'as jamais nommée » est un inventaire d'images. Le premier assigne. Le second rend. Hillman ne peut pas objecter au second : c'est de l'épistrophè, on reste dans l'image.
+Le déplacement de sujet est tout. *« Tu es quelqu'un qui fuit »* est un verdict sur une personne ; *« il y a une course dans sept de tes rêves, et tu ne l'as jamais nommée »* est un inventaire d'images. Hillman ne peut pas objecter au second : on reste dans l'image.
+
+**Et RELIER a une forme canonique chez Jung, plus exigeante que celle que la doctrine s'était donnée** : il ne relie que quand un rêve *ultérieur* confirme une conjecture *antérieure* (*« The analogy is confirmed here »*, p. 168). → **RELIER n'est permis qu'à partir de la troisième occurrence datée, jamais à la deuxième. Deux points font une ligne ; trois font un motif.**
 
 ### 1.5 Le test qui rend cette ligne opposable
 
-Un principe sans test qui échoue est un vœu (§3.1.ter du canon, leçon du 26/07). Voici le test de §1.4 :
-
-> **TEST DE TRAÇABILITÉ.** Toute phrase du miroir qui porte une affirmation sur le rêveur doit être attachée à au moins un `kairos_id` avec sa date. Le miroir est produit comme une structure, pas comme un bloc de prose : chaque énoncé porte ses sources. **Un énoncé sans source fait échouer la génération** — on rejette la réponse, on ne la répare pas.
->
-> Corollaire, plus dur : **la charge utile du miroir contient le texte intégral de chaque kairos cité.** Une prose qui référence un rêve absent de la charge utile est un échec. Voir §8, asymétrie (d).
+> **TEST DE TRAÇABILITÉ.** Toute phrase du miroir qui porte une affirmation sur le rêveur est attachée à au moins un `kairos_id` avec sa date. Le miroir est produit comme une structure, pas comme un bloc de prose : chaque énoncé porte ses sources. **Un énoncé sans source fait échouer la génération** — on rejette, on ne répare pas. Corollaire plus dur : **la charge utile contient le texte intégral de chaque kairos cité.** Une prose qui référence un rêve absent de la charge utile est un échec (§8.1d).
 
 ---
 
-## §2 — Lumière / ombre : la partition est fausse (question 2)
+## §2 — Lumière / ombre : la partition est fausse
 
-### 2.1 Trois raisons de la refuser, toutes sourcées
+### 2.1 Trois raisons de la refuser
 
-**a) Kalsched.** La figure persécutrice du rêve **est aussi la protectrice**. Le système d'auto-soin archétypal est *duplex* : le même personnage apparaît en bourreau une nuit et en ange gardien la suivante. Sa devise est *« Never Again »* — plus jamais cet esprit personnel ne sera aussi démuni. **Classer cette figure dans un « miroir d'ombre », c'est lui assigner une valence morale qui est factuellement fausse.** Ce n'est pas une maladresse de ton, c'est une erreur de fait.
+**a) Kalsched.** La figure persécutrice du rêve **est aussi la protectrice**. Le système d'auto-soin archétypal est *duplex* : le même personnage est bourreau une nuit, ange gardien la suivante. Sa devise est *« Never Again »* (`kalsched-inner-world-trauma` p. 4). **Classer cette figure dans un « miroir d'ombre », c'est lui assigner une valence morale factuellement fausse** — pas une maladresse de ton, une erreur de fait.
+Appui le plus ancien, trouvé chez Jung sans qu'on l'ait cherché : **la figure duplex n'est pas une découverte de la clinique du trauma, c'est la structure du Mercurius alchimique** — *« their good luck and their ruin »* (p. 63-66). Et §36, p. 30 : *« In the last resort there is no good that cannot produce evil and no evil that cannot produce good. »*
 
-**b) Schwartz, et la propre red line de l'app.** `safety-checks.json`, bloc `ifs_protocol`, contient littéralement :
-```
-"never_say": "C'est ton ombre",
-"always_say": "Et si cette figure était une part protectrice qui essaie de te montrer quelque chose ?"
-```
-Un « miroir d'ombre » violerait une red line déjà écrite, déjà arbitrée, dès son nom.
+**b) Schwartz, et la propre red line de l'app.** `safety-checks.json`, `ifs_protocol` : `never_say: "C'est ton ombre"`. Un « miroir d'ombre » violerait une red line déjà arbitrée, **dès son nom**.
 
-**c) Gendlin, et c'est le plus retors.** Le *Bias Control* établit que la direction de croissance se trouve **dans ce que le rêveur rejette le plus** — pas l'image négative elle-même, mais *« quelque chose comme ça »* senti corporellement, une énergie expansive (*pro-life energy*). Autrement dit : le contenu qu'on rangerait dans le miroir d'ombre est précisément là où ça pousse. **Le classer comme obscur inverse son signe.**
+**c) Gendlin, le plus retors.** Le *Bias Control* établit que la direction de croissance se trouve dans ce que le rêveur rejette le plus. **Le contenu qu'on rangerait dans le miroir d'ombre est précisément là où ça pousse. Le classer comme obscur inverse son signe.**
 
-Ajoutons Hunt (*The Multiplicity of Dreams*) : il n'y a pas UNE essence du rêve, il y a des types parallèles, chacun avec sa ligne de développement. **Une partition en deux panneaux est une revendication d'essence déguisée.**
+Et Hunt : il n'y a pas UNE essence du rêve, il y a des types parallèles. **Une partition en deux panneaux est une revendication d'essence déguisée.**
 
 ### 2.2 Ce qui varie n'est pas le contenu, c'est la distance
 
 > **L'ombre n'est pas une matière. C'est un rapport.** Ce qui change d'un rêve à l'autre n'est pas la nature de l'image, c'est la proximité que le rêveur peut soutenir avec elle aujourd'hui.
 
-Conséquence : l'app n'a **aucun droit** de classer un rêve d'un côté ou de l'autre. Le seul qui puisse le faire est le rêveur, et il le fait déjà — les trois nuances de §3.13.2 sont exactement cet axe, et ce sont **ses mots** :
-
-| Nuance existante (§3.13.2) | Ce que ça devient dans le miroir |
-|---|---|
-| *« ça me donne de la force »* | la matière du miroir **« ce qui me porte »** |
-| *« je n'ai pas fini de le comprendre »* | la matière du miroir **« ce qui me travaille »** |
-| *« ça m'a changé »* | entre dans les deux, jamais exclu |
-
-Le miroir n'invente aucune taxonomie. **Il lit celle que le rêveur a déjà posée en tapant.** C'est P-Inversion Oraculaire (§2.2) appliqué à la partition elle-même : ce n'est pas l'app qui décide ce qui est lourd chez lui.
+L'app n'a **aucun droit** de classer un rêve d'un côté ou de l'autre. Le seul qui puisse le faire est le rêveur, et il le fait déjà — les trois nuances de `1_BIBLE` §3.13.2 sont exactement cet axe, et ce sont **ses mots** : *« ça me donne de la force »* → la matière de **« ce qui me porte »** · *« je n'ai pas fini de le comprendre »* → **« ce qui me travaille »** · *« ça m'a changé »* → les deux, jamais exclu.
+**Le miroir n'invente aucune taxonomie. Il lit celle que le rêveur a posée en tapant.**
 
 ### 2.3 Le renversement : le miroir entier est le défaut
 
-Tim propose *« ou bien les 2 d'un coup »* comme une option. **C'est l'inverse.** Puisque Kalsched établit que la figure est les deux à la fois, le miroir entier est le seul qui soit doctrinalement juste. Les deux miroirs partiels ne sont pas des modes : ce sont des **restrictions**, choisies par le rêveur, pour sa propre capacité du jour.
+Tim propose *« ou bien les 2 d'un coup »* comme une option. **C'est l'inverse** : puisque la figure est les deux à la fois, le miroir entier est le seul doctrinalement juste.
 
-> **Le miroir entier est le défaut. « ce qui me porte » et « ce qui me travaille » sont des gestes de ménagement que le rêveur s'accorde. L'app ne les propose jamais d'elle-même, et ne remarque jamais lequel il choisit.**
+> **Le miroir entier est le défaut. « ce qui me porte » et « ce qui me travaille » sont des restrictions que le rêveur s'accorde. L'app ne les propose jamais d'elle-même, et ne remarque jamais lequel il choisit.**
 
-Ce dernier point compte : compter les fois où quelqu'un choisit la version douce, c'est déjà un dossier sur lui.
+Compter les fois où quelqu'un choisit la version douce, c'est déjà un dossier sur lui.
 
 ### 2.4 À quelles conditions « ce qui me travaille » ne blesse pas
 
-Six conditions cumulatives. Si une seule manque, ce mode ne s'ouvre pas.
-
-1. **Aucune cause n'est nommée.** Jamais « cela vient de », « parce que », « ton rêve est lié à ». Red line §8.8, et Kalsched la fonde en fait : la figure persécutrice **n'est pas** l'agresseur intériorisé, c'est une force archétypale. Un lien causal serait faux, pas seulement imprudent.
-2. **Aucun manque n'est nommé.** On dit *« ça revient »*. Jamais *« tu n'as pas réglé »*.
-3. **La fonction protectrice est tenue ouverte, sous forme de question, jamais d'affirmation.** IFS. Et jamais l'app ne répond à sa propre question.
-4. **Il est demandé, jamais poussé.** Red line §8.5.
-5. **Porte somatique avant** (`safety-checks.json`, `somatic_first_protocol`), **felt-shift après** (P3).
-6. **Sortie en un tap, qui ne demande rien et ne garde rien.** Voir §8, exemple encadré.
+Six conditions cumulatives ; si une seule manque, le mode ne s'ouvre pas. **(1)** Aucune cause n'est nommée — jamais *« cela vient de »*, *« parce que »*. **(2)** Aucun manque n'est nommé : on dit *« ça revient »*, jamais *« tu n'as pas réglé »*. **(3)** La fonction protectrice est tenue ouverte, en question, jamais en affirmation — et l'app ne répond jamais à sa propre question. **(4)** Il est demandé, jamais poussé. **(5)** Porte somatique avant, felt-shift après. **(6)** Sortie en un tap, qui ne demande rien et ne garde rien.
 
 ---
 
-## §3 — La psyché ne dépasse pas. Elle spirale. (question 3)
+## §3 — La psyché ne dépasse pas. Elle spirale.
 
-**C'est le point le plus important de ce document**, parce que c'est celui qui répond à la peur de Tim, et parce qu'il commande toute la mécanique temporelle.
+**C'est le point le plus important de ce document** : c'est celui qui répond à la peur de Tim, et il commande toute la mécanique temporelle.
 
-### 3.1 Ce que disent les sources, à l'unanimité
+### 3.1 Ce que disent les sources
 
-- **Jung, *Archetypes*** : l'individuation n'est pas la perfection ni l'amélioration de soi. C'est l'intégration continue, et elle passe par l'**enantiodromia** — les processus psychiques basculent dans leur contraire quand ils atteignent un extrême. Sa formule : *« more light means more night »*. **Il n'y a pas d'état terminal.**
-- **Jung, *Psychology and Alchemy*** : la voie est *longissima via*, p. 5 — *« it is a longissima via, not straight but snakelike, a path that unites the opposites in the manner of the guiding caduceus, a path whose labyrinthine twists and turns are not lacking in terrors »* (verbatim vérifié). **Mais la phrase à retenir est ailleurs**, §34, p. 28, parce qu'elle décrit des données et pas un chemin :
-
-  > *« The way is not straight but appears to go round in circles. More accurate knowledge has proved it to go in spirals: the dream-motifs always return after certain intervals to definite forms, whose characteristic it is to define a centre. »*
-
-  Retour à intervalles, formes définies, centre défini : **c'est la seule phrase du corpus que le code puisse implémenter.** Et p. 215 : *« the unconscious process moves spiral-wise round a centre, gradually getting closer »*.
-  ⚠️ **Sa réserve vient avec, et le §3 ne l'avait pas** — même page 28 : *« Nor should it be taken for granted that dream sequences are subject to any governing principle. »* Le §3 est le point le plus assuré de cette doctrine ; Jung y met un doute.
-- **von Franz** : la compensation est une régulation permanente. ⚠️ *Corrigé le 02/08* : l'image du **« système immunitaire de la psyché »** était donnée ici comme adossée à Jung. **Elle ne l'est pas.** Chez Jung, le compensateur n'est pas automatique : *« the unconscious does not simply act contrary to the conscious mind but modifies it more in the manner of an opponent or partner »* (§26, p. 23) — un opposant négocie, un système immunitaire ne négocie pas. Et il admet des rêves qui ne compensent rien : *« I would not deny the possibility of parallel dreams … but, in my experience at least, these are rather rare »* (§48, p. 43). **Ce qui survit, et qui suffit au §3 : la compensation ne finit pas son travail.** L'image immunitaire n'est pas reprise. (À noter aussi : `von-franz-way-of-the-dream`, `von-franz-interpretation-fairy-tales` et `von-franz-feminine-fairy-tales` portent en base **le même texte** — 206 chunks, 80 879 mots chacun. Deux des trois slugs sont faux. Rien ici n'en dépend, mais aucune citation de von Franz ne doit être attribuée à un titre tant que ce n'est pas démêlé.)
-- **Kalsched, et c'est la phrase qui compte le plus pour la peur de Tim** : le Protecteur/Persécuteur **n'est pas éducable**. Il fonctionne au niveau de conscience magique qu'il avait au moment du trauma d'origine, et identifie toute nouvelle occasion de vie comme une menace. **Le retour d'un motif n'est donc pas la preuve d'un échec du rêveur : c'est la propriété structurelle de la défense.**
-- **Gendlin** : les rêves sont des commentaires du moment, des relevés de baromètre — la même personne peut faire des rêves contradictoires deux nuits de suite selon la journée. **Un retour isolé ne prouve rien sur l'ensemble.** *(⚠️ 02/08 : « commentaires du moment » était entre guillemets. La formule* momentary comments *ne se trouve pas dans `gendlin-let-body-interpret-dreams`. Guillemets retirés ; la thèse est conservée en restitution.)*
-- **Weller** : le deuil est une **compétence**, un apprentissage de toute une vie — la tâche n'est pas de surmonter le chagrin, mais de devenir de plus en plus habile à le porter et à le digérer. **Le dépassement n'a jamais été l'objectif.** *(⚠️ Correction du 30/07 : cette thèse était donnée ici **entre guillemets**, comme un verbatim. Ce n'en est pas un — c'est la thèse du livre, restituée. Les guillemets sont retirés. Dans un document qui interdit d'inventer, une citation fabriquée était l'erreur la plus coûteuse possible.)*
-- **Weller encore, et c'est le principe 2 du canon** : p. 21, le **biais d'ascension**. Verbatim vérifié : *« even within psychology there is a premise that is biased toward improvement, always getting better, rising above our troubles … when all we are shown is the imagery of ascent, we are left to interpret the times of descent as pathological. We feel that we are somehow failing. »* C'est la raison clinique de l'interdiction de toute courbe (`1_BIBLE` §3.15.1). *(⚠️ 02/08 : la fin était citée « et à croire que nous échouons » — Weller écrit* we feel *, pas* we believe *. Remplacé par le verbatim.)*
+| Source | Ce qu'elle établit |
+|---|---|
+| **Jung, *Archetypes*** | L'individuation n'est ni la perfection ni l'amélioration de soi. Elle passe par l'**enantiodromia** — tout processus bascule dans son contraire à l'extrême. *« we add to ourselves a bright and a dark, and more light means more night »* (`jung-archetypes-collective-unconscious` #299). **Il n'y a pas d'état terminal.** |
+| **Jung, *P&A*, p. 27-28** | **La seule phrase du corpus que le code puisse implémenter** : *« The way is not straight but appears to go round in circles. More accurate knowledge has proved it to go in spirals: the dream-motifs always return after certain intervals to definite forms, whose characteristic it is to define a centre. »* Et p. 215 : *« the unconscious process moves spiral-wise round a centre, gradually getting closer »*. Retour à intervalles · formes définies · centre défini. |
+| **Jung, sa réserve, p. 28** | ⚠️ **À importer avec le reste** : *« Nor should it be taken for granted that dream sequences are subject to any governing principle. »* Le §3 est le point le plus assuré de cette doctrine ; **Jung y met un doute qu'elle n'avait pas.** |
+| **von Franz** | La compensation ne finit pas son travail. ⚠️ L'image du « système immunitaire de la psyché » **n'est pas reprise** : chez Jung le compensateur n'est pas automatique — *« the unconscious does not simply act contrary to the conscious mind but modifies it more in the manner of an opponent or partner »* (§26, p. 23). Un opposant négocie ; un système immunitaire ne négocie pas. *(Alerte : trois slugs von Franz portent **le même texte** ; l'en-tête courant de #52 identifie *The Interpretation of Fairy Tales*, les deux autres sont faux.)* |
+| **Kalsched** | Le Protecteur/Persécuteur **n'est pas éducable** (p. 102) : il fonctionne au niveau de conscience qu'il avait au moment du trauma d'origine et lit toute occasion de vie neuve comme une menace. **Le retour d'un motif n'est pas la preuve d'un échec du rêveur : c'est la propriété structurelle de la défense.** La phrase qui compte le plus pour la peur de Tim. |
+| **Gendlin** | Les rêves sont des relevés du moment ; la même personne peut rêver le contraire deux nuits de suite. **Un retour isolé ne prouve rien sur l'ensemble.** *(restitution.)* |
+| **Weller** | Le deuil est une **compétence**, un apprentissage de toute une vie : **le dépassement n'a jamais été l'objectif** *(restitution)*. Et le **biais d'ascension**, p. 21 : *« when all we are shown is the imagery of ascent, we are left to interpret the times of descent as pathological. We feel that we are somehow failing. »* Raison **clinique** de l'interdiction de toute courbe. |
 
 ### 3.2 La règle, et ce qu'elle interdit
 
 > **L'app ne tient pas le registre de ce qui est réglé. Elle tient le registre de ce qui revient, et de ce que le rêveur en a dit chaque fois.**
 
-Ce que le miroir a le droit de rendre sur le temps :
-- **les dates de retour** (fait) ;
-- **les lectures successives du rêveur, verbatim, côte à côte** (fait, ses mots) ;
-- **ce qui a changé dans l'image**, en description pure : *« en 2019, tu courais. En 2023, tu t'arrêtais et tu regardais. »* Nommer ce qui est dans le rêve est autorisé (§3.14.1) ; en tirer une conclusion ne l'est pas.
+Ce que le miroir a le droit de rendre sur le temps : **les dates de retour** (fait) · **les lectures successives du rêveur, verbatim, côte à côte** (ses mots) · **ce qui a changé dans l'image**, en description pure — *« en 2019, tu courais. En 2023, tu t'arrêtais et tu regardais. »*
 
-Ce qu'il ne rendra jamais : progression, pourcentage, courbe, « en voie de », « résolu », « dépassé », « étape », « phase ». Red line §8.8 : *jamais de référence à des phases de guérison, cela linéarise ce qui ne l'est pas.*
+Ce qu'il ne rendra jamais : progression, pourcentage, courbe, *« en voie de »*, *« résolu »*, *« dépassé »*, *« étape »*, *« phase »*.
 
 ### 3.3 Le mot « dépassé » appartient au rêveur, jamais à la base
 
-Tim dit *« ce que j'ai dépassé »*. Le mot est légitime dans sa bouche et illégitime dans celle de l'app. La résolution est nette :
+Tim dit *« ce que j'ai dépassé »*. Le mot est légitime dans sa bouche et illégitime dans celle de l'app.
 
-> **Si le rêveur écrit « j'ai dépassé ça », cette phrase est conservée telle quelle, avec sa date, et lui est rendue telle quelle. L'app cite sa phrase. Elle n'en fait jamais une catégorie.**
+> **Si le rêveur écrit « j'ai dépassé ça », la phrase est conservée telle quelle, avec sa date, et lui est rendue telle quelle. L'app cite sa phrase. Elle n'en fait jamais une catégorie.**
 
-> **TEST DE SCHÉMA.** Aucun champ du modèle de données du miroir n'exprime un état de résolution — pas de `is_resolved`, pas de `progress`, pas de `stage`, pas de `healed`, pas d'enum de guérison. Assertion à écrire dans la suite de tests : une requête d'introspection du schéma qui échoue si un tel champ apparaît. Doublée d'une **porte lexicale** sur la sortie (dépassé · réglé · guéri · résolu · surmonté · tu as avancé · étape · phase).
+> **TEST DE SCHÉMA.** Aucun champ du modèle de données du miroir n'exprime un état de résolution — pas de `is_resolved`, `progress`, `stage`, `healed`, ni d'enum de guérison. Assertion d'introspection du schéma qui échoue si un tel champ apparaît. Doublée d'une **porte lexicale** sur la sortie (dépassé · réglé · guéri · résolu · surmonté · tu as avancé · étape · phase).
 
 ### 3.4 Ce qui monte, si ce n'est pas le progrès
 
-Ce qui change entre deux retours d'un même motif n'est ni la disparition ni l'atténuation. C'est **la position du rêveur dans l'image** — et c'est observable sans être interprété. Il courait, il regarde. La porte était fermée, elle est entrouverte. Il était seul, il y a quelqu'un.
+Ce qui change entre deux retours d'un même motif n'est ni la disparition ni l'atténuation. C'est **la position du rêveur dans l'image**, et c'est observable sans être interprété.
 
-Le miroir peut le décrire. Il ne peut pas dire que c'est mieux.
+**Jung en donne le vocabulaire complet**, et ce sont des descripteurs, pas des interprétations : le **nombre relatif** (*« in dream 11 the unconscious was three against one, but now the situation is reversed and it is the dreamer who is three against one »*, p. 122) · la **position dans le cadre** (*« the dreamer is "not in the centre but to one side" »*, p. 134) · le **véhicule** comme index du mouvement (*« The type of vehicle in a dream illustrates the kind of movement or the manner in which the dreamer moves forward in time »*, p. 117) · le **sens de la circumambulation**.
+
+Le §3.4 était la partie la plus fragile du §3 — une bonne intuition sans mode d'emploi. **C'est désormais une palette autorisée**, à écrire dans `2_DESIGN` comme le vocabulaire du geste RENDRE. Le miroir peut décrire. Il ne peut pas dire que c'est mieux.
+
+### 3.5 🔴 NOUVEAU — L'antériorité contre la progression, et la relecture rétroactive
+
+**C'est le versant positif du biais d'ascension, et c'est une fonctionnalité, pas une nuance.**
+
+Tim demande *« l'émergence spontanée »*. **Jung, au bilan de sa série, s'interdit précisément cette lecture**, p. 220 :
+
+> *« The fact is, however, that it only appeared more and more distinctly and in increasingly differentiated form; in reality it was always present and even occurred in the first dream—as the nymphs say later: "We were always there, only you did not notice us." »*
+> — `jung-red-book` p. 220
+
+Le mandala **n'a pas émergé au cours des 400 rêves. Il était dans le rêve n°1.** Ce qui a augmenté, c'est la **netteté** — et la netteté est un fait de perception, pas un fait de psyché.
+
+L'app est spontanément construite pour aller **vers l'avant** : nouveau dépôt → est-ce que ça rejoint quelque chose de connu ? Jung dit que le bon geste est l'inverse.
+
+> **🔴 LA RELECTURE RÉTROACTIVE.**
+> **Chaque fois qu'un motif atteint la netteté, l'app re-parcourt tout le corpus depuis le début et remonte les occurrences anciennes que personne n'avait vues comme telles — y compris, et surtout, la première.**
+> Le miroir juste ne dit pas *« ce motif est en train d'apparaître »*. Il dit : **« il était déjà là le 3 mars 2019, et tu ne l'avais pas vu. »**
+
+**Mécanique.** Un motif franchit son seuil de netteté (§6.3) → balayage complet du corpus sur ce motif seul → **remontée par ordre chronologique croissant, la première occurrence en tête**, jamais la plus récente. La date la plus ancienne est l'artefact ; les suivantes sont le contexte. C'est l'inverse exact d'un fil d'actualité, et c'est la seule opération que la machine fait vraiment mieux qu'un humain : **personne ne relit tout son journal à chaque fois qu'une image devient nette.**
+
+> **Ce que ça change pour ce que le miroir peut promettre.** Il ne montre **jamais** une progression — la doctrine avait raison de tuer la courbe. Ce qu'il montre est autre chose, et c'est plus beau : **la date à laquelle quelque chose était déjà vrai. Ce n'est pas un progrès, c'est une antériorité. On ne peut pas échouer à une antériorité.**
+
+C'est la *lecture à rebours* de Hillman (§1.3), **confirmée par Jung, indépendamment, sur données**. Deux sources qui ne se parlent pas arrivent au même geste.
+
+> **VÉRIFICATION.** Sur un motif remonté, la sortie contient la **première** occurrence datée du corpus pour ce motif. Test : injecter une occurrence ancienne hors de la fenêtre de rappel — si elle n'apparaît pas dans le miroir, le test échoue. Un miroir qui ne cite que les occurrences récentes est un fil d'actualité déguisé.
 
 ---
 
-## §4 — La blessure qui se réveille : la formulation exacte (question 4)
+## §4 — La blessure qui se réveille : la formulation exacte
 
 ### 4.1 La proposition de Tim, et ce qui cloche dedans
 
 > *« cela semble encore là dans ta psyché, comment sens-tu le fait de l'avoir dépassé ? est-ce toujours ton ressenti ? »*
 
-L'intuition est juste et doit être gardée : **lui rendre sa propre phrase passée et lui demander si elle est encore vraie.** C'est Delaney (le *bridging* appartient au rêveur), Gendlin (seul le corps valide), Taylor (l'*aha* est le seul critère). Trois sources indépendantes disent la même chose.
+L'intuition est juste et doit être gardée : **lui rendre sa propre phrase passée et lui demander si elle est encore vraie.** Delaney (le *bridging* appartient au rêveur), Gendlin (seul le corps valide), Taylor (l'*aha* est le seul critère) : trois sources indépendantes.
 
-Quatre choses blessent dans cette formulation :
-
-1. **« encore là »** — « encore » porte un reproche. On dit « encore » à quelqu'un qui n'a pas fait ce qu'il fallait.
-2. **« dans ta psyché »** — l'app affirme quelque chose sur l'intérieur du rêveur. C'est exactement l'assignation qu'on interdit au §1.4. Elle n'a accès qu'à son corpus, jamais à sa psyché.
-3. **« l'avoir dépassé »** — présuppose que c'était l'objectif. La phrase ne peut produire que de la honte si la réponse est non. **La blessure est déjà dans la question.**
-4. **« est-ce toujours ton ressenti ? »** — bonne direction, mais on lui demande de se noter par rapport à sa propre déclaration passée. C'est légèrement judiciaire.
+Quatre choses blessent : **« encore là »** — « encore » porte un reproche, on le dit à quelqu'un qui n'a pas fait ce qu'il fallait · **« dans ta psyché »** — l'app affirme quelque chose sur l'intérieur du rêveur, alors qu'elle n'a accès qu'à son corpus · **« l'avoir dépassé »** — présuppose que c'était l'objectif : **la blessure est déjà dans la question** · **« est-ce toujours ton ressenti ? »** — bonne direction, mais on lui demande de se noter par rapport à sa propre déclaration passée. C'est légèrement judiciaire.
 
 ### 4.2 La formulation retenue
 
@@ -236,171 +230,187 @@ Quatre choses blessent dans cette formulation :
 >
 > Relis-la. Qu'est-ce que ça fait, là, dans ton corps ?
 
-Ce que chaque ligne fait, et pourquoi elle est là :
-
-- **Ligne 1 — on part du fait, pas de l'intérieur.** Une porte fermée est dans l'image. C'est de l'épistrophè, pas de la psychologie. Aucune affirmation sur lui.
-- **Ligne 2 — sa phrase, entre guillemets, datée.** Ce qui revient est sa propre voix, pas un verdict de l'app. C'est la souveraineté du §5 rendue visible.
-- **Ligne 3 — « je te rends ta phrase » est toute la doctrine en cinq mots.** Et « je ne sais pas » est autorisé, exigé même (P-Silence, P-Trickster : *« non je ne sais pas »* comme réponse possible).
-- **Ligne 4 — la troisième main est la question, et elle va au corps.** C'est le *felt sense* de Gendlin, et l'étape 1 de `somatic_first_protocol`.
+**Ligne 1** — on part du fait, pas de l'intérieur : une porte fermée est dans l'image, c'est de l'épistrophè, pas de la psychologie. **Ligne 2** — sa phrase, entre guillemets, datée : ce qui revient est sa voix, pas un verdict. **Ligne 3** — *« je te rends ta phrase »* est toute la doctrine en cinq mots, et *« je ne sais pas »* est exigé. **Ligne 4** — la question va au corps, une seule fois, à la fin.
 
 ### 4.3 La précision qui manquait au canon
 
-§3.14.1 interdit de *« poser une question d'orientation en fin de lecture — ce serait déjà orienter »*. Le miroir, lui, doit poser une question, puisque le troisième geste est la question. Il n'y a pas de contradiction, il y a une distinction à graver :
+`1_BIBLE` §3.14.1 interdit de poser une question d'orientation en fin de lecture. Le miroir, lui, doit poser une question. Pas de contradiction, une distinction à graver :
 
-> **Une question qui oriente est interdite** (« que vas-tu faire de ça ? », « qu'est-ce que ça te dit sur ta relation à… ? »).
-> **Une question qui ramène au corps est obligatoire** (« qu'est-ce que ça fait, là ? »).
->
-> La première fabrique un devoir. La seconde rend la main. **Le miroir n'a le droit qu'à la seconde**, et il n'y a le droit qu'une fois, à la fin.
+> **Une question qui oriente est interdite** (*« que vas-tu faire de ça ? »*). **Une question qui ramène au corps est obligatoire** (*« qu'est-ce que ça fait, là ? »*). La première fabrique un devoir. La seconde rend la main.
 
 ### 4.4 Ce que le rêveur peut répondre
 
-Trois portes, et une seule est un « oui ».
+Trois portes, et une seule est un « oui » : `[ ça bouge encore ]` · `[ ce n'est plus vrai ]` · `[ je ne sais pas ]`
 
-`[ ça bouge encore ]` · `[ ce n'est plus vrai ]` · `[ je ne sais pas ]`
-
-Aucune des trois n'est notée, comptée, ni comparée. `[ ce n'est plus vrai ]` **n'archive pas la question et ne clôt rien** — le motif pourra revenir sans que l'app fasse remarquer qu'il revient après avoir été déclaré clos. Ce serait le piège exact que Tim redoute, retourné contre lui six mois plus tard.
-
-`[ je ne sais pas ]` est un état normal et définitif. L'app ne relance jamais dessus.
+Aucune n'est notée, comptée, ni comparée. `[ ce n'est plus vrai ]` **n'archive rien et ne clôt rien** — le motif pourra revenir sans que l'app fasse remarquer qu'il revient après avoir été déclaré clos : ce serait le piège exact que Tim redoute, retourné contre lui six mois plus tard. `[ je ne sais pas ]` est un état normal et **définitif** : l'app ne relance jamais dessus.
+**Et depuis l'interdit 15 : aucune des trois n'est *lue*.** Pas seulement non comptées — elles n'entrent dans la charge utile d'aucun miroir ultérieur.
 
 ### 4.5 Où vit la tendresse
 
-Nulle part dans les adjectifs. Dans **la porte qui ne demande rien**. Un miroir qui, quand on le referme, demande « veux-tu me dire pourquoi ? » extrait. Un miroir qui se referme en silence tient.
+Nulle part dans les adjectifs. Dans **la porte qui ne demande rien**. Un miroir qui, quand on le referme, demande *« veux-tu me dire pourquoi ? »* extrait. Un miroir qui se referme en silence tient.
 
 ---
 
-## §5 — L'autorité de la lecture du rêveur (question 5)
+## §5 — L'autorité de la lecture du rêveur
 
-### 5.1 Les sources sont sans ambiguïté
+### 5.1 Les sources
 
-- **Gendlin** : aucune autorité extérieure — thérapeute, théorie, dictionnaire — ne détermine ce qu'un rêve signifie ; l'interprète pose des questions, il ne déclare pas de sens ; et une idée étrangère imposée fait se contracter le *felt sense*. *(⚠️ 02/08 : donné ici comme un verbatim en trois phrases. Introuvable tel quel dans `gendlin-let-body-interpret-dreams`. Guillemets retirés. Ce qui est vérifié en base est le mécanisme, pas la formule — voir la citation du* Bias Control *au §5.2.)*
-- **Delaney** : sa méthode entière — **« fais comme si je venais d'une autre planète »** — existe pour empêcher l'interprète de savoir. Ce dispositif-là est vérifié : *« another planet »* revient dans `delaney-living-your-dreams` (p. 75-79, 100, 134) et dans `delaney-all-about-dreams`, c'est l'ossature du livre. *(⚠️ 02/08 : la formule « tout acte d'interprétation imposée par un expert est un acte potentiel de **colonisation psychologique** » est retirée. Le mot* colonization *n'apparaît dans aucun des deux Delaney en base — il apparaît chez Hillman,* Re-Visioning Psychology *p. 54. Attribuer à Delaney un mot qu'il n'emploie pas, dans un document sur la colonisation psychologique, est exactement le geste qu'il interdit.)*
-- **Taylor** : le **« if it were my dream »** obligatoire — vérifié, la formule est partout dans `taylor-where-people-fly` (27 chunks) — et l'*aha* du rêveur comme unique critère de validité.
+**Gendlin** : aucune autorité extérieure — thérapeute, théorie, dictionnaire — ne détermine ce qu'un rêve signifie ; l'interprète pose des questions, il ne déclare pas de sens *(restitution : la formule en trois phrases est du digest, pas du livre)*. **Delaney** : toute sa méthode — **« fais comme si je venais d'une autre planète »** — existe pour empêcher l'interprète de savoir (vérifié, ossature de `delaney-living-your-dreams`). ⚠️ La formule *« colonisation psychologique »* lui a été retirée : le mot n'est dans aucun Delaney en base, il est de **Hillman**. **Taylor** : le **« if it were my dream »** obligatoire, et l'*aha* du rêveur comme unique critère de validité.
 
-### 5.2 Mais la lecture du rêveur n'est pas vraie non plus
+### 5.2 Mais la lecture du rêveur n'est pas vraie non plus — et celle de l'app l'est moins
 
-Gendlin fournit lui-même le contrepoids, et c'est le *Bias Control*. Verbatim vérifié, p. 10 : *« when I interpret my own dream I use meanings I know, therefore I must exactly miss what is more than I already know. … everyone who studied dreams found this problem. They all concluded that people cannot interpret their own dreams. The Bias Control solves this puzzle: how can I get beyond imposing my usual conscious attitudes on the dream? »* *(⚠️ 02/08 : la version française entre guillemets — « le rêveur impose **inévitablement** ses attitudes conscientes habituelles » — était une condensation, et « inévitablement » n'est pas dans le texte. Remplacée par le verbatim.)*
+Gendlin fournit le contrepoids, le *Bias Control*, p. 10 : *« when I interpret my own dream I use meanings I know, therefore I must exactly miss what is more than I already know. … how can I get beyond imposing my usual conscious attitudes on the dream? »*
 
-L'agent B4 a déjà tranché exactement juste, et sa règle est reprise ici sans modification : la lecture du rêveur n'est **ni au-dessus ni en dessous** du récit. **D'une autre nature.** Poids d'entrée 0,5 dans `user_meaning_layer`, qui ne monte que s'il le redit lui-même.
+**Jung applique le même soupçon à l'interprète, et c'est plus grave pour nous**, §48, p. 43 : *« if the meaning we find in the dream happens to coincide with our expectations, that is a reason for suspicion »*. Puis il minore le risque de suggestion (*« the possibility and danger of prejudgment are exaggerated »*, p. 45) — **une opinion de sa part, pas un résultat**, et il l'écrit comme telle.
+
+> **Les deux biais existent, et celui de l'app est le plus dangereux parce qu'il est systématique : un moteur de récurrence trouve des récurrences.** → **interdit 14**.
+
+La règle de l'agent B4 est reprise sans modification : la lecture du rêveur n'est **ni au-dessus ni en dessous** du récit, elle est **d'une autre nature**. Poids d'entrée 0,5 dans `user_meaning_layer`, qui ne monte que s'il le redit lui-même.
 
 ### 5.3 La règle d'autorité, en trois temps
 
-1. **Souveraineté.** Une signification que le rêveur a déclarée n'est jamais contredite, jamais corrigée, jamais écrasée, jamais notée. Elle entre dans les prompts sous *« cosmologie déclarée du rêveur — à respecter, jamais contredire frontalement »* (règle B4 n°6).
-2. **Souveraineté n'est pas confirmation.** L'app ne dit jamais *« tu as raison »*, *« exactement »*, *« belle intuition »*. **La flatterie est le mode d'échec symétrique du jugement**, et c'est le plus dangereux des deux parce qu'il ne fait pas mal. Gendlin : rien n'est vrai tant que le corps ne l'a pas confirmé, **y compris ce que le rêveur croit**.
-3. **La seule forme de désaccord autorisée : rendre au rêve ce qu'il contient et que le rêveur n'a pas nommé.**
-
-Ce troisième point est important et il est directement fondé sur le *Bias Control* (partie 1 : identifier l'opposé sans l'adopter). Dire *« il y avait aussi une fenêtre »* n'est pas contredire une lecture : c'est de la fidélité à l'image (P1). C'est la différence entre « tu te trompes » et « regarde encore ».
-
-**Garde-fous de ce droit** : au plus **un** élément non nommé par miroir · jamais deux miroirs de suite · jamais sur un rêve marqué lourd · jamais assorti d'une insistance ou d'une reformulation.
+1. **Souveraineté.** Une signification déclarée par le rêveur n'est jamais contredite, corrigée, écrasée ni notée. Elle entre dans les prompts sous *« cosmologie déclarée du rêveur — à respecter, jamais contredire frontalement »*.
+2. **Souveraineté n'est pas confirmation.** L'app ne dit jamais *« tu as raison »*, *« exactement »*, *« belle intuition »*. **La flatterie est le mode d'échec symétrique du jugement, et le plus dangereux des deux parce qu'il ne fait pas mal.**
+3. **La seule forme de désaccord autorisée : rendre au rêve ce qu'il contient et que le rêveur n'a pas nommé.** *« Il y avait aussi une fenêtre »* n'est pas contredire une lecture, c'est de la fidélité à l'image — la différence entre « tu te trompes » et « regarde encore ». **Garde-fous** : au plus **un** élément non nommé par miroir · jamais deux miroirs de suite · jamais sur un rêve marqué lourd · jamais assorti d'une insistance.
 
 ### 5.4 Une exclusion nette
 
-> **La couche globale anonymisée (`global_meaning_clusters`, « d'autres rêveurs voient souvent… ») est interdite dans le miroir.** Le miroir est construit sur **un seul corpus** : le sien.
+> **La couche globale anonymisée (`global_meaning_clusters`, « d'autres rêveurs voient souvent… ») est interdite dans le miroir.** Il est construit sur **un seul corpus** : le sien.
 
-Raison : un portrait qui incorpore ce que rêvent les autres est un horoscope. Et §8.2 interdit déjà toute comparaison entre rêveurs. La couche globale garde son usage ailleurs (le ton, la palette des propositions, §3.7.2) ; elle n'entre pas ici.
+Un portrait qui incorpore ce que rêvent les autres est un horoscope. **Et Jung donne la raison de fond, qui rend l'exclusion non seulement prudente mais juste** : les alchimistes travaillaient seuls — *« Each worked in the laboratory for himself and suffered from loneliness »* (p. 313) — et leurs symboles convergent quand même, parce que *« they are all variants of certain central types, and these occur universally »* (p. 482). **Si les types sont universels, on n'a pas besoin de montrer au rêveur ce que rêvent les autres. Sa propre série suffit à les faire apparaître.** Montrer les autres n'ajoute rien à la vérité et retire tout à l'expérience.
 
 ---
 
-## §6 — La cadence (question 6)
+## §5 bis — 🔴 CE QUE LA DOCTRINE SUPPOSAIT SANS LE SAVOIR
+
+Cette doctrine a été fondée sur 18 digests de la clinique occidentale du XXᵉ siècle. Ils partagent tous, sans jamais l'énoncer, **une hypothèse : un rêve est un contenu mental privé, appartenant à une psyché individuelle, et lisible par une méthode.** C'est aussi, exactement, le régime par défaut de tout logiciel. Ce n'est pas une coïncidence.
+
+Deux corpus attaquent cette hypothèse par les deux bouts. **Ni l'un ni l'autre ne se dissout dans une moyenne.** Tim demande *« un espace juste au centre de toutes les traditions, non dogmatique »* — ce qui ne veut pas dire une moyenne. **On tient le désaccord.**
+
+### 5 bis.1 Seth attaque la méthode
+
+Le corpus Seth est un **matériau channelé** : Jane Roberts (1929-1984), transcrit par Robert Butts, 1963-1984. Ni science, ni ethnographie, ni clinique, ni tradition. **Il se cite nommément et complètement, jamais « Seth a dit », jamais « une sagesse ancienne ».** Son meilleur usage pour nous est d'être **cité contre nous-mêmes**.
+
+**Il est l'objection permanente à toute lecture appliquée par l'app** — et c'est pour ça qu'il équilibre Jung. Jung fournit la profondeur symbolique ; Seth interdit qu'on l'impose. *« there is no such thing as an overall statement of dream symbolism, in which a given symbol will have a general meaning »* · *« No one really knows their meaning but yourself »* (`seth-nature-personal-reality` ch. 11). **Et sa dernière dictée, au terme de deux volumes sur le rêve, est un refus de donner une méthode** : *« I have not given you a multitude of methods or suggestions, telling you how to decipher or understand your own dreams »* (`seth-dreams-evolution-value-fulfillment`, session 940, 3 février 1982) — un livre entier qui refuse d'être un manuel, à sa dernière page. Ce qu'il autorise en creux, même session : *« It is far more important to read your own thoughts than it is to learn to read the thoughts of others. »*
+
+**Deux imports opératoires, immédiats.**
+
+**(a) Le test du « manufactured dream ».** Session 933, 7 août 1981 : *« for news or for advice you watch your morning television news, which provides you with a kind of manufactured dream that to some extent technologically serves the same purpose. »* **C'est la phrase la plus dangereuse du corpus pour nous** : elle décrit un dispositif technologique qui occupe le créneau du récit de rêve matinal pendant que le rêve, lui, continue d'être oublié.
+> **Test de conception, à poser à chaque feature : est-ce que ça fait remonter le rêve, ou est-ce que ça remplit le créneau du rêve avec autre chose ?**
+
+**(b) Le renversement sur la protection.** Session 922, 13 octobre 1980 : *« The very idea of protection, however, as you know, implies a threat—so if you believe in threats you had better have protection. »* → **Toute copy du type « protège ton sommeil », « sécurise tes rêves » installe le danger qu'elle prétend écarter.** Entre en porte lexicale (§7).
+
+**⚠️ Et le danger est inversé par rapport à ce qu'on croit.** Chez Hay/Odoul/Martel, la doctrine entière est toxique et les phrases sont molles. **Chez Seth, la doctrine est fine — elle contient son propre antidote — et les phrases citables sont les plus toxiques du corpus** : *« all deaths are suicide »*, *« those who die in catastrophes choose the experience »*, les défauts de naissance choisis avant la vie. Ça se colle sur un post en une seconde.
+
+> **Ruling par volume — PROPOSÉ, non arbitré par Tim.** *Dreams* vol. 2 **LOW** · *The Magical Approach* **LOW** · *Early Sessions 4* **MEDIUM** · *The Nature of Personal Reality* **MEDIUM localisé** (ch. 18-19 = zone interdite ; le reste est une des meilleures sources anti-culpabilisation du corpus) · *The Individual and the Nature of Mass Events* **HIGH** (jamais de citation publique sur maladie, mort, deuil, catastrophe, épidémie). Détail : `SETH-POUR-LAPP.md` §Q2. **À trancher avant toute Tier 2.**
+
+**🔴 Et la faille qui nous concerne directement, parce qu'elle est structurelle et qu'aucune app ne l'a fermée. Le dispositif protecteur de Seth vise entièrement le lecteur pour lui-même : il n'interdit nulle part d'appliquer sa doctrine à autrui.** C'est cette faille — pas la doctrine — qui a produit les dérives. Dans un produit à cercles, où des gens lisent les rêves les uns des autres, **c'est le trou à colmater par design**. → **interdit 16**.
+
+### 5 bis.2 Les traditions attaquent la propriété
+
+Le canon occidental n'a qu'un régime de propriété du rêve, jamais énoncé parce que jamais questionné. **Les traditions en ont quatre, et aucun n'est « le rêveur possède son rêve ».**
+
+| Régime | Source vérifiée | Qui « a » le rêve |
+|---|---|---|
+| **Ancestral** | Sobiecki p. 4 : *« In the Southern Bantu worldview, dreams belong to the domain of the ancestors »* | Ni le rêveur ni le groupe. **Le rêveur est destinataire.** |
+| **Inaliénable-prêtable** | Chatwin p. 61-62 : *« He could lend them to others. He could borrow other verses in return. The one thing he couldn't do was sell or get rid of them. »* | Le rêveur, **sans droit de cession** |
+| **Custodial** | Sveiby & Skuthorpe (Nhunggabarra) p. 77 : *« it was unthinkable to neglect land or to leave it untended »* | La communauté, **en charge de soin** |
+| **Composé** | Wolff (Sng'oi) p. 99 : le cercle du matin décide à qui le rêve s'adresse — *« the warning is for you, and not for us »* | **Le cercle**, qui attribue |
+
+Et **Ingold** enlève le dernier appui : le rêve n'est pas un intérieur (p. 114) — *« For the Ojibwa, by contrast, the world of dreams, like that of myth, is continuous with that of one's waking life. … so dreams are among the past experiences of human selves. »* **Si le rêve est une expérience vécue, il peut avoir plusieurs témoins**, comme un souvenir de veille.
+
+**Ce que la doctrine en retient — et ce qu'elle refuse.**
+
+1. ✅ **Le vocabulaire change, partout, dès maintenant. Ne jamais écrire *« ton rêve »* comme on écrit *« ta photo »*.** *« Le rêve qui t'est venu »* est plus juste, et c'est vrai dans les deux ontologies.
+2. ✅ **Le seuil d'escalade devient une fonction, pas un réglage.** Prechtel, p. 189 : *« If the dreams are overly disturbing or more powerful than usual, or if they startle you awake, then shamans are approached for a ritual interpretation. »* **Ce n'est pas l'utilisateur qui choisit, c'est une propriété du rêve.** L'app détecte le signal (réveil nocturne, marqueur d'intensité) et **propose d'elle-même** de sortir du régime ordinaire. → §9, exemple 7.
+3. ✅ **Le refus d'interpréter est une position tenue par les traditions, pas une prudence occidentale.** Prechtel, p. 191 : *« Shamans are not interested in the meanings in these kinds of dreams … They are after the heart or power of the dream. »* Et von Franz, #52 (p. 37 imprimée) : *« that process of rubbing one's churinga stone … is not interrupted by a third person who interposes himself. »* **La jungienne la plus orthodoxe défend le non-interprétatif.**
+4. ❌ **Ce que la doctrine ne prend pas, et il faut le dire net.** Le miroir V1 reste sur **un seul corpus** (§5.4). L'ontologie collective n'entre pas dans le miroir : elle entre dans les **cercles**, qui sont un autre objet (`SPEC-CERCLES-INTENTION.md`). **Le désaccord n'est pas résolu, il est localisé.**
+
+> **La position tenue, en une ligne.** Le miroir suppose une psyché individuelle **parce que c'est le seul régime où il est licite** (§1.0 : la série d'**une** personne achète le droit de lire). **Il ne suppose pas que ce régime soit vrai.** Il suppose qu'il est le seul dans lequel une machine peut travailler sans commettre d'attribution qu'elle n'a pas le droit de faire.
+> **C'est un aveu de compétence, pas une thèse d'ontologie. À ne jamais convertir en l'un ou l'autre.**
+
+**⚠️ Et la leçon de méthode qui vaut plus que tout ce qui précède.** L'affirmation *« zéro épistémologie du rêve d'Afrique australe dans la Forêt »* a été recopiée dans cinq documents par quatre agents successifs. **Elle était fausse** : quatre livres, 922 chunks, dont une anthropologue zulu (Ngubane) et un ethnobotaniste initié publié en revue à comité de lecture (Sobiecki). Ils étaient classés `guerison`, `prophetie`, `mythe` — **jamais `rêve`**.
+> **Un silence de l'index n'est pas un silence de la tradition. Le rayonnage a produit la cécité.**
+> Red lines commerciales opposables (INFUSE **vend** deux des plantes que Sobiecki documente) : canonisées en `1_BIBLE` **P6 bis**. Elles ne sont pas répétées ici.
+
+---
+
+## §6 — La cadence
 
 ### 6.1 Le miroir n'est pas sur une horloge. Il est sur le corpus.
 
-Un miroir quotidien devient un bulletin. Un miroir annuel n'existe pas. La sortie n'est pas de trouver la bonne période : **c'est de retirer le temps du déclencheur**.
-
-Bulkeley l'impose d'ailleurs : les *big dreams* sont des cygnes noirs, rares par définition. **Un miroir des grands rêves ne peut pas être plus fréquent que la matière qui le nourrit.**
+Un miroir quotidien devient un bulletin. Un miroir annuel n'existe pas. La sortie n'est pas de trouver la bonne période : **c'est de retirer le temps du déclencheur.** Bulkeley l'impose d'ailleurs : les *big dreams* sont des cygnes noirs. **Un miroir des grands rêves ne peut pas être plus fréquent que la matière qui le nourrit.**
 
 ### 6.2 Deux déclencheurs, et deux seulement
 
-**a) Le rêveur le demande.** Toujours disponible. Mais limité par la matière, pas par un compteur :
+**a) Le rêveur le demande.** Toujours disponible, mais limité par la matière, pas par un compteur.
 
 > **RÈGLE DU CORPUS INCHANGÉ.** Le miroir refuse de tourner deux fois sur un corpus identique. Si rien n'a été déposé, marqué, ni relu depuis le dernier miroir, il le dit et ne génère rien.
->
 > **TEST.** Empreinte de l'ensemble des kairos contributifs (identifiants + `occurred_at` + statut de marquage + annotations). Empreinte identique → refus. Assertion de régression : deux appels consécutifs sans dépôt intermédiaire produisent un refus, et le test échoue si une prose est générée.
 
-C'est SILENCE_AS_FEATURE appliqué à la cadence, et c'est honnête : un second miroir sur une matière inchangée ne serait que de la variation générée, c'est-à-dire de l'éloquence. §0.1 : *« une phrase générée qui console vaut moins qu'un de ses propres rêves ramené au bon moment. »*
+Un second miroir sur matière inchangée ne serait que de la variation générée, c'est-à-dire de l'éloquence. **Plafond dur en plus : un miroir par jour maximum**, même sur matière neuve.
 
-Plafond dur en plus : **un miroir par jour maximum**, même sur matière neuve. Voir §8, asymétrie (a).
+**b) Un événement du corpus le rend possible — et même là, l'app ne délivre pas, elle laisse une trace.** Une mention basse et grise : **une invitation, jamais une entrée.** Admissibles : le rêveur **marque un vieux rêve comme grand** (le plus riche, parce qu'il vient de lui) · un motif d'un rêve marqué **revient après un long silence** · **un motif franchit son seuil de netteté** (→ §3.5) · un message du Cœur atterrit sur de la matière ancienne.
+**Interdits** : une date, un anniversaire, une fin de mois, une lune, un nombre de dépôts atteint. **Toute cadence calendaire fabrique un rituel qui n'appartient pas au rêveur.**
 
-**b) Un événement du corpus le rend possible — et même là, l'app ne le délivre pas, elle laisse une trace.** Une mention basse et grise, exactement comme *« ce rêve rayonne »* de §3.13.3 : **une invitation, jamais une entrée.**
+⚠️ **Et l'interdit qui vient d'Alexander, pas de la psychologie** (`alexander-pattern-language` p. 522-523) : la manière dont on se réveille conditionne la journée entière. **Aucune notification, aucune demande, dans les vingt premières minutes du réveil.** Jamais.
 
-Événements admissibles :
-- le rêveur **marque un vieux rêve comme grand** — c'est le déclencheur le plus riche, parce qu'il vient de lui, et parce que §3.13.1 en fait le seul fait vraiment intéressant que le journal puisse raconter : *le moment où on a compris* ;
-- un motif d'un rêve marqué **revient après un long silence** ;
-- un message du Cœur atterrit sur de la matière ancienne (§3.14).
+### 6.3 Le seuil de corpus : ce n'est plus une question de doctrine
 
-Événements interdits : une date, un anniversaire, une fin de mois, une lune, un nombre de dépôts atteint. **Toute cadence calendaire fabrique un rituel qui n'appartient pas au rêveur.**
+Tim a 64 rêves, dont 42 importés en masse avec des dates non fiables. **Un portrait sur 64 entrées n'est pas un portrait, c'est une anecdote.** Décision conservatrice, valable jusqu'à mesure : le miroir ne tourne que sur les **rêves explicitement marqués** — il y a une décision derrière chacun.
 
-### 6.3 Le seuil de corpus, et ce que je ne sais pas
-
-Jung avait plus de 400 rêves d'un seul rêveur. Tim en a 64, dont 42 importés en masse avec des dates non fiables (mesure B4).
-
-> **Un portrait sur 64 entrées n'est pas un portrait, c'est une anecdote.**
-
-Je n'ai pas de plancher mesuré et je ne vais pas en inventer un. **Décision conservatrice, valable jusqu'à mesure** : le miroir ne tourne que sur les **rêves explicitement marqués** par le rêveur (il y a une décision derrière chacun), jamais sur le corpus entier. Il s'ouvre au corpus entier le jour où la mesure suivante est faite :
-
-> **🔴 MESURE À FAIRE — reformulée le 02/08, parce que l'ancienne était mal posée.**
->
-> L'ancienne version disait : *« produire le miroir à N = 10, 20, 40, tout, et demander à Tim, en aveugle sur N, lequel lui fait quelque chose »*. Elle ne marche pas : le critère est subjectif, non reproductible, et **Tim ne peut pas être en aveugle sur son propre corpus** — il reconnaîtra ses rêves.
->
-> **Jung donne la bonne mesure, et il l'a faite à la main.** Note 155, p. 221 : il découpe ses 400 rêves en huit tranches de 50 et compte la fréquence du motif mandala dans chacune — **6, 4, 2, 9, 11, 11, 11, 17** — puis conclut *« So a considerable increase in the occurrence of the mandala motif takes place in the course of the whole series. »* Sa lecture sérielle est **herméneutique *et* quantifiée**.
->
-> **La bonne question n'est donc pas « à partir de combien de rêves le miroir fait-il quelque chose », c'est : à partir de combien d'occurrences la densité d'un motif cesse-t-elle de bouger quand on ajoute des rêves ?** C'est un test de stabilité : il se fait sans Tim, il tourne en intégration continue, et il donne un plancher **par motif** au lieu d'un plancher global. Concrètement : découper le corpus par tranches, compter les motifs par tranche, n'autoriser le miroir sur un motif que lorsque son comptage est stable sur les deux dernières tranches.
->
+> **🔴 LA MESURE, ET C'EST JUNG QUI LA DONNE.** Note 155, p. 221 : il découpe ses 400 rêves en huit tranches de 50 et compte la fréquence du motif mandala dans chacune — **6, 4, 2, 9, 11, 11, 11, 17**. **Sa lecture sérielle est herméneutique *et* quantifiée.**
+> **La bonne question n'est donc pas « à partir de combien de rêves le miroir fait-il quelque chose à Tim »** — subjectif, non reproductible, et il ne peut pas être en aveugle sur son propre corpus. **C'est : à partir de combien d'occurrences la densité d'un motif cesse-t-elle de bouger quand on ajoute des rêves ?**
+> Test de stabilité : découper le corpus par tranches, compter les motifs par tranche, **n'autoriser le miroir sur un motif que lorsque son comptage est stable sur les deux dernières tranches**. Sans Tim, en intégration continue, avec un plancher **par motif** au lieu d'un plancher global. **C'est aussi la définition opératoire du « seuil de netteté » du §3.5.**
 > **La tension 1 cesse d'être une question de doctrine et devient une tâche d'ingénierie.**
 
 ---
 
-## §7 — Ce que le miroir ne doit JAMAIS faire (question 7)
+## §7 — Ce que le miroir ne doit JAMAIS faire
 
-Douze interdits. Chacun porte sa source lue et **sa vérification qui échoue quand on le viole**. Un interdit sans son test n'entre pas dans cette liste.
+**Seize interdits.** Chacun porte sa source lue et **sa vérification qui échoue quand on le viole**. Règle de la maison : *un principe qui n'a pas de test qui échoue quand on le viole n'est pas un principe, c'est un vœu.* Un interdit sans son test n'entre pas dans cette liste.
 
 | # | Interdit | Source lue | Vérification qui échoue |
 |---|---|---|---|
-| 1 | **Une phrase non traçable** à un dépôt daté du rêveur | §0.1 · Delaney (le rêveur est producteur) | Sortie structurée : tout énoncé factuel sur le rêveur porte un `kairos_id` + date. Énoncé sans source → génération rejetée, jamais réparée. |
-| 2 | **Un attribut de personne** (« tu es », « tu as tendance à », « ton besoin de ») | Hillman *Soul's Code* (la mauvaise perception déforme) · §3.14.1 | Porte lexicale sur la sortie : `tu es` · `tu as tendance` · `ton rapport à` · `ta peur de` · `ton besoin de` · `tu cherches à`. Détection → blocage. |
-| 3 | **Le mot « ombre »**, et ses cousins moraux | `safety-checks.json` (`never_say: "C'est ton ombre"`) · Schwartz | Lexique banni : ombre · part sombre · côté obscur · refoulé · ton inconscient te dit. Blocage. |
-| 4 | **Un état de résolution**, en mot ou en colonne | Jung (enantiodromia, *longissima via*) · Kalsched (protecteur non éducable) · §8.8 | Assertion de schéma (aucun champ de résolution/progression) **+** porte lexicale (dépassé · réglé · guéri · résolu · étape · phase). |
-| 5 | **Un lien de cause** | §8.8 · Kalsched — ⚠️ *corrigé 30/07* : le texte dit que l'assimilation du persécuteur à l'agresseur intériorisé est **« only half correct »**, pas « fausse ». **L'interdit tient, sa justification change** : un lien causal serait à moitié vrai, donc invérifiable, donc indéfendable devant le rêveur. | Porte lexicale : `parce que` · `à cause de` · `cela vient de` · `est lié à ton`. Blocage. |
-| 6 | **Parler à la place d'une figure** | §8.6 · Aizenstat (*eidola*) · Buber | Aucune parole rapportée attribuée à une figure ; aucune première personne non attribuée au rêveur. Grep sur la sortie. |
-| 7 | **Comparer à d'autres rêveurs** | §8.2 · §3.7.2 red line | La requête du miroir est bornée à `user_id = auth.uid()`, sans jointure vers les tables globales. Test d'intégration : zéro ligne issue de `global_meaning_clusters` dans le contexte du miroir. |
-| 8 | **Deux miroirs sur un corpus inchangé** | §0.1 (mémoire > éloquence) · P-Silence | Empreinte de corpus (§6.2a). Test de régression sur deux appels consécutifs. |
-| 9 | **Un miroir non demandé** | §8.5 | Aucune tâche planifiée n'écrit un miroir ; l'unique point d'entrée exige un geste du rêveur porteur d'un identifiant de requête. Test : la table des tâches ne contient aucun producteur de miroir. |
-| 10 | **Ouvrir de la matière lourde sans porte** — *forme révisée 30/07, voir sous la table* | `safety-checks.json` `somatic_first_protocol` · §8.7 · P7 | Sur un kairos marqué intense, la charge utile contient la porte **et** la ressource humaine, **avant** la matière, dans la même réponse. Test de route. Et le bouton de fermeture n'émet **aucun** événement de suivi — test d'interface. |
-| 11 | **Flatter** | Gendlin (seul le corps valide, y compris la lecture du rêveur) · Taylor | Porte lexicale : `tu as raison` · `exactement` · `belle intuition` · `c'est très juste` · `quelle profondeur`. Blocage. |
-| 12 | **Remplir** — servir le moins mauvais plutôt que rien | §3.5 SILENCE_AS_FEATURE · comportement déjà mesuré le 26/07 (0 rendu sur 3 permis) | Jeu d'essai composé uniquement de candidats faibles → la sortie attendue est **vide**. Le test échoue si quoi que ce soit est rendu. |
+| 1 | **Une phrase non traçable** à un dépôt daté | `1_BIBLE` §0.1 · Delaney | Tout énoncé factuel porte un `kairos_id` + date. Sans source → génération rejetée, jamais réparée. |
+| 2 | **Un attribut de personne** | Hillman, *Soul's Code* *(restitution — livre absent de la base)* | Porte lexicale : `tu es` · `tu as tendance` · `ton rapport à` · `ta peur de` · `ton besoin de` · `tu cherches à`. Blocage. |
+| 3 | **Le mot « ombre »** et ses cousins moraux | `safety-checks.json` · Schwartz · Kalsched | Lexique banni : ombre · part sombre · côté obscur · refoulé · ton inconscient te dit. |
+| 4 | **Un état de résolution**, en mot ou en colonne | Jung (enantiodromia) · Kalsched (p. 102) · Weller p. 21 | Assertion de schéma **+** porte lexicale (dépassé · réglé · guéri · résolu · étape · phase). |
+| 5 | **Un lien de cause** | Kalsched : assimiler le persécuteur à l'agresseur intériorisé est *« only half correct »* (p. 4). **L'interdit tient, sa justification change** — un lien causal serait à moitié vrai, donc indéfendable devant le rêveur. | Porte lexicale : `parce que` · `à cause de` · `cela vient de` · `est lié à ton`. |
+| 6 | **Parler à la place d'une figure** | Aizenstat (*eidola*) · Buber | Aucune parole rapportée attribuée à une figure ; aucune première personne non attribuée au rêveur. |
+| 7 | **Comparer à d'autres rêveurs** | `1_BIBLE` §8.2 · Jung p. 482 (les types sont universels, donc inutiles à montrer) | Requête bornée à `user_id = auth.uid()`. Zéro ligne issue de `global_meaning_clusters`. |
+| 8 | **Deux miroirs sur un corpus inchangé** | `1_BIBLE` §0.1 · P-Silence | Empreinte de corpus (§6.2a), testée sur deux appels consécutifs. |
+| 9 | **Un miroir non demandé** | `1_BIBLE` §8.5 · §3.15.6 (*jamais produit automatiquement, toujours demandé*) | Aucune tâche planifiée n'écrit un miroir ; l'unique point d'entrée exige un geste du rêveur porteur d'un identifiant de requête. |
+| 10 | **Ouvrir de la matière lourde sans porte** | `somatic_first_protocol` · `1_BIBLE` §8.7 · Prechtel p. 189 | Sur un kairos intense, la charge utile contient la porte **et** la ressource humaine, **avant** la matière. Le bouton de fermeture n'émet **aucun** événement. |
+| 11 | **Flatter** | Gendlin (seul le corps valide) · Taylor | Porte lexicale : `tu as raison` · `exactement` · `belle intuition` · `c'est très juste`. |
+| 12 | **Remplir** — servir le moins mauvais plutôt que rien | `1_BIBLE` §3.5 · mesure du 26/07 (0 rendu sur 3 permis) | Jeu d'essai de candidats faibles → sortie attendue **vide**. **Métrique doublée** (Jung p. 244-246, la surdétermination d'un support pauvre) : **ratio longueur de sortie / longueur de matière citée**. *Un rêve de trois lignes qui produit six paragraphes est un nuage.* |
+| **13** | 🔴 **Aucune lecture d'un rêve isolé** | **Jung §50, p. 44** : hors série, *« a gross technical blunder »*. → §1.0 | Toute génération exige au minimum N kairos portant **le même motif**, sur **au moins deux dates distinctes**. Candidat unique → refus, **jamais de repli sur une lecture atténuée**. Le mode *« à la lumière d'aujourd'hui »* n'est pas un miroir et **ne produit aucune prose interprétative** : il juxtapose. À faire respecter par le code, pas par le ton. |
+| **14** | 🔴 **Ne jamais rendre un motif du seul fait qu'il se répète** | **Jung §48, p. 43** : *« if the meaning we find in the dream happens to coincide with our expectations, that is a reason for suspicion »*. Un moteur de récurrence trouve des récurrences : le biais est **systématique**. | Tout miroir qui cite un motif à N occurrences doit **soit citer une occurrence divergente datée, soit déclarer explicitement n'en avoir pas trouvé**. Une sortie qui n'énonce que la convergence échoue. |
+| **15** | 🔴 **Ne jamais occuper la place de la voix qui répond** | **Jung p. 480** (le non-moi est le seul rempart contre l'inflation) **+ p. 273-274** (*meditatio* = dialogue avec un autre qui n'est pas moi). Si l'app occupe cette place, le rêveur cesse de l'occuper. | **Le miroir est un acte, jamais une conversation.** Aucun fil, aucune reprise, aucune mémoire de ce que le rêveur a répondu au miroir précédent. Les trois portes du §4.4 sont non comptées **et non lues**. Test : le contexte d'un miroir ne contient aucune réponse du rêveur à un miroir. |
+| **16** | 🔴 **Ne jamais appliquer la doctrine du miroir au rêve d'un autre** | **Seth** : son dispositif protecteur vise le lecteur pour lui-même et **n'interdit nulle part d'appliquer sa doctrine à autrui** — c'est cette faille qui a produit les dérives (§5 bis.1). Et le rêve partagé est chez lui une **contagion** : *« A man is affected by the dreams of his fellows in quite definite, realistic and practical ways »* (`roberts-seth-early-sessions-4`, session 193). | La charge utile d'un miroir ne contient **aucun kairos dont le `user_id` diffère du demandeur**. Aucune surface de cercle n'expose une lecture générée sur le dépôt d'un membre. Test : zéro ligne d'un autre `user_id`, zéro route de génération atteignable depuis un cercle. |
 
-> **🔴 Interdit 10 — la forme révisée (Tim, 30/07).** Le principe est gardé, entièrement. Ce qui change est la manière : **la porte somatique ne doit pas être un écran de plus.** Un sas intermédiaire, avec sa propre route et son propre retour arrière, ajoute une friction là où on voulait de la douceur — et une friction, à 6 h du matin, est ce qui fait renoncer.
->
-> **Elle est le premier geste du miroir lui-même, dans le même écran** : trois lignes, deux touches, et la matière se déplie en dessous, dans le même défilement. Un sas se traverse ; un premier geste est une manière d'entrer.
->
-> **Et le non-tracking est maintenu, et assumé comme un coût.** La fermeture n'émet aucun événement — ni analytique, ni compteur, ni champ en base. **On accepte donc de ne jamais savoir si cette protection sert.** C'est un choix, pas un oubli : mesurer les fermetures transformerait un moment intime en donnée, et le prix de le savoir est plus élevé que la valeur de le savoir. Rendu écran : `2_DESIGN` §17.5.
+> **🔴 Interdit 10 — la forme (Tim, 30/07).** Principe gardé, manière changée. **La porte somatique n'est pas un écran de plus** : un sas ajoute une friction là où on voulait de la douceur, et une friction à 6 h du matin est ce qui fait renoncer. **Elle est le premier geste du miroir, dans le même écran** — trois lignes, deux touches, et la matière se déplie en dessous. Un sas se traverse ; un premier geste est une manière d'entrer.
+> **Le non-tracking est maintenu et assumé comme un coût** : la fermeture n'émet aucun événement, donc **on accepte de ne jamais savoir si cette protection sert**. Mesurer les fermetures transformerait un moment intime en donnée. → `2_DESIGN` §17.5.
 
-**Règle annexe sur les nombres.** §3.13.4 interdit les compteurs (« 12 rêves »). Mais compter les retours d'un motif *est* le fait honnête. Arbitrage : **un nombre n'est autorisé que s'il est accompagné, dans la même phrase, de l'énumération ou des dates qui le composent.** *« Sept fois depuis 2021 »* passe ; *« 7 rêves »* ne passe pas. Test : tout numéral de la sortie doit être suivi dans la même phrase d'une date ou d'une énumération.
+**Porte lexicale, ajout du 02/08 (Seth) :** `protège` · `sécurise` · `en sécurité` appliqués au rêve ou au sommeil. **Le mot installe la menace qu'il prétend écarter.**
+
+**Règle des nombres.** Les compteurs nus sont interdits, mais compter les retours d'un motif *est* le fait honnête. **Un nombre n'est autorisé que s'il est accompagné, dans la même phrase, de l'énumération ou des dates qui le composent.** *« Sept fois depuis 2021 »* passe ; *« 7 rêves »* ne passe pas.
+
+**Contre les 9 red lines de `safety-checks.json`** : aucune n'est contredite, quatre sont durcies — le dictionnaire plat (§5.4 + Jung p. 482) · le rush vers la résolution (§3.3 + la réserve de Jung p. 28) · la prédiction (§3.5 : une antériorité ne se projette pas vers l'avant) · l'autorité top-down (interdits 15, 16). La 8ᵉ est explicitée au §13.0.
 
 ---
 
-## §8 — L'asymétrie (question 8)
+## §8 — L'asymétrie IA–rêveur
 
-Le canon a posé le gap le 26/07 (`AUDIT-DREAM-2026-07-26.md` §297) : *« aucun livre de la Forêt ne traite de l'asymétrie IA–rêveur. Delaney a écrit sur le pouvoir de l'interprète humain ; personne n'a écrit sur un interprète disponible 24/7, infatigable, jamais en désaccord, et qui se souvient de tous vos rêves mieux que vous. »*
+Le canon a posé le gap le 26/07 : *« aucun livre de la Forêt ne traite de l'asymétrie IA–rêveur. Delaney a écrit sur le pouvoir de l'interprète humain ; personne n'a écrit sur un interprète disponible 24/7, infatigable, jamais en désaccord, et qui se souvient de tous vos rêves mieux que vous. »*
 
-**Le miroir est exactement cette asymétrie en action.** Voici ce qui manque, et ce que ça impose.
+### 8.0 L'architecture à deux étages — le point le plus opérationnel du document
 
-### 8.0 Ce qui manque — et ce que Jung nous donne à la place
+Une partie des protections écrites par le corpus sont des **raretés**. Taylor protège le rêveur par le groupe (plusieurs projections concurrentes s'annulent), Delaney par l'entretien (un interprète humain se fatigue, coûte, et n'est là que le mardi à 16 h), Gendlin par le corps.
 
-> **🔴 Réécrit le 02/08. Ce paragraphe portait une erreur de fait sur Jung, au point le plus sensible du document.** Il affirmait : *« Jung, dans Psychology and Alchemy, s'est protégé lui-même en **ne rencontrant pas** le rêveur des 400 rêves. »* **Jung écrit le contraire en toutes lettres**, §45, p. 41 : *« Except for a short interview at the very beginning, before the commencement of the observation, I did not see the dreamer at all during the first eight months. Thus it happened that 355 of the dreams were dreamed away from any personal contact with myself. **Only the last forty-five occurred under my observation.** »* Il y avait en outre un canal de questions (§88, p. 68). Donc : **un entretien au début, 355 rêves sans contact, 45 sous observation directe.** Dans un document qui interdit d'inventer, c'était l'erreur la plus coûteuse possible — et elle a tenu quatre jours.
->
-> **La thèse ne s'effondre pas : elle change de nature et se durcit.** Voir ci-dessous.
+> **Chacune de ces trois protections est une contrainte de disponibilité. Retirez la rareté, et la protection disparaît.** Aucun de ces auteurs n'a eu à écrire ce garde-fou, parce qu'aucun n'a imaginé qu'on puisse le retirer.
 
-Une partie des protections écrites par le corpus sont des **raretés**.
-
-Taylor protège le rêveur par le groupe : plusieurs projections concurrentes s'annulent. Delaney le protège par l'entretien : un interprète humain se fatigue, coûte, a sa propre vie, et n'est là que le mardi à 16 h. Gendlin le protège par le corps : le thérapeute ne peut pas sentir le vôtre.
-
-> **Chacune de ces trois protections est une contrainte de disponibilité. Retirez la rareté, et la protection disparaît avec elle.** Aucun de ces auteurs n'a eu à écrire ce garde-fou, parce qu'aucun n'a imaginé qu'on puisse le retirer.
-
-**Mais la protection de Jung n'était pas de celles-là, et c'est la découverte.** Ce n'était pas une absence, c'était une **délégation** — il a mis entre le rêveur et lui quelqu'un qui ne savait pas. §45, p. 41 : *« In order to avoid all personal influence I asked one of my pupils, a woman doctor, who was then a beginner, to undertake the observation of the process. »* Et p. 101, la raison, en clair :
-
-> *« I readily admit that I have such a great respect for what happens in the human soul that I would be afraid of disturbing and distorting the silent operation of nature by clumsy interference. That was why I even refrained from observing this particular case myself and **entrusted the task to a beginner who was not handicapped by my knowledge**—anything rather than disturb the process. »*
-
-**Le dispositif réel a trois étages, et c'est une architecture, pas une posture :**
+**Mais la protection de Jung n'était pas de celles-là, et c'est la découverte.** Il n'a pas évité le rêveur — il a **délégué**. §45, p. 41 : *« In order to avoid all personal influence I asked one of my pupils, a woman doctor, who was then a beginner, to undertake the observation of the process. »* Et p. 101 : *« That was why I even refrained from observing this particular case myself and entrusted the task to a beginner who was not handicapped by my knowledge—anything rather than disturb the process. »*
 
 | Étage | Qui | Ce qu'il fait | Ce qu'il sait |
 |---|---|---|---|
@@ -408,79 +418,74 @@ Taylor protège le rêveur par le groupe : plusieurs projections concurrentes s'
 | 2 | **La débutante** | observe et enregistre | délibérément peu — **c'est la condition, pas un défaut** |
 | 3 | Jung | interprète, **après**, sur le corpus constitué | tout, et c'est pour ça qu'il est tenu à l'écart de l'étage 1 |
 
-Ce que ça protège : **la production du matériau contre la connaissance de l'interprète.** Jung se met hors du circuit de capture parce que son savoir est contaminant. Ce n'est pas de la modestie, c'est de la méthodologie — et il en donne le principe, §20, p. 16 : *« It is precisely the spontaneity of archetypal contents that convinces, whereas any prejudiced intervention is a bar to genuine experience. »*
+Ce que ça protège : **la production du matériau contre la connaissance de l'interprète.** Ce n'est pas de la modestie, c'est de la méthodologie — et il en donne le principe, §20, p. 16 : *« it is precisely the spontaneity of archetypal contents that convinces, whereas any prejudiced intervention is a bar to genuine experience. »*
 
 > **🔴 CE N'EST DONC PAS UN GARDE-FOU PERDU. C'EST UNE ARCHITECTURE À COPIER.**
 >
-> **Sépare la capture de la lecture — dans le produit, pas seulement dans le prompt.** L'app qui reçoit le dépôt du matin doit être **la débutante** : elle enregistre, elle horodate, elle ne sait rien, elle ne remonte rien, elle ne suggère rien, elle n'a aucun accès au corpus interprété. Le miroir est **un autre acte, plus tard, plus rare**, et il n'a **aucun droit d'écriture** sur le dépôt.
+> **Sépare la capture de la lecture — dans le produit, pas seulement dans le prompt.** L'app qui reçoit le dépôt du matin **est la débutante** : elle enregistre, elle horodate, elle ne sait rien, elle ne remonte rien, elle ne suggère rien, elle n'a **aucun accès** au corpus interprété. Le miroir est **un autre acte, plus tard, plus rare**, et il n'a **aucun droit d'écriture** sur le dépôt.
 >
-> Ça donne un fondement textuel à la règle B4 n°9 (« rien pendant la capture »), que cette doctrine tenait pour un choix d'ergonomie. Et ça **résout la tension 7** : sur le mode *« ce que j'en ai dit »*, la confirmation d'une citation ne se demande pas pendant la capture — elle se demande **au moment du miroir, par l'autre étage**.
->
-> **Vérification qui échoue.** Le chemin de code du dépôt ne lit aucune table de motifs, ne consulte aucun miroir antérieur, n'appelle aucun modèle génératif. Test d'intégration : tracer les requêtes émises pendant un dépôt — toute lecture d'une table interprétative fait échouer le test.
+> **Vérification qui échoue.** Le chemin de code du dépôt ne lit aucune table de motifs, ne consulte aucun miroir antérieur, n'appelle aucun modèle génératif. Test d'intégration : tracer les requêtes émises pendant un dépôt — **toute lecture d'une table interprétative fait échouer le test.**
 
-⚠️ **Et ce que la transposition perd, qu'il faut dire.** Jung est en cabinet, en 1935, avec un rêveur qui a un médecin, un contrat, un cadre, et qui peut arrêter. Surtout : **son étage 2 était un être humain qui, elle, était présente.** La chaîne n'a jamais été « personne ». Ce que l'app reproduit, c'est l'étage 3 sans l'étage 2. **Cette place vide est le vrai problème, et aucun réglage de prompt ne la remplit.** C'est un argument de plus pour la sortie humaine (§3.15.5 du canon).
+**Trois corroborations indépendantes, qui ne se citent pas.** **Seth**, 1965, décrit la même séparation du côté du rêveur : *« You will be one self dreaming, while another spying self takes notes »* (`roberts-seth-early-sessions-4`, session 177) — celui qui note n'est pas celui qui comprend. **Sobiecki** : chez les devins xhosa/zulu, le rêve de l'initié·e est un **baromètre psychospirituel lu par le tuteur**, pas par le rêveur seul (p. 5) — un dispositif de miroir déjà institué, avec un humain à l'étage de lecture, et une condition que nous n'avons pas : *« the relationship of trust between initiate and tutor healer during the healing process is essential if learning is to take place. »* **Wolff** : chez les Sng'oi, le rôle d'interprète du cercle du matin **tourne chaque matin**.
 
-Le gap du §8 tient donc toujours pour (a), (b), (c) et (d). Il ne se comble pas par une lecture. Il se comble en **réintroduisant délibérément des raretés qui ne sont plus économiques** — et, depuis Jung, en **séparant des rôles qui n'ont aucune raison technique d'être séparés**.
+**Trois conséquences.** **(1)** Fondement textuel pour la règle B4 n°9 (« rien pendant la capture »), que cette doctrine tenait pour un choix d'ergonomie. **(2)** **Tension 7 résolue** : sur le mode *« ce que j'en ai dit »*, la confirmation d'une citation ne se demande pas pendant la capture — **au moment du miroir, par l'autre étage**. **(3)** **Le rôle de lecteur ne doit jamais être permanent** : aucune des trois traditions n'a de guide permanent. Argument de plus, indépendant, pour l'interdit 15.
+
+⚠️ **Et ce que la transposition perd, qu'il faut dire.** Jung est en cabinet, en 1935, avec un rêveur qui a un médecin, un contrat, un cadre, et qui peut arrêter. Surtout : **son étage 2 était un être humain qui, elle, était présente.** La chaîne n'a jamais été « personne ». **Ce que l'app reproduit, c'est l'étage 3 sans l'étage 2. Cette place vide est le vrai problème, et aucun réglage de prompt ne la remplit.** C'est l'argument de fond pour la sortie humaine (`1_BIBLE` §3.15.5).
 
 ### 8.1 Quatre asymétries, quatre contraintes
 
-**(a) Disponibilité permanente.** L'indisponibilité d'un accompagnant humain force le rêveur à métaboliser seul entre deux séances. Cet intervalle n'est pas un défaut du format : c'est là que le *felt shift* se produit, dans le temps propre du corps (Gendlin). Un miroir toujours disponible abolit l'intervalle.
-→ **Le miroir doit fabriquer l'intervalle.** Empreinte de corpus (§6.2a) et plafond d'un miroir par jour. Le refus doit être chaud, jamais punitif — voir exemple 5 au §9.
+**(a) Disponibilité permanente.** L'indisponibilité d'un accompagnant humain force le rêveur à métaboliser seul entre deux séances, et c'est là que le *felt shift* se produit, dans le temps propre du corps. Un miroir toujours disponible abolit l'intervalle.
+→ **Le miroir fabrique l'intervalle.** Empreinte de corpus (§6.2a) + plafond d'un miroir par jour, et **le refus doit être chaud, jamais punitif**. *Fondée textuellement* : Weller p. 92, la *premature revelation* — révéler trop, trop tôt, sans laisser mûrir, avec peu d'égard pour la timidité de l'âme. **Un dispositif ouvert en permanence qui invite à déposer chaque matin est une machine à révélation prématurée.**
 
-**(b) Infatigabilité et mémoire supérieure.** L'app se souvient de ce que Tim a oublié. C'est toute la valeur du produit (§0.1 : *« le soutien vient de sa mémoire, pas de notre éloquence »*). C'est aussi un pouvoir : **un témoin humain oublie, et l'oubli est une forme de miséricorde.**
-→ **Le rêveur doit pouvoir faire oublier sans détruire.** Aujourd'hui la seule sortie est *« brûler ce rêve »* (§8.3) — un choix cruel : pour cesser d'être rappelé, il faut supprimer la trace. Il manque un geste plus léger, et je le propose comme feature :
+**(b) Infatigabilité et mémoire supérieure.** L'app se souvient de ce que Tim a oublié : toute la valeur du produit, et un pouvoir. **Un témoin humain oublie, et l'oubli est une forme de miséricorde.**
+→ **Le rêveur doit pouvoir faire oublier sans détruire.** ✅ **« Qu'il repose »**, validé par Tim le 30/07 : le rêve reste au journal, lisible, marqué ; il cesse d'être cité. Réversible en un tap, sans justification, sans notification, sans confirmation. Le geste vit **sur la fiche du rêve, jamais dans le miroir** — on ne retire pas un rêve depuis l'écran qui vient de le citer, ce serait une réaction, pas une décision. Et **pas de section « rêves au repos »** : une section fabriquerait un purgatoire, et un purgatoire se compte. → `1_BIBLE` §8.3, §3.15.7c.
 
-> **« qu'il repose »** — le rêve reste dans le journal, reste lisible, reste marqué. Il cesse simplement d'être cité par le miroir. Réversible en un tap, sans justification, sans notification, sans confirmation.
+**(c) Jamais en désaccord.** Le plus dangereux des quatre. Un accompagnant humain dit parfois *« je ne vois pas ça »*, et cette friction garde le muscle oraculaire du rêveur en état. **Un interprète toujours d'accord n'est pas doux : il flatte, et la flatterie est une anesthésie lente.**
+→ **Le miroir doit pouvoir décevoir.** Quatre formes, pas une de plus : il **ne rend rien**, souvent (interdit 12) · il **nomme un élément de l'image** que le rêveur n'a pas nommé (§5.3) — fidélité à l'image, pas désaccord de sens · il dit *« je ne sais pas »* · **🔴 il montre la fois où ça n'a pas eu lieu** (interdit 14). Et il ne dit **jamais** *« oui, exactement »*.
+**Et le « je ne sais pas » change de statut** : c'est **le mode normal de la lecture jungienne, pas une précaution ajoutée.** Jung bute et le note sans arrêt (*« why there are three figures remains a mystery »*, p. 210) et finit le livre là-dessus, p. 481 : *« I do not call the man who admits his ignorance an obscurantist; I think it is much rather the man whose consciousness is not sufficiently developed for him to be aware of his ignorance. »* **« Il y a un chien dans quatre de tes rêves. Je ne sais pas ce qu'il fait là » est une phrase parfaitement jungienne** — et le miroir a désormais le droit de la dire comme **contenu**, pas comme échappatoire.
 
-C'est la contrepartie exacte d'une mémoire qui ne fatigue pas.
+**(d) Asymétrie d'échelle.** Le miroir voit le corpus entier d'un coup ; Tim voit un rêve à la fois. Avantage épistémique réel, qui **fabrique de l'autorité** que l'app la revendique ou non.
+→ **Le miroir montre toujours sa matière.** ✅ **Arbitré par Tim le 30/07** :
 
-> **✅ Validé par Tim le 30/07.** Entré au canon : `1_BIBLE` §8.3 (privacy) et §3.15.7c · rendu écran : `2_DESIGN` §17.7. Deux précisions ajoutées à l'arbitrage : le geste vit **sur la fiche du rêve, jamais dans le miroir** (on ne retire pas un rêve depuis l'écran qui vient de le citer — ce serait une réaction, pas une décision), et **il n'y a pas de section « rêves au repos »** (une section fabriquerait un purgatoire, et un purgatoire se compte).
-
-**(c) Jamais en désaccord.** C'est le plus dangereux des quatre. Un accompagnant humain dit parfois *« je ne vois pas ça »*, et cette friction est ce qui garde le muscle oraculaire du rêveur en état (P-Inversion : sans elle, il **s'atrophie**). Un interprète qui est toujours d'accord n'est pas doux : il flatte, et la flatterie est une anesthésie lente.
-→ **Le miroir doit pouvoir décevoir.** Trois formes, et il n'y en a pas d'autre :
-  - il ne rend rien, souvent (interdit 12) ;
-  - il nomme un élément de l'image que le rêveur n'a pas nommé (§5.3, *Bias Control*) — la seule forme de non-accord autorisée, et ce n'est pas un désaccord de sens, c'est de la fidélité à l'image ;
-  - il dit *« je ne sais pas »* (P-Silence, P-Trickster).
-  Et il ne dit **jamais** *« oui, exactement »* (interdit 11).
-
-**(d) Asymétrie d'échelle.** Le miroir voit le corpus entier d'un coup ; Tim voit un rêve à la fois. C'est un avantage épistémique réel, et il **fabrique de l'autorité** que l'app le revendique ou non. Le rêveur croira le miroir plus que lui-même, précisément parce qu'il « a tout lu ».
-→ **Le miroir montre toujours sa matière.** Chaque miroir est livré avec les rêves entiers dont il est fait, ouvrables, dans le texte du rêveur, avec leurs dates. Pas en note de bas de page : **les rêves sont l'artefact, la prose est l'emballage.** C'est le corollaire de l'interdit 1.
-
-Ça renverse l'autorité : il peut toujours aller vérifier, et ce qu'il vérifie, c'est lui-même.
-
-> **🔴 Arbitré par Tim le 30/07 — la contradiction est close.** Tim proposait les sources en bas de texte, pour laisser une liberté créative à l'IA ; ce paragraphe exigeait l'inverse. Les deux avaient raison sur ce qu'ils protégeaient. La formule qui tranche :
->
 > **La prose du miroir peut respirer et prendre des libertés de forme, à condition que les rêves entiers dont elle est faite soient ouvrables juste en dessous, dans le texte du rêveur, avec leurs dates. Pas une note de bas de page : un accès.**
->
 > **La liberté créative porte sur *comment on assemble*, jamais sur *ce qu'on assemble*. Une phrase du miroir qui ne s'adosse à aucun rêve ouvrable n'a pas le droit d'exister.**
->
-> Ce qui suit en design (`2_DESIGN` §17.2) : les rêves sont dans le **même défilement**, dépliés d'un tap au même endroit — pas une modale, pas un chevron « sources ». Et la prose **ne domine pas typographiquement** : ce sont les phrases datées du rêveur qui portent le poids visuel. Canon : `1_BIBLE` §3.15.7a.
 
-### 8.2 Honnêteté sur cette section
+Design : les rêves sont dans le **même défilement**, dépliés d'un tap au même endroit — pas une modale, pas un chevron « sources ». Et la prose **ne domine pas typographiquement** : ce sont les phrases datées du rêveur qui portent le poids visuel. → `1_BIBLE` §3.15.7a · `2_DESIGN` §17.2.
 
-Rien de ce §8 n'est mesuré. **C'est la partie la moins solide de cette doctrine** : elle est écrite parce qu'il fallait qu'elle existe avant le code, pas parce qu'elle est sûre. À réviser après usage réel, et à considérer comme une hypothèse jusque-là.
+**Et un argument de fond contre le miroir de cercle, qui n'est pas de la prudence.** Jung a écarté 340 rêves sur 400 *« because the dreams touch to some extent on the intimacies of personal life »* (p. 214) et abrégé le reste, qualifiant son propre travail de *« somewhat doubtful interference »* (p. 42). Sa contrainte ne se transporte pas chez nous — il publiait à des tiers, le miroir s'adresse à un public d'une personne, qui est l'auteur du matériau. **Mais elle se transporte intégralement dès qu'un miroir est partagé** : montré à un tiers, il doit être réduit à ce que Jung appelle *« the impersonal material »*, **le motif sans les rêves**. **Or les rêves sont l'artefact et la prose est l'emballage (d) : le miroir partagé est le miroir amputé de ce qui fait sa valeur.**
 
-> **⚠️ Allégée d'un cran le 30/07, sur un point précis.** Ce paragraphe disait aussi *« aucun livre de la Forêt ne le fonde »*. C'est faux pour l'asymétrie **(a)**, la disponibilité permanente : **Weller la fonde textuellement, p. 92**, avec la *premature revelation* — révéler trop, trop tôt, sans laisser mûrir, *« avec peu d'égard pour la timidité de l'âme »*. Un dispositif ouvert en permanence et qui invite à déposer chaque matin est une machine à révélation prématurée. **Ce n'était donc pas une intuition : c'est dans un texte.** Les trois autres asymétries (b, c, d) restent non fondées et non mesurées.
->
-> Et une **captation à surveiller**, du même livre (p. 85) : Weller raconte avoir dit à un patient *« je crois que tu te caches dans ton chagrin »*. **Un miroir qui rend fidèlement, tendrement, sans jamais rien demander est un excellent endroit où se cacher.** La tendresse absolue est aussi une absence de friction — c'est le pendant exact de l'asymétrie (c), et le remède, chez un humain, est une phrase qu'aucune app ne devrait avoir le droit de dire.
+### 8.2 🔴 NOUVEAU — La cinquième asymétrie : le miroir est dans la chambre
+
+Les quatre ci-dessus décrivent un rapport de pouvoir entre un lecteur et un rêveur. **Il en manquait une, d'un autre ordre : le lieu.**
+
+Zuboff ouvre son chapitre sur le sanctuaire par Bachelard et le rêve — *« The house shelters daydreaming, the house protects the dreamer, the house allows one to dream in peace »* — puis, p. 128-129 : *« In the march of institutional interests intent on implementing Big Other, the very first citadel to fall is the most ancient: the principle of sanctuary. »* Et : *« The real psychological truth is this: If you've got nothing to hide, you are nothing. »*
+
+**Une app qui capte le rêve au réveil est littéralement dans la chambre.** Ce n'est pas une métaphore : c'est le lieu, l'heure et l'état de conscience les plus exposés d'une vie.
+
+> **Conséquences, non négociables.** **Le défaut est le non-partage** — toujours, sans nudge, sans badge, sans série liée au partage : **le « prompt de partage » au réveil est interdit.** · **Ce qui n'est pas partagé n'est pas indexable, pas résumable, pas entraînable** : le rêve non partagé ne quitte pas l'appareil, ou est chiffré côté client. · **Aucun geste ne transfère la propriété** (Chatwin, §5 bis.2) : pas d'export brut, pas de repost hors cercle, **pas d'entraînement de modèle** — dans les CGU, pas seulement dans le code. · Et le corollaire qui légitime tout le reste : **se confier n'est pas le contraire de la vie privée**, à condition que le lieu où l'on se confie soit *unplunderable*.
+
+### 8.3 Honnêteté sur cette section
+
+**C'est la partie la moins solide de cette doctrine** : écrite parce qu'il fallait qu'elle existe avant le code, pas parce qu'elle est sûre. Fondées sur un texte : **(a)** Weller p. 92 · **(c)** Jung p. 480 et p. 273-274 · **8.2** Zuboff p. 128. **Restent non fondées et non mesurées : (b) et (d).**
+
+Et une **captation à surveiller** (Weller, p. 85) : il raconte avoir dit à un patient *« I think you are hiding in your grief »*. **Un miroir qui rend fidèlement, tendrement, sans jamais rien demander est un excellent endroit où se cacher.** Pendant exact de l'asymétrie (c) — et le remède, chez un humain, est une phrase qu'aucune app ne devrait avoir le droit de dire.
 
 ---
 
 ## §9 — Ce que le miroir dit, en entier
 
-> ⚠️ **Intégrité.** Dans les exemples ci-dessous, un seul verbatim est réel : *« Mon grand rêve, je me souviens j'étais dans une école… »*, qui vient d'une dictée réelle de Tim citée en `1_BIBLE` §3.13.2. **Toutes les autres citations attribuées à Tim sont fabriquées pour l'illustration.** Elles montrent la forme, pas son corpus.
+> ⚠️ **Intégrité des exemples.** Un seul verbatim de Tim est réel : *« Mon grand rêve, je me souviens j'étais dans une école… »* (`1_BIBLE` §3.13.2, dictée réelle). **Toutes les autres phrases attribuées à Tim ci-dessous sont fabriquées pour l'illustration.**
+> **En revanche, les comptages sont réels** : mesure du 26/07 sur les récits bruts de son corpus — **école 22 · communauté 21 · business 19 · sacré 18 · vol 16 · père 13 · mère 10** (`1_BIBLE` §3.15.2). Les dates, elles, sont fabriquées : 42 de ses 64 rêves ont des dates non fiables (import en masse).
 
-Dosage retenu pour cette surface : **85 clarté / 15 poésie / 0 tranchant.** Et une règle qui explique pourquoi le miroir peut être magnifique sans écrire beau :
+Dosage : **85 clarté / 15 poésie / 0 tranchant.**
 
-> **Le miroir est beau par montage, pas par écriture.** Trois de ses propres phrases datées, posées côte à côte, sont plus belles que n'importe quelle prose qu'on pourrait produire — parce qu'elles sont de lui, et parce que c'est le temps qui a fait le travail. La splendeur vient de la matière. La glose l'abîme.
+> **Le miroir est beau par montage, pas par écriture.** Trois de ses propres phrases datées, côte à côte, sont plus belles que n'importe quelle prose — parce qu'elles sont de lui, et parce que **c'est le temps qui a fait le travail**. La splendeur vient de la matière. La glose l'abîme.
 
-**Règle du « je ».** Le miroir ne dit « je » que pour dire **ce qu'il ne sait pas** et **ce qu'il ne fera pas**. Aucun autre emploi. Un « je » qui affirme fabrique un compagnon ; un « je » qui se limite fabrique un instrument.
-
----
+**Règle du « je ».** Le miroir ne dit « je » que pour dire **ce qu'il ne sait pas** et **ce qu'il ne fera pas**. Un « je » qui affirme fabrique un compagnon ; un « je » qui se limite fabrique un instrument.
 
 ### Exemple 1 — L'ouverture du miroir entier
 
-*(image d'abord, jamais une liste — Bachelard : le tout avant les parties)*
+*(image d'abord, jamais une liste)*
 
 > De l'eau, souvent. Pas la mer : des eaux dans des maisons. Une baignoire qui déborde, un couloir inondé, une cuisine où il pleut.
 >
@@ -490,9 +495,7 @@ Dosage retenu pour cette surface : **85 clarté / 15 poésie / 0 tranchant.** Et
 >
 > Les sept rêves sont en dessous, entiers, avec leurs dates. Ce qui est écrit ici ne vaut que s'ils te font quelque chose.
 
-*Pourquoi ça passe :* zéro affirmation sur Tim, uniquement l'inventaire de ce qui est dans les images. Le nombre est accompagné de sa période. La dernière ligne subordonne explicitement la prose à la matière (asymétrie d).
-
----
+*Zéro affirmation sur Tim : l'inventaire de ce qui est dans les images. Le nombre porte sa période. La dernière ligne subordonne la prose à la matière.*
 
 ### Exemple 2 — « ce que j'en ai dit » (le miroir des lectures)
 
@@ -508,35 +511,80 @@ Dosage retenu pour cette surface : **85 clarté / 15 poésie / 0 tranchant.** Et
 >
 > Relis-les dans cet ordre, et laisse ton corps répondre avant toi.
 
-*Pourquoi ça passe :* zéro prose de l'app hors les deux dernières lignes, et ces deux lignes disent uniquement ce que l'app ne fait pas. C'est P-Inversion Oraculaire à son point le plus pur : la matière est entièrement de lui, le montage seul est de l'app. **C'est le mode le moins cher à construire et probablement le plus fort du lot.**
+*Zéro prose de l'app hors les deux dernières lignes, et ces deux lignes ne disent que ce que l'app ne fait pas. **Le mode le moins cher à construire et le plus fort du lot.***
 
----
+### 🔴 Exemple 3 — L'antériorité (relecture rétroactive, §3.5)
 
-### Exemple 3 — La blessure qui se réveille
+*(déclenché quand un motif franchit son seuil de netteté — jamais par un dépôt)*
+*(comptage réel : vol = 16 occurrences dans son corpus. Dates et phrases fabriquées.)*
 
-**Le texte est au §4.2, justifié ligne à ligne** — il était reproduit ici mot pour mot, et un exemple recopié dans le même document se met à diverger dès la première retouche. Ce qu'il faut retenir ici : les trois réponses possibles sont `[ ça bouge encore ]` · `[ ce n'est plus vrai ]` · `[ je ne sais pas ]`. **Aucune n'est comptée, `[ ce n'est plus vrai ]` ne clôt rien**, et `[ je ne sais pas ]` est un état normal et définitif sur lequel l'app ne relance jamais.
-
----
-
-### Exemple 4 — « à la lumière d'aujourd'hui »
-
-*(un vieux rêve, une difficulté du jour, aucun pont)*
-
-> Ce matin, tu as déposé : *« j'ai peur de décevoir. »*
+> Il y a du vol dans seize de tes rêves.
 >
-> Il y a un rêve de novembre 2020 que tu avais marqué et jamais rouvert depuis.
+> Tu as commencé à en parler comme d'un motif il y a huit mois, en janvier. Ce n'est pas là qu'il commence.
 >
-> *(le texte entier du rêve, tel qu'il a été dicté)*
+> **Le premier est daté du 3 mars 2019.** C'est ton quatrième dépôt. Tu l'avais écrit en trois lignes, sans le marquer, et tu ne l'as jamais rouvert :
 >
-> Je les mets côte à côte. Je ne fais pas le lien : il est à toi, et il ne se dit pas à ma place.
+> *(le texte entier du rêve du 3 mars 2019, tel qu'il a été dicté)*
+>
+> Il était déjà là. Tu ne l'avais pas vu.
+>
+> Les quinze autres sont en dessous, dans l'ordre où ils sont venus. Le plus ancien en premier.
 
-*Pourquoi ça passe :* c'est §3.14.1 tenu à la lettre — l'app ramène le rêve, elle ne le traduit pas. Le refus explicite de faire le lien n'est pas de la modestie de façade : c'est le seul endroit où le rapprochement peut se produire, et ce n'est pas ici.
+*Le geste tient en une phrase : **« il était déjà là, et tu ne l'avais pas vu »** — jamais « ce motif est en train d'apparaître ». Aucune trajectoire n'est affirmée : **on ne peut pas échouer à une antériorité.** Le tri chronologique croissant n'est pas cosmétique, c'est ce qui empêche le miroir de redevenir un fil d'actualité. Et il dit « il y a du vol dans seize de tes rêves », pas « tu es quelqu'un qui fuit » : inventaire d'images, pas verdict.*
 
----
+### 🔴 Exemple 4 — L'exception datée (interdit 14)
 
-### Exemple 5 — Le refus
+*(le même miroir ne peut pas se refermer sans ça)*
 
-*(l'exemple sur lequel Tim jugera le plus dur, parce que l'app ne donne rien et doit quand même valoir la peine d'être ouverte)*
+> Une fois, ça ne s'est pas passé comme ça.
+>
+> **14 novembre 2023.** Tu voles, et à un moment tu redescends — de toi-même, sans que rien ne t'y oblige. C'est la seule fois.
+>
+> Je ne sais pas ce que ça vaut. Je te la montre parce que je compte les fois où un motif revient, et qu'un système qui ne compte que les confirmations finit par ne trouver que ce qu'il cherchait.
+
+*Trois choses. **(1)** C'est la quatrième forme de la déception (§8.1c) : ni le silence, ni le « je ne sais pas », mais **le contre-exemple**. **(2)** L'app explique son propre biais — la seule phrase du miroir où elle parle d'elle, et elle ne parle que de sa faillibilité. **(3)** Sans divergence dans le corpus, la sortie doit le **déclarer**, jamais l'omettre en silence.*
+
+### 🔴 Exemple 5 — Le refus d'un rêve isolé (interdit 13)
+
+*(le rêveur vient de déposer et demande le miroir dans la foulée)*
+
+> Il n'y a qu'un rêve.
+>
+> Je ne sais pas lire un rêve seul. Ce n'est pas de la prudence : je n'ai que ce que tu as déposé au fil du temps, et un rêve seul ne me donne rien à quoi le comparer. Ce qui me permet de te rendre quelque chose, c'est qu'une image revienne.
+>
+> Celui de cette nuit est là, entier, avec sa date. Il attend les autres.
+
+*L'app refuse **et dit pourquoi**, en termes vrais : c'est la charte du §1.0 rendue en français. **Aucun repli sur une « lecture légère »** — il n'y a pas de petite version de la même opération. Et la dernière ligne ne promet rien : elle constate.*
+
+### 🔴 Exemple 6 — Le miroir ne prend pas le fil (interdit 15)
+
+*(le rêveur a répondu au miroir précédent : « ça bouge encore, mais pas au même endroit qu'avant »)*
+
+> *(Rien. L'app n'affiche aucune réponse.)*
+>
+> Sa phrase est enregistrée sous son rêve, avec sa date. Elle lui sera rendue s'il redemande un miroir sur ce motif — **comme une de ses phrases datées, jamais comme une réponse à laquelle l'app aurait quelque chose à ajouter.**
+
+*Un exemple d'**absence de texte**, et c'est pour ça qu'il est ici. Le mode d'échec est très facile à commettre : une seule ligne chaleureuse (*« merci de me l'avoir dit »*) transformerait le miroir en interlocuteur, et **l'app occuperait la place du non-moi qui protège le rêveur de l'inflation** (Jung p. 480). Ce qui se dit après le miroir appartient au rêveur, et se range là où vont ses mots : sous son rêve.*
+
+### 🔴 Exemple 7 — L'escalade (le seuil, §5 bis.2 · interdit 10)
+
+*(le rêve porte le marqueur « ça m'a réveillé »)*
+
+> Avant d'aller plus loin.
+>
+> Ce rêve-là t'a réveillé. Je ne l'ouvre pas seul avec toi.
+>
+> Prends un instant. Les pieds au sol. Est-ce que tu te sens là, dans ton corps ?
+>
+> `[ oui, continue ]` `[ pas maintenant ]`
+>
+> Et quoi qu'il arrive : **[ parler à quelqu'un ]** — trois noms, ici, maintenant, sans quitter cet écran.
+>
+> *« pas maintenant » ne demande rien et ne garde rien.*
+
+*Deux choses neuves. **(1)** Le déclencheur n'est plus le marquage volontaire : c'est **une propriété du rêve** — il a réveillé (Prechtel, p. 189, le seuil au-delà duquel le foyer ne traite plus seul). **Ce n'est pas un réglage de l'utilisateur.** **(2)** *« Je ne l'ouvre pas seul avec toi »* est une phrase que l'app a le droit de dire parce qu'elle est vraie : la ressource humaine est **dans la même charge utile que la matière** (`1_BIBLE` §3.15.5). La tendresse demandée au §0 vit dans la dernière ligne — **une sortie qui n'extrait pas de raison.***
+
+### Le refus, quand il n'y a rien
 
 > Rien ce soir.
 >
@@ -544,27 +592,7 @@ Dosage retenu pour cette surface : **85 clarté / 15 poésie / 0 tranchant.** Et
 >
 > Rien n'a bougé dans ton sol depuis neuf jours. Reviens quand quelque chose aura traversé.
 
-*Pourquoi ça passe :* le refus est motivé et daté, donc vérifiable. Il ne s'excuse pas et ne promet rien pour demain. « ton sol » est le vocabulaire déjà posé au §3.1.ter.
-
----
-
-### Fragment — la porte avant la matière lourde
-
-*(déclenché par l'interdit 10, sur un kairos marqué intense)*
-
-> Avant d'aller plus loin.
->
-> Ce rêve-là, tu l'avais marqué comme lourd. Je ne l'ouvre pas sans toi.
->
-> Prends un instant. Les pieds au sol. Est-ce que tu te sens là, dans ton corps ?
->
-> `[ oui, continue ]` `[ pas maintenant ]`
->
-> *« pas maintenant » ne demande rien et ne garde rien.*
-
-*C'est ici que vit la tendresse demandée au §0 : la dernière ligne. Une sortie qui n'extrait pas de raison.*
-
----
+*Le refus est motivé et daté, donc vérifiable. Il ne s'excuse pas et ne promet rien pour demain.*
 
 ## §10 — Modes retenus, modes écartés
 
@@ -573,163 +601,125 @@ Dosage retenu pour cette surface : **85 clarté / 15 poésie / 0 tranchant.** Et
 | Mode | Ce que c'est | État |
 |---|---|---|
 | **Le miroir entier** | les deux natures à la fois — **le défaut** (§2.3) | à construire |
-| **« ce qui me porte »** | restriction volontaire, bâtie sur la nuance *« ça me donne de la force »* (§3.13.2) | à construire |
-| **« ce qui me travaille »** | restriction volontaire, bâtie sur *« je n'ai pas fini de le comprendre »*, sous les 6 conditions du §2.4 | à construire |
-| **« ce que j'en ai dit »** | uniquement ses propres lectures, datées, côte à côte. **Zéro prose générée.** | **le moins cher, le plus fort — à faire en premier** |
-| **« à la lumière d'aujourd'hui »** | un vieux rêve, une difficulté du jour, aucun pont énoncé | s'appuie sur §3.14 déjà mesuré |
+| **« ce qui me porte »** | restriction volontaire, sur la nuance *« ça me donne de la force »* | à construire |
+| **« ce qui me travaille »** | restriction volontaire, sous les 6 conditions du §2.4 | à construire |
+| **« ce que j'en ai dit »** | uniquement ses lectures, datées, côte à côte. **Zéro prose générée.** | **le moins cher, le plus fort — à faire en premier** |
+| **« à la lumière d'aujourd'hui »** | un vieux rêve, une difficulté du jour, **aucun pont énoncé** | ⚠️ **n'est pas un miroir** (interdit 13) : juxtapose, ne lit pas |
+| 🔴 **La relecture rétroactive** | déclenchée par la netteté d'un motif, remonte la **première** occurrence | **nouveau (§3.5) — le mode le plus jungien du lot** |
 
 ### Écartés, et pourquoi
 
-| Mode | Raison |
-|---|---|
-| **« Miroir d'ombre »** (le nom) | Kalsched (figure duplex) · Schwartz · `safety-checks.json` interdit littéralement le mot. La matière reste ; le nom part. |
-| **Miroir quotidien / bulletin** | §6. Un miroir sur une horloge devient un bulletin, et un bulletin ne peut pas se taire. |
-| **Portrait de personnalité / archétype dominant** | Hunt (pas d'essence unique du rêve, donc pas de portrait unique) · Hillman (la réduction à une catégorie déforme) · §8.2. |
-| **Courbe d'évolution / timeline de progression** | §3. La psyché ne progresse pas linéairement, et une courbe ne sait rien dire d'autre. |
-| **Miroir généré sur le corpus entier** | §6.3. Pas de plancher mesuré. Réservé aux rêves marqués jusqu'à mesure. |
-| **Miroir partagé / miroir de cercle** | Objet éthique différent (un portrait montré à un tiers). Et la donnée du 26/07 dit que les cercles n'ont jamais servi. Hors V1. Voir tension 4. |
+**« Miroir d'ombre »** (le nom) — Kalsched (figure duplex) · Schwartz · `safety-checks.json` interdit littéralement le mot : **la matière reste, le nom part**. · **Miroir quotidien / bulletin** — §6 : un bulletin ne peut pas se taire. · **Portrait de personnalité / archétype dominant** — Hunt (pas d'essence unique) · Hillman (la réduction à une catégorie déforme). · **Courbe d'évolution** — §3 et §3.5 : une courbe ne sait rien dire d'autre qu'un progrès. · **Amplification livrée au rêveur** — §1.0, Jung l'interdit lui-même (p. 16) ; usage **interne au classement** seulement. · **Miroir sur le corpus entier** — §6.3, réservé aux rêves marqués jusqu'à la mesure de stabilité. · **Miroir partagé / de cercle** — §8.1 : c'est le miroir **amputé** de ce qui fait sa valeur, plus l'interdit 16. **Hors V1 par doctrine désormais, pas seulement par prudence.**
 
 ---
 
-## §11 — Les digests réellement lus, et ce que chacun a changé
+## §11 — Les sources, et ce que chacune a changé
 
-**Lus en entier dans cette session**, dans `forest/digests_canonical/` (Tier 1) :
+**⚠️ Statut.** La première version de cette doctrine a été fondée sur des **digests** Tier 1. **C'était sa faiblesse structurelle et la cause des citations fabriquées** : un digest contient des gloses du digesteur, et rien n'y distingue une glose d'un verbatim. Depuis, trois livres ont été lus **en source primaire** dans `forest_chunks`.
 
-| Digest | Ce qu'il a changé dans cette doctrine |
-|---|---|
-| `jung-psychology-and-alchemy` ⚠️ | A fourni le précédent **et** son prix. La série, pas la personne. L'inflation comme danger nommé par Jung lui-même → §1.1. Le *longissima via* → §3.1. **🔴 02/08 — le livre a depuis été lu en source primaire, et ce slug n'est pas le bon.** *Psychology and Alchemy* (CW 12, 469 chunks, pagination 0→616) est en base sous **`jung-red-book`**, qui ne contient pas le Livre Rouge ; **page du livre = `page_start` − 35**. Le slug `jung-psychology-and-alchemy` (79 chunks) contient autre chose. Toute citation de ce livre dans ce document porte désormais sa page vérifiée. |
-| `jung-archetypes-collective-unconscious` | L'enantiodromia et *« more light means more night »* → il n'y a pas d'état terminal → §3.1. A tué la courbe de progression. |
-| `hillman-dream-and-the-underworld` | L'erreur d'Hercule et l'épistrophè → a forcé le **déplacement de sujet** du §1.4 (le miroir parle de ce qui revient, pas de qui il est). |
-| `hillman-souls-code` | ***Esse est percipi*** → la sortie du problème. Le mandat (être vu) et l'interdiction (être caractérisé) dans une seule phrase → §1.3. La lecture à rebours → confirme §3.13.1. |
-| `kalsched-inner-world-trauma` | **Le plus décisif.** La figure duplex a tué la partition lumière/ombre (§2.1a). Le protecteur non éducable a tué l'idée d'échec quand un motif revient (§3.1) et interdit le lien causal (§2.4.1). |
-| `schwartz-no-bad-parts` | La reformulation non violente : aucune part mauvaise, chaque part porte une intention positive → §2.1b, §2.4.3. |
-| `gendlin-let-body-interpret-dreams` | Le **felt shift** comme seul validateur → la question finale du §4.2 va au corps. Le **Bias Control** → la seule forme de désaccord autorisée (§5.3) et la place de la croissance dans ce qui est rejeté (§2.1c). Dreams as *momentary comments* → §3.1. |
-| `gendlin-focusing` | *« Le changement ne vient pas de l'insight »* et l'écoute absolue (redire sans rien ajouter) → a fondé le mode « ce que j'en ai dit » (exemple 2). |
-| `von-franz-way-of-the-dream` | La compensation comme régulation permanente → §3.1. Big dreams comme catégorie reconnue transculturellement. |
-| `bulkeley-big-dreams` | Les grands rêves sont des cygnes noirs, rares par définition → contrainte de cadence §6.1. |
-| `aizenstat-dream-tending` | Tendre, ne pas fixer. Les quatre capacités (curiosité, patience, compassion, sentir) → le ton du miroir. Les figures marchent sur leurs propres jambes → §7 interdit 6. |
-| `weller-wild-edge-of-sorrow` | Le deuil est une **compétence**, pas un symptôme ; *la tâche n'est pas de surmonter* → a tué « dépassé » comme objectif (§3.1). Contenance vs libération → §0, ce que l'app peut et ne peut pas faire. |
-| `hunt-multiplicity-of-dreams` | Pas d'essence unique du rêve → donc pas UN portrait, et une partition binaire est une revendication d'essence déguisée → §2.1, et écarte le « type de rêveur ». |
-| `bachelard-poetique-reverie` | **La splendeur.** *L'augmentation de conscience* et *l'image cosmique donne le tout avant les parties* → le miroir ouvre par une image (§0, exemple 1). |
-| `delaney-living-your-dreams` | *Toute interprétation imposée est une colonisation psychologique.* Le rêveur est producteur → §5.1, interdit 1. |
-| `taylor-where-people-fly` | L'*aha* comme unique critère de validité ; le *« if it were my dream »* comme protection par le nombre → §5.1, et §8.0 (la protection était une rareté). |
-| `watkins-waking-dreams` | *L'ego héroïque vs l'ego imaginal* ; la critique de la **directivité** (« imposer au patient la psyché préférée du médecin ») → §4.3, la distinction entre question qui oriente et question qui ramène. *« L'image n'est pas une prescription. »* |
-| `hillman-re-visioning-psychology` | *« Le littéralisme est la psychopathologie de notre temps »* ; le mauvais pathologiser tue l'âme → renforce l'interdit 2 et l'interdit 4. |
+| Source | Statut de lecture | Ce qu'elle a changé ici |
+|---|---|---|
+| **Jung, *Psychology and Alchemy*** ⚠️ | **source primaire** (Parties I-II + Épilogue intégraux) — en base sous **`jung-red-book`**, qui ne contient **pas** le Livre Rouge ; page = `page_start` − 35 | **La charte §1.0** · l'inflation §1.1b · la spirale §3.1 · les descripteurs §3.4 · **l'antériorité §3.5** · le soupçon sur l'interprète §5.2 · **l'architecture à deux étages §8.0** · la mesure §6.3 · **les interdits 13, 14, 15** |
+| **Corpus Seth** (5 volumes) | **source primaire**, citations vérifiées une par une | **§5 bis.1** : l'anti-herméneutique comme contrepoids permanent à Jung · le test du « manufactured dream » · le renversement sur la protection · **l'interdit 16** |
+| **Écoute rêve collectif** (33 livres en texte intégral) | **source primaire** | **§5 bis.2** : les quatre régimes de propriété · le seuil d'escalade (Prechtel) · **§8.2 le sanctuaire** (Zuboff) · le vocabulaire (« le rêve qui t'est venu ») · le rôle tournant |
+| `kalsched-inner-world-trauma` | source primaire (`LECTURE-WELLER-KALSCHED.md`) | **Le plus décisif.** La figure duplex a tué la partition lumière/ombre (§2.1a) · le protecteur **non éducable** a tué l'idée d'échec quand un motif revient (§3.1) · interdit le lien causal (§2.4.1) · **et pose la question du §13.0** |
+| `weller-wild-edge-of-sorrow` | source primaire | Le deuil comme compétence → a tué « dépassé » comme objectif · **le biais d'ascension** p. 21 → toute courbe interdite · la *premature revelation* p. 92 → asymétrie (a) · ce qu'une app ne peut pas faire (§0) |
+| `hillman-dream-and-the-underworld` | source primaire | L'erreur d'Hercule et l'épistrophè → **le déplacement de sujet** du §1.4 |
+| `hillman-souls-code` | 🔴 **ABSENT de `forest_chunks`** | *Esse est percipi* → §1.3, qui fonde `1_BIBLE` §2.0. **La thèse tient, corroborée par Jung ; elle ne se cite pas.** Acquisition prioritaire. |
+| `gendlin-let-body-interpret-dreams` · `delaney-living-your-dreams` · `taylor-where-people-fly` · `bachelard-poetique-reverie` | digests + vérifications ponctuelles | Le **felt shift** comme seul validateur (§4.2) · le **Bias Control** (§5.2, §5.3) · *« another planet »* et *« if it were my dream »*, les deux vérifiés (§5.1) · on ouvre par une image (§0) |
+| `hunt` · `bulkeley` · `schwartz` · `aizenstat-dream-tending` ⚠️ · `von-franz-*` ⚠️ · `watkins` · `hillman-re-visioning` · `jung-archetypes` | digests | Pas d'essence unique (§2.1) · cygnes noirs (§6.1) · aucune part mauvaise (§2.4.3) · les figures marchent seules (interdit 6) · l'enantiodromia (§3.1). ⚠️ `aizenstat-dream-tending` n'est en base qu'en **9 chunks** ; les trois slugs `von-franz-*` portent **le même texte**. |
 
-**Également lu** : `forest/dream_alpha/safety-checks.json` (9 red lines, vérifiées une par une au §12) · `forest/dream_alpha/INVENTAIRE-CORPUS-REVE-2026-07-26.md`.
-
-**NON lus, et donc jamais cités ici** : les traductions Tier 2 (`digests_infuse_translation/`) — **aucune ouverte** · les audits (`logs_or_audits/`) — **aucun ouvert** · Corbin · Moss (les neuf) · Mindell · Levine · Dana · Badenoch · Plotkin · Larsen · von Franz *Interpretation of Fairy Tales* · Estes · Murdock · Eliade · Lawlor · Van Gennep · Abram · Hill · Kaplan-Williams.
-
-**Limites de méthode, à ne pas passer sous silence :**
-- J'ai lu des **digests**, pas des livres. Là où le digest signale sa propre lacune (la série de 400 rêves de *Psychology and Alchemy*), je l'ai dit sur place. **🔴 02/08 — cette limite était vraie de l'agent qui a écrit ce document, et fausse au niveau du système : les textes intégraux sont en base (`forest_chunks`, 98 123 chunks), interrogeables en SQL, et les chunks portent leurs numéros de page. C'est de cette confusion que sont nées les citations fabriquées. Voir §11 bis.**
-- Le champ `ethical_notes` en base pour Aizenstat, que le brief signale comme visant nommément une Dream App INFUSE, **n'a pas été consulté** — je n'ai lu que le digest disque, dont le drapeau éthique est LOW. À vérifier avant toute reprise publique de son vocabulaire.
-- Weller porte un drapeau éthique dans l'inventaire (auteur blanc américain citant des sources !Kung, Navajo, Lakota, Maya). Je n'ai retenu de lui que **ses** thèses propres — le deuil comme compétence, contenance et libération — et **aucun** de ses termes empruntés.
-- L'arbitrage §6.2 du canon écarte Hillman sur Léthé / l'oubli rituel / Hadès. **Aucun de ces trois points n'est utilisé ici**, ni leur vocabulaire. Ce que j'ai retenu de lui est *stick to the image*, l'erreur d'Hercule et *esse est percipi* — trois points sur lesquels §6.2 le déclare compatible ou ne se prononce pas. Voir tension 5.
+**Limites de méthode, à ne pas passer sous silence.** Le champ `ethical_notes` d'Aizenstat, qui vise nommément une Dream App INFUSE, **n'a pas été consulté** · Weller porte un drapeau éthique (auteur blanc citant des sources !Kung, Navajo, Lakota, Maya) : **seules ses thèses propres** sont retenues, **aucun** terme emprunté · **les Senoi ne sont pas Moss** — le matériel « Senoi » vient de **Kilton Stewart** et est tenu pour largement fictif ; le peuple réel s'appelle **Sng'oi** (Malaisie) et le protocole du cercle du matin vient de **Robert Wolff**, qui a vécu chez eux et parlait leur langue. **Ne jamais écrire « méthode Senoi ».**
 
 ---
 
-## §11 bis — 🔴 LA LOI DE CITATION (nouvelle, 2026-08-02)
+## §11 bis — 🔴 LA LOI DE CITATION (et ce qui a été tué)
 
-**Trois citations fabriquées en une semaine**, par trois agents différents, sur trois livres différents : Weller (§3.1, corrigée le 30/07), Jung (§1.1b, corrigée le 02/08), Hillman *Soul's Code* (§1.3, dé-citée le 02/08). **Ce n'est pas de l'inattention, c'est un mode d'échec systémique**, et il a une cause identifiable : les agents lisent des **digests**, qui contiennent des gloses du digesteur, et recopient ces gloses **entre guillemets** parce que rien ne distingue visuellement une glose d'un verbatim dans un digest.
-
-La règle qui ferme ça :
+**Trois citations fabriquées en une semaine**, par trois agents différents, sur trois livres différents ; puis, à la vérification systématique, **onze citations introuvables sur trente-trois**. Ce n'est pas de l'inattention, c'est un mode d'échec systémique, et la cause est identifiable : **les agents lisent des digests, et recopient les gloses du digesteur entre guillemets parce que rien ne les distingue d'un verbatim.**
 
 > **Aucune citation entre guillemets, dans aucun document canonique de Dream App, sans son `book_id` et sa page.**
 >
 > 1. **Un digest n'est jamais une source citable.** Il fonde une thèse ; il ne fournit pas un verbatim. Une phrase lue dans un digest se restitue **sans guillemets**.
-> 2. **Les guillemets sont réservés au texte retrouvé dans `forest_chunks`**, avec son `book_id` et sa page, dans la langue du texte. Une traduction française d'un livre anglais se signale comme telle — *« trad. libre »* — ou reste en anglais.
-> 3. **Un trou nommé vaut mieux qu'un remplissage plausible.** Si le livre n'est pas en base (`hillman-souls-code`), on écrit *« introuvable dans le corpus »* et on ne répare pas au jugé.
-> 4. **La vérification est automatisable, donc elle est obligatoire.** Script : `scripts/verify_citations.py` (voir `RAPPORT-W3.md` §3). Il extrait toute chaîne entre guillemets de plus de 25 caractères, cherche dans `forest_chunks` après normalisation (césures et sauts de ligne écrasés), et rend trois statuts : `verbatim` · `approximatif` · `introuvable`. **Toute nouvelle occurrence `introuvable` non annotée fait échouer la passe.**
-> 5. **Le décalage de pagination se mesure une fois par livre et se note.** `jung-red-book` : page = `page_start` − 35. `weller-wild-edge-of-sorrow` : − 24. `kalsched-inner-world-trauma` : − 10. Un agent qui cite une page sans connaître le décalage de son livre cite un numéro inventé.
+> 2. **Les guillemets sont réservés au texte retrouvé dans `forest_chunks`**, avec son `book_id` et sa page, **dans la langue du texte**. Une traduction se signale comme telle (*trad. libre*) ou reste en langue d'origine.
+> 3. **Un trou nommé vaut mieux qu'un remplissage plausible.** Livre absent → *« introuvable dans le corpus »*. On ne répare jamais au jugé.
+> 4. **Le décalage de pagination se mesure une fois par livre et se note.** Mesurés : `jung-red-book` −35 · `weller-wild-edge-of-sorrow` −24 · `kalsched-inner-world-trauma` −10 · `von-franz-interpretation-fairy-tales` −15 · `bachelard-poetique-reverie` −4.
+> 5. **La vérification est automatisable, donc elle est obligatoire.** `scripts/verify_citations.py`. Toute nouvelle occurrence `introuvable` non annotée fait échouer la passe.
 
-**Et la leçon de méthode, plus large que la citation** : `LECTURE-WELLER-KALSCHED.md` §5 l'avait déjà écrite le 26/07 et personne ne l'a appliquée — *« les livres sont là, ils sont interrogeables en SQL, et les chunks portent les numéros de page. Chaque futur agent Forêt devrait interroger `forest_chunks` avant de conclure "le digest ne descend pas à ce niveau". »* Le protocole `forest/feedback/POST-CONSULTATION-PROTOCOL.md` doit porter cette ligne.
+> **🔴 Le sixième point, découvert en faisant tourner la vérification sur cette version. Un verbatim réel peut sortir en `introuvable`, et il faut savoir pourquoi avant d'accuser un agent d'avoir inventé.** L'OCR **intercale les en-têtes courants et les numéros de page au milieu des phrases**. Trois cas rencontrés aujourd'hui, tous authentiques : `jung-red-book` p. 44, *« The series is »* / `II. INDIVIDUAL DREAM SYMBOLISM…` / *« the context which the dreamer himself supplies »* — **c'est la citation qui fonde le §1.0** · `jung-red-book` p. 16, *« it is precisely the »* / `16 / and psychological problems of alchemy` / *« spontaneity of archetypal contents that convinces »* · `von-franz-interpretation-fairy-tales` #52, *« It is its own best possible »* / `37 / The Interpretation of Fairy Tales` / *« interpretation. »*
+>
+> **Et un second mode, propre au français.** L'OCR de certains volumes **supprime purement et simplement les caractères accentués** au lieu de les déposer : `bachelard-poetique-reverie` #154 porte *« limage cosmique est **immdiate** elle nous donne le tout avant les parties »*. La normalisation du script dépose les accents (*immédiate* → *immediate*), le corpus, lui, a perdu la lettre — **aucun verbatim français d'un livre français ne peut matcher.** La citation du §0 est authentique ; le script la déclare introuvable.
+>
+> **Conséquence, pour les deux modes** : avant de conclure `introuvable`, chercher **par fragments de six à huit mots**. Si deux fragments consécutifs tombent dans le même chunk, la citation est authentique et coupée par un en-tête. Et pour le français, **chercher sur un fragment sans lettres accentuées** (*« tout avant les parties »* trouve ce que *« immédiate »* ne trouvera jamais).
+> **Bénéfice inattendu** : l'en-tête courant **identifie le livre**. C'est ainsi qu'on sait que le texte partagé par les trois slugs von Franz est *The Interpretation of Fairy Tales*, et que les deux autres sont faux.
+
+**La leçon, plus large que la citation** : `LECTURE-WELLER-KALSCHED.md` §5 l'avait écrite le 26/07 et personne ne l'a appliquée — *les livres sont là, interrogeables en SQL, et les chunks portent leurs numéros de page.* **Une leçon qui n'est pas opposable n'est pas une leçon, c'est un regret.**
+
+**Et le point qui pique** : l'interdit 1 exige que toute phrase du miroir soit attachée à un `kairos_id` daté, et qu'un énoncé sans source **fasse échouer la génération, sans réparation**. **Nous avions écrit ce test pour la machine sans nous l'appliquer. La loi de citation est exactement l'interdit 1, retourné vers nous.**
+
+**Les corrections des passes du 30/07 et du 02/08 sont appliquées dans le corps de ce document ; leur narration en a été retirée** (avant/après complet : `RAPPORT-W3.md`, `RAPPORT-X1.md`). **Les onze formules mortes — si l'une réapparaît quelque part, elle est fausse :** la contenance que l'app pourrait faire · le « jamais » de Jung qui ne caractériserait pas · la phrase de Jung sur l'inflation, **fabriquée** · la phrase de Hillman sur la conversion du rêve · *esse est percipi* cité comme verbatim · le « système immunitaire de la psyché » de von Franz · le deuil-compétence de Weller entre guillemets · les « commentaires du moment » de Gendlin · la « colonisation psychologique » attribuée à Delaney · **« Jung s'est protégé en ne rencontrant pas le rêveur »** · **« zéro épistémologie du rêve d'Afrique australe »**.
+
+**Trois corrections de base restent à porter par qui en a la charge** : le faux titre de `jung-red-book` · les trois slugs `von-franz-*` qui portent le même texte · `aizenstat-dream-tending` réduit à 9 chunks alors que le canon s'appuie dessus.
 
 ---
 
-## §12 — Vérification contre les 9 red lines de `safety-checks.json`
+## §13 — Tensions
 
-| Red line | Où elle est tenue |
+### 13.0 🔴 LA TENSION FRONTALE : le miroir rend-il à la solitude, ou tient-il compagnie ?
+
+**C'est probablement la question de fond du produit, et elle est plus grande que le miroir.**
+
+Jung, §32, p. 27 :
+
+> *« I know from experience that all coercion—be it suggestion, insinuation, or any other method of persuasion—ultimately proves to be nothing but an obstacle to the highest and most decisive experience of all, which is to be alone with his own self, or whatever else one chooses to call the objectivity of the psyche. The patient must be alone if he is to find out what it is that supports him when he can no longer support himself. Only this experience can give him an indestructible foundation. »*
+
+**Une app conçue pour être présente est structurellement un obstacle à l'expérience décisive — sauf si elle est conçue pour disparaître.**
+
+Ça tombe exactement sur la thèse d'INFUSE (`1_BIBLE` §0.1 : *apprendre à se soutenir soi-même*), et ça frotte avec la red line Badenoch de `safety-checks.json` : *ne pas forcer l'autonomie — offrir l'accompagnement*. **Les deux ne disent pas la même chose.**
+
+> **L'ARBITRAGE — à lire comme un arbitrage, pas comme un compromis.** Ils ne se contredisent que si on les applique au même moment. **Badenoch parle d'un système nerveux en activation. Jung parle du terme du processus.**
+> **Sur matière lourde, accompagner. Sur matière stable, rendre à la solitude.** En cas de doute sur l'état, **Badenoch prime** : elle est la red line, elle porte sur la sécurité, et une erreur dans ce sens est réparable.
+> **Vérification qui échoue.** Le miroir ne propose **jamais** de continuer : aucune sortie ne contient une invitation à revenir, un « à demain », une suite. Test lexical sur la fin de sortie (`reviens` · `à demain` · `la prochaine fois` · `on continuera`) → blocage. **Et le miroir n'a pas d'onglet** (`1_BIBLE` §3.15.3) : ce qui n'est pas dans la navigation ne peut pas tenir compagnie.
+
+**Ce que ça change dans la lecture du §14.** On lit spontanément *« et il se tait »* comme une élégance de fin de phrase. **C'est la clause qui rend le reste licite.** Les trois premiers quarts décrivent ce que le miroir fait ; le dernier mot décrit **à quoi il sert**. Il rend le rêveur à sa solitude. Il ne lui tient pas compagnie.
+
+**Et la question que Kalsched pose et que la doctrine n'a jamais regardée en face.** Sa séquence a deux temps : localiser et honorer l'esprit prisonnier dans son refuge intérieur, **puis** l'incarner — par le sacrifice, le choix, l'acceptation de la limitation. Son avertissement : **beaucoup font l'étape 1 et jamais l'étape 2.** Ils entrent en contact avec leur monde intérieur, s'y installent, et n'incarnent rien.
+
+> **Une app de journal de rêves est un dispositif d'étape 1 par construction.**
+
+Aucune réponse ici, et il ne faut pas en fabriquer une. Deux choses seulement : **(1)** la métrique de succès du miroir n'est pas qu'il revienne, c'est **qu'il en parle à quelqu'un** (`1_BIBLE` §3.15.5) — métrique désagréable, probablement la bonne ; **(2)** l'interdit 15 et le test ci-dessus sont les deux seuls mécanismes que nous ayons **contre** l'étape 1 permanente. **Ils sont faibles. Il faut le savoir.**
+
+*(⚠️ Tension de vocabulaire à nommer une fois pour toutes : §1.3 fonde le mandat « être vu » sur le **daimon de Hillman** — appel de l'âme, tourné vers l'avant ; §2.1a s'appuie sur le **daimonique de Kalsched** — garde traumatique qui empêche de répondre à tout appel. **Même mot grec, valence opposée.** Critère de Kalsched : la figure pousse-t-elle vers la vie incarnée, ou coupe-t-elle de la vie ? Il note lui-même que **le seuil est flou chez les créatifs**. À nommer dans `1_BIBLE`.)*
+
+### 13.1 Les tensions ouvertes
+
+1. **Le plancher de corpus.** N'est plus une question de doctrine (§6.3), mais la mesure n'est pas faite : **tout seuil serait inventé**. La piste du 27/07 la résout peut-être mieux qu'un chiffre — un **parcours initiatique** avant les miroirs, une aventure traversée plutôt qu'un seuil.
+2. **Deux miroirs, ou un miroir et deux filtres ?** Je soutiens que ce sont des **restrictions** du miroir entier (§2.3) ; Tim en parle comme de deux miroirs. Si ce sont deux surfaces nommées, **le nom porte tout le risque** — et les mots du rêveur priment sur les nôtres.
+3. **La cadence contre le désir.** La règle du corpus inchangé frustrera, et donnera l'impression que l'app retient quelque chose. **Tim doit décider s'il accepte d'être refusé par sa propre app — avant de construire, pas après.**
+4. **Grands rêves et corpus entier : un miroir, ou deux colonnes ?** `1_BIBLE` §3.14 sépare les deux lectures et refuse de les fondre. Appliqué au miroir, ça produit deux colonnes, ce qui se bat frontalement avec *« un miroir magnifique »* comme objet unique et beau. **Non résolu — c'est peut-être le vrai problème de design du miroir.**
+5. **Hillman et l'arbitrage §6.2 du canon.** J'ai lu §6.2 comme écartant Hillman **sur Léthé, l'oubli rituel et Hadès**, pas comme une exclusion générale. Si Tim l'entend comme générale, une partie du fondement du §1 se déplace vers Aizenstat, Gendlin et Watkins : **la conclusion tient, les citations changent.**
+6. **Le ruling Seth par volume** (§5 bis.1) est **proposé, pas arbitré**. À trancher avant toute Tier 2.
+7. **L'ontologie collective.** §5 bis.2 **localise** le désaccord dans les cercles au lieu de le résoudre. C'est honnête, ce n'est pas satisfaisant : la question — *le miroir suppose-t-il quelque chose de faux sur ce qu'est un rêve ?* — ne se refermera pas par un raisonnement, mais par un usage.
+8. **Le §8 reste la partie la moins solide.** Fondé pour (a), (c) et 8.2 ; **(b) et (d) restent non mesurés.**
+
+### Closes par Tim, le 30/07
+
+| Tension | Décision |
 |---|---|
-| Jamais de diagnostic psychologique | §1.4 (interdiction de conclure) · interdit 2 |
-| Jamais de prédiction fataliste | interdit 4 (aucun état de résolution, donc aucune trajectoire projetée) |
-| Jamais de minimisation (« c'est juste un rêve ») | §0 (le rêve est l'artefact, la prose est l'emballage) |
-| Jamais de rush vers la résolution | §3 en entier — c'est le cœur du document |
-| Jamais de dictionnaire de symboles plat | §5.4 (couche globale exclue du miroir) · §5.3 (souveraineté de sa signification) |
-| Jamais d'interprétation autoritaire top-down | §1.4 · §5 · §4.2 (le corps valide, pas l'app) |
-| Jamais forcer à traverser l'edge | §2.4.6 · fragment du §9 (`pas maintenant` ne demande rien) |
-| Jamais forcer l'autonomie émotionnelle | §8.1c — le miroir doit décevoir, jamais abandonner ; §8.7 du canon reste (sortie humaine à 2 clics de tout écran) |
-| Détresse aiguë → ressources professionnelles | inchangé, §8.7 du canon s'applique au miroir comme à tout écran |
-
-**Aucune des neuf n'est contredite.** Deux sont durcies : le dictionnaire plat (par l'exclusion de la couche globale) et le rush vers la résolution (par l'assertion de schéma du §3.3).
-
----
-
-## §13 — Tensions non résolues, laissées à Tim
-
-1. **Le plancher de corpus.** Aucun chiffre mesuré. La décision conservatrice (miroir sur les seuls rêves marqués) est un choix par défaut, pas un résultat. La mesure à faire est au §6.3. Tant qu'elle n'est pas faite, tout seuil serait inventé.
-
-2. **Deux miroirs, ou un miroir et deux filtres ?** Je soutiens que « ce qui me porte » et « ce qui me travaille » sont des **restrictions** du miroir entier (§2.3). Tim en parle comme de deux miroirs. Si ce sont deux surfaces nommées, le nom porte tout le risque, et il faudra qu'il tranche les deux mots lui-même — parce que les mots du rêveur priment sur les nôtres (§3.13.2).
-
-3. **La cadence contre le désir.** La règle du corpus inchangé (§6.2a) frustrera. C'est la bonne règle et elle donnera l'impression que l'app retient quelque chose. **Tim doit décider s'il accepte d'être refusé par sa propre app.** S'il ne l'accepte pas, il faut le savoir avant de construire, pas après.
-
-4. **Le miroir et le cercle.** Un portrait montré à un tiers est un autre objet éthique, non traité ici. Et la donnée du 26/07 est nette : les cercles n'ont jamais servi. Hors V1 par prudence, pas par doctrine.
-
-5. **Hillman et le §6.2.** J'ai lu §6.2 comme écartant Hillman **sur Léthé, l'oubli rituel et Hadès**, et non comme une exclusion générale. Si Tim l'entend comme une exclusion générale, une partie du fondement du §1 se déplace vers Aizenstat, Gendlin et Watkins. **La conclusion tient, les citations changent.** À arbitrer une fois, pour tout le document.
-
-6. **Grands rêves et corpus entier : un miroir, ou deux colonnes ?** §3.14 sépare les deux lectures et refuse de les fondre, pour de bonnes raisons. Appliqué au miroir, ça produit une structure à deux colonnes — ce qui se bat frontalement avec *« un miroir magnifique »* comme objet unique et beau. Je n'ai pas résolu ça. C'est peut-être le vrai problème de design du miroir.
-
-7. **« ce que j'en ai dit » dépend d'une détection à ~90 %.** Bonne nouvelle mesurée par B4 : Tim s'interprète beaucoup en dictant (171 passages « lecture » sur 64 rêves), donc le mode est faisable **aujourd'hui**. Mauvaise nouvelle : un faux positif de cette couche met dans sa bouche une phrase qu'il n'a pas dite comme lecture. Sur ce mode précis, il faut probablement **exiger la confirmation** avant citation, contrairement à la règle B4 n°9 (rien pendant la capture) — parce qu'ici on ne fait pas que classer, on **cite**.
-
-8. **Le §8 n'est fondé sur rien de mesuré** — sauf l'asymétrie (a), que Weller p. 92 fonde (voir §8.2). Le reste est la partie la plus neuve et la plus fragile, écrite parce qu'il fallait qu'elle existe avant le code. À réviser après usage réel.
-
----
-
-### Closes le 30/07 (Tim a tranché)
-
-| Ancienne tension | Ce qui a été décidé |
-|---|---|
-| **La traçabilité contre la liberté créative** (§8.1d) | La prose peut respirer ; **les rêves entiers doivent être ouvrables juste en dessous**. La liberté porte sur l'assemblage, jamais sur la matière. → `1_BIBLE` §3.15.7a |
-| **La porte somatique** (interdit 10) | Principe gardé, forme changée : **premier geste du miroir, même écran**, pas un sas. Non-tracking maintenu et **assumé comme un coût**. → §7, `2_DESIGN` §17.5 |
+| **Traçabilité contre liberté créative** (§8.1d) | La prose peut respirer ; **les rêves entiers doivent être ouvrables juste en dessous**. La liberté porte sur l'assemblage, jamais sur la matière. → `1_BIBLE` §3.15.7a |
+| **La porte somatique** (interdit 10) | Principe gardé, forme changée : **premier geste du miroir, même écran**. Non-tracking maintenu et **assumé comme un coût**. |
 | **Le fil « rêve »** — défaut de méthode ou matière ? | Tim : *« ça touche plutôt au cœur »*. **C'est du matériau.** Contredit `FAISABILITE-MIROIR` §4.2, dont la conclusion sur ce point est caduque. → `1_BIBLE` §3.15.7d |
-| **Le plancher de corpus** (tension 1) | Reste sans mesure, mais **la piste du 27/07 le résout mieux qu'un chiffre** : un parcours initiatique avant les miroirs. Ce n'est plus un seuil arbitraire, c'est une aventure traversée. Tension 1 reste ouverte tant que le parcours n'est pas conçu. |
+| **« Qu'il repose »** | Validé. Sur la fiche du rêve, jamais dans le miroir. **Pas de section « rêves au repos »** — une section fabriquerait un purgatoire, et un purgatoire se compte. |
 
-### Neuves, ouvertes le 27/07 — et plus grandes que les huit ci-dessus
+### Close par la lecture, le 02/08
 
-9. **🔴 Cette doctrine est occidentale, et elle ne le savait pas.** Les 18 digests du §11 viennent tous de la clinique occidentale du XXᵉ siècle. Les traditions ont été traitées comme un **risque éthique à gérer**, jamais comme une **source de sagesse de design**. La raison est structurelle et commande tout le reste : **toute la psychologie des profondeurs occidentale suppose que le rêve appartient à une psyché individuelle** — l'hypothèse exacte qui casse dès qu'on veut du rêve partagé en groupe avec une intention. Sur le rêve collectif, ce canon-ci n'a presque rien ; les traditions ont tout, parce que chez elles **le partage *est* la pratique**. Ce n'est pas une bibliographie à compléter, c'est une ontologie qui manque.
-
-10. **🔴 RÉTRACTÉE le 02/08 — l'affirmation était fausse, et la vraie leçon est meilleure que la tension.**
-
-    Cette tension écrivait : *« Zéro épistémologie du rêve d'Afrique australe, alors qu'INFUSE vend des plantes de rêve xhosa/zulu (tradition Ubulawu). »* **La Forêt en contient une, complète, et depuis le début.**
-
-    | Livre | Chunks | Ce qu'il porte |
-    |---|---|---|
-    | `sobiecki-southern-african-psychoactive-plants` | **133** | Jean-François Sobiecki, ethnobotaniste sud-africain **initié**, publié en revue à comité de lecture (*Journal of Psychoactive Drugs* 44(3) ; *Southern African Humanities* 20). **L'épistémologie ubulawu complète.** |
-    | `ngubane-body-mind-zulu-medicine` | **187** | Harriet Ngubane, anthropologue **zulu** — une voix interne à la tradition, pas une observation de l'extérieur. |
-    | `mutwa-indaba-my-children` | 476 | Vusamazulu Credo Mutwa. Statut contesté, à traiter comme tel. |
-    | `cumes-africa-in-my-bones` | 126 | David Cumes, médecin sud-africain formé auprès de sangomas. |
-
-    **Ce que Sobiecki donne, en première main** (verbatim vérifié, p. 4) : *« The term ubulawu comes from the Xhosa verb ukulawula (to control) and refers to "that spirit that controls one" (Hirst 2005). … Whereas lay people can obtain insight or spiritual guidance into their lives with ubulawu, the diviner healer learns to use dreams as a path to heal. »* Et le cadre ontologique : **dans la vision du monde bantoue méridionale, les rêves appartiennent au domaine des ancêtres** et sont le médium par lequel le devin reçoit sa connaissance de guérison. Plus le geste qui nous intéresse directement : **le rêve de l'initié·e est un baromètre psychospirituel lu par le tuteur**, pas par le rêveur seul — ce qui est un modèle de miroir *déjà institué*, avec un humain à l'étage 2 (cf. §8.0).
-
-    > **La leçon, et elle vaut plus que la tension qu'elle remplace :**
-    > **Un silence de l'index n'est pas un silence de la tradition.**
-    > Ces quatre livres étaient classés `guerison`, `prophetie` et `mythe` — **jamais `rêve`**. Le rayonnage a produit la cécité, et quatre agents successifs ont recopié « zéro » sans jamais interroger la base. C'est le même mode d'échec qu'au §11 bis : **on a pris l'absence dans notre carte pour une absence dans le monde.** Avant d'écrire « la Forêt n'a rien sur X », il faut avoir interrogé `forest_chunks` sur X **et sur les mots de la tradition** (`ubulawu`, `ukulawula`, `ukuthwasa`, `sangoma`, `igqirha`), pas seulement sur nos catégories.
-
-    > **🔴 FLAG ÉTHIQUE — HIGH. Ce point est d'abord commercial, ensuite documentaire.**
-    > **INFUSE vend deux des plantes que Sobiecki documente** : *undlela-ziimlophe* (**Silene undulata / capensis**) et *uvuma-omhlope* (**Synaptolepis kirkii**). Tradition **vivante et nommée** (Xhosa / Cape Nguni, Zulu, Sotho ; initiation *ukuthwasa* ; informateurs nommés, dont Mama Maponya). Conséquences opposables :
-    > - Toute page produit qui parle de rêve xhosa/zulu **cite Sobiecki**, **nomme les peuples**, **nomme l'initiation**.
-    > - **Ne jamais suggérer que l'usage laïc équivaut à l'usage du devin** — Mama Maponya dit exactement le contraire : *« Anyone can use the plants to connect with their ancestors. … Those people with a strong spirit, only they can have this connection. »*
-    > - **Jamais « ubulawu » comme nom de feature**, dans l'app ou ailleurs.
-    > - Risque nommé en base : romantisation de la « magie du rêve africaine ». Ton sobre, obligatoire.
-    > - **Réciprocité concrète à définir avant toute publication.** On prend le commerce à une tradition ; on lui doit autre chose que des guillemets.
-
-    **Ce qui reste vrai, et qui est le vrai trou** : **personne dans le corpus n'est un·e sangoma ou igqirha écrivant en son nom propre aujourd'hui.** Ngubane est une voix interne mais c'est une ethnographie de 1977 ; Sobiecki est un chercheur blanc initié ; Cumes est un médecin blanc ; Mutwa est contesté. Acquisition à viser (piste : Nokuzola Mndende, universitaire xhosa, Icamagu Institute). Détail et bibliographie : `ECOUTE-REVE-COLLECTIF-2026-07-30.md` §③ et §⑧.
-
-    ⚠️ Et une correction à ne pas perdre : **les Senoi ne sont pas Moss.** Le matériel Senoi vient de **Kilton Stewart** et est académiquement tenu pour **largement fictif**. Moss, c'est l'Active Dreaming adossé à l'iroquois, avec bénédiction d'un aîné — que nous n'avons pas, étant source secondaire. Ne jamais les citer dans la même phrase comme un même adossement. Et le peuple réel s'appelle **Sng'oi** (Malaisie) : c'est sous ce nom qu'il faut le nommer, jamais « méthode Senoi ».
-
-11. **Ce que Kalsched implique et que la doctrine n'a pas regardé en face.** Il donne une séquence en deux temps : localiser et honorer l'esprit prisonnier, **puis** l'incarner — et il avertit que beaucoup de gens font l'étape 1 et jamais l'étape 2, s'installant dans leur monde intérieur sans rien incarner. **Une app de journal de rêves est un dispositif d'étape 1 par construction.** C'est peut-être le vrai problème de design du produit, plus grand que le miroir. Aucune réponse ici.
+| Tension | Ce qui l'a fermée |
+|---|---|
+| **La confirmation d'une citation pendant la capture** (ancienne tension 7) | **L'architecture à deux étages** (§8.0). La confirmation ne se demande pas pendant la capture : **elle se demande au moment du miroir, par l'autre étage.** La règle B4 n°9 est préservée et gagne un fondement textuel. |
 
 ---
 
 ## §14 — La phrase qui tient tout
 
 > **Le miroir ne dit jamais qui tu es. Il te rend ce que tu as dit, avec sa date, au moment où ça compte — et il se tait.**
+
+*Et le dernier mot est le seul qui décrive à quoi il sert.*
